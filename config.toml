@@ -1,0 +1,38 @@
+baseurl = "https://www.bryanscahfroth.com/"
+languageCode = "en-us"
+title = "Bryan Schafroth Portfolio"
+theme = "hugo-xmin"
+googleAnalytics = "UA-38508489-1"
+disqusShortname = ""
+ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
+footnotereturnlinkcontents = "↩"
+
+[permalinks]
+    post = "/post/:year/:month/:day/:slug/"
+    note = "/note/:year/:month/:day/:slug/"
+
+[[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+[[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 2
+[[menu.main]]
+    name = "Posts"
+    url = "/post/"
+    weight = 3
+[[menu.main]]
+    name = "Categories"
+    url = "/categories/"
+    weight = 4
+[[menu.main]]
+    name = "Tags"
+    url = "/tags/"
+    weight = 5
+
+
+[params]
+    description = "A Xmin Hugo Theme"
+    footer = "&copy; [Bryan Schafroth](https://www.bryanschafroth.com) 2020 | [Github](https://github.com/Bshaf303)"

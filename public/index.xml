@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Home on Bryan Schafroth Portfolio</title>
+    <link>/</link>
+    <description>Recent content in Home on Bryan Schafroth Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Oct 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Experimental Design</title>
+      <link>/post/2017/10/01/experimental-design/</link>
+      <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2017/10/01/experimental-design/</guid>
+      <description>In the book Encyclopedia of Behavioral Medicine, Turner describes experimental design from a clinical perspective “as an experiment with a series of observations made under conditions in which the influences of interest are controlled by the research scientist”, Turner, 2013. The randomized trial is the classic example of experimental design. The data is randomized to one of two or more experimental groups. Then the significant differences between the sets are analyzed.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>/about/</guid>
+      <description>I am a junior level data scientist professional with a Master’s Degree in Data Science. I have demonstrated abilities to extract insights from data and use them to make recommendations based on statistical modeling. I enjoy defining and solving problems by distilling abstract/complex theories and datasets into simple terms and draft meaningful easy-to-understand outcomes for both technical and non-technical audiences.
+In addition to my Data Science profession, I have a background in civil engineering.</description>
+    </item>
+    
+  </channel>
+</rss>
