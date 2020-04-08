@@ -6,10 +6,19 @@
     <description>Recent content in Home on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 20 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Data Science and a Code of Ethics</title>
+      <link>/post/2019/01/20/data-science-and-a-code-of-ethics/</link>
+      <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/01/20/data-science-and-a-code-of-ethics/</guid>
+      <description>The Association for Computing Machinery (ACM) created the ACM Code of Ethics and Professional Conduct to direct computing professionals to act and promote ethical behavior in the profession (ACM, 2018). The ACM Code of Ethics and Professional Conduct is in four sections: General Ethical Principles, Professional Responsibilities, Professional Leadership Principles, and Compliance With the Code (ACM, 2018). This paper will discuss the seven General Ethical Principles and classify them into the three major areas of ethics, privacy, and social justice.</description>
+    </item>
     
     <item>
       <title>Experimental Design</title>
