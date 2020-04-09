@@ -18,7 +18,7 @@ tags:
 * Detect outliers and anomalies
 * Test assumptions 
 
-#References
+# References
 
 Nist Sematech. (n.d.). One-Way ANOVA. Retrieved from http://www.itl.nist.gov/div898/handbook/ppc/section2/ppc231.htm
 

@@ -6,10 +6,19 @@
     <description>Recent content in Ethics on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 23 Jan 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/ethics/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Informed Consent and Data Science</title>
+      <link>/post/2019/01/23/informed-consent-and-data-science/</link>
+      <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/01/23/informed-consent-and-data-science/</guid>
+      <description>This retrospective study is from the Netherlands. See the published research article in the reference section below. The article review uses data from 2000 to 2016 and identifies 2,037 children that were previous patients at a university hospital (Draijer, Bosch, Wiegman, Sjouke, Benninga, &amp;amp; Koot, 2018, p.174). The kids screened for liver disease with the goal of this study to use a higher-performing algorithm that improves the accuracy in detecting the condition.</description>
+    </item>
     
     <item>
       <title>Data Science and a Code of Ethics</title>
