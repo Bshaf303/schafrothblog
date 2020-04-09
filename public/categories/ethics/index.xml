@@ -6,10 +6,19 @@
     <description>Recent content in Ethics on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 23 Jan 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 08 Apr 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/ethics/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>A Case Study on Genome Privacy</title>
+      <link>/post/2020/04/08/a-case-study-on-genome-privacy/</link>
+      <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2020/04/08/a-case-study-on-genome-privacy/</guid>
+      <description>The premise of this article is Walser-Kuntz, Deel, and Singer&amp;rsquo;s case study in genome privacy (2005). The authors of the case study state that biosciences have been able to isolate the single nucleotide polymorphism (SNP) as part of humans&amp;rsquo; DNA markers (Walser-Kuntz, Deel, &amp;amp; Singer, 2005). The SNPs have three uses, according to Walser-Kuntz, Deel, &amp;amp; Singer: genetic markers for disease, specialized applications in medicine, and mapping human evolution (p.</description>
+    </item>
     
     <item>
       <title>Informed Consent and Data Science</title>
