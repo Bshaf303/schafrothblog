@@ -17,7 +17,7 @@
       <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>/post/2017/10/01/experimental-design/</guid>
-      <description>In the book Encyclopedia of Behavioral Medicine, Turner describes experimental design from a clinical perspective “as an experiment with a series of observations made under conditions in which the influences of interest are controlled by the research scientist”, Turner, 2013. The randomized trial is the classic example of experimental design. The data is randomized to one of two or more experimental groups. Then the significant differences between the sets are analyzed.</description>
+      <description>In the book Encyclopedia of Behavioral Medicine, Turner describes experimental design from a clinical perspective “as an experiment with a series of observations made under conditions in which the research scientist controls the influences of interest”, Turner, 2013. The randomized trial is a classic example of experimental design. The data is randomized to one of two or more experimental groups. Then the significant differences between the sets are analyzed. (Turner, 2013) The Completely Randomized Design, Randomized Block Design, and Factorial design are three experimental designs, and analysis of variance (ANOVA) will tell us whether or not there is a difference between the means of one or more independent categorical groups.</description>
     </item>
     
   </channel>

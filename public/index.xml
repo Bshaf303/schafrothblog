@@ -21,12 +21,21 @@
     </item>
     
     <item>
+      <title>Ethical Issues a Data Scientist Could Face</title>
+      <link>/post/2019/01/15/ethical-issues-a-data-scientist-could-face/</link>
+      <pubDate>Tue, 15 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/01/15/ethical-issues-a-data-scientist-could-face/</guid>
+      <description>The Association for Computing Machinery (ACM) has a code of ethics and professional conduct guidelines (ACM, 2018). The &amp;ldquo;code&amp;rdquo; is for people that work in computing and a guide to consider when decision making. Section 2.9 outlines the need to design systems that are very secure and recognizing that breaches of computer systems can be malevolent to many people and organizations (ACM, 2018). The ACM states not to roll out systems without thorough testing of security exploits (2018).</description>
+    </item>
+    
+    <item>
       <title>Experimental Design</title>
       <link>/post/2017/10/01/experimental-design/</link>
       <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
       
       <guid>/post/2017/10/01/experimental-design/</guid>
-      <description>In the book Encyclopedia of Behavioral Medicine, Turner describes experimental design from a clinical perspective “as an experiment with a series of observations made under conditions in which the influences of interest are controlled by the research scientist”, Turner, 2013. The randomized trial is the classic example of experimental design. The data is randomized to one of two or more experimental groups. Then the significant differences between the sets are analyzed.</description>
+      <description>In the book Encyclopedia of Behavioral Medicine, Turner describes experimental design from a clinical perspective “as an experiment with a series of observations made under conditions in which the research scientist controls the influences of interest”, Turner, 2013. The randomized trial is a classic example of experimental design. The data is randomized to one of two or more experimental groups. Then the significant differences between the sets are analyzed. (Turner, 2013) The Completely Randomized Design, Randomized Block Design, and Factorial design are three experimental designs, and analysis of variance (ANOVA) will tell us whether or not there is a difference between the means of one or more independent categorical groups.</description>
     </item>
     
     <item>
