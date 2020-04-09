@@ -6,33 +6,42 @@
     <description>Recent content in Tags on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>data collection</title>
-      <link>/tags/data-collection/</link>
-      <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
+      <title>Bias</title>
+      <link>/tags/bias/</link>
+      <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>/tags/data-collection/</guid>
+      <guid>/tags/bias/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ethical breach</title>
       <link>/tags/ethical-breach/</link>
-      <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 28 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/ethical-breach/</guid>
       <description></description>
     </item>
     
     <item>
+      <title>data collection</title>
+      <link>/tags/data-collection/</link>
+      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/data-collection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>privacy</title>
       <link>/tags/privacy/</link>
-      <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/privacy/</guid>
       <description></description>
@@ -41,7 +50,7 @@
     <item>
       <title>privacy in data</title>
       <link>/tags/privacy-in-data/</link>
-      <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/privacy-in-data/</guid>
       <description></description>

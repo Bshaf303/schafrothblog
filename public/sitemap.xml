@@ -3,63 +3,78 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/2020/04/08/a-case-study-on-genome-privacy/</loc>
-    <lastmod>2020-04-08T00:00:00+00:00</lastmod>
+    <loc>/post/2019/02/03/agorithm-bias-in-analysis/</loc>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/2020/04/08/case-study-on-data-collection-harvesting-personalities-online/</loc>
-    <lastmod>2020-04-08T00:00:00+00:00</lastmod>
+    <loc>/tags/bias/</loc>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2020-04-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-collection/</loc>
-    <lastmod>2020-04-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2020/04/08/employee-ethical-breach/</loc>
-    <lastmod>2020-04-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/ethical-breach/</loc>
-    <lastmod>2020-04-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/ethics/</loc>
-    <lastmod>2020-04-08T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2020-04-08T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2020-04-08T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/privacy/</loc>
-    <lastmod>2020-04-08T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/privacy-in-data/</loc>
-    <lastmod>2020-04-08T00:00:00+00:00</lastmod>
+    <loc>/categories/statistical-methods/</loc>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/</loc>
-    <lastmod>2020-04-08T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-03T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2019/01/28/employee-ethical-breach/</loc>
+    <lastmod>2019-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ethical-breach/</loc>
+    <lastmod>2019-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/ethics/</loc>
+    <lastmod>2019-01-28T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2019/01/27/a-case-study-on-genome-privacy/</loc>
+    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</loc>
+    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/data-collection/</loc>
+    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/privacy/</loc>
+    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/privacy-in-data/</loc>
+    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -89,11 +104,6 @@
   
   <url>
     <loc>/tags/experimental-design/</loc>
-    <lastmod>2017-10-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/statistical-methods/</loc>
     <lastmod>2017-10-01T00:00:00+00:00</lastmod>
   </url>
   

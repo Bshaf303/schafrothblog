@@ -6,10 +6,19 @@
     <description>Recent content in Statistical Methods on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 01 Oct 2017 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/statistical-methods/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Agorithm Bias in Analysis</title>
+      <link>/post/2019/02/03/agorithm-bias-in-analysis/</link>
+      <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/02/03/agorithm-bias-in-analysis/</guid>
+      <description>The term &amp;ldquo;bias&amp;rdquo; concerning an analysis of population data concerning machine learning and predictive analytic algorithms can result in bias, and that would be a bit more in-depth for this discussion. According to Bruce and Bruce (2017), the bias seen in statistical measurement or sampling errors is likely due to the process of measurement and sampling methods. Bias may be observable or invisible and detected by referencing or benchmarking values.</description>
+    </item>
     
     <item>
       <title>Experimental Design</title>

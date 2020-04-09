@@ -1,7 +1,7 @@
 ---
 title: A Case Study on Genome Privacy
 author: 'Bryan '
-date: '2020-04-08'
+date: '2019-01-27'
 slug: a-case-study-on-genome-privacy
 categories:
   - Ethics

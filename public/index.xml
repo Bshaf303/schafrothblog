@@ -6,36 +6,45 @@
     <description>Recent content in Home on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 08 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 03 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>A Case Study on Genome Privacy</title>
-      <link>/post/2020/04/08/a-case-study-on-genome-privacy/</link>
-      <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
+      <title>Agorithm Bias in Analysis</title>
+      <link>/post/2019/02/03/agorithm-bias-in-analysis/</link>
+      <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/04/08/a-case-study-on-genome-privacy/</guid>
+      <guid>/post/2019/02/03/agorithm-bias-in-analysis/</guid>
+      <description>The term &amp;ldquo;bias&amp;rdquo; concerning an analysis of population data concerning machine learning and predictive analytic algorithms can result in bias, and that would be a bit more in-depth for this discussion. According to Bruce and Bruce (2017), the bias seen in statistical measurement or sampling errors is likely due to the process of measurement and sampling methods. Bias may be observable or invisible and detected by referencing or benchmarking values.</description>
+    </item>
+    
+    <item>
+      <title>Employee Ethical Breach</title>
+      <link>/post/2019/01/28/employee-ethical-breach/</link>
+      <pubDate>Mon, 28 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/01/28/employee-ethical-breach/</guid>
+      <description>The article is from August of 2018 and found in the Healthcare IT News, among others. The ethics breach was by a Canadian pharmacist in Nova Scotia. The pharmacist caught accessing the health records of approximately 46 patients that the pharmacist knew (Minion, 2018). The ethics breach was spread over two years until the Canadian Privacy Commission discovered what was happening though standard audits. The article said this pharmacist had looked at the records of former classmates, her doctor, and a person whom she had a car accident with, her kid&amp;rsquo;s therapist, her coworkers, family members, and her kid&amp;rsquo;s girlfriend (Minion, 2018).</description>
+    </item>
+    
+    <item>
+      <title>A Case Study on Genome Privacy</title>
+      <link>/post/2019/01/27/a-case-study-on-genome-privacy/</link>
+      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/01/27/a-case-study-on-genome-privacy/</guid>
       <description>The premise of this article is Walser-Kuntz, Deel, and Singer&amp;rsquo;s case study in genome privacy (2005). The authors of the case study state that biosciences have been able to isolate the single nucleotide polymorphism (SNP) as part of humans&amp;rsquo; DNA markers (Walser-Kuntz, Deel, &amp;amp; Singer, 2005). The SNPs have three uses, according to Walser-Kuntz, Deel, &amp;amp; Singer: genetic markers for disease, specialized applications in medicine, and mapping human evolution (p.</description>
     </item>
     
     <item>
       <title>Case Study on Data Collection: Harvesting Personalities Online</title>
-      <link>/post/2020/04/08/case-study-on-data-collection-harvesting-personalities-online/</link>
-      <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
+      <link>/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</link>
+      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
       
-      <guid>/post/2020/04/08/case-study-on-data-collection-harvesting-personalities-online/</guid>
+      <guid>/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</guid>
       <description>Raicu wrote a case study for the Santa Clara University discussing the data analytics firm Cambridge Analytica who provided marketing services for various political campaigns (2016). The case study reveals Cambridge Analytica assumed the personality type of nearly all of the registered voters in the U.S. (Raicu, 2016). The study attempts to answer how Cambridge Analytica determined the personality type of 190 million people who were registered to vote across the U.</description>
-    </item>
-    
-    <item>
-      <title>Employee Ethical Breach</title>
-      <link>/post/2020/04/08/employee-ethical-breach/</link>
-      <pubDate>Wed, 08 Apr 2020 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2020/04/08/employee-ethical-breach/</guid>
-      <description>The article is from August of 2018 and found in the Healthcare IT News, among others. The ethics breach was by a Canadian pharmacist in Nova Scotia. The pharmacist caught accessing the health records of approximately 46 patients that the pharmacist knew (Minion, 2018). The ethics breach was spread over two years until the Canadian Privacy Commission discovered what was happening though standard audits. The article said this pharmacist had looked at the records of former classmates, her doctor, and a person whom she had a car accident with, her kid&amp;rsquo;s therapist, her coworkers, family members, and her kid&amp;rsquo;s girlfriend (Minion, 2018).</description>
     </item>
     
     <item>

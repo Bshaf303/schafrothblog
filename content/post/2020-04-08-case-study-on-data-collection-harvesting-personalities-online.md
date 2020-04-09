@@ -1,7 +1,7 @@
 ---
 title: 'Case Study on Data Collection: Harvesting Personalities Online'
 author: 'Bryan '
-date: '2020-04-08'
+date: '2019-01-27'
 slug: case-study-on-data-collection-harvesting-personalities-online
 categories:
   - Ethics
