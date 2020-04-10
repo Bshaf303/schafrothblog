@@ -6,10 +6,19 @@
     <description>Recent content in social justice on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 22 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/social-justice/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Social Justice Aided with Data Science</title>
+      <link>/post/2019/02/25/social-justice-aided-with-data-science/</link>
+      <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/02/25/social-justice-aided-with-data-science/</guid>
+      <description>The social justice issue that data science can aid with is life expectancy throughout the world. The social justice issue is a project that was brought to the world&amp;rsquo;s attention by Hans Rosling, and you can see his presentation on Youtube in the references. He compared the life expectancy to the Gross Domestic Product per capita (GPD) of the countries, and plotting the data found a strong correlation between GDP and the life span of the Country&amp;rsquo;s citizens.</description>
+    </item>
     
     <item>
       <title>Social Media and Social Justice Fast Food Targeting</title>

@@ -4,22 +4,37 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2019-02-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-02-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-02-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/public-data/</loc>
+    <lastmod>2019-02-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/social-justice/</loc>
-    <lastmod>2019-02-22T00:00:00+00:00</lastmod>
+    <lastmod>2019-02-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2019/02/25/social-justice-aided-with-data-science/</loc>
+    <lastmod>2019-02-25T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-02-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -30,16 +45,6 @@
   <url>
     <loc>/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</loc>
     <lastmod>2019-02-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-02-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/public-data/</loc>
-    <lastmod>2019-02-18T00:00:00+00:00</lastmod>
   </url>
   
   <url>
