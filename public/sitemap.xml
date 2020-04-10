@@ -4,7 +4,37 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2019-03-02T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/government-data-resources/</loc>
+    <lastmod>2019-03-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2019-03-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2019-03-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/public-data/</loc>
+    <lastmod>2019-03-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2019-03-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2019/03/04/using-data-gov-and-applications-that-solve-problems/</loc>
+    <lastmod>2019-03-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -18,28 +48,8 @@
   </url>
   
   <url>
-    <loc>/</loc>
-    <lastmod>2019-03-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
-    <lastmod>2019-03-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/social-justice/</loc>
     <lastmod>2019-03-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-03-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/public-data/</loc>
-    <lastmod>2019-02-25T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -69,11 +79,6 @@
   
   <url>
     <loc>/post/2019/02/16/government-data-planning-u-s-compared-to-australia/</loc>
-    <lastmod>2019-02-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/government-data-resources/</loc>
     <lastmod>2019-02-16T00:00:00+00:00</lastmod>
   </url>
   

@@ -6,10 +6,20 @@
     <description>Recent content in Home on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 02 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 04 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using Data.gov and Applications that Solve Problems</title>
+      <link>/post/2019/03/04/using-data-gov-and-applications-that-solve-problems/</link>
+      <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/03/04/using-data-gov-and-applications-that-solve-problems/</guid>
+      <description>On the data.gov application site, there are a handful of examples where the open data from data.gov can provide a service to consumers. There is a good sampling of applications voluntarily submitted to the site for the chance to be featured. Data.gov does not say they endorse the applications.
+ One of the many applications is Redfin. I recently learned about Redfin on television, and it was a commercial for the company.</description>
+    </item>
     
     <item>
       <title>Data Science for Social Justice - Bolivia Case Study</title>

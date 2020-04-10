@@ -6,10 +6,19 @@
     <description>Recent content in Tags on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 02 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 04 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>government data resources</title>
+      <link>/tags/government-data-resources/</link>
+      <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/government-data-resources/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>social justice</title>
@@ -26,15 +35,6 @@
       <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/sentiment-analysis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>government data resources</title>
-      <link>/tags/government-data-resources/</link>
-      <pubDate>Sat, 16 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/government-data-resources/</guid>
       <description></description>
     </item>
     
