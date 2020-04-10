@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Corporate Responsibility on Bryan Schafroth Portfolio</title>
+    <link>/categories/corporate-responsibility/</link>
+    <description>Recent content in Corporate Responsibility on Bryan Schafroth Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 02 Mar 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/corporate-responsibility/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Data Science for Social Justice - Bolivia Case Study</title>
+      <link>/post/2019/03/02/data-science-for-social-justice-bolivia-case-study/</link>
+      <pubDate>Sat, 02 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/03/02/data-science-for-social-justice-bolivia-case-study/</guid>
+      <description>Data science for social justice is a present-day concept that is gaining more recognition and popularity in the world. Solving current social problems using available open-source data and data science skillsets will help many world populations and is an ongoing challenge. The article reviews an old case study about Cochabamba, Bolivia’s problem with water infrastructure privatization, and what happened in the year 2000. While the data science profession, open data sources, and current technologies were not around in 2000, this article is a speculative assessment on how a data scientist from two sides may retrospectively go about the work today given the skills and technologies available.</description>
+    </item>
+    
+  </channel>
+</rss>
