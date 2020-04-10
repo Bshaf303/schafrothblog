@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>sentiment Analysis on Bryan Schafroth Portfolio</title>
+    <link>/tags/sentiment-analysis/</link>
+    <description>Recent content in sentiment Analysis on Bryan Schafroth Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 18 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/sentiment-analysis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Sentiment Analysis and Social Media Use Policy</title>
+      <link>/post/2019/02/18/sentiment-analysis-and-social-media-use-policy/</link>
+      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/02/18/sentiment-analysis-and-social-media-use-policy/</guid>
+      <description>The data scientist should read all agreements and policies of the specific social media site before engaging in data mining for sentiment analysis. The agreements and policies are carefully written by social media companies to protect users, the social company, and the developers. On Twitter&amp;rsquo;s Developers Agreement under &amp;ldquo;VII. Other Important Terms&amp;rdquo; there is a guide on what information is available and how it should not be used (Twitter Developer, May 25, 2018).</description>
+    </item>
+    
+  </channel>
+</rss>

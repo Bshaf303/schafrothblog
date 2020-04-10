@@ -6,13 +6,49 @@
     <description>Recent content in Home on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 03 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 22 Feb 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Agorithm Bias in Analysis</title>
+      <title>Social Media and Social Justice Fast Food Targeting</title>
+      <link>/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</link>
+      <pubDate>Fri, 22 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</guid>
+      <description>This article discusses a potential social justice project using social media data. Contained in the article is a description of the social justice issue and presented in a mind map. The paper discusses the purpose of the research and why the project is exploring a potential social justice problem in social media. The analysis then speculates the ethical and privacy issues relating to the project. A final summary and status of the social justice problem conclude this paper.</description>
+    </item>
+    
+    <item>
+      <title>Sentiment Analysis and Social Media Use Policy</title>
+      <link>/post/2019/02/18/sentiment-analysis-and-social-media-use-policy/</link>
+      <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/02/18/sentiment-analysis-and-social-media-use-policy/</guid>
+      <description>The data scientist should read all agreements and policies of the specific social media site before engaging in data mining for sentiment analysis. The agreements and policies are carefully written by social media companies to protect users, the social company, and the developers. On Twitter&amp;rsquo;s Developers Agreement under &amp;ldquo;VII. Other Important Terms&amp;rdquo; there is a guide on what information is available and how it should not be used (Twitter Developer, May 25, 2018).</description>
+    </item>
+    
+    <item>
+      <title>Government Data Planning - U.S. Compared to Australia</title>
+      <link>/post/2019/02/16/government-data-planning-u-s-compared-to-australia/</link>
+      <pubDate>Sat, 16 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/02/16/government-data-planning-u-s-compared-to-australia/</guid>
+      <description>New South Wales (NSW), Australia is one of six states, and each state has a government structure similar to the Commonwealth or Federal branch (Australian government, n.d.). NSW has web resources available that include information on all government services. The site is a one-stop place to find government services related to policy, digital services, and user tools (NSW Government, 2019a). A section of the NSW website, under the &amp;ldquo;policy,&amp;rdquo; is the Data and Information services discussed in this paper.</description>
+    </item>
+    
+    <item>
+      <title>State, Local, Federal Data Social Media Sources</title>
+      <link>/post/2019/02/11/state-local-federal-data-sources/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/02/11/state-local-federal-data-sources/</guid>
+      <description>The City and County of Denver have a social media policy, and the council does encourage social media usage; however, it must be in line with the local government&amp;rsquo;s mission (City and County of Denver, n.d.). The policy states the social media is not an official government communication and does not guarantee information accuracy and completeness (City and County of Denver, n.d). The social media provided on external sites is a public service; thus, mining data is acceptable.</description>
+    </item>
+    
+    <item>
+      <title>Algorithm Bias in Analysis</title>
       <link>/post/2019/02/03/agorithm-bias-in-analysis/</link>
       <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
       

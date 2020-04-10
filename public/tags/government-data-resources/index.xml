@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>government data resources on Bryan Schafroth Portfolio</title>
+    <link>/tags/government-data-resources/</link>
+    <description>Recent content in government data resources on Bryan Schafroth Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 16 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/government-data-resources/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Government Data Planning - U.S. Compared to Australia</title>
+      <link>/post/2019/02/16/government-data-planning-u-s-compared-to-australia/</link>
+      <pubDate>Sat, 16 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/02/16/government-data-planning-u-s-compared-to-australia/</guid>
+      <description>New South Wales (NSW), Australia is one of six states, and each state has a government structure similar to the Commonwealth or Federal branch (Australian government, n.d.). NSW has web resources available that include information on all government services. The site is a one-stop place to find government services related to policy, digital services, and user tools (NSW Government, 2019a). A section of the NSW website, under the &amp;ldquo;policy,&amp;rdquo; is the Data and Information services discussed in this paper.</description>
+    </item>
+    
+  </channel>
+</rss>

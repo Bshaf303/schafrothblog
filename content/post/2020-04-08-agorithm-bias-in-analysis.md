@@ -1,12 +1,12 @@
 ---
-title: Agorithm Bias in Analysis
+title: Algorithm Bias in Analysis
 author: 'Bryan '
 date: '2019-02-03'
 slug: agorithm-bias-in-analysis
 categories:
   - Statistical Methods
 tags:
-  - Bias
+  - bias
 ---
 
 &nbsp;&nbsp;&nbsp;&nbsp;The term "bias" concerning an analysis of population data concerning machine learning and predictive analytic algorithms can result in bias, and that would be a bit more in-depth for this discussion. According to Bruce and Bruce (2017), the bias seen in statistical measurement or sampling errors is likely due to the process of measurement and sampling methods. Bias may be observable or invisible and detected by referencing or benchmarking values. The authors say the algorithm has been misspecified or a critical variable(s) left out (p. 47). Delgado-Rodriquez & Llorca (2004) surmise bias as the "lack of internal validity" or an improper analysis of the relationship between one thing and the outcome in a data population in which the estimated or proposed statistic that does not equal the actual value. The Delgado-Rodriquez & Llorca also mention categorization of the biases by the stage of research the bias occurs. "The most important biases are those produced in the definition and selection of the study population" (p.635). The important take away is distinguishing biases from random error or lack of precision. 

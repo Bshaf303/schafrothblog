@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>government analytics on Bryan Schafroth Portfolio</title>
+    <link>/tags/government-analytics/</link>
+    <description>Recent content in government analytics on Bryan Schafroth Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 11 Feb 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/government-analytics/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>State, Local, Federal Data Sources</title>
+      <link>/post/2019/02/11/state-local-federal-data-sources/</link>
+      <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/02/11/state-local-federal-data-sources/</guid>
+      <description>The City and County of Denver have a social media policy, and the council does encourage social media usage; however, it must be in line with the local government&amp;rsquo;s mission (City and County of Denver, n.d.). The policy states the social media is not an official government communication and does not guarantee information accuracy and completeness (City and County of Denver, n.d). The social media provided on external sites is a public service; thus, mining data is acceptable.</description>
+    </item>
+    
+  </channel>
+</rss>

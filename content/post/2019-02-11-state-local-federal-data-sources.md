@@ -1,0 +1,30 @@
+---
+title: State, Local, Federal Data Social Media Sources
+author: Bryan
+date: '2019-02-11'
+slug: state-local-federal-data-sources
+categories: 
+  - Public Data
+tags: 
+  - government social media data
+---
+
+&nbsp;&nbsp;&nbsp;&nbsp;The City and County of Denver have a social media policy, and the council does encourage social media usage; however, it must be in line with the local government's mission (City and County of Denver, n.d.). The policy states the social media is not an official government communication and does not guarantee information accuracy and completeness (City and County of Denver, n.d). The social media provided on external sites is a public service; thus, mining data is acceptable. There is no guarantee that social media posts are 100% accurate and complete; therefore, when using the data in research, be transparent about this source of data and its accuracy (or lack of). The City of Denver's social media sites are subject to public record laws; thus, any information attached to the account is "subject to public disclosure under Citywide Colorado Open Records Fee Policy (CORA)" (City and County of Denver, n.d).
+
+&nbsp;&nbsp;&nbsp;&nbsp;The State of Colorado Department of Revenue (CDOR) has a social media policy and allows its use because it is a communication tool regarding the department. Social media use is to communicate the department's goals and public outreach. The state also says the information is generalized and "does not apply to all the facts and circumstances of a specific situation" (Colorado Department of Revenue, n.d.). The state says the information provided in social media is not accurate and may not be precise regarding legal, tax, or financial information (Colorado Department of Revenue, n.d.). The department states that social media is public information and caution taken that users do not post personal information (Colorado Department of Revenue. (n.d.). These sites can be mined and used for research with the knowledge that the data may not be entirely accurate. Researchers should disclose the source of data within published results for their project. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;The U.S. Department of Health and Human Services has a social media policy. The department states they must follow the federal standards for information and information technology (U.S. Department of Health and Human Service, July 30, 2018). All social media from the department must be accessible to all public persons. Department standards say social media contains the branding of the department. The department also encourages public consumption of the information; however, they do filter political, corporate endorsements, and any discrimination (U.S. Department of Health and Human Service, July 30, 2018). Any information posted to social media shall also be verifiable on the agency's official website (U.S. Department of Health and Human Service, July 30, 2018). In other words, all information posted has a secondary accessible and verifiable source, which is the official sites for the department. The department has to maintain social media records under the Federal regulations for record management; this information is public (U.S. Department of Health and Human Service, July 30, 2018). As mentioned in the local and state examples, accuracy and completeness shall not be reliable. However, the department ensures that the same information can be found on the official website and is also open to the public. Researchers can use government social media data, and again, with local and state social media, use the data with discretion. 
+
+&nbsp;&nbsp;&nbsp;&nbsp;Realistically, social media is not the first place I would go for local, state, federal information. I would use the data repositories they provide on official websites first. Or use social to do the preliminary analysis for a research project. It is clear they restrict the information and always present information that is in line with the mission and objectives of the organization, thus biased to their standards.
+
+# References
+
+City and County of Denver. (n.d.). Citywide Colorado Open Records Fee Policy. Retrieved from: https://www.denvergov.org/content/denvergov/en/city-of-denver-home/cora.html
+
+City and County of Denver. (n.d.). Denver City council social media policy. Retrieved from: https://www.denvergov.org/content/dam/denvergov/Portals/695/2018/social-media/Social%20Media%20Policy.pdf
+
+Colorado Department of Revenue. (n.d.). Social media policy. Retrieved from: https://colorado.gov/pacific/revenue/social-media-policy
+
+U.S. Department of Health and Human Service. (n.d). HHS social media policies checklist. Retrieved from:https://www.hhs.gov/sites/default/files/web/socialmedia/getting_started/checklist_social_media_policies.pdf?language=es
+
+U.S. Department of Health and Human Service. (July 30, 2018). Social media policies: Retrieved from: https://www.hhs.gov/web/social-media/policies/index.html
