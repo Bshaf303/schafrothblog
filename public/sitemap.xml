@@ -4,31 +4,56 @@
   
   <url>
     <loc>/categories/</loc>
-    <lastmod>2019-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/government-data-resources/</loc>
-    <lastmod>2019-03-04T00:00:00+00:00</lastmod>
+    <loc>/tags/data-collection/</loc>
+    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/</loc>
-    <lastmod>2019-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2019/03/09/open-data-annual-crime-dataset-2015/</loc>
+    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2019-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/privacy/</loc>
+    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/privacy-in-data/</loc>
+    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/categories/public-data/</loc>
-    <lastmod>2019-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/social-justice/</loc>
+    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/</loc>
+    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/government-data-resources/</loc>
     <lastmod>2019-03-04T00:00:00+00:00</lastmod>
   </url>
   
@@ -44,11 +69,6 @@
   
   <url>
     <loc>/post/2019/03/02/data-science-for-social-justice-bolivia-case-study/</loc>
-    <lastmod>2019-03-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/social-justice/</loc>
     <lastmod>2019-03-02T00:00:00+00:00</lastmod>
   </url>
   
@@ -129,21 +149,6 @@
   
   <url>
     <loc>/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</loc>
-    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-collection/</loc>
-    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/privacy/</loc>
-    <lastmod>2019-01-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/privacy-in-data/</loc>
     <lastmod>2019-01-27T00:00:00+00:00</lastmod>
   </url>
   

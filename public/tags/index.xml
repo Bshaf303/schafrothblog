@@ -6,10 +6,46 @@
     <description>Recent content in Tags on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>data collection</title>
+      <link>/tags/data-collection/</link>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/data-collection/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>privacy</title>
+      <link>/tags/privacy/</link>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/privacy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>privacy in data</title>
+      <link>/tags/privacy-in-data/</link>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/privacy-in-data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>social justice</title>
+      <link>/tags/social-justice/</link>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/social-justice/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>government data resources</title>
@@ -17,15 +53,6 @@
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/government-data-resources/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>social justice</title>
-      <link>/tags/social-justice/</link>
-      <pubDate>Sat, 02 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/social-justice/</guid>
       <description></description>
     </item>
     
@@ -62,33 +89,6 @@
       <pubDate>Mon, 28 Jan 2019 00:00:00 +0000</pubDate>
       
       <guid>/tags/ethical-breach/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>data collection</title>
-      <link>/tags/data-collection/</link>
-      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/data-collection/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>privacy</title>
-      <link>/tags/privacy/</link>
-      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/privacy/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>privacy in data</title>
-      <link>/tags/privacy-in-data/</link>
-      <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/privacy-in-data/</guid>
       <description></description>
     </item>
     

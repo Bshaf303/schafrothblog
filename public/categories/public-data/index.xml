@@ -6,10 +6,19 @@
     <description>Recent content in Public Data on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 04 Mar 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 09 Mar 2019 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/public-data/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Open Data – Annual Crime Dataset 2015</title>
+      <link>/post/2019/03/09/open-data-annual-crime-dataset-2015/</link>
+      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/03/09/open-data-annual-crime-dataset-2015/</guid>
+      <description>Data.gov has a “Local Government” (data.gov, 2019b) section among fourteen available topics to obtain data. In the “All Local Government section, as of this writing, there are 17,209 datasets (data.gov, 2019a). Filtering found in the “Organizations” or “Publishers” tab will isolate all the data available for Austin, Texas. Not all U.S. States, cities, and counties are in this resource, which does not indicate the data are not available. A direct way to find local data is to go to the city, state, or county websites.</description>
+    </item>
     
     <item>
       <title>Using Data.gov and Applications that Solve Problems</title>
