@@ -1,2 +1,19 @@
 knitr::include_url('https://github.com/Bshaf303/schafrothblog/blob/master/public/slides/govregdata.html')
+---
+title: Government Regulations Slide Presentation
+author: Bryan
+date: '2019-02-07'
+slug: government-regulations-slide-presentation
+categories:
+  - Public Data
+tags:
+  - government data resources
+---
+
+This article is a slide presentation discussing government regulations covering the legal aspects of privacy. It covers the industry regulated why it was created and other interesting information. A direct link to the slide presentation can be found here: [Government Regulations Slide Presentation](https://www.bryanschafroth.com/slides/govregdata.html#1) 
+
+Or hover mouse over slide and scroll through:
+
+```{r echo = FALSE}
+knitr::include_url('https://www.bryanschafroth.com/slides/govregdata.html#1')
 ```
