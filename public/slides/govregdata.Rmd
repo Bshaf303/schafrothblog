@@ -1,0 +1,275 @@
+---
+title: "Government Regulations"
+subtitle: "Data Privacy "
+author: "Bryan Schafroth"
+date: "2/7/2019"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+# Contents
+
+#### U.S. Regulations & Legal Aspects of Privacy
+1. Financial
+
+1. Healthcare
+
+1. Personal Privacy and the Federal Government
+
+1. Homeland Security
+
+1. North American Electric Reliability Corporation (NERC)
+
+1. Cybersecurity
+
+1. Compliance and Enforcement
+
+1. Conclusion
+
+1. References
+
+---
+
+# Legal Aspects of Privacy
+
+- Financial
+
+- Healthcare
+
+- Personal Privacy and the Government
+
+- Homeland Security
+
+---
+
+# Financial 
+
+#### The Gramm-Leach-Bliley Act
+
+- Consumer Financial Privacy - Federal Trade Commission (FTC) 
+
+- Privacy of Consumer Financial Information Rule (16 C.F.R. Part 313)
+
+--
+
+#### Sarbanes-Oxley Act of 2002 (SOX) 
+
+- Protect Investors from fraudulent accounting activities by corporations
+
+- Corporate Responsibility Act of 2002 
+
+- Section 302: senior management to certify the accuracy of the reported financial statement of the corporation 
+
+- Section 404: management and auditors must have internal controls in place and report on the adequacy of the controls.
+
+---
+
+# Healthcare
+
+#### Health Insurance Portability and Accountability Act (HIPAA) 
+
+- Protection of personal information within healthcare and health insurance industries 
+
+- Protect personal information for theft and fraud
+
+- Patient authorization over their data
+
+- 45 CFR Part 160 – Subparts A and E of Part 164
+
+---
+
+# Personal Privacy and the Federal Government
+
+#### Privacy Act of 1974
+
+- Regulates the collection, maintenance, use , and sharing of personal information by federal agencies
+
+- Department of Justice Office of Privacy and Civil Liberties (OPCL)
+
+- 5, U.S. Code. Section 552a Records maintained on individuals
+
+---
+
+# Homeland Security
+
+#### Federal Information Modernization Act (FISMA)
+
+- Federal data security standards and guidelines
+
+- All federal agencies information security protocols to protect federal data
+
+- S.2521 is the 2014 updated act
+
+--
+
+#### North American Electric Reliability Corporation (NERC) 
+
+- Federal Energy regulatory Commission
+
+- Reduce risk to the North American Power grid – Nonprofit -U.S., Canada, Northern Baja Mexico 
+
+---
+
+# Homeland Security
+
+#### Homeland Security Presidential Directives (HSPDs) – Issued by the President of the U.S. and be revoked or left active indefinitely:
+--
+#### Key Highlights:
+1. Homeland Security Council
+1. Immigration Policy
+1. HSPD 5 Emergency Incident Management Systems
+1. HSPD 7 Protect key infrastructure
+1. HSPD 8 Federal emergency preparedness
+1. HSPD Protect Food and Agriculture
+1. HSPD 12 Identification process for entry into all federal buildings
+1. HSPD 13 Maritime security
+1. HSPD 14 Domestic Nuclear and radioactive material detection
+1. HSPD 20 Government operations in catastrophic emergency
+1. HSPD 21 Disaster healthcare processes for all related organizations
+1. HSPD 23 Cybersecurity
+
+---
+
+# Homeland Security
+
+#### U.S. Patriot Act - Department of Justice - Prevent future terror attacks
+
+1. The Patriot Act allows investigators to use the tools that were already available to investigate organized crime and drug trafficking
+
+1. The Patriot Act facilitated information sharing and cooperation among government agencies so that they can better "connect the dots.
+
+1. The Patriot Act updated the law to reflect new technologies and new threats.
+
+1. The Patriot Act increased the penalties for those who commit terrorist crimes
+
+---
+
+# North American Electric Reliability Corporation (NERC) 
+- Established June 1, 1968 (National Electric Reliability Council). The Non-profit (North American Electric Reliability Corporation) was created in March 28, 2006
+
+- Created to ensure the reliability if the North American bulk power systems
+
+- Assure the effective and efficient reduction of risks to the reliability and security of the bulk power systems
+
+--
+
+- Standard provides a cybersecurity framework for the identification and protection of critical cyber assets that control or affect the reliability of North American bulk power systems.
+
+- 1600 bulk power system users, owners, and operators. The regulations apply to all electric utilities and other entities (co-ops, etc.) that own or operate generation, transmission, or other facilities (substations) in the bulk electric system.
+
+---
+
+# Cybersecurity Focus
+
+- Cybersecurity threats to the electric grid have become a reality—particularly in the past decade
+
+- Proactively addressing these threats is critical to ensuring the security and reliability of the electric grid. NERC, FERC and DOE have been active in this area and are coordinating their efforts to ensure that cybersecurity threats to the North American grid are minimized and, ultimately, prevented entirely
+
+---
+
+# Cybersecurity Focus
+
+#### Cybersecurity Systems:
+
+1. High Impact BES Cyber Systems
+
+1. Medium Impact BES Cyber Systems
+
+1. Electronic Access Control or Monitoring Systems (EACMS)
+
+1. Physical Access Control Systems (PACS)
+
+1. Protected Cyber Assets (PCA)
+
+---
+
+# Compliance and Enforcement
+
+- These reliability standards apply to electric utilities and other entities that own or operate generation, transmission, or other facilities in the bulk electric system
+
+--
+
+- Entities found to be in violation of reliability standards are subject to financial penalties and other enforcement actions. NERC has offices in Atlanta, Georgia and Washington, D.C.
+
+---
+
+# Conclusion
+
+--
+
+**Financial:**
+
+- The Gramm-Leach-Bliley-Act
+
+- Sarbanes-Oxley Act of 2002
+
+--
+
+**Healthcare:**
+
+- Health Insurance Portability and Accountability Act (HIPPA)
+
+--
+
+
+**Personal Privacy and the Government:**
+
+- Privacy Act of 1974
+
+
+--
+
+
+**Homeland Security:**
+
+- Federal Information Security Moderization Act (FISMA)
+
+- North American Electric Reliability Corporation (NERC)
+
+- Homeland Security Presidential Directives (HSPDs)
+
+- U.S. Patriot Act
+
+---
+
+class: inverse
+
+#### References
+
+Federal Trade Commission (n.d.). How to comply with the privacy of consumer financial information rule of the Gramm-Leach-Bliley Act. Retrieved from: https://www.ftc.gov/tips-advice/business-center/guidance/how-comply-privacy-consumer-financial-information-rule-gramm
+
+Health and Human Services. (n.d.). The HIPAA privacy rule. Retrieved from: https://www.hhs.gov/hipaa/for-professionals/privacy/index.html
+
+Investopedia. (May 31, 2018). Sarbanes-Oxley Act Of 2002 – SOX. Retrieved from: https://www.investopedia.com/terms/s/sarbanesoxleyact.asp
+
+I.S. Partners. (n.d.). NERC CIP Compliance. Retrieved from: https://www.ispartnersllc.com/internal-audit-compliance/nerc-cip/
+
+North American Electric Reliability Corporation. (2017). CIP Standards. Retrieved from: https://www.nerc.com/pa/Stand/Pages/CIPStandards.aspx
+
+U.S. Department of Justice. (n.d.). Overview of the Privacy Act of 1974 (2015 Edition). Retrieved from: https://www.justice.gov/opcl/overview-privacy-act-1974-2015-edition
+
+---
+
+class: inverse
+
+#### References, cont.
+
+U.S. Department of Justice. (n.d.). The USA Patriot Act: Preserving life and liberty. Retrieved from: https://www.justice.gov/archive/ll/highlights.htm
+
+U.S. Department of Homeland Security. (n.d.). Federal Information Security Modernization Act. Retrieved from: https://www.dhs.gov/fisma
+
+Western Interstate Energy Board. (n.d.). North American Electric Reliability Corporation (NERC). Retrieved from: https://westernenergyboard.org/reliability/north-american-electric-reliability-corporation-nerc/
+
+Wikipedia (n.d.). Presidential directive. Retrieved from: https://en.wikipedia.org/wiki/Presidential_directive
+
+Wikipedia (n.d.). North American Electric Reliability Corporation. Retrieved from: https://en.wikipedia.org/wiki/North_American_Electric_Reliability_Corporation
+
+
+
+
+
