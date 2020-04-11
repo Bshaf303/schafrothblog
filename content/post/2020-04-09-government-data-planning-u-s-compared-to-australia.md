@@ -19,7 +19,7 @@ tags:
 
 &nbsp;&nbsp;&nbsp;&nbsp;The first impressions with NSW's Government data site is a thorough site that covers just about all one would need to understand the state's accountability and transparency with government data. While Colorado and Data.gov had similar data they did not mention transparency and accountability, however, were more like a data repository. The other observation is NSW was clear on policy and legislation involving data and listed all of the laws (Acts) related to data. Colorado and the U.S. Government didn't mention policy/ legislation on their data sites. One interesting tool the NSW used was the Digital Policy Landscape and is a visualization app connecting all the various data and shows the relationships between different data, strategies, policy reach, government departments and legislation (NSW Government, 2019e). The U.S. Government does have much more data than a state in Australia due to size and reach. One other area that the U.S. Government's data was more in-depth, particularly with Health and Human Services and its Center For Disease Control (CDC) data. NSW only had a hospital, ambulance, patient survey types of data (Bureau of Health Information, 2019). All are excellent sources for data research and are updated often.
 
-# References
+### References
 
 Australian Government. (n.d.). State and territory government. Retrieved from: https://www.australia.gov.au/about-government/how-government-works/state-and-territory-government
 

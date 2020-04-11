@@ -16,7 +16,7 @@ tags: []
     
 &nbsp;&nbsp;&nbsp;&nbsp;Reed et al. (2010) describe social justice as a “distribution of all rights and responsibilities” (p.21) in every aspect of society with fair treatment and benefits shared between all of society. Social justice shall dissolve social inequalities, and all people in a community can have access to the same benefits of technologies available to all. 
 
-# General Ethical Principles
+### General Ethical Principles
 
 &nbsp;&nbsp;&nbsp;&nbsp;Contribute to society and human well-being, acknowledging that all people are stakeholders in computing (ACM, 2018). The first principle is about social justice, and computing should benefit all of humanity regardless of how diverse people and groups are from each other. The first principle also mentions autonomy, health, safety, and sustainability considered on the broader social justice scale what computing professionals produce is in-line with public well-being. 
 
@@ -35,7 +35,7 @@ tags: []
 &nbsp;&nbsp;&nbsp;&nbsp;In conclusion, the seven classified principles outlined all fall under ethics, privacy, and social justice. Most policies are well-defined, and classification is typically one or the other, while some code principles have two categories of classification. Either way, the concept is clear how the professionals shall act and avoid and be aware of issues that can arise between ethics, privacy, and social justice while handling data and technologies available today. 
 
 
-# References
+### References
 
 ACM (2018). ACM code of ethics and professional conduct. Retrieved from: https://www.acm.org/code-of-ethics#h-2.9-design-and-implement-systems-that-are-robustly-and-usably-secure.
 

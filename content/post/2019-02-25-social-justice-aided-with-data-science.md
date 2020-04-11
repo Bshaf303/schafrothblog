@@ -14,7 +14,7 @@ tags:
 
 &nbsp;&nbsp;&nbsp;&nbsp;This research had been previously done, and new studies can easily be derived from the original analysis using new and current data by adding additional data to this, such as access to clean water, education, diseases, food supplies, political, access to healthcare, and other economic open-source data. A non-profit such as Water for people could easily use this data to focus efforts around the world to bring clean drinking water and proper sanitary water solutions to nations with lower life expectancy.
 
-# References
+### References
 
 Gapminder. (n.d.). Interactive map. Retrieved from: https://www.gapminder.org/tools/#$chart-type=bubbles
 

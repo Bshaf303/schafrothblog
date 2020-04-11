@@ -17,7 +17,7 @@ tags:
 
 &nbsp;&nbsp;&nbsp;&nbsp;Realistically, social media is not the first place I would go for local, state, federal information. I would use the data repositories they provide on official websites first. Or use social to do the preliminary analysis for a research project. It is clear they restrict the information and always present information that is in line with the mission and objectives of the organization, thus biased to their standards.
 
-# References
+### References
 
 City and County of Denver. (n.d.). Citywide Colorado Open Records Fee Policy. Retrieved from: https://www.denvergov.org/content/denvergov/en/city-of-denver-home/cora.html
 

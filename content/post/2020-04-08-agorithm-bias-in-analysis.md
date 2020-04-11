@@ -15,6 +15,7 @@ tags:
 
 &nbsp;&nbsp;&nbsp;&nbsp;Chen, Johansson, & Sontag (2018) performed a study and found machine learning algorithms used in healthcare create concerns of fairness and bias. The authors say there is a "balance between fairness and accuracy" (p. 1), and there is a give and take between fairness and accuracy, which can lead to prediction errors and adverse outcomes. The paradox is the algorithms intended to increase algorithm accuracy and to remove human bias; however, the authors discovered data quality and model selection could produce unintended bias (Chen, Johansson, & Sontag, 2018). The authors stress accuracy can be lacking when taking insufficient or skewed sample data, given a set of specific variables available. Chen, Johansson, & Sontag found in their study that gathering more samples in the data will improve fairness, and there are other ways to reduce discrimination without losing accuracy in the models (2018).  
 
+### References
 
 Bruce, A., Bruce, P.(2017). Practical statistics for data scientists – 50 essential concepts. (3rd ed.). Sebastopol, CA: O’Reilly Media. (46-47).
 

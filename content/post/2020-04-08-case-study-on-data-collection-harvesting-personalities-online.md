@@ -23,7 +23,7 @@ tags:
 
 &nbsp;&nbsp;&nbsp;&nbsp;Cambridge Analytica had a privacy policy and also stated they are subject to the regulatory enforcement powers of the U.S. Federal Trade Commission under their Privacy Shield framework statement (Wayback Machine, 2017). On their web pages, they say what they do with data collection, and they don't tell how the predictive analytics classifies individuals into personality groups, which we could deduce by looking at machine learning classification algorithms. The major glaring issue is our government used this data for political purposes, and our personal information is out there and being used by "third parties" who get access because they are business partners. We have a right to the truth, right to privacy, a right not to be injured, and a right to what is agreed (Velasquez et al. 2015). A need to fix the violation of our privacy rights by those that hold, store, transfer, and it's hard to say by whom because the very politicians that used persuasion also write laws and regulations. 
 
-# References
+### References
 
 Bali, R., Sarkar, D., Lantz, B., & Lesmeister, C. (2016). R: Unleash machine learning techniques. (pp. 279-313). Birmingham, UK: Packt Publishing Ltd.
 

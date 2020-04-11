@@ -15,7 +15,7 @@ tags:
 
 &nbsp;&nbsp;&nbsp;&nbsp;Sobey's privacy policy states they protect personal health information and have security measures in place from unauthorized use (Sobeys, 2019). I could not find any further info of filed lawsuits against Sobeys as well as the pharmacist. The Privacy Commissioner quoted saying after the investigation that Sobeys did not correctly monitor access to the data and were "inadequate." The commissioner made eight recommendations for Sobey's to improve security monitoring of the health database through all of its locations in Nova Scotia (Quon, 2018). Sobeys also had to contact all people in the 46 records breached (Quon, 2018); however, I wasn't able to find if they had potentially sued the chain for damages.
 
-# References
+### References
 
 Minion, L. (August 13, 2018). Canadian pharmacist breaches privacy of people known to her by routinely accessing their health records. Retrieved from: https://www.healthcareit.com.au/article/canadian-pharmacist-breaches-privacy-people-known-her-routinely-accessing-their-health
 
