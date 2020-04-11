@@ -30,5 +30,14 @@
       <description>New South Wales (NSW), Australia is one of six states, and each state has a government structure similar to the Commonwealth or Federal branch (Australian government, n.d.). NSW has web resources available that include information on all government services. The site is a one-stop place to find government services related to policy, digital services, and user tools (NSW Government, 2019a). A section of the NSW website, under the &amp;ldquo;policy,&amp;rdquo; is the Data and Information services discussed in this paper.</description>
     </item>
     
+    <item>
+      <title>Government Regulations Slide Presentation</title>
+      <link>/post/2019/02/07/government-regulations-slide-presentation/</link>
+      <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2019/02/07/government-regulations-slide-presentation/</guid>
+      <description>knitr::include_url(/static/slides/govregdata’)</description>
+    </item>
+    
   </channel>
 </rss>
