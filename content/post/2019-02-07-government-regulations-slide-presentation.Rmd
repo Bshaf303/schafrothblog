@@ -12,5 +12,5 @@ tags:
 ---
 
 ```{r echo=FALSE}
-knitr::include_url(github.com/Bshaf303/schafrothblog/blob/master/static/slides/govregdata.html)
+knitr::include_url('https://github.com/Bshaf303/schafrothblog/blob/master/public/slides/govregdata.html')
 ```
