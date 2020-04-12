@@ -1,0 +1,212 @@
+---
+title: "Body-Worn Camera's in Law Enforcement Agencies, 2016"
+subtitle: "Data Privacy and The Bureau of Justice Statistics"
+author: "Bryan Schafroth"
+date: "2/13/2019"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+# Contents
+
+- Introduction
+
+- Description
+
+- Ethical Issues
+
+- Privacy Issues
+
+- Status
+
+- Summary
+
+- References
+
+---
+
+# Introduction
+
+#### Body-Worn Camera's (BWC) by Local & State Law Enforcement Agencies
+- Law Enforcement Agency Deployment
+
+- Agency Policies
+
+- Accessing & Storage of Data
+
+- Agencies Without Body-Worn Cameras
+
+#### Law Enforcement Management & Administration Statistics (LEMAS)
+- June 30, 2016 Survey Questionnaire
+
+#### Body-Worn Cameras in Law Enforcement
+- Relatively new concept and adoption by agencies
+
+- No uniform standard policy
+
+---
+
+# Description
+
+#### Nearly half of all enforcement agencies in the U.S. have BWCs
+.pull-left[
+####Enforcement Agencies For:
+- Improve Officer Safety
+
+- Increase Evidence Quality
+
+- Reduce Civilian Complaints
+
+- Reduce Agency Liability
+
+- Improve Accountability
+
+- Simplify Incident Review
+
+- Reduce Use of Force
+]
+.pull-right[
+#### Enforcement Agencies Against
+- Costs - Insufficient Funding
+
+- Technology Challenges - Data Storage, Hardware
+
+- Privacy Concerns
+
+- Liability
+
+- Security of Camera Footage
+
+- Burden of Requests for Footage by Public/Media
+]
+
+---
+
+# Description
+
+#### 86% have a policy in place for the use of BWCs
+#### Does not cover all aspects 100% 
+- **Specific Events to Record: 26%-90% described in the policies**
+
+ - Traffic Stops 
+ 
+ - Citizen Contact
+ 
+ - Arrest Seach Warrants 
+ 
+ - Firesarms Deployment 
+ 
+ - Routine Service Calls 
+ 
+ - Criminal Investigations 
+ 
+ - Policing Public Events
+
+---
+
+# Description
+
+- **Video Transfer, Storage, Disposal** 
+
+  - Approx. 87% have systems in place
+
+--
+
+- **Disclose to Citizens Being Recorded**
+
+  - Under 50% have this policy included
+  
+--
+
+- **Direct Access: 8%-88% described in policies**
+  - Cheif Executive 
+  - Supervisor
+  - Officer
+  - Public
+  - District Attorney
+  - IT Deparment Heads and Staff
+  - Other Sworn Officers
+  -Other Non-Sworn Officers
+
+--
+
+- **Contact That Must Be Reduced**
+  - Under 50% have this policy included
+
+---
+
+# Privacy Issues
+
+- Video is available to the public per request for information
+
+- Personal affairs & property can be recorded without a warrant
+
+- Entering a home with other innocent bystanders or children
+
+- Different staff have access to the video footage without formalities
+
+- Officers will lose privacy as employees of the agency
+
+---
+
+# Status
+
+-  The research is in active status – the next survey is not given
+
+- 2016 was the last study performed by the department
+
+- There were 10 surveys since 1987 with 1 to 6 years between them
+
+- Technology has continued to change and adoption should increase
+
+- AI and machine learning is also on the rise in everything, which will open up more privacy and ethical issues
+
+- Privacy policies will need to catch up to the technology
+
+---
+
+# Summary
+
+- Lacking standardized practice policies nationwide
+
+- Legality of using cameras on citizens
+
+- Perspective of camera, doesn’t show entire scenario
+
+- Securing of video archives is varied and non-existent in some
+
+- Witnesses to crime can be retaliated against
+
+- Victims of sensitive scenarios are exposed (embarrassment, shame)
+
+- Disclosure of the use of these cameras
+
+---
+
+class: inverse
+
+#### References
+
+Bureau of Justice Statistics. (November 16, 2018). Body-Worn cameras in law enforcement agencies, 2016.
+Retrieved from: http://www.bjs.gov/index.cfm?ty=pbdetail&iid=6426
+
+Bureau of Justice Statistics. (November 16, 2018). Data tables. Retrieved from:
+https://www.bjs.gov/content/pub/sheets/bwclea16.zip
+
+U.S. Department of Justice. (November, 2018). Body-Worn cameras in law enforcement agencies, 2016.
+(pp. 1-20). Retrieved from: https://www.bjs.gov/content/pub/pdf/bwclea16.pdf
+
+U.S. Department of Justice. (January 31, 2018). Privacy policy. Retrieved from:
+https://www.justice.gov/doj/privacy-policy
+
+U.S. Department of Justice – Office of Justice Programs. (n.d.) Freedom of information act. Retrieved from:
+https://ojp.gov/about/foia/foia.htm
+
+U.S. Department of Justice. (December 13, 2018). Department of justice freedom of information act
+reference guide. Retrieved from: https://www.justice.gov/oip/department-justice-freedom-
+information-act-reference-guide

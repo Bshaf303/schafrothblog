@@ -1,0 +1,21 @@
+---
+title: Body-Worn Camera's & Privacy in Law Enforcement
+author: 'Bryan '
+date: '2019-02-13'
+slug: body-worn-camera-s-privacy-in-law-enforcement
+categories:
+  - Public Data
+tags:
+  - data collection
+  - government data resources
+  - Informed Consent
+---
+
+This presentation explores the Bureau of Justice Statistics and discusses privacy issues that are related to data obtained from Law Enforcement Agencies use of body-worn camera's. Direct Link to slides:
+[Body-Worn Cameras Slide Presentation](https://www.bryanschafroth.com/slides/govregdata.html#1)
+
+Or hover mouse over slide and scroll through:
+
+```{r echo = FALSE}
+knitr::include_url('https://www.bryanschafroth.com/slides/bodycamlaw.html#1')
+```
