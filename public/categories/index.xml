@@ -56,5 +56,41 @@
       <description></description>
     </item>
     
+    <item>
+      <title>Intelligent Systems</title>
+      <link>/categories/intelligent-systems/</link>
+      <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/intelligent-systems/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>IOT</title>
+      <link>/categories/iot/</link>
+      <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/iot/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Literature Review</title>
+      <link>/categories/literature-review/</link>
+      <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/literature-review/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Smart Cities</title>
+      <link>/categories/smart-cities/</link>
+      <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/smart-cities/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
