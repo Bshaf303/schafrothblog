@@ -67,11 +67,11 @@ There are four wilderness areas inside of the Roosevelt National Forest in  Colo
 |Comanche Peak|253,364  |43.2%|
 \
 ```{r echo=FALSE, fig.cap="The figure shows the terrain map of the location in Colorado, where the data originates. The red dots are the general location of the four wilderness areas within the Roosevelt National Forest. Image Source: https://www.google.com/maps/@40.7468344,-105.6422844,11z"}
-knitr::include_graphics("../../static/img/FC_2.jpg")
+knitr::include_graphics("/img/FC_2.jpg", error = FALSE)
 ```
 \
 ```{r echo=FALSE, fig.cap="The aerial image is from Google Earth and the colored outlines are shape files that outline the boundary of the four wilderness areas. The red lines are the forest service roads. Image Source: Google Earth Pro, Imagery data 09/07/2016"}
-knitr::include_graphics("../../static/img/FC_3.jpg")
+knitr::include_graphics("/img/FC_3.jpg", error = FALSE)
 ```
 
 Below are the tree species found in the dataset and the proportions of each tree. It is important to note the sampling of each tree species because there is class imbalance. Disproportionate ratios in machine learning algorithms will not perform well and will create errors in the prediction of classes. 
@@ -91,7 +91,7 @@ Below are the tree species found in the dataset and the proportions of each tree
 |Cottonwood and Willow |2,747| 0.5%
 \
 ```{r echo=FALSE, fig.cap="These photos are of the trees described as Cover Type in this dataset. The data describes living trees in a mountainous environment. Image Source:https://csfs.colostate.edu/colorado-trees/colorados-major-tree-species/"}
-knitr::include_graphics("../../static/img/FC_4.jpg")
+knitr::include_graphics("/img/FC_4.jpg", error = FALSE)
 ```
 
 #### Soil Types
@@ -158,18 +158,18 @@ I was looking for ways I could consolidate data and make it easier to understand
 Elevations – Mountain Growth Zones (Alpine, Subalpine, Montane, Foothills)
 
 ```{r echo=FALSE, fig.cap="This graphic describes the ecosystems or growth zones relative to elevation above sea level in Colorado. Image source: https://static.colostate.edu/client-files/csfs/pdfs/894651_08FrstHlth_www.pdf"}
-knitr::include_graphics("../../static/img/FC_5.jpg")
+knitr::include_graphics("/img/FC_5.jpg", error = FALSE)
 ```
 
 
 ```{r echo=FALSE, fig.cap="A similar graphic as above, this describes the life zones or growth zones in Colorado relative to a specified range of elevations that are described by Foothills, Montane, Subalpine, and Alpine. Feature engineering helped to group the elevation variable for exploring the data relationships. Image source: https://static.colostate.edu/client-files/csfs/pdfs/894651_08FrstHlth_www.pdf"}
-knitr::include_graphics("../../static/img/FC_6.jpg")
+knitr::include_graphics("/img/FC_6.jpg", error = FALSE)
 ```
 
 I also took the aspect category and broke that down into eight compass directions. The aspect is the direction that the mountain is facing. The aspect can be an indicator of the amount of sunlight or temperature the tree species would utilize for growth. 
 
 ```{r echo=FALSE, fig.cap="The two charts show the aspect of azimuth degrees used in the dataset. Feature Engineering is applied to group aspects into nine compass directions and used for exploring the data relationships. Image source: https://desktop.arcgis.com/en/arcmap/10.3/tools/spatial-analyst-toolbox/how-aspect-works.htm", fig.show='hold'}
-knitr::include_graphics(c("../../static/img/FC_8.jpg","../../static/img/FC_7.jpg"))
+knitr::include_graphics(c("/img/FC_8.jpg","/img/FC_7.jpg"), error = FALSE)
 ```
 
 #### Feature Engineering
@@ -182,7 +182,7 @@ horizontal distance to hydrology = b
 vertical distance to hydrology = a  
 
 ```{r echo=FALSE, fig.cap="The Pythagorean Theorem is used to calculate a new variable distance-to-water which will give a general surface distance and eliminate the conflict between elevation and vertical-distance-to-water variable"}
-knitr::include_graphics("../../static/img/FC_9.jpg")
+knitr::include_graphics("/img/FC_9.jpg", error = FALSE)
 ```
 
 Created categorical groups to visualize the data:
@@ -221,52 +221,52 @@ ggplot(smlSet, aes(Cover_Type, Elevation)) +
 ```
 
 ```{r echo=FALSE, fig.cap="The boxplot visually describes the relationship between Elevation (in meters) and Cover Type. There is a clear pattern between cover type and elevation. Outliers are indicated and noted."}
-knitr::include_graphics("../../static/img/FC_10.jpg")
+knitr::include_graphics("/img/FC_10.jpg", error = FALSE)
 ```
 \
 
 ```{r echo=FALSE, fig.cap="The barplot describes the cover type’s in the four wilderness areas. Lodgepole is found in all 4 Wilderness Areas while Cottonwood is only found in Wilderness Area 4. The 2nd figure shows the proportioned areas containing cover types.", fig.show='hold'}
-knitr::include_graphics(c("../../static/img/FC_10_1.jpg","../../static/img/FC_10_2.jpg"))
+knitr::include_graphics(c("/img/FC_10_1.jpg","/img/FC_10_2.jpg"), error = FALSE)
 ```
 \
 ```{r echo=FALSE, fig.align='left', fig.cap="This graph describes the aspect or newly created variable ‘Direction’ to the cover type. There appears to be some significance where trees are concerning the sun.", fig.show='hold'}
-knitr::include_graphics("../../static/img/FC_10_4.jpg")
+knitr::include_graphics("/img/FC_10_4.jpg", error = FALSE)
 ```
 \
 ```{r echo=FALSE, fig.align='left', fig.cap="In this figure, Wilderness Area and Direction show the relationships. We can see in Wilderness Area 1 a strong East to Northeast while Wilderness Area 3 has strong North and Northeast directions.", fig.show='hold'}
-knitr::include_graphics("../../static/img/FC_10_6.jpg")
+knitr::include_graphics("/img/FC_10_6.jpg", error = FALSE)
 ```
 \
 ```{r echo=FALSE, fig.align='left', fig.cap="This figure shows the relationship between cover type and the slope of the terrain. There are patterns and possibly some outliers at the steepest slopes 40 to 50+ degrees.", fig.show='hold'}
-knitr::include_graphics("../../static/img/FC_10_3.jpg")
+knitr::include_graphics("/img/FC_10_3.jpg", error = FALSE)
 ```
 \
 ```{r echo=FALSE, fig.cap="This figure describes the cover type to soil type. A clear pattern and shows Soil Type 29 holding two cover types in the majority, however, found growing in many other soil types.", fig.show='hold'}
-knitr::include_graphics("../../static/img/FC_10_5.jpg")
+knitr::include_graphics("/img/FC_10_5.jpg", error = FALSE)
 ```
 \
 ```{r echo=FALSE, fig.cap="These two graphs are showing the Soil Types to the Wilderness Area and Growth Zone. Soil Type 29 is predominant in Wilderness Area 1 and 3. On a different note, The soil type 29 shown in the second chart in the Montane and Subalpine elevations and Alpine has a small clustering of soil types shared with Subalpine.", fig.show='hold'}
-knitr::include_graphics(c("../../static/img/FC_10_7.jpg","../../static/img/FC_10_8.jpg"))
+knitr::include_graphics(c("/img/FC_10_7.jpg","/img/FC_10_8.jpg"), error = FALSE)
 ```
 \
 ```{r echo=FALSE, fig.align='left', fig.cap="This graph has the cover type, aspect, and distance to water variables and gives the data some movement. The Krummholz stands out and is further from the water; the cottonwood stays close to the water and moves further as the aspect changes closer to the South.", fig.show='hold'}
-knitr::include_graphics("../../static/img/FC_10_9.jpg")
+knitr::include_graphics("/img/FC_10_9.jpg", error = FALSE)
 ```
 \
 ```{r echo=FALSE, fig.align='left', fig.cap=" Cover type, slope, and elevation relationship are displayed above. A strong clustering from 0 to 20 degrees. Most cover types hold at steady elevations as seen in earlier graphs, and here we can see the same, however as the slope increases, there is the movement of some tree types to lower elevations. Ponderosa Pine and Douglas Fir trend to lower elevations as the slope gets steeper. DougFir does a climb up at steeper slopes, and we saw this in the outliers in the boxplot figure.", fig.show='hold'}
-knitr::include_graphics("../../static/img/FC_10_10.jpg")
+knitr::include_graphics("/img/FC_10_10.jpg", error = FALSE)
 ```
 \
 ```{r echo=FALSE, fig.align='left', fig.cap="This figure is the cover type, elevation, and aspect or facing direction. Most trees are steady, but Ponderosa and Cottonwood like the Southern exposures a bit more as the elevation go up. Most ever slightly climb in the middle while the Krummholz dips.", fig.show='hold'}
-knitr::include_graphics("../../static/img/FC_10_11.jpg")
+knitr::include_graphics("/img/FC_10_11.jpg", error = FALSE)
 ```
 \
 ```{r echo=FALSE, fig.align='left', fig.cap="This figure describes the relationship between cover type, elevation, and distance to water. There is a clear distinction the bottom 3 Cottonwood, Douglas Fir, and Ponderosa don't exist outside of the 600-700m to water range with Aspen following around 800m to water. The Lodgepole Pine, Spruce, and Krummholz reach further away from water. Given this is standing or moving water sources and not accounting for snow or rainfall", fig.show='hold'}
-knitr::include_graphics("../../static/img/FC_10_12.jpg")
+knitr::include_graphics("/img/FC_10_12.jpg", error = FALSE)
 ```
 \
 ```{r echo=FALSE, fig.align='left', fig.cap="One last exploration figure looks at cover type, distance to water, and aspect or facing direction. The trees are grouped tightly in the middle of the aspect range, which is a Southerly facing direction. Same relationship as the previous distance to water. Lodgepole stands out and moving further from the water and facing direction more East to Northeasterly, seen earlier.", fig.show='hold'}
-knitr::include_graphics("../../static/img/FC_10_13.jpg")
+knitr::include_graphics("/img/FC_10_13.jpg", error = FALSE)
 ```
 
 #### Correlation
@@ -276,7 +276,7 @@ I started the statistical analysis with a correlation plot. I have taken a small
 `corrplot::corrplot(cor1, method = "square")`
 
 ```{r echo=FALSE, fig.cap="The correlation matrix shows clear upper and lower confidence intervals (red/blue squares) clusters"}
-knitr::include_graphics("../../static/img/FC_11.jpg")
+knitr::include_graphics("/img/FC_11.jpg", error = FALSE)
 ```
 
 
@@ -286,7 +286,7 @@ It shows the areas of correlation in clusters groupings.
 `corrplot::corrplot(cor1, order = "hclust") # Clusters Correlations`
 
 ```{r echo=FALSE, fig.cap="This correlation matrix uses the hierarchical clustering ordering method setting because the previous figure indicated some clustering, here we magnify that trait to understand what variables are connected. Soil Type 29, Aspect, Slope, and Elevation. Noted is the distance to water is not heavily correlated, which can be good for my variable selection later."}
-knitr::include_graphics("../../static/img/FC_12.jpg")
+knitr::include_graphics("/img/FC_12.jpg", error = FALSE)
 ```
 
 After performing a near or at zero variance and shows the most correlated predictors Hillshade and Aspect standout. Here is a reduced dataset, and it also shows you how each variable is importantly related.
@@ -294,7 +294,7 @@ After performing a near or at zero variance and shows the most correlated predic
 `nzv <- nearZeroVar(sampleSet, saveMetrics= TRUE) # caret package`
 
 ```{r echo=FALSE, fig.cap="Correlation Matrix after near or at zero variance adjustment and cleans up the two previous correlation plots to show the confidence intervals that will likely make up the important variables in the trained model. The correlation plot reflects what was see in the previous figures."}
-knitr::include_graphics("../../static/img/FC_13.jpg")
+knitr::include_graphics("/img/FC_13.jpg", error = FALSE)
 ```
 
 #### Dimension Reduction
@@ -313,7 +313,7 @@ validationplot(fit1, val.type = "R2") # plots optimal number of components Based
 ```
 
 ```{r echo=FALSE, fig.cap="R2"}
-knitr::include_graphics("../../static/img/FC_14.jpg")
+knitr::include_graphics("/img/FC_14.jpg", error = FALSE)
 ```
 
 Root-Mean-Standard Error of Prediction Shows the ideal number of components around 40. RMSEP explains both predictor and response variance. Here we can identify 40 variables or parts that are important for modeling.
@@ -332,7 +332,7 @@ points(min_comp,
 ```
 
 ```{r echo=FALSE, fig.cap="Root Mean Square Error of Prediction"}
-knitr::include_graphics("../../static/img/FC_15.jpg")
+knitr::include_graphics("/img/FC_15.jpg", error = FALSE)
 ```
 
 This plot is the partial least squares variable importance plot to each species. This way is better than just using the correlation matrix because it takes into account each tree species.  
@@ -352,7 +352,7 @@ plot(varImp(plsFit), top =40)
 ```
 
 ```{r echo=FALSE, fig.cap="PLS - Variable Importance"}
-knitr::include_graphics("../../static/img/FC_16.jpg")
+knitr::include_graphics("/img/FC_16.jpg", error = FALSE)
 ```
 
 One last partial least squares plot, and it shows the optimized number of variables that I should be looking for in the model. It levels out around 36 variables and is what I should use as an optimal number of variables.
@@ -360,7 +360,7 @@ One last partial least squares plot, and it shows the optimized number of variab
 `ggplot(plsFit)  + ggtitle("Optimizing the Number of Variables")`
 
 ```{r echo=FALSE, fig.cap="PLS - Variable Importance shows the optimized number of variables around 36."}
-knitr::include_graphics("../../static/img/FC_17.jpg")
+knitr::include_graphics("/img/FC_17.jpg", error = FALSE)
 ```
  
 **Variable Importance**
@@ -382,7 +382,7 @@ ggplot(importance)  + ggtitle("Top Variable Importance")
 ```
 
 ```{r echo=FALSE, fig.cap="Random Forest Variable Importance and overall values.", fig.show='hold'}
-knitr::include_graphics(c("../../static/img/FC_19.jpg", "../../static/img/FC_18.jpg"))
+knitr::include_graphics(c("/img/FC_19.jpg", "/img/FC_18.jpg"), error = FALSE)
 ```
 
 Uses a feature selector package, the scatter plot is of the weights on the importance index. Like the plot above, elevation is a top variable. There is a grouping of approx. Eight above 40.
@@ -396,7 +396,7 @@ plot(weights$attr_importance)
 ```
 
 ```{r echo=FALSE, fig.cap="Random Forest Feature Selection and the attribute importance index values.", fig.show='hold'}
-knitr::include_graphics(c("../../static/img/FC_20.jpg","../../static/img/FC_21.jpg"))
+knitr::include_graphics(c("/img/FC_20.jpg","/img/FC_21.jpg"), error = FALSE)
 ```
 
 #### Algorithm Selection
@@ -422,7 +422,7 @@ sl <- SuperLearner(Y=Y_train,
 ```
                    
 ```{r echo=FALSE, fig.align='left', fig.cap="Shows the Risk and Coefficient of Error for each of the models. Ranger has the best result."}
-knitr::include_graphics("../../static/img/FC_23.jpg")
+knitr::include_graphics("/img/FC_23.jpg", error = FALSE)
 ```
 
 I found the Super Learner -Ranger produced the best results, and is a version of random forest that runs much faster and suited for high dimension datasets. The lowest risk coefficient is what I am looking for in the output and ranger/random forest have it.
@@ -441,7 +441,7 @@ plot(r) + theme_bw() + ggtitle("Model Preformance Estimate") # plots Crossfold V
 ```
 
 ```{r echo=FALSE, fig.cap="Super Learner function wrapper output for the various models. Risk is based on the Mean Squared Error (MSE)", fig.show='hold'}
-knitr::include_graphics(c("../../static/img/FC_22.jpg","../../static/img/FC_23A.jpg"))
+knitr::include_graphics(c("/img/FC_22.jpg","/img/FC_23A.jpg"), error = FALSE)
 ```
 
 ```
@@ -459,7 +459,7 @@ qplot(pred$pred[, 1],
 ```
 
 ```{r echo=FALSE, fig.align='left', fig.cap="This figure shows the prediction back on the test data, pulls the metric form inside the model"}
-knitr::include_graphics("../../static/img/FC_24.jpg")
+knitr::include_graphics("/img/FC_24.jpg", error = FALSE)
 ```
 
 Next is using the random forest from the caret package. The reason is the processing time for other modeling techniques. It still took too much time to run, and we are still figuring out what models and parameters to use. 
@@ -482,7 +482,7 @@ rf_random <- train(Cover_Type~.,
 ```   
              
 ```{r echo=FALSE, fig.cap="10-Fold Cross Validation output graph Mtry optimal at 24. 80% Accuracy and Kappa at 0.67.", fig.show='hold'}
-knitr::include_graphics(c("../../static/img/FC_25.jpg","../../static/img/FC_26.jpg"))
+knitr::include_graphics(c("/img/FC_25.jpg","/img/FC_26.jpg"), error = FALSE)
 ```
 
 Random Forest out of the box (OOB) method. The tuning function and outputs 19 with the lowest error.
@@ -497,7 +497,7 @@ bestMtry <- tuneRF(training[,-1],training[,1],
 ```
 
 ```{r echo=FALSE, fig.cap="Random Forest out of the box (OOB) method. A tuning function and outputs 19 Mtry as optimal with the lowest error", fig.show='hold'}
-knitr::include_graphics(c("../../static/img/FC_27.jpg","../../static/img/FC_28.jpg"))
+knitr::include_graphics(c("/img/FC_27.jpg","/img/FC_28.jpg"), error = FALSE)
 ```
 
 A large chunk of time to run this model. The initial run was on fewer trees and discovered more was better. 3000 to 5000 trees produced better results. It took a while to run, but I was able to come up with a better value to enter into my final model.
@@ -523,7 +523,7 @@ lattice::dotplot(results)
 ```
 
 ```{r echo=FALSE, fig.cap="Accuracy and Kappa metric graph comparing 1000 to 5000 trees in the tuning parameter of the random forest model. The table gives the values and shows the values of accuracy and Kappa.", fig.show='hold'}
-knitr::include_graphics(c("../../static/img/FC_29.jpg","../../static/img/FC_30.jpg"))
+knitr::include_graphics(c("/img/FC_29.jpg","/img/FC_30.jpg"), error = FALSE)
 ```
 
 #### Final Model
@@ -550,7 +550,7 @@ rf_final <- train(Cover_Type~.,
 ```
 
 ```{r echo=FALSE, fig.align='left', fig.cap="Random Forest Model Tuning Grid"}
-knitr::include_graphics("../../static/img/FC_31.jpg")
+knitr::include_graphics("/img/FC_31.jpg", error = FALSE)
 ```
 The final prediction and a selected model. I was able to get an 82% accuracy rate with a Kappa of 71%. There are some false positives and false negatives, mainly with spruce and Lodgepole pine. So there's some room for improvement. Which classes did better? Ponderosa is 90% balanced accuracy. Aspen is the lowest at 72%. 
 
@@ -567,7 +567,7 @@ caret::confusionMatrix(final_pred, testing$Cover_Type)
 ```
 
 ```{r echo=FALSE, fig.align='left', fig.cap="Random Forest Model Results "}
-knitr::include_graphics("../../static/img/FC_32.jpg")
+knitr::include_graphics("/img/FC_32.jpg", error = FALSE)
 ```
 
 #### Conclusion
