@@ -170,6 +170,15 @@ Or hover mouse over slide and scroll through:
     </item>
     
     <item>
+      <title>Classification Problem using Machine Learning</title>
+      <link>/post/2018/10/21/classification-problem-using-machine-learning-forest-cover-type/</link>
+      <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/10/21/classification-problem-using-machine-learning-forest-cover-type/</guid>
+      <description>IntroductionThis article will present a machine learning problem and the concept behind solving the problem. The project will go into detail about the early exploratory steps and build a machine learning model that can be used in production to categorize data. This project is to categorize seven Rocky Mountain tree types found in the forests. In this project, we will use old legacy data from the 1990s and use modern machine learning methods to categorize the data.</description>
+    </item>
+    
+    <item>
       <title>Real-Time Data and Smart Cities</title>
       <link>/post/2018/03/20/real-time-data-and-smart-cities/</link>
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>

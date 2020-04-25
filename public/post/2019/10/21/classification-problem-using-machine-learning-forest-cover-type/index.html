@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Classification Problem using Machine Learning – Forest Cover Type | Bryan Schafroth Portfolio</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/post/">Posts</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Classification Problem using Machine Learning – Forest Cover Type</span></h1>
+<h2 class="author">Bryan Schafroth</h2>
+<h2 class="date">2019/10/21</h2>
+</div>
+
+<main>
+
+
+
+<div id="introduction" class="section level4">
+<h4>Introduction</h4>
+<p>    This article will present a machine learning problem and the concept behind solving the problem. The project will go into detail about the early exploratory steps and build a machine learning model that can be used in production to categorize data. This project is to categorize seven Rocky Mountain tree types found in the forests. In this project we will use old legacy data from the 1990’s and use modern machine learning methods to categorize the data. The owner of the data can migrate the newly categorized data over to their modern cloud database. In the late 1990’s data was collected for mapping by survey methods and done manually in the field. Though in the modern era we can use high resolution aerial imagery, GPS, and methods in GIS systems to categorize cartographic data using the tools of computer vision and machine learning. However, for practical purposes there are clients and owners of legacy data on old systems. Owners would like to migrate data from legacy systems into modern databases such as the cloud. Utilization of the data through modern computing is of use to the owners. One of the issues is how to categorize the vast amount of legacy data. Automating the categorization process with machine learning is the method proposed in this article.</p>
+<p>    A passion for outdoors and the natural environment with some previous knowledge of the domain is useful and is the reason this data was chosen for this example machine learning problem. A note about the importance of understanding the descriptions in the data and where it came from. Even though we have professional working years understanding some of the data there was other data that not clear and had to research the subject matter to fully understand the variables in the dataset. This will later be explained. The project is about the process of working with a data source and building an algorithmic model to accomplish a workable solution to categorizing disparate data. This method can be applied to many other data sources and would produce varying degrees of success.</p>
+</div>
+<div id="table-of-contents" class="section level4">
+<h4>Table of Contents</h4>
+<ul>
+<li>Data Background</li>
+<li>Data Attributes</li>
+<li>Data Exploration</li>
+<li>Correlation Plots</li>
+<li>Variable Importance</li>
+<li>Feature Selection</li>
+<li>Feature Engineering</li>
+<li>Algorithm Selection</li>
+<li>Model Output</li>
+<li>Conclusion</li>
+<li>References</li>
+</ul>
+</div>
+<div id="data-background" class="section level4">
+<h4>Data Background</h4>
+<p>    The data is originally owned by Jock A. Blackard and Colorado State University with the US Forest Service Region 2. The data is being shared and open sourced on the UCI Machine Learning Repository (2018). The data spans four wilderness areas in the Roosevelt National Forest. The data record is a thirty-by-thirty meter cartographic mapping cell. The cell has attributes given to it which are what we will use in this project.</p>
+<p>    There are seven dominant tree species that we are classifying. Much of the terminology is from survey and forestry mapping. Cell attributes: Elevation, Aspect, Slope, Distance to Water and Roads, Forest Region, etc. There’s a mixture of binary and integer values. This dataset combines 40 soil types from the USGS. And gives us 581,012 total observations and 54 variables to use within this project.</p>
+</div>
+<div id="data-attributes" class="section level4">
+<h4>Data Attributes</h4>
+<p>Attributes are embedded metadata for GIS data files:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Variable Name</th>
+<th align="center">Unit of Measurment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Elevation</td>
+<td align="center">Meters</td>
+</tr>
+<tr class="even">
+<td align="left">Aspect</td>
+<td align="center">Azimuth</td>
+</tr>
+<tr class="odd">
+<td align="left">Slope</td>
+<td align="center">Degrees</td>
+</tr>
+<tr class="even">
+<td align="left">Horizontal Distance to Hydrology</td>
+<td align="center">Meters</td>
+</tr>
+<tr class="odd">
+<td align="left">Vertical Distance to Hydrology</td>
+<td align="center">Meters</td>
+</tr>
+<tr class="even">
+<td align="left">Horizontal Distance to Roads</td>
+<td align="center">Meters</td>
+</tr>
+<tr class="odd">
+<td align="left">Hill Shade at 9 am</td>
+<td align="center">Color Index 0 to 255</td>
+</tr>
+<tr class="even">
+<td align="left">Hill Shade at 12 pm</td>
+<td align="center">Color Index 0 to 255</td>
+</tr>
+<tr class="odd">
+<td align="left">Hill Shade at 3 pm</td>
+<td align="center">Color Index 0 to 255</td>
+</tr>
+<tr class="even">
+<td align="left">Horizontal Distance to Fire Points</td>
+<td align="center">Meters</td>
+</tr>
+<tr class="odd">
+<td align="left">Wilderness Area</td>
+<td align="center">Name / binary</td>
+</tr>
+<tr class="even">
+<td align="left">Soil Types</td>
+<td align="center">Name / binary</td>
+</tr>
+<tr class="odd">
+<td align="left">Cover Type</td>
+<td align="center">1 to 7 integers</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="data-exploration" class="section level4">
+<h4>Data Exploration</h4>
+<p>I imported the dataset into RStudio you can see all 581012 observations with 55 variables. The file size was 79MB CSV file.</p>
+<div class="figure">
+<img src="/img/FC_2.jpg" alt="Fig. 1 Summary" />
+<p class="caption">Fig. 1 Summary</p>
+</div>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-38508489-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  
+  <hr/>
+  © <a href="https://www.bryanschafroth.com">Bryan Schafroth</a> 2020 | <a href="https://www.linkedin.com/in/bryanschafroth">LinkedIn</a>
+  
+  </footer>
+  </body>
+</html>
+

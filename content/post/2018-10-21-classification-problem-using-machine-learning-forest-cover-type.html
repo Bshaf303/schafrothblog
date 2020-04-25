@@ -1,0 +1,908 @@
+---
+title: Classification Problem using Machine Learning
+author: Bryan Schafroth
+date: '2018-10-21'
+slug: classification-problem-using-machine-learning-forest-cover-type
+categories:
+  - Projects
+tags:
+  - machine learning
+  - correlation plots
+  - principle component analysis
+  - Partial Least Squares
+  - Random Forest
+  - kappa
+  - 10-fold cross validation
+---
+
+
+
+<div id="introduction" class="section level4">
+<h4>Introduction</h4>
+<p>This article will present a machine learning problem and the concept behind solving the problem. The project will go into detail about the early exploratory steps and build a machine learning model that can be used in production to categorize data. This project is to categorize seven Rocky Mountain tree types found in the forests. In this project, we will use old legacy data from the 1990s and use modern machine learning methods to categorize the data. The owner of the data can migrate the newly categorized data over to their modern cloud database. In the late 1990s, data was collected for mapping by survey methods and done manually in the field. Though in the modern era, we can use high-resolution aerial imagery, GPS, and techniques in GIS systems to categorize cartographic data using the tools of computer vision and machine learning. However, for practical purposes, there are clients and owners of legacy data on old systems. Owners would like to migrate data from legacy systems into modern databases such as the cloud. The utilization of the data through modern computing is of use to the owners. One of the issues is how to categorize the vast amount of legacy data. Automating the categorization process with machine learning is the method proposed in this article.</p>
+<p>A passion for outdoors and the natural environment with some previous knowledge of the domain is useful and is the reason this data was chosen for this example machine learning problem. A note about the importance of understanding the descriptions in the data and its origin, though I have professional domain experience, I still had to research the subject matter to understand the variables in the dataset fully and recommend not overlooking domain understanding. The project is about the process of working with a data source and building an algorithmic model to accomplish a workable solution to categorizing disparate data. This method can be applied to many other data sources and would produce varying degrees of success.</p>
+<p>The process to follow is what I understand as an effective workflow as of this writing. The data background and attributes explained. I talk about feature selection and engineering. In the next section, I will show exploratory graphs to understand the data relationships better. I move into correlation, dimension reduction, partial least squares, variable importance, and final algorithm selection. There are bits of R code snippets to show how the graph or table was derived. I discuss the final model and leave with a conclusion and references. Thanks for reading!</p>
+</div>
+<div id="data-background" class="section level4">
+<h4>Data Background</h4>
+<p>Formerly the data is owned by Jock A. Blackard and Colorado State University with the US Forest Service Region 2. The data is being shared and open-sourced on the UCI Machine Learning Repository (2018). The dataset spans four wilderness areas in the Roosevelt National Forest. The data record is a thirty-by-thirty meter cartographic mapping cell. The cell has attributes given to it, which are what we will use in this project.</p>
+<p>There are seven dominant tree species that we are classifying. Much of the terminology is from the survey and forestry mapping. Cell attributes: Elevation, Aspect, Slope, Distance to Water and Roads, Forest Region, etc. The variable values are in binary and integer values, and the dataset combines 40 soil types from the USGS. The dataset gives us 581,012 total observations and 54 variables to use within this project.</p>
+</div>
+<div id="data-attributes" class="section level4">
+<h4>Data Attributes</h4>
+<p>Attributes are embedded metadata for GIS data files. I imported the dataset, a 79MB CSV file, into RStudio, you can see there are 581012 observations with 55 variables. The figure below is a sampling of the main variables.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Variable Name</th>
+<th align="center">Unit of Measurment</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Elevation</td>
+<td align="center">Meters</td>
+</tr>
+<tr class="even">
+<td align="left">Aspect</td>
+<td align="center">Azimuth</td>
+</tr>
+<tr class="odd">
+<td align="left">Slope</td>
+<td align="center">Degrees</td>
+</tr>
+<tr class="even">
+<td align="left">Horizontal Distance to Hydrology</td>
+<td align="center">Meters</td>
+</tr>
+<tr class="odd">
+<td align="left">Vertical Distance to Hydrology</td>
+<td align="center">Meters</td>
+</tr>
+<tr class="even">
+<td align="left">Horizontal Distance to Roads</td>
+<td align="center">Meters</td>
+</tr>
+<tr class="odd">
+<td align="left">Hill Shade at 9 am</td>
+<td align="center">Color Index 0 to 255</td>
+</tr>
+<tr class="even">
+<td align="left">Hill Shade at 12 pm</td>
+<td align="center">Color Index 0 to 255</td>
+</tr>
+<tr class="odd">
+<td align="left">Hill Shade at 3 pm</td>
+<td align="center">Color Index 0 to 255</td>
+</tr>
+<tr class="even">
+<td align="left">Horizontal Distance to Fire Points</td>
+<td align="center">Meters</td>
+</tr>
+<tr class="odd">
+<td align="left">Wilderness Area</td>
+<td align="center">Name / binary</td>
+</tr>
+<tr class="even">
+<td align="left">Soil Types</td>
+<td align="center">Name / binary</td>
+</tr>
+<tr class="odd">
+<td align="left">Cover Type</td>
+<td align="center">1 to 7 integers</td>
+</tr>
+</tbody>
+</table>
+<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<img src="../../static/img/FC_1.jpg" alt="The table is from an RStudio summary of the variables contained in the Cover Type dataset and shows the first 27 columns of 55. The values are integer and binary." width="273" />
+<p class="caption">
+Figure 1: The table is from an RStudio summary of the variables contained in the Cover Type dataset and shows the first 27 columns of 55. The values are integer and binary.
+</p>
+</div>
+</div>
+<div id="roosevelt-national-forest-wilderness-areas" class="section level4">
+<h4>Roosevelt National Forest Wilderness Areas</h4>
+<p>There are four wilderness areas inside of the Roosevelt National Forest in Colorado. There are two small areas: Neota and Cashe la Poudre and two larger areas Rawah and Comanche Peak. The aerial imagery from Google Earth helps to see how the tree density is between the barren rocky regions of the mountainous terrain. The image shows us the diversity of the environment.</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Wilderness Area</th>
+<th align="center">Trees/Region</th>
+<th align="center">Percent of Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Rawah</td>
+<td align="center">260,795</td>
+<td align="center">44.9%</td>
+</tr>
+<tr class="even">
+<td align="left">Comanche Peak</td>
+<td align="center">253,364</td>
+<td align="center">43.2%</td>
+</tr>
+<tr class="odd">
+<td align="left">Cashe la Poudre</td>
+<td align="center">36,968</td>
+<td align="center">6.4%</td>
+</tr>
+<tr class="even">
+<td align="left">Neota</td>
+<td align="center">29,884</td>
+<td align="center">5.1%</td>
+</tr>
+<tr class="odd">
+<td align="left">Comanche Peak</td>
+<td align="center">253,364</td>
+<td align="center">43.2%</td>
+</tr>
+</tbody>
+</table>
+<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<img src="../../static/img/FC_2.jpg" alt="The figure shows the terrain map of the location in Colorado, where the data originates. The red dots are the general location of the four wilderness areas within the Roosevelt National Forest. Image Source: https://www.google.com/maps/@40.7468344,-105.6422844,11z" width="366" />
+<p class="caption">
+Figure 2: The figure shows the terrain map of the location in Colorado, where the data originates. The red dots are the general location of the four wilderness areas within the Roosevelt National Forest. Image Source: <a href="https://www.google.com/maps/@40.7468344,-105.6422844,11z" class="uri">https://www.google.com/maps/@40.7468344,-105.6422844,11z</a>
+</p>
+</div>
+<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="../../static/img/FC_3.jpg" alt="The aerial image is from Google Earth and the colored outlines are shape files that outline the boundary of the four wilderness areas. The red lines are the forest service roads. Image Source: Google Earth Pro, Imagery data 09/07/2016" width="400" />
+<p class="caption">
+Figure 3: The aerial image is from Google Earth and the colored outlines are shape files that outline the boundary of the four wilderness areas. The red lines are the forest service roads. Image Source: Google Earth Pro, Imagery data 09/07/2016
+</p>
+</div>
+<p>Below are the tree species found in the dataset and the proportions of each tree. It is important to note the sampling of each tree species because there is class imbalance. Disproportionate ratios in machine learning algorithms will not perform well and will create errors in the prediction of classes.</p>
+</div>
+<div id="cover-type" class="section level4">
+<h4>Cover Type</h4>
+<p><code>round(prop.table((table(sampleSetTran$Cover_Type))), 3) *100 # class imbalance</code></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Tree Species</th>
+<th align="center">Number of Samples</th>
+<th align="center">Percent of Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Lodgepole Pine</td>
+<td align="center">283,301</td>
+<td align="center">48.4%</td>
+</tr>
+<tr class="even">
+<td align="left">Spruce/Fir</td>
+<td align="center">211,840</td>
+<td align="center">36.5%</td>
+</tr>
+<tr class="odd">
+<td align="left">Ponderosa Pine</td>
+<td align="center">35,754</td>
+<td align="center">6.2%</td>
+</tr>
+<tr class="even">
+<td align="left">Krummholz</td>
+<td align="center">20,510</td>
+<td align="center">3.5%</td>
+</tr>
+<tr class="odd">
+<td align="left">Douglas Fir</td>
+<td align="center">17,367</td>
+<td align="center">3.0%</td>
+</tr>
+<tr class="even">
+<td align="left">Aspen</td>
+<td align="center">9,492</td>
+<td align="center">1.6%</td>
+</tr>
+<tr class="odd">
+<td align="left">Cottonwood and Willow</td>
+<td align="center">2,747</td>
+<td align="center">0.5%</td>
+</tr>
+</tbody>
+</table>
+<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="../../static/img/FC_4.jpg" alt="These photos are of the trees described as Cover Type in this dataset. The data describes living trees in a mountainous environment. Image Source:https://csfs.colostate.edu/colorado-trees/colorados-major-tree-species/" width="400" />
+<p class="caption">
+Figure 4: These photos are of the trees described as Cover Type in this dataset. The data describes living trees in a mountainous environment. Image Source:<a href="https://csfs.colostate.edu/colorado-trees/colorados-major-tree-species/" class="uri">https://csfs.colostate.edu/colorado-trees/colorados-major-tree-species/</a>
+</p>
+</div>
+</div>
+<div id="soil-types" class="section level4">
+<h4>Soil Types</h4>
+<p>The table shows the 40 soil types. We can see soil type 29 is 20% of the data. Doing some research into the soil types, I can group them. I did find there are four categories of soil, but then the families there are over 20 different families. So I will leave soil types alone.</p>
+<p>40 Soil Types:
+Igneous Metaphoric
+Mixed Sedimentary
+Glacial
+Alluvium
+Families:
+Cathedral, Retake, Vanet, Limber, Gothic, Bullwark, Catamount, Gateview, Leighcan,
+Como, Granile, Cryaquolis, Moran, Bross, etc
+(source: <a href="https://soilseries.sc.egov.usda.gov/osdlist.aspx" class="uri">https://soilseries.sc.egov.usda.gov/osdlist.aspx</a>)</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Type</th>
+<th align="center">Number of Samples</th>
+<th align="center">Percent of Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Soil_Type29</td>
+<td align="center">115,24</td>
+<td align="center">19.8%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type23</td>
+<td align="center">57,752</td>
+<td align="center">9.9%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type32</td>
+<td align="center">52,519</td>
+<td align="center">9.0%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type33</td>
+<td align="center">45,154</td>
+<td align="center">7.8%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type22</td>
+<td align="center">33,373</td>
+<td align="center">5.7%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type10</td>
+<td align="center">32,634</td>
+<td align="center">5.6%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type30</td>
+<td align="center">30,170</td>
+<td align="center">5.2%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type12</td>
+<td align="center">29,971</td>
+<td align="center">5.2%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type31</td>
+<td align="center">25,666</td>
+<td align="center">4.4%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type24</td>
+<td align="center">21,278</td>
+<td align="center">3.7%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type13</td>
+<td align="center">17,431</td>
+<td align="center">3.0%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type38</td>
+<td align="center">15,573</td>
+<td align="center">2.7%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type39</td>
+<td align="center">13,806</td>
+<td align="center">2.4%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type11</td>
+<td align="center">12,410</td>
+<td align="center">2.1%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type4</td>
+<td align="center">12,396</td>
+<td align="center">2.1%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type20</td>
+<td align="center">9,259</td>
+<td align="center">1.6%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type40</td>
+<td align="center">8,750</td>
+<td align="center">1.5%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type2</td>
+<td align="center">7,525</td>
+<td align="center">1.3%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type6</td>
+<td align="center">6,575</td>
+<td align="center">1.1%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type3</td>
+<td align="center">4,823</td>
+<td align="center">0.8%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type19</td>
+<td align="center">4,021</td>
+<td align="center">0.7%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type17</td>
+<td align="center">3,422</td>
+<td align="center">0.6%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type1</td>
+<td align="center">3,031</td>
+<td align="center">0.5%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type16</td>
+<td align="center">2,845</td>
+<td align="center">0.5%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type26</td>
+<td align="center">2,589</td>
+<td align="center">0.4%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type18</td>
+<td align="center">1,899</td>
+<td align="center">0.3%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type35</td>
+<td align="center">1,891</td>
+<td align="center">0.3%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type34</td>
+<td align="center">1,611</td>
+<td align="center">0.3%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type5</td>
+<td align="center">1,597</td>
+<td align="center">0.3%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type9</td>
+<td align="center">1,147</td>
+<td align="center">0.2%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type27</td>
+<td align="center">1,086</td>
+<td align="center">0.2%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type28</td>
+<td align="center">946</td>
+<td align="center">0.2%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type21</td>
+<td align="center">838</td>
+<td align="center">0.1%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type14</td>
+<td align="center">599</td>
+<td align="center">0.1%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type25</td>
+<td align="center">474</td>
+<td align="center">0.1%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type37</td>
+<td align="center">298</td>
+<td align="center">0.1%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type8</td>
+<td align="center">179</td>
+<td align="center">0.0%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type36</td>
+<td align="center">119</td>
+<td align="center">0.0%</td>
+</tr>
+<tr class="odd">
+<td align="left">Soil_Type7</td>
+<td align="center">105</td>
+<td align="center">0.0%</td>
+</tr>
+<tr class="even">
+<td align="left">Soil_Type15</td>
+<td align="center">3</td>
+<td align="center">0.0%</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="feature-selection" class="section level4">
+<h4>Feature Selection</h4>
+<p>I was looking for ways I could consolidate data and make it easier to understand the numbers. I took the elevation category and grouped that into zones. This based on mountain growth zones described by the State of Colorado. Tree species grow in a range of elevations in the rocky mountains, and I wanted to show that here hoping it would help me with my visualization.</p>
+<p>Elevations – Mountain Growth Zones (Alpine, Subalpine, Montane, Foothills)</p>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="../../static/img/FC_5.jpg" alt="This graphic describes the ecosystems or growth zones relative to elevation above sea level in Colorado. Image source: https://static.colostate.edu/client-files/csfs/pdfs/894651_08FrstHlth_www.pdf" width="347" />
+<p class="caption">
+Figure 5: This graphic describes the ecosystems or growth zones relative to elevation above sea level in Colorado. Image source: <a href="https://static.colostate.edu/client-files/csfs/pdfs/894651_08FrstHlth_www.pdf" class="uri">https://static.colostate.edu/client-files/csfs/pdfs/894651_08FrstHlth_www.pdf</a>
+</p>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-6"></span>
+<img src="../../static/img/FC_6.jpg" alt="A similar graphic as above, this describes the life zones or growth zones in Colorado relative to a specified range of elevations that are described by Foothills, Montane, Subalpine, and Alpine. Feature engineering helped to group the elevation variable for exploring the data relationships. Image source: https://static.colostate.edu/client-files/csfs/pdfs/894651_08FrstHlth_www.pdf" width="400" />
+<p class="caption">
+Figure 6: A similar graphic as above, this describes the life zones or growth zones in Colorado relative to a specified range of elevations that are described by Foothills, Montane, Subalpine, and Alpine. Feature engineering helped to group the elevation variable for exploring the data relationships. Image source: <a href="https://static.colostate.edu/client-files/csfs/pdfs/894651_08FrstHlth_www.pdf" class="uri">https://static.colostate.edu/client-files/csfs/pdfs/894651_08FrstHlth_www.pdf</a>
+</p>
+</div>
+<p>I also took the aspect category and broke that down into eight compass directions. The aspect is the direction that the mountain is facing. The aspect can be an indicator of the amount of sunlight or temperature the tree species would utilize for growth.</p>
+<div class="figure"><span id="fig:unnamed-chunk-7"></span>
+<img src="../../static/img/FC_8.jpg" alt="The two charts show the aspect of azimuth degrees used in the dataset. Feature Engineering is applied to group aspects into nine compass directions and used for exploring the data relationships. Image source: https://desktop.arcgis.com/en/arcmap/10.3/tools/spatial-analyst-toolbox/how-aspect-works.htm" width="255" /><img src="../../static/img/FC_7.jpg" alt="The two charts show the aspect of azimuth degrees used in the dataset. Feature Engineering is applied to group aspects into nine compass directions and used for exploring the data relationships. Image source: https://desktop.arcgis.com/en/arcmap/10.3/tools/spatial-analyst-toolbox/how-aspect-works.htm" width="282" />
+<p class="caption">
+Figure 7: The two charts show the aspect of azimuth degrees used in the dataset. Feature Engineering is applied to group aspects into nine compass directions and used for exploring the data relationships. Image source: <a href="https://desktop.arcgis.com/en/arcmap/10.3/tools/spatial-analyst-toolbox/how-aspect-works.htm" class="uri">https://desktop.arcgis.com/en/arcmap/10.3/tools/spatial-analyst-toolbox/how-aspect-works.htm</a>
+</p>
+</div>
+</div>
+<div id="feature-engineering" class="section level4">
+<h4>Feature Engineering</h4>
+<p>There are two variables, one is the horizontal distance to water, and the other is the vertical distance to water. I thought I could just consolidate the two using the Pythagorean theorem to calculate the “distance-to-water” That would give me a surface distance. It would correlate with the elevation and the vertical distance otherwise.</p>
+<p>New Variable:<br />
+Distance-to-Water = c<br />
+horizontal distance to hydrology = b<br />
+vertical distance to hydrology = a</p>
+<div class="figure"><span id="fig:unnamed-chunk-8"></span>
+<img src="../../static/img/FC_9.jpg" alt="The Pythagorean Theorem is used to calculate a new variable distance-to-water which will give a general surface distance and eliminate the conflict between elevation and vertical-distance-to-water variable" width="134" />
+<p class="caption">
+Figure 8: The Pythagorean Theorem is used to calculate a new variable distance-to-water which will give a general surface distance and eliminate the conflict between elevation and vertical-distance-to-water variable
+</p>
+</div>
+<p>Created categorical groups to visualize the data:
+Cover Type Predictor Variable
+Descriptive labels</p>
+<ul>
+<li>Spruce &amp; Fir</li>
+<li>Lodgepole</li>
+<li>Ponderosa</li>
+<li>Cottonwood &amp; Willow</li>
+<li>Aspen</li>
+<li>Douglas Fir</li>
+<li>Krummholz</li>
+</ul>
+<p>Aspect Variable
+Labeled as the 8 Compass Directions</p>
+<ul>
+<li>North</li>
+<li>Northeast</li>
+<li>East</li>
+<li>Southeast</li>
+<li>South</li>
+<li>Southwest</li>
+<li>West</li>
+<li>Northwest</li>
+</ul>
+</div>
+<div id="exploratory-graphs" class="section level4">
+<h4>Exploratory Graphs</h4>
+<p>This section reviews plots of the dataset and makes comparisions of data variables.</p>
+<pre><code>ggplot(smlSet, aes(Cover_Type, Elevation)) + 
+  geom_boxplot(aes(color = Cover_Type), 
+  outlier.color = &quot;black&quot;) + 
+  ggtitle(&quot;Cover Type and Elevation&quot;)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-9"></span>
+<img src="../../static/img/FC_10.jpg" alt="The boxplot visually describes the relationship between Elevation (in meters) and Cover Type. There is a clear pattern between cover type and elevation. Outliers are indicated and noted." width="600" />
+<p class="caption">
+Figure 9: The boxplot visually describes the relationship between Elevation (in meters) and Cover Type. There is a clear pattern between cover type and elevation. Outliers are indicated and noted.
+</p>
+</div>
+<p><br />
+</p>
+<div class="figure"><span id="fig:unnamed-chunk-10"></span>
+<img src="../../static/img/FC_10_1.jpg" alt="The barplot describes the cover type’s in the four wilderness areas. Lodgepole is found in all 4 Wilderness Areas while Cottonwood is only found in Wilderness Area 4. The 2nd figure shows the proportioned areas containing cover types." width="600" /><img src="../../static/img/FC_10_2.jpg" alt="The barplot describes the cover type’s in the four wilderness areas. Lodgepole is found in all 4 Wilderness Areas while Cottonwood is only found in Wilderness Area 4. The 2nd figure shows the proportioned areas containing cover types." width="600" />
+<p class="caption">
+Figure 10: The barplot describes the cover type’s in the four wilderness areas. Lodgepole is found in all 4 Wilderness Areas while Cottonwood is only found in Wilderness Area 4. The 2nd figure shows the proportioned areas containing cover types.
+</p>
+</div>
+<br />
+
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-11"></span>
+<img src="../../static/img/FC_10_4.jpg" alt="This graph describes the aspect or newly created variable ‘Direction’ to the cover type. There appears to be some significance where trees are concerning the sun." width="420" />
+<p class="caption">
+Figure 11: This graph describes the aspect or newly created variable ‘Direction’ to the cover type. There appears to be some significance where trees are concerning the sun.
+</p>
+</div>
+<br />
+
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-12"></span>
+<img src="../../static/img/FC_10_6.jpg" alt="In this figure, Wilderness Area and Direction show the relationships. We can see in Wilderness Area 1 a strong East to Northeast while Wilderness Area 3 has strong North and Northeast directions." width="600" />
+<p class="caption">
+Figure 12: In this figure, Wilderness Area and Direction show the relationships. We can see in Wilderness Area 1 a strong East to Northeast while Wilderness Area 3 has strong North and Northeast directions.
+</p>
+</div>
+<br />
+
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-13"></span>
+<img src="../../static/img/FC_10_3.jpg" alt="This figure shows the relationship between cover type and the slope of the terrain. There are patterns and possibly some outliers at the steepest slopes 40 to 50+ degrees." width="600" />
+<p class="caption">
+Figure 13: This figure shows the relationship between cover type and the slope of the terrain. There are patterns and possibly some outliers at the steepest slopes 40 to 50+ degrees.
+</p>
+</div>
+<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-14"></span>
+<img src="../../static/img/FC_10_5.jpg" alt="This figure describes the cover type to soil type. A clear pattern and shows Soil Type 29 holding two cover types in the majority, however, found growing in many other soil types." width="600" />
+<p class="caption">
+Figure 14: This figure describes the cover type to soil type. A clear pattern and shows Soil Type 29 holding two cover types in the majority, however, found growing in many other soil types.
+</p>
+</div>
+<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-15"></span>
+<img src="../../static/img/FC_10_7.jpg" alt="These two graphs are showing the Soil Types to the Wilderness Area and Growth Zone. Soil Type 29 is predominant in Wilderness Area 1 and 3. On a different note, The soil type 29 shown in the second chart in the Montane and Subalpine elevations and Alpine has a small clustering of soil types shared with Subalpine." width="600" /><img src="../../static/img/FC_10_8.jpg" alt="These two graphs are showing the Soil Types to the Wilderness Area and Growth Zone. Soil Type 29 is predominant in Wilderness Area 1 and 3. On a different note, The soil type 29 shown in the second chart in the Montane and Subalpine elevations and Alpine has a small clustering of soil types shared with Subalpine." width="600" />
+<p class="caption">
+Figure 15: These two graphs are showing the Soil Types to the Wilderness Area and Growth Zone. Soil Type 29 is predominant in Wilderness Area 1 and 3. On a different note, The soil type 29 shown in the second chart in the Montane and Subalpine elevations and Alpine has a small clustering of soil types shared with Subalpine.
+</p>
+</div>
+<br />
+
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-16"></span>
+<img src="../../static/img/FC_10_9.jpg" alt="This graph has the cover type, aspect, and distance to water variables and gives the data some movement. The Krummholz stands out and is further from the water; the cottonwood stays close to the water and moves further as the aspect changes closer to the South." width="600" />
+<p class="caption">
+Figure 16: This graph has the cover type, aspect, and distance to water variables and gives the data some movement. The Krummholz stands out and is further from the water; the cottonwood stays close to the water and moves further as the aspect changes closer to the South.
+</p>
+</div>
+<br />
+
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-17"></span>
+<img src="../../static/img/FC_10_10.jpg" alt=" Cover type, slope, and elevation relationship are displayed above. A strong clustering from 0 to 20 degrees. Most cover types hold at steady elevations as seen in earlier graphs, and here we can see the same, however as the slope increases, there is the movement of some tree types to lower elevations. Ponderosa Pine and Douglas Fir trend to lower elevations as the slope gets steeper. DougFir does a climb up at steeper slopes, and we saw this in the outliers in the boxplot figure." width="600" />
+<p class="caption">
+Figure 17:  Cover type, slope, and elevation relationship are displayed above. A strong clustering from 0 to 20 degrees. Most cover types hold at steady elevations as seen in earlier graphs, and here we can see the same, however as the slope increases, there is the movement of some tree types to lower elevations. Ponderosa Pine and Douglas Fir trend to lower elevations as the slope gets steeper. DougFir does a climb up at steeper slopes, and we saw this in the outliers in the boxplot figure.
+</p>
+</div>
+<br />
+
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-18"></span>
+<img src="../../static/img/FC_10_11.jpg" alt="This figure is the cover type, elevation, and aspect or facing direction. Most trees are steady, but Ponderosa and Cottonwood like the Southern exposures a bit more as the elevation go up. Most ever slightly climb in the middle while the Krummholz dips." width="600" />
+<p class="caption">
+Figure 18: This figure is the cover type, elevation, and aspect or facing direction. Most trees are steady, but Ponderosa and Cottonwood like the Southern exposures a bit more as the elevation go up. Most ever slightly climb in the middle while the Krummholz dips.
+</p>
+</div>
+<br />
+
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-19"></span>
+<img src="../../static/img/FC_10_12.jpg" alt="This figure describes the relationship between cover type, elevation, and distance to water. There is a clear distinction the bottom 3 Cottonwood, Douglas Fir, and Ponderosa don't exist outside of the 600-700m to water range with Aspen following around 800m to water. The Lodgepole Pine, Spruce, and Krummholz reach further away from water. Given this is standing or moving water sources and not accounting for snow or rainfall" width="600" />
+<p class="caption">
+Figure 19: This figure describes the relationship between cover type, elevation, and distance to water. There is a clear distinction the bottom 3 Cottonwood, Douglas Fir, and Ponderosa don’t exist outside of the 600-700m to water range with Aspen following around 800m to water. The Lodgepole Pine, Spruce, and Krummholz reach further away from water. Given this is standing or moving water sources and not accounting for snow or rainfall
+</p>
+</div>
+<br />
+
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-20"></span>
+<img src="../../static/img/FC_10_13.jpg" alt="One last exploration figure looks at cover type, distance to water, and aspect or facing direction. The trees are grouped tightly in the middle of the aspect range, which is a Southerly facing direction. Same relationship as the previous distance to water. Lodgepole stands out and moving further from the water and facing direction more East to Northeasterly, seen earlier." width="600" />
+<p class="caption">
+Figure 20: One last exploration figure looks at cover type, distance to water, and aspect or facing direction. The trees are grouped tightly in the middle of the aspect range, which is a Southerly facing direction. Same relationship as the previous distance to water. Lodgepole stands out and moving further from the water and facing direction more East to Northeasterly, seen earlier.
+</p>
+</div>
+</div>
+<div id="correlation" class="section level4">
+<h4>Correlation</h4>
+<p>I started the statistical analysis with a correlation plot. I have taken a smaller sampling of the data, it’s a smaller randomized sample representative of all the data because of limited computational resources in my environment and then able to create the correlation matrix. Here are several variables that are correlated. Assuming that removing some of these variables can simplify this, I’ve removed the zero or near-zero variance predictors to see what the correlation does. This technique is debatable, but removing some of the binary 0s from the soil types will help to clean this data up where variables have very few unique values.</p>
+<p><code>corrplot::corrplot(cor1, method = "square")</code></p>
+<div class="figure"><span id="fig:unnamed-chunk-21"></span>
+<img src="../../static/img/FC_11.jpg" alt="The correlation matrix shows clear upper and lower confidence intervals (red/blue squares) clusters" width="400" />
+<p class="caption">
+Figure 21: The correlation matrix shows clear upper and lower confidence intervals (red/blue squares) clusters
+</p>
+</div>
+<p>Hierarchical clustering order “hcluster” correlation plot
+It shows the areas of correlation in clusters groupings.</p>
+<p><code>corrplot::corrplot(cor1, order = "hclust") # Clusters Correlations</code></p>
+<div class="figure"><span id="fig:unnamed-chunk-22"></span>
+<img src="../../static/img/FC_12.jpg" alt="This correlation matrix uses the hierarchical clustering ordering method setting because the previous figure indicated some clustering, here we magnify that trait to understand what variables are connected. Soil Type 29, Aspect, Slope, and Elevation. Noted is the distance to water is not heavily correlated, which can be good for my variable selection later." width="400" />
+<p class="caption">
+Figure 22: This correlation matrix uses the hierarchical clustering ordering method setting because the previous figure indicated some clustering, here we magnify that trait to understand what variables are connected. Soil Type 29, Aspect, Slope, and Elevation. Noted is the distance to water is not heavily correlated, which can be good for my variable selection later.
+</p>
+</div>
+<p>After performing a near or at zero variance and shows the most correlated predictors Hillshade and Aspect standout. Here is a reduced dataset, and it also shows you how each variable is importantly related.</p>
+<p><code>nzv &lt;- nearZeroVar(sampleSet, saveMetrics= TRUE) # caret package</code></p>
+<div class="figure"><span id="fig:unnamed-chunk-23"></span>
+<img src="../../static/img/FC_13.jpg" alt="Correlation Matrix after near or at zero variance adjustment and cleans up the two previous correlation plots to show the confidence intervals that will likely make up the important variables in the trained model. The correlation plot reflects what was see in the previous figures." width="400" />
+<p class="caption">
+Figure 23: Correlation Matrix after near or at zero variance adjustment and cleans up the two previous correlation plots to show the confidence intervals that will likely make up the important variables in the trained model. The correlation plot reflects what was see in the previous figures.
+</p>
+</div>
+</div>
+<div id="dimension-reduction" class="section level4">
+<h4>Dimension Reduction</h4>
+<p><strong>Partial Least Squares</strong></p>
+<p>Another way to reduce dimensions is the Partial Least Squares Regression. The optimal number of principal components needed based on the R2. R2 is on the low or “weak” end between 0 and 1 at R2 = 0.32. Continuing with the partial least squares, I’ve created this plot of the root mean standard error of prediction and predicts using the test data.</p>
+<pre><code>fit1 &lt;- plsr(Cover_Type~., 
+            data=sampleSet2pls, 
+            Scale=TRUE, 
+            validation =&quot;CV&quot;
+)
+validationplot(fit1, val.type = &quot;R2&quot;) # plots optimal number of components Based on R^2</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-24"></span>
+<img src="../../static/img/FC_14.jpg" alt="R2" width="600" />
+<p class="caption">
+Figure 24: R2
+</p>
+</div>
+<p>Root-Mean-Standard Error of Prediction Shows the ideal number of components around 40. RMSEP explains both predictor and response variance. Here we can identify 40 variables or parts that are important for modeling.</p>
+<pre><code>pls.RMSEP &lt;- RMSEP(fit1, estimate=&quot;CV&quot;)
+plot(pls.RMSEP, 
+    main=&quot;RMSEP PLS Cover_Type&quot;, 
+    xlab=&quot;Components&quot;
+)
+min_comp &lt;- which.min(pls.RMSEP$val)
+points(min_comp, 
+      min(pls.RMSEP$val), 
+      pch=1, col=&quot;red&quot;, 
+      cex=2) # Show number of components in the graph</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-25"></span>
+<img src="../../static/img/FC_15.jpg" alt="Root Mean Square Error of Prediction" width="600" />
+<p class="caption">
+Figure 25: Root Mean Square Error of Prediction
+</p>
+</div>
+<p>This plot is the partial least squares variable importance plot to each species. This way is better than just using the correlation matrix because it takes into account each tree species.</p>
+<p>In this plot of partial squares, I can show that the dependent variables and how they relate to the predictor variables. You usually can’t see this in a correlation plot, so this is very interesting to see. It helps to narrow down which variables to use.</p>
+<pre><code>plsFit &lt;- train(Cover_Type~., 
+                data = train, 
+                method = &quot;pls&quot;, 
+                preProc = c(&quot;center&quot;, &quot;scale&quot;),
+                tuneLength =40,
+                trControl = ctrl, 
+                metric = &quot;ROC&quot;) 
+
+plot(varImp(plsFit), top =40)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-26"></span>
+<img src="../../static/img/FC_16.jpg" alt="PLS - Variable Importance" width="600" />
+<p class="caption">
+Figure 26: PLS - Variable Importance
+</p>
+</div>
+<p>One last partial least squares plot, and it shows the optimized number of variables that I should be looking for in the model. It levels out around 36 variables and is what I should use as an optimal number of variables.</p>
+<p><code>ggplot(plsFit)  + ggtitle("Optimizing the Number of Variables")</code></p>
+<div class="figure"><span id="fig:unnamed-chunk-27"></span>
+<img src="../../static/img/FC_17.jpg" alt="PLS - Variable Importance shows the optimized number of variables around 36." width="400" />
+<p class="caption">
+Figure 27: PLS - Variable Importance shows the optimized number of variables around 36.
+</p>
+</div>
+<p><strong>Variable Importance</strong></p>
+<p>I wanted to test another method of determining the optimal number of variables to use. Here the random forest was used to determine the most important variables. Used 10-fold cross-validation with 80% accuracy and a kappa of 68%</p>
+<p>I wanted to compare the results from partial squares to using the random forest variable importance graph. I like this one because it gives me an idea of the model accuracy in the Kappa and it also spells out each variable and giving a weight value to them with this graph on the right we can see which variables I’m going to use in my models.</p>
+<pre><code>mdl &lt;- train(Cover_Type~., 
+             data = train, 
+             method = &quot;rf&quot;, 
+             preProcess = c(&quot;center&quot;, &quot;scale&quot;), 
+             trControl = ctrl2)
+             
+importance &lt;- varImp(mdl, scale=FALSE)
+
+ggplot(importance)  + ggtitle(&quot;Top Variable Importance&quot;)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-28"></span>
+<img src="../../static/img/FC_19.jpg" alt="Random Forest Variable Importance and overall values." width="356" /><img src="../../static/img/FC_18.jpg" alt="Random Forest Variable Importance and overall values." width="400" />
+<p class="caption">
+Figure 28: Random Forest Variable Importance and overall values.
+</p>
+</div>
+<p>Uses a feature selector package, the scatter plot is of the weights on the importance index. Like the plot above, elevation is a top variable. There is a grouping of approx. Eight above 40.</p>
+<pre><code>weights &lt;- random.forest.importance(Cover_Type ~., 
+                                    train, 
+                                    importance.type = 1
+)
+plot(weights$attr_importance)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-29"></span>
+<img src="../../static/img/FC_20.jpg" alt="Random Forest Feature Selection and the attribute importance index values." width="692" /><img src="../../static/img/FC_21.jpg" alt="Random Forest Feature Selection and the attribute importance index values." width="400" />
+<p class="caption">
+Figure 29: Random Forest Feature Selection and the attribute importance index values.
+</p>
+</div>
+</div>
+<div id="algorithm-selection" class="section level4">
+<h4>Algorithm Selection</h4>
+<p>I decided to run an ensemble method first. It will give me weighted averages and indicate the best model to use. The algorithms used in this are glmnet, random forest, ranger, xgboost, neuralnet, support vector, and a few others. The Super Learner package has a built-in predictor function and returns the values based on the validation data. The Super Learner provides wrapper functions for these algorithms and allows me to move quickly through testing these, and weight and fit for each algorithm are estimated. I get a Risk and Coefficient function</p>
+<pre><code>sl_model &lt;- c(&quot;SL.mean&quot;,
+              &quot;SL.glmnet&quot;, 
+              &quot;SL.randomForest&quot;, 
+              &quot;SL.ranger&quot;,
+              &quot;SL.xgboost&quot;, 
+              &quot;SL.nnet&quot;, 
+              &quot;SL.ksvm&quot;,
+              &quot;SL.svm&quot;,
+              &quot;SL.nnls&quot;) # mean is lowest benchmark
+
+sl &lt;- SuperLearner(Y=Y_train, 
+                  X=X_train, 
+                  family = gaussian(), 
+                  SL.library = sl_model
+)</code></pre>
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-30"></span>
+<img src="../../static/img/FC_23.jpg" alt="Shows the Risk and Coefficient of Error for each of the models. Ranger has the best result." width="177" />
+<p class="caption">
+Figure 30: Shows the Risk and Coefficient of Error for each of the models. Ranger has the best result.
+</p>
+</div>
+<p>I found the Super Learner -Ranger produced the best results, and is a version of random forest that runs much faster and suited for high dimension datasets. The lowest risk coefficient is what I am looking for in the output and ranger/random forest have it.</p>
+<pre><code>r = CV.SuperLearner(Y=Y_train, 
+                    X=X_train, 
+                    family = gaussian(), 
+                    V=10, 
+                    SL.library = sl_model
+)
+
+summary(r) 
+
+plot(r) + theme_bw() + ggtitle(&quot;Model Preformance Estimate&quot;) # plots Crossfold Validation</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-31"></span>
+<img src="../../static/img/FC_22.jpg" alt="Super Learner function wrapper output for the various models. Risk is based on the Mean Squared Error (MSE)" width="600" /><img src="../../static/img/FC_23A.jpg" alt="Super Learner function wrapper output for the various models. Risk is based on the Mean Squared Error (MSE)" width="440" />
+<p class="caption">
+Figure 31: Super Learner function wrapper output for the various models. Risk is based on the Mean Squared Error (MSE)
+</p>
+</div>
+<pre><code>pred &lt;- predict(sl, 
+                X_hold, 
+                onlySL = T
+)
+head(pred$pred)
+
+qplot(pred$pred[, 1], 
+      binwidth=0.001) + 
+      theme_linedraw() + 
+      ggtitle(&quot;Prediction Metric&quot;
+)</code></pre>
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-32"></span>
+<img src="../../static/img/FC_24.jpg" alt="This figure shows the prediction back on the test data, pulls the metric form inside the model" width="600" />
+<p class="caption">
+Figure 32: This figure shows the prediction back on the test data, pulls the metric form inside the model
+</p>
+</div>
+<p>Next is using the random forest from the caret package. The reason is the processing time for other modeling techniques. It still took too much time to run, and we are still figuring out what models and parameters to use.</p>
+<p>After the super learner, I went back to the random forest in the cart package. Here is the output from the predictors, and it shows you the number of optimal M tries, 24 at 80% accuracy and a Kappa of 67.3%</p>
+<pre><code>control &lt;- trainControl(method=&#39;repeatedcv&#39;, 
+                        number=10, 
+                        repeats=3,
+                        search = &#39;random&#39;
+)
+rf_random &lt;- train(Cover_Type~.,
+                   data = training,
+                   method = &#39;rf&#39;,
+                   metric = &#39;Accuracy&#39;,
+                   tuneLength  = 15, 
+                   trControl = control
+)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-33"></span>
+<img src="../../static/img/FC_25.jpg" alt="10-Fold Cross Validation output graph Mtry optimal at 24. 80% Accuracy and Kappa at 0.67." width="328" /><img src="../../static/img/FC_26.jpg" alt="10-Fold Cross Validation output graph Mtry optimal at 24. 80% Accuracy and Kappa at 0.67." width="434" />
+<p class="caption">
+Figure 33: 10-Fold Cross Validation output graph Mtry optimal at 24. 80% Accuracy and Kappa at 0.67.
+</p>
+</div>
+<p>Random Forest out of the box (OOB) method. The tuning function and outputs 19 with the lowest error.</p>
+<pre><code>bestMtry &lt;- tuneRF(training[,-1],training[,1],
+                   mtryStart= 2,
+                   stepFactor = 1.5, 
+                   improve = 1e-5, 
+                   ntree = 500
+)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-34"></span>
+<img src="../../static/img/FC_27.jpg" alt="Random Forest out of the box (OOB) method. A tuning function and outputs 19 Mtry as optimal with the lowest error" width="338" /><img src="../../static/img/FC_28.jpg" alt="Random Forest out of the box (OOB) method. A tuning function and outputs 19 Mtry as optimal with the lowest error" width="165" />
+<p class="caption">
+Figure 34: Random Forest out of the box (OOB) method. A tuning function and outputs 19 Mtry as optimal with the lowest error
+</p>
+</div>
+<p>A large chunk of time to run this model. The initial run was on fewer trees and discovered more was better. 3000 to 5000 trees produced better results. It took a while to run, but I was able to come up with a better value to enter into my final model.</p>
+<pre><code>for (ntree in c(1000,2000,3000,4000,5000)){
+  set.seed(17)
+  fit &lt;- train(Cover_Type~.,
+               data = training,
+               method = &#39;rf&#39;,
+               metric = &#39;Accuracy&#39;,
+               tuneGrid = tunegrid,
+               trControl = control,
+               ntree = ntree
+)
+  key &lt;- toString(ntree)
+  modellist[[key]] &lt;- fit
+}
+
+results &lt;- caret::resamples(modellist)
+
+lattice::dotplot(results)</code></pre>
+<div class="figure"><span id="fig:unnamed-chunk-35"></span>
+<img src="../../static/img/FC_29.jpg" alt="Accuracy and Kappa metric graph comparing 1000 to 5000 trees in the tuning parameter of the random forest model. The table gives the values and shows the values of accuracy and Kappa." width="444" /><img src="../../static/img/FC_30.jpg" alt="Accuracy and Kappa metric graph comparing 1000 to 5000 trees in the tuning parameter of the random forest model. The table gives the values and shows the values of accuracy and Kappa." width="309" />
+<p class="caption">
+Figure 35: Accuracy and Kappa metric graph comparing 1000 to 5000 trees in the tuning parameter of the random forest model. The table gives the values and shows the values of accuracy and Kappa.
+</p>
+</div>
+</div>
+<div id="final-model" class="section level4">
+<h4>Final Model</h4>
+<p>The Ranger random forest algorithm from the Super Learner package in R was performing better than the random forest from the caret package. For all of the previous work, parallel processing is used, and Ranger random forest algorithm does run faster even though it’s still 30 min training time. The model run was the best yet with all the models. I was holding at 81% accuracy and a Kappa of 70%. Mtry of 39 using the extra trees, 3000 trees and I up sampled the training dataset because of the low proportions, this made a nice increase in the accuracy.</p>
+<p>Before I came up with my final model, it’s worth noting I ran the Ranger package quite a few times, and I was adjusting the scaling centering normalization of the data and also trying different parameters. This model is the one that came up the best. I used Mtry of 39 in a split rule using the extra trees. The number of trees seems to be around 3000. As optimal. They train the model, and I came up with an 81% accuracy in a Kappa of 70%</p>
+<p>I thought that was pretty good. That was the highest result training that I had come up with after multiple tests and iterations. It’s worth mentioning, though, that I addressed the disproportion of the data and tried up sampling and down sampling methods, and this uses the up sampling method. Which I can use with preprocessing in the caret package. So here you have to give credit to the up sample method.</p>
+<pre><code>tuneGrid &lt;- expand.grid(.mtry = 39,
+                        .splitrule = &quot;extratrees&quot;,
+                        .min.node.size = 1
+)
+set.seed(201)                     
+rf_final &lt;- train(Cover_Type~., 
+                  data = training,
+                  method = &quot;ranger&quot;,
+                  tuneGrid = tuneGrid,
+                  num.trees = 3000,
+                  trControl = fit_control
+)</code></pre>
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-36"></span>
+<img src="../../static/img/FC_31.jpg" alt="Random Forest Model Tuning Grid" width="463" />
+<p class="caption">
+Figure 36: Random Forest Model Tuning Grid
+</p>
+</div>
+<p>The final prediction and a selected model. I was able to get an 82% accuracy rate with a Kappa of 71%. There are some false positives and false negatives, mainly with spruce and Lodgepole pine. So there’s some room for improvement. Which classes did better? Ponderosa is 90% balanced accuracy. Aspen is the lowest at 72%.</p>
+<p>This graph shows us the statistics by class. It is interesting to see that between all seven classes where the balanced accuracy was for each one. It is good to see that the Ponderosa had a 90% balance accuracy while two other categories three others were in the 80 percentile. The Aspen and Cottonwood were in the low 70 percentile, and those categories were also some of the lower proportioned samples that I had in the data. It makes me think that I can improve this model or improve doing an ensemble method where I can narrow down each of these classes individually. And have them predict cumulatively in an ensemble method. So there’s room for improvement here.</p>
+<ul>
+<li>Accuracy = 82%</li>
+<li>Kappa = 71%</li>
+<li>The Spruce_Fir False Positive</li>
+<li>The Lodgepole False Negative</li>
+</ul>
+<pre><code>final_pred &lt;- predict(rf_final, testing)
+caret::confusionMatrix(final_pred, testing$Cover_Type)</code></pre>
+<div class="figure" style="text-align: left"><span id="fig:unnamed-chunk-37"></span>
+<img src="../../static/img/FC_32.jpg" alt="Random Forest Model Results " width="586" />
+<p class="caption">
+Figure 37: Random Forest Model Results
+</p>
+</div>
+</div>
+<div id="conclusion" class="section level4">
+<h4>Conclusion</h4>
+<p>This project was a comprehensive analysis starting with coming up with an idea to a final model and took about eight weeks to get to this point. While still calculating somewhat accurately, there was a lot of trial and error in this project with weeks of failure. The original data set was too big to run locally. I wasn’t able to run some of the algorithms in training. But I did discover that I can use multiple cores to process. A smaller sample set was used and still took 30-45min to run each training model. In the beginning, it took several weeks of experimenting using the individual model libraries until the discovery of the Caret package that has all of the algorithms available AND can use multiple cores to process. In my case, I ran 6-7 cores with 32GB RAM. I used the ranger package, which is a random forest model. It is just leaner, and it runs larger data more efficiently.</p>
+<p>The analysis started with looking at the exploratory graphs, and there were some important relationships between the variables. Then a correlation matrix was used to see if the coefficients between variables showed me associations not so prominent and to summarize the data. I found some variable dependencies that need to be changed. From the information gathered, I performed feature engineering on a few variables to reduce the dependencies. My next goal was to use methods to find variable importance and reduce the dimensions of the dataset down to meaningful relationships. I applied the partial least squares technique to find predictor variables that are uncorrelated, a good practice to reduce the collinear relationships seen in the correlation matrix. I decided to try another method and used the random forest to determine variable importance because I had a lot of variables, and this technique has gained popularity due to its benefits. I used the list of the top variables to create the final training and testing dataset. These findings showed up in the initial exploratory graphs. I found a wrapper package that gave me a choice of machine learning algorithms to test them all in an ensemble to determine which algorithm would be best for classifying the data. It returned the random forest algorithm. The Ranger is a function that produces a faster version of the random forest algorithm. When I got to this point as previously indicated, I implemented multi-core processing to speed the time on training the models. Ranger did make it easier. I didn’t have much time to play around with the parameters; however, I tested several parameters to optimize the random forest model. All the work and eight weeks, I was able to build a model and reduce the dimensions of the data to produce an 82% accuracy with a Kappa of 71%. This result would work for the task we set out to do to classify data points—definitely room for growth.</p>
+</div>
+<div id="references" class="section level4">
+<h4>References</h4>
+<p>ArcGis.com (2018). How Aspect works. Retrieved from: <a href="http://desktop.arcgis.com/en/arcmap/10.3/tools/spatial-analyst-toolbox/how-aspect-works.htm" class="uri">http://desktop.arcgis.com/en/arcmap/10.3/tools/spatial-analyst-toolbox/how-aspect-works.htm</a></p>
+<p>ArcGis.com (2018). Colorado Life Zones. Retrieved from: <a href="https://www.arcgis.com/home/item.html?id=df93467a99f24d95948e6fd37bb77303#overview" class="uri">https://www.arcgis.com/home/item.html?id=df93467a99f24d95948e6fd37bb77303#overview</a></p>
+<p>ArcGis.com (2018). Slope. Retrieved from: <a href="http://desktop.arcgis.com/en/arcmap/10.3/tools/spatial-analyst-toolbox/slope.htm" class="uri">http://desktop.arcgis.com/en/arcmap/10.3/tools/spatial-analyst-toolbox/slope.htm</a></p>
+<p>ArcGis.com (2018). Hillshade. Retrieved from: <a href="http://desktop.arcgis.com/en/arcmap/10.3/tools/spatial-analyst-toolbox/hillshade.htm" class="uri">http://desktop.arcgis.com/en/arcmap/10.3/tools/spatial-analyst-toolbox/hillshade.htm</a></p>
+<p>Bali, R., Sarkar, D., Lantz, B., &amp; Lesmeister, C. (2016). R: Unleash Machine Learning Techniques. Packt Publishing Ltd.</p>
+<p>Chou, Y. W. (2015). Machine learning with R cookbook.</p>
+<p>City of Fort Collins. (n.d.). Natural Areas Program. Retrieved from: <a href="https://www.fcgov.com/naturalareas/mn-res-pdf/lifezones2014.pdf" class="uri">https://www.fcgov.com/naturalareas/mn-res-pdf/lifezones2014.pdf</a></p>
+<p>Colorado State Forest Service. (n.d.) Five-Year Strategic Plan. Retrieved from: <a href="https://csfs.colostate.edu/media/sites/22/2014/02/CSFS-StrategicPlan-2016-2020.pdf" class="uri">https://csfs.colostate.edu/media/sites/22/2014/02/CSFS-StrategicPlan-2016-2020.pdf</a></p>
+<p>Colorado State Forest Service. (n.d.) Colorado’s Major Tree Species. Retrieved from: <a href="https://csfs.colostate.edu/colorado-trees/colorados-major-tree-species/#1466528536401-3dfe36cb-d417" class="uri">https://csfs.colostate.edu/colorado-trees/colorados-major-tree-species/#1466528536401-3dfe36cb-d417</a></p>
+<p>Firescape. (2018). Rocky mountain Montane Riparian. Retrieved from: <a href="https://www.azfirescape.org/galiuro/ecosystem-description/rocky-mountain-montane-riparian" class="uri">https://www.azfirescape.org/galiuro/ecosystem-description/rocky-mountain-montane-riparian</a></p>
+<p>Google (2018). Importing Geographic Information Systems (GIS) data in Google Earth. Retrieved from: <a href="https://www.google.com/earth/outreach/learn/importing-geographic-information-systems-gis-data-in-google-earth/#importtiff" class="uri">https://www.google.com/earth/outreach/learn/importing-geographic-information-systems-gis-data-in-google-earth/#importtiff</a></p>
+<p>Kuhn, M., &amp; Johnson, K. (2013). Applied predictive modeling (Vol. 26). New York: Springer.</p>
+<p>Kuhn, M. (2018). The caret Package. Retrieved from: <a href="https://topepo.github.io/caret/index.html" class="uri">https://topepo.github.io/caret/index.html</a></p>
+<p>Olsen, B. (2010). Lodge-Pole Pine Forest. Retrieved from: <a href="https://www.flickr.com/photos/bryanto/4722902786" class="uri">https://www.flickr.com/photos/bryanto/4722902786</a></p>
+<p>State of Colorado. (2008). 2008 Report, The Health of Colorado’s Forests. Retrieved from: <a href="https://static.colostate.edu/client-files/csfs/pdfs/894651_08FrstHlth_www.pdf" class="uri">https://static.colostate.edu/client-files/csfs/pdfs/894651_08FrstHlth_www.pdf</a></p>
+<p>UCI Machine Learning Repository. (2018). Covertype Data Set. Retrieved from : <a href="https://archive.ics.uci.edu/ml/datasets/covertype" class="uri">https://archive.ics.uci.edu/ml/datasets/covertype</a></p>
+<p>USDA Forest Service. (2018). FSGeodata Clearinghouse. Retrieved from: <a href="https://data.fs.usda.gov/geodata/" class="uri">https://data.fs.usda.gov/geodata/</a></p>
+<p>USDA Natural Resources Conservation Service. (2018). Soil Series Descriptions. Retrieved from: <a href="https://soilseries.sc.egov.usda.gov/osdlist.aspx" class="uri">https://soilseries.sc.egov.usda.gov/osdlist.aspx</a></p>
+<p>Wickham, H. (2016). ggplot2: elegant graphics for data analysis. Springer.</p>
+<p>Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. O’Reilly Media, Inc.</p>
+</div>

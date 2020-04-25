@@ -102,6 +102,69 @@
     </item>
     
     <item>
+      <title>10-fold cross validation</title>
+      <link>/tags/10-fold-cross-validation/</link>
+      <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/10-fold-cross-validation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>correlation plots</title>
+      <link>/tags/correlation-plots/</link>
+      <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/correlation-plots/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kappa</title>
+      <link>/tags/kappa/</link>
+      <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/kappa/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>machine learning</title>
+      <link>/tags/machine-learning/</link>
+      <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Partial Least Squares</title>
+      <link>/tags/partial-least-squares/</link>
+      <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/partial-least-squares/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>principle component analysis</title>
+      <link>/tags/principle-component-analysis/</link>
+      <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/principle-component-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Random Forest</title>
+      <link>/tags/random-forest/</link>
+      <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/random-forest/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>algorithms</title>
       <link>/tags/algorithms/</link>
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
@@ -170,15 +233,6 @@
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/lda/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>machine learning</title>
-      <link>/tags/machine-learning/</link>
-      <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/machine-learning/</guid>
       <description></description>
     </item>
     
