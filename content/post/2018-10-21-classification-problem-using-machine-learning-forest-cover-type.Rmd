@@ -49,8 +49,8 @@ Attributes are embedded metadata for GIS data files. I imported the dataset, a 7
 |Soil Types |Name / binary|
 |Cover Type |1 to 7 integers|
 \
-```{r echo=FALSE, fig.cap="The table is from an RStudio summary of the variables contained in the Cover Type dataset and shows the first 27 columns of 55. The values are integer and binary."}
-knitr::include_graphics("../../static/img/FC_1.jpg")
+```{r echo=FALSE, fig.cap="The table is from an RStudio summary of the variables contained in the Cover Type dataset and shows the first 27 columns of 55. The values are integer and binary.", error=TRUE}
+knitr::include_graphics('/img/FC_1.jpg')
 ```
 
 #### Roosevelt National Forest Wilderness Areas
