@@ -102,6 +102,69 @@
     </item>
     
     <item>
+      <title>AUC</title>
+      <link>/tags/auc/</link>
+      <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/auc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>convolutional neural networks</title>
+      <link>/tags/convolutional-neural-networks/</link>
+      <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/convolutional-neural-networks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>data augmentation</title>
+      <link>/tags/data-augmentation/</link>
+      <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/data-augmentation/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>deep learning</title>
+      <link>/tags/deep-learning/</link>
+      <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/deep-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>image classification</title>
+      <link>/tags/image-classification/</link>
+      <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/image-classification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Keras</title>
+      <link>/tags/keras/</link>
+      <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/keras/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ROC</title>
+      <link>/tags/roc/</link>
+      <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/roc/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>10-fold cross validation</title>
       <link>/tags/10-fold-cross-validation/</link>
       <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
@@ -179,24 +242,6 @@
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/big-data/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>convolutional neural networks</title>
-      <link>/tags/convolutional-neural-networks/</link>
-      <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/convolutional-neural-networks/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>deep learning</title>
-      <link>/tags/deep-learning/</link>
-      <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/deep-learning/</guid>
       <description></description>
     </item>
     

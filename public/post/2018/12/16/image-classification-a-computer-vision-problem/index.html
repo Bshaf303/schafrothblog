@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Image Classification - A Computer Vision Problem | Bryan Schafroth Portfolio</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/post/">Posts</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Image Classification - A Computer Vision Problem</span></h1>
+<h2 class="author">Bryan Schafroth</h2>
+<h2 class="date">2018/12/16</h2>
+</div>
+
+<main>
+
+
+
+<div id="seedling-image-classification---a-convolutional-neural-network-problem-in-rstudio" class="section level4">
+<h4>Seedling Image Classification - A Convolutional Neural Network Problem in RStudio</h4>
+</div>
+<div id="table-of-contents" class="section level4">
+<h4>Table of Contents</h4>
+<ol style="list-style-type: decimal">
+<li>The Project Origins</li>
+<li>Image Data</li>
+<li>The Data Science Problem</li>
+<li>The Software to Work the Problem</li>
+<li>Data Exploration</li>
+<li>Image Augmentation</li>
+<li>Base Model</li>
+<li>VGG16 Pretrained Model</li>
+<li>Training and Validation Graphs</li>
+<li>Data Augment – Balance Classes</li>
+<li>VGG16 Pretrained Model – Freeze/Unfreeze</li>
+<li>Training and Validation Graphs</li>
+<li>Predictions and Evaluations –VGG16</li>
+<li>Multi-Class ROC/AUC</li>
+<li>Improving the model - Part 2</li>
+<li>Predictions and Evaluations –VGG16</li>
+<li>Multi-Class ROC/AUC</li>
+<li>Summary</li>
+<li>References</li>
+</ol>
+<div class="figure"><span id="fig:unnamed-chunk-1"></span>
+<img src="/img/SIC_1.jpg" alt="Image of invasive weed species growing in a crop. Image Source: https://vision.eng.au.dk/roboweedmaps/"  />
+<p class="caption">
+Figure 1: Image of invasive weed species growing in a crop. Image Source: <a href="https://vision.eng.au.dk/roboweedmaps/" class="uri">https://vision.eng.au.dk/roboweedmaps/</a>
+</p>
+</div>
+</div>
+<div id="project-origins" class="section level4">
+<h4>Project Origins</h4>
+<p>Aarhus, Denmark, is one of the leaders in smart city research. The Aarhus University Computer Vision and Biosystems Signal Processing Group has been working on a project to use computer vision to detect seedlings of the weeds within crops and have made the dataset publicly available. The more significant implications of this problem benefit automated agriculture production. The need for this technology has immediate benefits for farmers because it will help to reduce the use of herbicides on the environment and to treat the invasive species before the weeds use all the available nutrients needed by the produced crop.</p>
+<p>A camera mechanically scans the crops early in the growing season shortly after germination. The data can then be processed through an image classification model and output what species of early detected weeds are growing. Establishing a herbicide application plan to spray for the specific types of invasive plants will have benefits of not over-spraying chemicals into the environment, and product cost savings by reducing the amount and frequency of applications to crops.</p>
+<p>The benefits are to the environment and the number of herbicides released into the atmosphere. Cost savings and increased productivity by doing other essential tasks for staff are the results of using only the specific amount and type of herbicide narrowed down to invasive plant type. The longer reaching benefit of the project is to automate agriculture with AI and autonomous systems.</p>
+<ul>
+<li>Computer Vision and BioSystems Signal Processing Group – Aarhus University, Denmark</li>
+<li>Detect Invasive Plants in Agriculture – Weeds take Soil Nutrients from the Produced Crop</li>
+<li>Reduction of Herbicides – Cost and Environment</li>
+<li>Automated/ Robotic Agriculture Production – Its the Future</li>
+</ul>
+<p>This project will use a publically available dataset, and the images of seedlings will be classified using convolutional neural networks in Keras for R with TensorFlow back-end to classify 12 species of seedling growth images. I will use computer vision, deep learning techniques to solve this problem.
+This seedling image classification presentation will describe the problem and cover all the steps and observations taken to develop a working outcome leaving room for further testing.</p>
+</div>
+<div id="image-data" class="section level4">
+<h4>Image Data</h4>
+<p>The data I collected is the plant seedling dataset. It is single plant cropped images and was a substantial file download at 1.7GB. The data file has 12 labeled folders of images for each weed species, and the images are PNG’s marked 1 to n per folder. There are five thousand five hundred and thirty-nine PNG images total. The images range in different pixel resolutions and sizes.</p>
+<ul>
+<li>Plant Seedlings Dataset – V2 Non-segmented Single Plants (Cropped Images) 1.7 GB File Size</li>
+<li>Retrieved from: Computer Vision and BioSystems Signal Processing Group Link: <a href="https://vision.eng.au.dk/plant-seedlings-dataset/" class="uri">https://vision.eng.au.dk/plant-seedlings-dataset/</a></li>
+<li>12 directories for each individual plant by species</li>
+<li>The folders labeled by plant name – Pictures in folders are labeled PNGs files. 1(n) for that plant type</li>
+<li>There are 5,539 PNG images total</li>
+<li>Different image size and resolutions</li>
+</ul>
+</div>
+<div id="the-data-science-problem" class="section level4">
+<h4>The Data Science Problem</h4>
+<p>The problem is to identify and classify the seedling images of weed species.
+It is a multi-class classification problem with 12 classes.
+We are dealing with large file size for a local computer environment.
+The image classification technique used will be the convolutional neural network and is a category of deep learning for computers. I chose the convolutional neural network because it is the most commonly used method to evaluate pictures and imagery at the time of this project.</p>
+<ul>
+<li>The problem is to identify and classify images of plant seedlings</li>
+<li>A multi-class image classification problem – 12 categories of images</li>
+<li>Large file size for a local computer environment</li>
+<li>Convolutional Neural Network (ConvNet or CNN’s) – A part of deep learning neural networks</li>
+<li>Convolutional Neural Networks are commonly used to evaluate the picture and video imagery</li>
+</ul>
+</div>
+<div id="software-to-work-the-problem" class="section level4">
+<h4>Software to Work the Problem</h4>
+<p>The software that I used is based in Rstudio.
+Keras is the leading deep learning library and has been available for just over a year for R as of this project implementation. However, available for Python longer.
+Under Keras is TensorFlow, Python, Virtual Studio.
+Nvidia CUDA and cuDNN is loaded because we can use my computers GTX1070 graphics card to do the neural network calculations. This project would not be possible without this support! This project will not discuss the in-depth process of setting the software up to run CNNs. Refer to the online documentation for Keras and its dependencies. The following software is all open-source, MS Visual Studio was used as a trial version.</p>
+<ul>
+<li>Rstudio™<br />
+</li>
+<li>Keras™ Library – A Deep Learning Library Adapted to R High-Level Interface</li>
+<li>TensorFlow™ for R - Low-Level</li>
+<li>Anaconda Python™ 3.7</li>
+<li>MS Visual Studio™</li>
+<li>Nvidia CUDA™ Toolkit – GPU Support</li>
+<li>Nvidia cuDNN™ – GPU Support</li>
+</ul>
+</div>
+<div id="data-exploration" class="section level4">
+<h4>Data Exploration</h4>
+<p>Exploring the image files as earlier mentioned 1.7GB with 12 directories labeled for each type of weed seedling species, the individual PNG’s are labeled 1(n).
+There are breaks in the numbering as if they deleted images at some point and image sizes vary greatly from 21 to 1700 pixel squares which may or may not affect model accuracy
+The images are mostly centered and cropped in tight but are also blurry, fuzzy, with irregular background from brown pebbles to a black and white striped scale from the lab where these images originate.</p>
+<ul>
+<li>1.7GB</li>
+<li>12 individual directories</li>
+<li>Each directory is labeled and has pictures numbered 1.png through 1(n).png</li>
+<li>The images in each folder have missing chronological numbering</li>
+<li>Image sizes vary (21x21px, 311x311px, 1700x1700px)</li>
+<li>Focus, blurry, skewed, irregular background (pebbles, b&amp;w scale, etc.)</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="left">12 Categories</th>
+<th align="center">Total Number</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Black Grass</td>
+<td align="center">309</td>
+</tr>
+<tr class="even">
+<td align="left">Charlock</td>
+<td align="center">452</td>
+</tr>
+<tr class="odd">
+<td align="left">Cleavers</td>
+<td align="center">335</td>
+</tr>
+<tr class="even">
+<td align="left">Common Chickweed</td>
+<td align="center">713</td>
+</tr>
+<tr class="odd">
+<td align="left">Common Wheat</td>
+<td align="center">253</td>
+</tr>
+<tr class="even">
+<td align="left">Fat Hen</td>
+<td align="center">538</td>
+</tr>
+<tr class="odd">
+<td align="left">Loose Silky-Bent</td>
+<td align="center">762</td>
+</tr>
+<tr class="even">
+<td align="left">Maize</td>
+<td align="center">257</td>
+</tr>
+<tr class="odd">
+<td align="left">Scentless Mayweed</td>
+<td align="center">607</td>
+</tr>
+<tr class="even">
+<td align="left">Shepherd’s Purse</td>
+<td align="center">274</td>
+</tr>
+<tr class="odd">
+<td align="left">Small-Flowered Cranesbill</td>
+<td align="center">576</td>
+</tr>
+<tr class="even">
+<td align="left">Sugar Beet</td>
+<td align="center">463</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+The sampling of images shown. I scaled them all the same for this visual. One thing to note is for each seedling, there are several different growth stages from seedling to mature leaves. Note the background brown pebbles and some with the black and white striping. I am assuming the black and white striping is the edge of the container and may be used to scale the plants.</p>
+<ul>
+<li>3 Samples</li>
+<li>12 Categories</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-2"></span>
+<img src="/img/SIC_2.jpg" alt="Top row, left to right: Black Grass, Charlock, Cleavers, Common Chickweed, Common Wheat, Fat Hen. Bottom row, left to right: Loose Silk-Bent, Maize, Scentless Mayweed, Shepherd's Purse, Small Flowered Cranesbill, Sugar Beet."  />
+<p class="caption">
+Figure 2: Top row, left to right: Black Grass, Charlock, Cleavers, Common Chickweed, Common Wheat, Fat Hen. Bottom row, left to right: Loose Silk-Bent, Maize, Scentless Mayweed, Shepherd’s Purse, Small Flowered Cranesbill, Sugar Beet.
+</p>
+</div>
+<ul>
+<li>Class Imbalance</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Class Imbalance</th>
+<th align="center">Total Number</th>
+<th align="center">Percent of Total</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Black Grass</td>
+<td align="center">309</td>
+<td align="center">5.6%</td>
+</tr>
+<tr class="even">
+<td align="left">Charlock</td>
+<td align="center">452</td>
+<td align="center">8.2%</td>
+</tr>
+<tr class="odd">
+<td align="left">Cleavers</td>
+<td align="center">335</td>
+<td align="center">6.0%</td>
+</tr>
+<tr class="even">
+<td align="left">Common Chickweed</td>
+<td align="center">713</td>
+<td align="center">12.9%</td>
+</tr>
+<tr class="odd">
+<td align="left">Common Wheat</td>
+<td align="center">253</td>
+<td align="center">4.6%</td>
+</tr>
+<tr class="even">
+<td align="left">Fat Hen</td>
+<td align="center">538</td>
+<td align="center">9.7%</td>
+</tr>
+<tr class="odd">
+<td align="left">Loose Silky-Bent</td>
+<td align="center">762</td>
+<td align="center">13.8%</td>
+</tr>
+<tr class="even">
+<td align="left">Maize</td>
+<td align="center">257</td>
+<td align="center">4.6%</td>
+</tr>
+<tr class="odd">
+<td align="left">Scentless Mayweed</td>
+<td align="center">607</td>
+<td align="center">11.0%</td>
+</tr>
+<tr class="even">
+<td align="left">Shepherd’s Purse</td>
+<td align="center">274</td>
+<td align="center">4.9%</td>
+</tr>
+<tr class="odd">
+<td align="left">Small-Flowered Cranesbill</td>
+<td align="center">576</td>
+<td align="center">10.4%</td>
+</tr>
+<tr class="even">
+<td align="left">Sugar Beet</td>
+<td align="center">463</td>
+<td align="center">8.4%</td>
+</tr>
+</tbody>
+</table>
+<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="/img/SIC_3.jpg" alt="Here is a plot of the distribution of the 12 classes. From 253 of the common wheat to 762 of the Loose Silky-bent. The first impression is this will be an unbalanced classification problem."  />
+<p class="caption">
+Figure 3: Here is a plot of the distribution of the 12 classes. From 253 of the common wheat to 762 of the Loose Silky-bent. The first impression is this will be an unbalanced classification problem.
+</p>
+</div>
+<p>I begin with splitting the images into 80% training 10% validation and 10% testing folders.
+The validation set is used to pre-test the CNN because if we do multiple runs on the test set, these models will leak and pick up information from the test set over time.
+With the validation set, the model never sees the fresh new test data.
+CNN’s need large numbers of images to train the model. 10’s of thousands of images are ideal. Large file size of image data is not optimal for this project, and this is a small dataset for my processing environment.</p>
+<ul>
+<li>80% training – 4475 images</li>
+<li>10% validation – 552 images</li>
+<li>10% test – 562 images</li>
+<li>Validation and Test Set Class Proportions</li>
+</ul>
+<p><code>table(factor(train_generator$classes))</code></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Class</th>
+<th align="center">Training Quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="center">247</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="center">362</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="center">268</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="center">567</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="center">202</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="center">424</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="center">611</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="center">204</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="center">483</td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="center">219</td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="center">461</td>
+</tr>
+<tr class="even">
+<td align="left">11</td>
+<td align="center">370</td>
+</tr>
+</tbody>
+</table>
+<p><code>table(factor(validation_generator$classes))</code></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Class</th>
+<th align="center">Validation Quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="center">31</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="center">46</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="center">34</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="center">72</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="center">26</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="center">55</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="center">75</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="center">26</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="center">61</td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="center">28</td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="center">59</td>
+</tr>
+<tr class="even">
+<td align="left">11</td>
+<td align="center">47</td>
+</tr>
+</tbody>
+</table>
+<p><code>table(factor(test_generator$classes))</code></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Class</th>
+<th align="center">Test Quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">0</td>
+<td align="center">32</td>
+</tr>
+<tr class="even">
+<td align="left">1</td>
+<td align="center">44</td>
+</tr>
+<tr class="odd">
+<td align="left">2</td>
+<td align="center">33</td>
+</tr>
+<tr class="even">
+<td align="left">3</td>
+<td align="center">74</td>
+</tr>
+<tr class="odd">
+<td align="left">4</td>
+<td align="center">25</td>
+</tr>
+<tr class="even">
+<td align="left">5</td>
+<td align="center">59</td>
+</tr>
+<tr class="odd">
+<td align="left">6</td>
+<td align="center">76</td>
+</tr>
+<tr class="even">
+<td align="left">7</td>
+<td align="center">25</td>
+</tr>
+<tr class="odd">
+<td align="left">8</td>
+<td align="center">63</td>
+</tr>
+<tr class="even">
+<td align="left">9</td>
+<td align="center">27</td>
+</tr>
+<tr class="odd">
+<td align="left">10</td>
+<td align="center">56</td>
+</tr>
+<tr class="even">
+<td align="left">11</td>
+<td align="center">46</td>
+</tr>
+</tbody>
+</table>
+<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="/img/SIC_4.jpg" alt="Validation and Test Set Class Proportions. Randomized samples of 10% Validation 10% Test"  />
+<p class="caption">
+Figure 4: Validation and Test Set Class Proportions. Randomized samples of 10% Validation 10% Test
+</p>
+</div>
+</div>
+<div id="image-augmentation" class="section level4">
+<h4>Image Augmentation</h4>
+<p>Image augmentation addresses the issue of small data in CNN training. By using’s Kera’s Image Data Generator, I can create altered copies of existing images by shifting, skewing, flipping, scaling, and rotating an existing image.
+These are random transformations to the images to help train the CNN on more instances of different versions of the same pictures.</p>
+<ul>
+<li>Too few samples to train – Random transformations to random images</li>
+<li>The model will see more variations of the images</li>
+<li>Rotate 40 deg,</li>
+<li>Shift left/right by 0.2, shift up/down by 0.2,</li>
+<li>Zoom by 0.2,</li>
+<li>Shear (tilt) by 0.2</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="/img/SIC_5.jpg" alt="Top row image is shifted right. Bottom row shows image rotated couter clockwise and shifted up."  />
+<p class="caption">
+Figure 5: Top row image is shifted right. Bottom row shows image rotated couter clockwise and shifted up.
+</p>
+</div>
+<div class="figure"><span id="fig:unnamed-chunk-6"></span>
+<img src="/img/SIC_6.jpg" alt="Top row image is rotated clockwise. Bottom row the image is shifted downward."  />
+<p class="caption">
+Figure 6: Top row image is rotated clockwise. Bottom row the image is shifted downward.
+</p>
+</div>
+</div>
+<div id="base-model" class="section level4">
+<h4>Base Model</h4>
+<p>Shown is the base CNN model. It is layers of tensors stacked together, and the network works over each layer. It starts with a specified image size and color channel and decreases in a densely connected layer holding only the parameters that define each of the 12 classes. This model goes through 3.4 million parameters. It starts with 148 x 148-pixel images. The third number is the RGB color channel.</p>
+<p>Basic ConvNet:</p>
+<ul>
+<li>A stack of layers</li>
+<li>The shape is the image size and decreases</li>
+<li>The last layer has 12 outputs for 12 classes</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-7"></span>
+<img src="/img/SIC_7.jpg" alt="The base model tensors shown in Keras for RStudio."  />
+<p class="caption">
+Figure 7: The base model tensors shown in Keras for RStudio.
+</p>
+</div>
+</div>
+<div id="vgg16-pretrained-model" class="section level4">
+<h4>VGG16 Pretrained Model</h4>
+<p>In contrast, this is a VGG16 pertained model used in this project. This model is loaded from Keras and pre-trained on 1000+ image categories. Note the flattening and dense layers not included. Alone this model has 14.7 million parameters that are calculated over and start with 299 x 299 squared pixeled images.</p>
+<ul>
+<li>Trained on Image Net 1000’s of classes:</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-8"></span>
+<img src="/img/SIC_8.jpg" alt="The parameters shown for the VGG16 model"  />
+<p class="caption">
+Figure 8: The parameters shown for the VGG16 model
+</p>
+</div>
+</div>
+<div id="vgg16-training-and-validation" class="section level4">
+<h4>VGG16 Training and Validation</h4>
+<p>I ran the early training with the base model first. The first graph demonstrates the results of using the data as-is with no extra steps. We see the training data is overfitting, and the loss function is higher.
+The second model shows what happens when I added the random image augmentation and added a dropout layer to reduce overfitting
+The drop out is a regularization technique that randomly sets some output features to zero. What we need to know is it reduces overfitting of the model.
+And in the second graph, we can see the training and validation are much closer.
+The area between 15 and 20 epochs is where the model fits well, but accuracy is still too low.</p>
+<ul>
+<li>Training Accuracy = 86.6%</li>
+<li>Validation Accuracy = 76%</li>
+<li>Overfitting</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-9"></span>
+<img src="/img/SIC_9.jpg" alt="The graph shows overfitting of the model, the blue and red lines diverge early and the distance increases at 30 epochs."  />
+<p class="caption">
+Figure 9: The graph shows overfitting of the model, the blue and red lines diverge early and the distance increases at 30 epochs.
+</p>
+</div>
+<ul>
+<li>Training Accuracy = 69%</li>
+<li>Validation Accuracy = 66.6%</li>
+<li>Added Dropout Augmentation = Reduce Overfit</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-10"></span>
+<img src="/img/SIC_10.jpg" alt="The graph shows reduced overfitting of the model, the blue and red lines converge earlier, epoch 16-18, then drift apart. However, still closer then the previous run of the model"  />
+<p class="caption">
+Figure 10: The graph shows reduced overfitting of the model, the blue and red lines converge earlier, epoch 16-18, then drift apart. However, still closer then the previous run of the model
+</p>
+</div>
+<p>Here is the VGG16 model; this one uses the base layers with 25.3 million parameters.
+The process is to add my network on top of the already trained VGG16. I freeze the base network first, train the part I added. Unfreeze some layers in the base above and jointly train both of these layers and the part I added.</p>
+<div class="figure"><span id="fig:unnamed-chunk-11"></span>
+<img src="/img/SIC_11.jpg" alt="VGG16 Pretrained Model Freeze/Unfreeze. Note the 25M params."  />
+<p class="caption">
+Figure 11: VGG16 Pretrained Model Freeze/Unfreeze. Note the 25M params.
+</p>
+</div>
+<p>Figure 12 may show low accuracy but is fitting well and very little overfitting.
+Figure 13 shows the unfrozen layer, and my layers added for a longer training run of 100 epochs
+The accuracy has increased to 96.7 and 95.2 percent. I see it is overfitting at around 1.5%, but not sure why.</p>
+<p>VGG16 freeze base layers:</p>
+<ul>
+<li>Training Accuracy = 57.3%</li>
+<li>Validation Accuracy = 57%</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-12"></span>
+<img src="/img/SIC_12.jpg" alt="VGG16 - Freeze base layers. 150x150."  />
+<p class="caption">
+Figure 12: VGG16 - Freeze base layers. 150x150.
+</p>
+</div>
+<p>VGG16 unfreeze base layers:</p>
+<ul>
+<li>Training Accuracy = 96.7%</li>
+<li>Validation Accuracy = 95.2%</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-13"></span>
+<img src="/img/SIC_13.jpg" alt="VGG16 - Unfreeze base layers. 150X150."  />
+<p class="caption">
+Figure 13: VGG16 - Unfreeze base layers. 150X150.
+</p>
+</div>
+</div>
+<div id="predictions-and-evaluations-vgg16" class="section level4">
+<h4>Predictions and Evaluations – VGG16</h4>
+<p>I run a prediction on my test data now.
+To validate this model, I create a confusion matrix from the predicted and test labels.
+87.8% accuracy with a Kappa of 0.86 isn’t too bad but not great.</p>
+<p>VGG16 Prediction:</p>
+<ul>
+<li>Predicted Accuracy = 87.8%</li>
+<li>Kappa = 0.866</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-14"></span>
+<img src="/img/SIC_14.jpg" alt="VGG16 Unfreeze 150x150. Confusion Matrix"  />
+<p class="caption">
+Figure 14: VGG16 Unfreeze 150x150. Confusion Matrix
+</p>
+</div>
+<p>In the matrix, I see 45 False Positives (FP) for the Loose Silky-Bent, and it looks like that is pulling the overall accuracy down. Not sure as to why this happened.</p>
+<p>False Positive:</p>
+<ul>
+<li>45 false positives of class 7 - Loose Silky-Bent</li>
+</ul>
+<p>Image comparision of the mis-classified Loose Silky-Bent. 69% balanced accuracy with a 39.4% sensitivity. Figure 15 shows the two classes top and bottom. This makes sense why the model would think one is the other because they look similar.</p>
+<div class="figure"><span id="fig:unnamed-chunk-15"></span>
+<img src="/img/SIC_15.jpg" alt="Top row is Loose Silky-Bent. The model produced 45 False Positves mistaken for the Blackgrass on bottom row. Both are very similar with the narrow green leaves."  />
+<p class="caption">
+Figure 15: Top row is Loose Silky-Bent. The model produced 45 False Positves mistaken for the Blackgrass on bottom row. Both are very similar with the narrow green leaves.
+</p>
+</div>
+</div>
+<div id="multi-class-rocauc" class="section level4">
+<h4>Multi-Class ROC/AUC</h4>
+<p>I evaluate the model results using the mean Reciever Operating Characteristics (ROC) curve and the mean Area Under the Curve (AUC) because it is a multi-class problem. This model did reasonably well with an AUC of 93.1%. The prediction is reliable, but the model needs work to bring the accuracy up.</p>
+<ul>
+<li>Mean AUC = 93.12%</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-16"></span>
+<img src="/img/SIC_16.jpg" alt=" Mean AUC is 93.1% using the 150x150 VGG16 unfreeze model."  />
+<p class="caption">
+Figure 16:  Mean AUC is 93.1% using the 150x150 VGG16 unfreeze model.
+</p>
+</div>
+<p>Classes Close to 0,1:</p>
+<ul>
+<li>Class 7 69%</li>
+<li>12 Classes ROC Plot</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-17"></span>
+<img src="/img/SIC_17.jpg" alt="The graph shows each individual ROC and as the matrix tables showed the majority are close or at 0,1. The magenta colored line cutting across is class 7."  />
+<p class="caption">
+Figure 17: The graph shows each individual ROC and as the matrix tables showed the majority are close or at 0,1. The magenta colored line cutting across is class 7.
+</p>
+</div>
+</div>
+<div id="improving-model---part-2" class="section level4">
+<h4>Improving model - Part 2</h4>
+<p>After running the baseline and observing the results, there is room to make the model better. I found that the class imbalance could be an issue with CNN’s.
+I augmented random samples of images in each of the training directories to bring the image counts up to the 610 each to that of the Loose-Silk-bent class.
+I applied randomly different augmenting parameters to the pictures using the image data generator in Keras, which has 17 different ways to change the images.
+Now I have a balanced dataset to test the model further.</p>
+<ul>
+<li>Data Augmentation – Balance Classes Use the image augmentation technique</li>
+<li>Randomly augment all other classes to bring to 610 for each class</li>
+<li>Keep the max quantity of 610 for Loose Silky-Bent</li>
+</ul>
+<p><code>table(factor(train_generator$classes))</code></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Class by Name</th>
+<th align="center">Training Quantity</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Black Grass</td>
+<td align="center">247</td>
+</tr>
+<tr class="even">
+<td align="left">Charlock</td>
+<td align="center">362</td>
+</tr>
+<tr class="odd">
+<td align="left">Cleavers</td>
+<td align="center">268</td>
+</tr>
+<tr class="even">
+<td align="left">Common Chickweed</td>
+<td align="center">567</td>
+</tr>
+<tr class="odd">
+<td align="left">Common Wheat</td>
+<td align="center">202</td>
+</tr>
+<tr class="even">
+<td align="left">Fat Hen</td>
+<td align="center">424</td>
+</tr>
+<tr class="odd">
+<td align="left">Loose Silky-Bent</td>
+<td align="center">611</td>
+</tr>
+<tr class="even">
+<td align="left">Maize</td>
+<td align="center">204</td>
+</tr>
+<tr class="odd">
+<td align="left">Scentless Mayweed</td>
+<td align="center">483</td>
+</tr>
+<tr class="even">
+<td align="left">Shepherd’s Purse</td>
+<td align="center">219</td>
+</tr>
+<tr class="odd">
+<td align="left">Small-Flowered Cranesbill</td>
+<td align="center">461</td>
+</tr>
+<tr class="even">
+<td align="left">Sugar Beet</td>
+<td align="center">370</td>
+</tr>
+</tbody>
+</table>
+<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-18"></span>
+<img src="/img/SIC_18.jpg" alt="Showing the before augmentation and imbalanced data"  />
+<p class="caption">
+Figure 18: Showing the before augmentation and imbalanced data
+</p>
+</div>
+<p><code>table(y)</code></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Class by Name</th>
+<th align="center">Augmented Number</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Black Grass</td>
+<td align="center">610</td>
+</tr>
+<tr class="even">
+<td align="left">Charlock</td>
+<td align="center">610</td>
+</tr>
+<tr class="odd">
+<td align="left">Cleavers</td>
+<td align="center">610</td>
+</tr>
+<tr class="even">
+<td align="left">Common Chickweed</td>
+<td align="center">610</td>
+</tr>
+<tr class="odd">
+<td align="left">Common Wheat</td>
+<td align="center">610</td>
+</tr>
+<tr class="even">
+<td align="left">Fat Hen</td>
+<td align="center">610</td>
+</tr>
+<tr class="odd">
+<td align="left">Loose Silky-Bent</td>
+<td align="center">610</td>
+</tr>
+<tr class="even">
+<td align="left">Maize</td>
+<td align="center">610</td>
+</tr>
+<tr class="odd">
+<td align="left">Scentless Mayweed</td>
+<td align="center">610</td>
+</tr>
+<tr class="even">
+<td align="left">Shepherd’s Purse</td>
+<td align="center">610</td>
+</tr>
+<tr class="odd">
+<td align="left">Small-Flowered Cranesbill</td>
+<td align="center">610</td>
+</tr>
+<tr class="even">
+<td align="left">Sugar Beet</td>
+<td align="center">610</td>
+</tr>
+</tbody>
+</table>
+<br />
+
+<div class="figure"><span id="fig:unnamed-chunk-19"></span>
+<img src="/img/SIC_19.jpg" alt="Augmented data to bring each class up in numbers so there is more data to train the models."  />
+<p class="caption">
+Figure 19: Augmented data to bring each class up in numbers so there is more data to train the models.
+</p>
+</div>
+<p>I am going back to the base model again, but this time I have a balanced data set, and I have increased the size of the images to 299 x 299 pixels. More pixels to process, maybe more detail for the model to grab? The graph on the left shows overfitting but improved accuracy of 92.3% and slightly improved validation accuracy of 77.8% over the earlier run with imbalanced data. Figure 21 shows the overfitting reduced, and accuracy is up to 70% while the validation accuracy is up to 74% over the baseline imbalanced data.</p>
+<p>Training and Validation Graphs</p>
+<ul>
+<li>Balanced Data @ 299 x 299 pixel images Freeze</li>
+<li>Overfitting</li>
+<li>Training Accuracy = 92.3%</li>
+<li>Validation Accuracy = 77.8%</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-20"></span>
+<img src="/img/SIC_20.jpg" alt="Overfitting on the balanced data and increased the pixel size to 299 x 299."  />
+<p class="caption">
+Figure 20: Overfitting on the balanced data and increased the pixel size to 299 x 299.
+</p>
+</div>
+<ul>
+<li>Reduced overfitting</li>
+<li>Training Accuracy = 70%</li>
+<li>Validation Accuracy = 74.1%</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-21"></span>
+<img src="/img/SIC_21.jpg" alt="Overfitting reduced."  />
+<p class="caption">
+Figure 21: Overfitting reduced.
+</p>
+</div>
+<p>The graph shows the unfrozen layer with my layers added for a longer training run of 100 epochs up from 30 epochs. The final training model. The accuracy has increased again over the baseline to 97.3% accuracy and 95.5% validation accuracy (same as before). I see it is overfitting around 2%, but not sure at this point.</p>
+</div>
+<div id="training-and-validation-graphs" class="section level4">
+<h4>Training and Validation Graphs</h4>
+<ul>
+<li>Balanced Data @ 299 x 299 pixel images UnFreeze</li>
+<li>Training Accuracy = 97.3%</li>
+<li>Validation Accuracy = 95.5%</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-22"></span>
+<img src="/img/SIC_22.jpg" alt="Model unfreezed on 299 x 299 pixels, shows overfitting again."  />
+<p class="caption">
+Figure 22: Model unfreezed on 299 x 299 pixels, shows overfitting again.
+</p>
+</div>
+<p>I run the prediction on the test set with this new model. I am pleased to see an increase in model Accuracy of 92% and Kappa to 91%. I now have a False Negative amount of 22 in Class 1, but it is related to Class 7 from before where there was a FP of 45. Looking through the table at the bottom, a balanced accuracy of 64.7% for class 1, the Black Grass, and it looks like this is bringing down the overall model accuracy, which could be much higher. I think I know why, but let us look at the ROC and AUC for this model.</p>
+</div>
+<div id="predictions-and-evaluations-vgg16-1" class="section level4">
+<h4>Predictions and Evaluations – VGG16</h4>
+<p>VGG16 Prediction:</p>
+<ul>
+<li>Predicted Accuracy = 92.1%</li>
+<li>Kappa = 0.913</li>
+</ul>
+<p>False Negative:</p>
+<ul>
+<li>Class 1 – Black Grass</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-23"></span>
+<img src="/img/SIC_23.jpg" alt="Confusion Matrix results on the test data."  />
+<p class="caption">
+Figure 23: Confusion Matrix results on the test data.
+</p>
+</div>
+<p>The mean area under the curve has improved to 94.9%, almost a 2% improvement from earlier. It seems like the model is working as designed for the most part.</p>
+</div>
+<div id="multi-class-roc-and-auc" class="section level4">
+<h4>Multi-Class ROC and AUC</h4>
+<p>Multi-class area under the curve (AUC) = 94.9%</p>
+<div class="figure"><span id="fig:unnamed-chunk-24"></span>
+<img src="/img/SIC_24.jpg" alt="Reciever Operating Characteristics (ROC). Area Under the Curve (AUC) = 94.9%"  />
+<p class="caption">
+Figure 24: Reciever Operating Characteristics (ROC). Area Under the Curve (AUC) = 94.9%
+</p>
+</div>
+<p>In figure 25 we can see how the majority of classes are close to 0,1 while Class 1 is 64%.</p>
+<p>Multi-Class ROC:</p>
+<ul>
+<li>Majority of Classes close to 0,1</li>
+<li>Class 1 @ 64%</li>
+</ul>
+<div class="figure"><span id="fig:unnamed-chunk-25"></span>
+<img src="/img/SIC_25.jpg" alt="ROC curve. Magenta line is Class 1 and at 64% AUC."  />
+<p class="caption">
+Figure 25: ROC curve. Magenta line is Class 1 and at 64% AUC.
+</p>
+</div>
+</div>
+<div id="summary" class="section level4">
+<h4>Summary</h4>
+<p>For this multi-class classification problem, we can predict and classify images from 12 categories to varying degrees of accuracy.
+From the model steps, the smaller image size and imbalanced data produced fairly decent results of 87.8% percent and an AUC of 93.1% After adding more augmented images to balance the data to 610 for each class and increasing the image size, I re ran the models and increased the accuracy to 92.1% and increased the reliability of the model with an AUC of 94.1%.
+I placed the images of class 7 and class 1 the loose silky-bent and the black grass together previously in figure 15, and they look very similar, explaining the misclassification in both models.</p>
+<p>I think the next step is to use further image augmenting techniques to highlight what makes each grass unique I would like to see if I can mask the background to remove the pebbles and black and white bar. At the time of this project, I couldn’t find a method in R to do this until yesterday and can potentially use a library called OpenImageR but entirely not sure if I can batch process this to all images. I think masking the image background will be the next step to improving this model.</p>
+<ul>
+<li>Multi-Class Classification of 12 categories of seedling images</li>
+<li>Using pre-trained Convnet VGG16 architecture trained on ImageNet as the base layers</li>
+</ul>
+<p>VGG16 Prediction</p>
+<p>Imbalanced Train Set @ 150 x 150 pixels</p>
+<ul>
+<li>Predicted Accuracy = 87.8%</li>
+<li>Kappa = 0.866</li>
+<li>Mean AUC = 93.12%</li>
+<li>False Positive Class 7 - Loose Silky-Bent</li>
+</ul>
+<table style="width:100%;">
+<colgroup>
+<col width="30%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Predicted /Labeled</th>
+<th align="center">Black Grass</th>
+<th align="center">Charlock</th>
+<th align="center">Cleavers</th>
+<th align="center">Common Chickweed</th>
+<th align="center">Common Wheat</th>
+<th align="center">Fat Hen</th>
+<th align="center">Loose Silky-Bent</th>
+<th align="center">Maize</th>
+<th align="center">Scentless Mayweed</th>
+<th align="center">Shepherd’s Purse</th>
+<th align="center">Small-Flowered Cranesbill</th>
+<th align="center">Sugar Beet</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Black Grass</td>
+<td align="center">26</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">45</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="left">Charlock</td>
+<td align="center">0</td>
+<td align="center">44</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Cleavers</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">33</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="left">Common Chickweed</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">73</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Common Wheat</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">22</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="left">Fat Hen</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">3</td>
+<td align="center">59</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Loose Silky-Bent</td>
+<td align="center">6</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">33</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="left">Maize</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">22</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">3</td>
+</tr>
+<tr class="odd">
+<td align="left">Scentless Mayweed</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">62</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="left">Shepherd’s Purse</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">24</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Small-Flowered Cranesbill</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">55</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="left">Sugar Beet</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">42</td>
+</tr>
+</tbody>
+</table>
+<p>VGG16 Prediction</p>
+<p>Balanced Train Set @ 299 x 299 pixels</p>
+<ul>
+<li>Predicted Accuracy = 92.1%</li>
+<li>Kappa = 0.913</li>
+<li>Mean AUC = 94.12%</li>
+<li>False Positive Class 1 – Black Grass</li>
+</ul>
+<table style="width:100%;">
+<colgroup>
+<col width="30%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Predicted /Labeled</th>
+<th align="center">Black Grass</th>
+<th align="center">Charlock</th>
+<th align="center">Cleavers</th>
+<th align="center">Common Chickweed</th>
+<th align="center">Common Wheat</th>
+<th align="center">Fat Hen</th>
+<th align="center">Loose Silky-Bent</th>
+<th align="center">Maize</th>
+<th align="center">Scentless Mayweed</th>
+<th align="center">Shepherd’s Purse</th>
+<th align="center">Small-Flowered Cranesbill</th>
+<th align="center">Sugar Beet</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Black Grass</td>
+<td align="center">10</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">9</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="left">Charlock</td>
+<td align="center">0</td>
+<td align="center">43</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Cleavers</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">33</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center"></td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="left">Common Chickweed</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">74</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Common Wheat</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">23</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="left">Fat Hen</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">58</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Loose Silky-Bent</td>
+<td align="center">22</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">0</td>
+<td align="center">66</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="left">Maize</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">22</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Scentless Mayweed</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">62</td>
+<td align="center">1</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="left">Shepherd’s Purse</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">1</td>
+<td align="center">25</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Small-Flowered Cranesbill</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">55</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="left">Sugar Beet</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">45</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="references" class="section level4">
+<h4>References</h4>
+<p>Aarhus University. (2018). Plant seedlings dataset. Retrieved from: <a href="https://vision.eng.au.dk/plant-seedlings-dataset/" class="uri">https://vision.eng.au.dk/plant-seedlings-dataset/</a></p>
+<p>Allaire, J., Chollet, F. (2018). Deep learning with R. (pp.111-148). Manning</p>
+<p>Allaire, J. (2017). Using a pre-trained convnet. Retrieved from: <a href="https://jjallaire.github.io/deep-learning-with-r-notebooks/notebooks/5.3-using-a-pretrained-convnet.nb.html#" class="uri">https://jjallaire.github.io/deep-learning-with-r-notebooks/notebooks/5.3-using-a-pretrained-convnet.nb.html#</a></p>
+<p>Brownlee, J. (2016). Image augmentation for deep learning with Keras. Retrieved from: <a href="https://machinelearningmastery.com/image-augmentation-deep-learning-keras/" class="uri">https://machinelearningmastery.com/image-augmentation-deep-learning-keras/</a></p>
+<p>Hodnett, M., Wiley, J. (2018). R deep learning essentials. Retrieved from: <a href="https://lumen.regis.edu/record=b1847282~S3" class="uri">https://lumen.regis.edu/record=b1847282~S3</a></p>
+<p>Keras. (2018). Reference. Retrieved from: <a href="https://keras.rstudio.com/reference/index.html" class="uri">https://keras.rstudio.com/reference/index.html</a></p>
+<p>Lui, Y. (2018). R deep learning projects: master the techniques to design and develop neural network models in R. Retrieved from: <a href="https://lumen.regis.edu/record=b1816355~S3" class="uri">https://lumen.regis.edu/record=b1816355~S3</a></p>
+<p>Prakash, A., PKS. (2017). R deep learning cookbook: solve complex neural net problems with TensorFlow, H2O, and</p>
+<p>MxNet. Retrieved from: <a href="https://lumen.regis.edu/record=b1787602~S3" class="uri">https://lumen.regis.edu/record=b1787602~S3</a>
+Soumendra, P. (2018). [Keras] A thing your should know about Keras if you plan to train a deep learning model on a large dataset. Retrieved from: <a href="https://medium.com/difference-engine-ai/keras-a-thing-you-should-know-about-keras-if-you-plan-to-train-a-deep-learning-model-on-a-large-fdd63ce66bd2" class="uri">https://medium.com/difference-engine-ai/keras-a-thing-you-should-know-about-keras-if-you-plan-to-train-a-deep-learning-model-on-a-large-fdd63ce66bd2</a></p>
+<p>TensorFlow for R. (2018). Tutorial: Overfitting and underfitting. Retrieved from: <a href="https://tensorflow.rstudio.com/keras/articles/tutorial_overfit_underfit.html" class="uri">https://tensorflow.rstudio.com/keras/articles/tutorial_overfit_underfit.html</a></p>
+<p>TensorFlow for R. (2018). Image classification on small datasets with Keras. Retrieved from: <a href="https://blogs.rstudio.com/tensorflow/posts/2017-12-14-image-classification-on-small-datasets/" class="uri">https://blogs.rstudio.com/tensorflow/posts/2017-12-14-image-classification-on-small-datasets/</a></p>
+<p>Vijayabhaskar, J. (2018). Tutorial on using Keras flow_from_directory and generators. Retrieved from: <a href="https://medium.com/@vijayabhaskar96/tutorial-image-classification-with-keras-flow-from-directory-and-generators-95f75ebe5720" class="uri">https://medium.com/@vijayabhaskar96/tutorial-image-classification-with-keras-flow-from-directory-and-generators-95f75ebe5720</a></p>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-38508489-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  
+  <hr/>
+  © <a href="https://www.bryanschafroth.com">Bryan Schafroth</a> 2020 | <a href="https://www.linkedin.com/in/bryanschafroth">LinkedIn</a>
+  
+  </footer>
+  </body>
+</html>
+

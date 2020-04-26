@@ -183,6 +183,51 @@
   </url>
   
   <url>
+    <loc>/tags/auc/</loc>
+    <lastmod>2018-12-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/computer-vision/</loc>
+    <lastmod>2018-12-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/convolutional-neural-networks/</loc>
+    <lastmod>2018-12-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/data-augmentation/</loc>
+    <lastmod>2018-12-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/deep-learning/</loc>
+    <lastmod>2018-12-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/image-classification/</loc>
+    <lastmod>2018-12-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/12/16/image-classification-a-computer-vision-problem/</loc>
+    <lastmod>2018-12-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/keras/</loc>
+    <lastmod>2018-12-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/roc/</loc>
+    <lastmod>2018-12-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/10-fold-cross-validation/</loc>
     <lastmod>2018-10-21T00:00:00+00:00</lastmod>
   </url>
@@ -234,16 +279,6 @@
   
   <url>
     <loc>/tags/big-data/</loc>
-    <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/convolutional-neural-networks/</loc>
-    <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/deep-learning/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
   </url>
   

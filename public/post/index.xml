@@ -170,6 +170,15 @@ Or hover mouse over slide and scroll through:
     </item>
     
     <item>
+      <title>Image Classification - A Computer Vision Problem</title>
+      <link>/post/2018/12/16/image-classification-a-computer-vision-problem/</link>
+      <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/12/16/image-classification-a-computer-vision-problem/</guid>
+      <description>Seedling Image Classification - A Convolutional Neural Network Problem in RStudioTable of ContentsThe Project OriginsImage DataThe Data Science ProblemThe Software to Work the ProblemData ExplorationImage AugmentationBase ModelVGG16 Pretrained ModelTraining and Validation GraphsData Augment – Balance ClassesVGG16 Pretrained Model – Freeze/UnfreezeTraining and Validation GraphsPredictions and Evaluations –VGG16Multi-Class ROC/AUCImproving the model - Part 2Predictions and Evaluations –VGG16Multi-Class ROC/AUCSummaryReferencesFigure 1: Image of invasive weed species growing in a crop.</description>
+    </item>
+    
+    <item>
       <title>Classification Problem using Machine Learning</title>
       <link>/post/2018/10/21/classification-problem-using-machine-learning-forest-cover-type/</link>
       <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
