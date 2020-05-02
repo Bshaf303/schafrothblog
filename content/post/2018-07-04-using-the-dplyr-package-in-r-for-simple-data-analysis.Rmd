@@ -1,0 +1,116 @@
+---
+title: Using the dplyr Package in R for Simple Data Analysis
+author: 'Bryan '
+date: '2018-07-04'
+slug: using-the-dplyr-package-in-r-for-simple-data-analysis
+categories: 
+  - Data Analysis
+tags: 
+  - R techniques
+---
+
+This article will briefly describe the dplyr package in R and the simple functions to analyze data with R for data analytics. The dplyr package in R is used for data manipulation and transformation because, typically, the data is not in a usable form. The package is useful for exploratory data analysis and a method of statistical analysis using graphical techniques. Some of the benefits are:
+ 
+- get insights from the data intuitively
+- find hidden trends
+- find outliers and anomalous data
+- test assumptions
+- help develop models that the data will fit
+
+The dplyr package is used by many data scientists and analysts to manipulate data. All the functions in dplyr have alternate methods in the base version of R and the other myriad of packages that do similar functions. However, R's code base may be slower in processing time for the modern data problems. The dplyr documentation says dplyr is the grammar of data manipulation. The plyr package was the old version, and the "d" represented data frames and added functionality. I further learned that the "Tibble" package is also used in conjunction because it is a simplified data frame structure for subsetting and printing. The dplyr package provides fast performance with large data sets, easy to use function names, with different data frames, tables, database formats.
+
+Below R code shows `rename()`, `select()`, and `filter()`, `group_by()`, and `summarize()` functions. I brought this data into a data frame and noticed there are no descriptive column headings. I want to give a descriptive name to 5 variables (rename) and then reorder them in a new data frame (select), then I would like to see all the grade variables that are the number four (filter). I would like to see the break down of the size variable and use (group_by) and then (summarize) to get a full count of the size occurrences.
+
+
+```{r raw_data,include=FALSE}
+
+library(tidyverse)
+```
+
+Load the data into a data frame using readr which is part of the tidyverse collection including dplyr. The default output shows the column variable names and the data type.
+
+#### read_csv()
+
+```{r read data, warning=FALSE}
+df = readr::read_csv("../../static/data/df.csv")
+```
+\
+This is produced using `kable()` from the knitr package in R. Displayed are the first 10 rows of data.
+\
+```{r table, echo=FALSE}
+knitr::kable(df[1:10, ], caption="The raw data")
+```
+
+
+The `names()` function will display all the variable names in the data.
+\
+```{r names}
+names(df)
+```
+
+#### rename()
+
+For this exercise I will only `rename()` five variables for demonstration.
+
+```{r}
+df_names = rename(df, color=V1, round=V2, length=V3, size=V12, grade=V14)
+```
+
+
+```{r, echo=FALSE}
+knitr::kable(df_names[1:10, ], caption="The rename five variables", align= 'c')
+```
+
+#### select()
+
+Narrow the data to the five variables that I am interested in analyzing.
+
+```{r}
+df_select = select(df_names, grade, size, color, length, round)
+```
+
+
+```{r, echo=FALSE}
+knitr::kable(df_select[1:10, ], caption="The selected variables", align= 'c')
+```
+
+#### filter()
+
+Refine the variables to only display the grade variable when it is equal to four. 
+
+```{r}
+df_filter = filter(df_select, grade == 4)
+```
+
+
+```{r, echo=FALSE}
+knitr::kable(df_filter[1:10, ], caption = "Filter out all grade = 4 records", align= 'c')
+```
+
+#### group_by() and summarize()
+
+Further refine and summarize the data. This returns a count of each size.
+
+```{r}
+by_size = group_by(df_filter, size) %>% summarize(count = n())
+```
+
+
+```{r, echo=FALSE}
+knitr::kable(by_size, caption = "The size variable", align= 'c')
+```
+
+\
+
+#### Conclusion
+
+This article covered the dplyr package from the tidyverse in R. To set up the data first, the readr() package loaded the dataset into a working data frame or "tibble" Each time a function runs, the output is in a labeled table. The table comes from knitr and the `kable()` function. Table 1 described the dataset and showed the first ten records. The `name()` function lists the variable or column names as a starting point. For the exercise, I was interested in five variables: V1, V2, V3, V12, & V14. I put them in a new data frame  df_names and renamed them descriptively as: "color", "round", "length", "size", and "grade" with the `rename` function. The result is in table 2. I used the `select()` function to only show the five variables of interest in table 3. The further refine the data, the `filter()` function helped to narrow down all the "grade" variables that are number four and shown in table 4. To go a bit further in the data the `group_by` function insolated the "size" variable and `summarize()` by `count = n()` to output on the four categories of "size" and the number of instances in the data, shown in table 5. The functions used from the dplyr package very useful when exploring the data. See the documentation for the other functions `arrange()` and `merge()` not covered for this example.
+
+
+#### References
+
+Peng, R. D. (2015). Exploratory Data Analysis with R. Retrieved from: https://leanpub.com/exdata
+
+RDocumentation. (2018). Introduction to dplyr. Retrieved from: https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html
+
+Wickham, H., & Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. p. 43-75, O’Reilly. 

@@ -273,6 +273,21 @@
   </url>
   
   <url>
+    <loc>/categories/data-analysis/</loc>
+    <lastmod>2018-07-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r-techniques/</loc>
+    <lastmod>2018-07-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/07/04/using-the-dplyr-package-in-r-for-simple-data-analysis/</loc>
+    <lastmod>2018-07-04T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/algorithms/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
   </url>

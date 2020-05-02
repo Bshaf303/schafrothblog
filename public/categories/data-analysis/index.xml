@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Data Analysis on Bryan Schafroth Portfolio</title>
+    <link>/categories/data-analysis/</link>
+    <description>Recent content in Data Analysis on Bryan Schafroth Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 04 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/data-analysis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Using the dplyr Package in R for Simple Data Analysis</title>
+      <link>/post/2018/07/04/using-the-dplyr-package-in-r-for-simple-data-analysis/</link>
+      <pubDate>Wed, 04 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/07/04/using-the-dplyr-package-in-r-for-simple-data-analysis/</guid>
+      <description>This article will briefly describe the dplyr package in R and the simple functions to analyze data with R for data analytics. The dplyr package in R is used for data manipulation and transformation because, typically, the data is not in a usable form. The package is useful for exploratory data analysis and a method of statistical analysis using graphical techniques. Some of the benefits are:
+get insights from the data intuitivelyfind hidden trendsfind outliers and anomalous datatest assumptionshelp develop models that the data will fitThe dplyr package is used by many data scientists and analysts to manipulate data.</description>
+    </item>
+    
+  </channel>
+</rss>

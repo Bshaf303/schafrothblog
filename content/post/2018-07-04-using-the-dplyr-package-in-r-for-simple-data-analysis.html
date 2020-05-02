@@ -1,0 +1,669 @@
+---
+title: Using the dplyr Package in R for Simple Data Analysis
+author: 'Bryan '
+date: '2018-07-04'
+slug: using-the-dplyr-package-in-r-for-simple-data-analysis
+categories: 
+  - Data Analysis
+tags: 
+  - R techniques
+---
+
+
+
+<p>This article will briefly describe the dplyr package in R and the simple functions to analyze data with R for data analytics. The dplyr package in R is used for data manipulation and transformation because, typically, the data is not in a usable form. The package is useful for exploratory data analysis and a method of statistical analysis using graphical techniques. Some of the benefits are:</p>
+<ul>
+<li>get insights from the data intuitively</li>
+<li>find hidden trends</li>
+<li>find outliers and anomalous data</li>
+<li>test assumptions</li>
+<li>help develop models that the data will fit</li>
+</ul>
+<p>The dplyr package is used by many data scientists and analysts to manipulate data. All the functions in dplyr have alternate methods in the base version of R and the other myriad of packages that do similar functions. However, R’s code base may be slower in processing time for the modern data problems. The dplyr documentation says dplyr is the grammar of data manipulation. The plyr package was the old version, and the “d” represented data frames and added functionality. I further learned that the “Tibble” package is also used in conjunction because it is a simplified data frame structure for subsetting and printing. The dplyr package provides fast performance with large data sets, easy to use function names, with different data frames, tables, database formats.</p>
+<p>Below R code shows <code>rename()</code>, <code>select()</code>, and <code>filter()</code>, <code>group_by()</code>, and <code>summarize()</code> functions. I brought this data into a data frame and noticed there are no descriptive column headings. I want to give a descriptive name to 5 variables (rename) and then reorder them in a new data frame (select), then I would like to see all the grade variables that are the number four (filter). I would like to see the break down of the size variable and use (group_by) and then (summarize) to get a full count of the size occurrences.</p>
+<p>Load the data into a data frame using readr which is part of the tidyverse collection including dplyr. The default output shows the column variable names and the data type.</p>
+<div id="read_csv" class="section level4">
+<h4>read_csv()</h4>
+<pre class="r"><code>df = readr::read_csv(&quot;../../static/data/df.csv&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   X1 = col_double(),
+##   V1 = col_double(),
+##   V2 = col_double(),
+##   V3 = col_double(),
+##   V4 = col_double(),
+##   V5 = col_double(),
+##   V6 = col_double(),
+##   V7 = col_double(),
+##   V8 = col_double(),
+##   V9 = col_double(),
+##   V10 = col_double(),
+##   V11 = col_double(),
+##   V12 = col_character(),
+##   V13 = col_character(),
+##   V14 = col_double()
+## )</code></pre>
+<p><br />
+This is produced using <code>kable()</code> from the knitr package in R. Displayed are the first 10 rows of data.<br />
+</p>
+<table>
+<caption><span id="tab:table">Table 1: </span>The raw data</caption>
+<thead>
+<tr class="header">
+<th align="right">X1</th>
+<th align="right">V1</th>
+<th align="right">V2</th>
+<th align="right">V3</th>
+<th align="right">V4</th>
+<th align="right">V5</th>
+<th align="right">V6</th>
+<th align="right">V7</th>
+<th align="right">V8</th>
+<th align="right">V9</th>
+<th align="right">V10</th>
+<th align="right">V11</th>
+<th align="left">V12</th>
+<th align="left">V13</th>
+<th align="right">V14</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">1</td>
+<td align="right">63</td>
+<td align="right">1</td>
+<td align="right">1</td>
+<td align="right">145</td>
+<td align="right">233</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">150</td>
+<td align="right">0</td>
+<td align="right">2.3</td>
+<td align="right">3</td>
+<td align="left">0.0</td>
+<td align="left">6.0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">2</td>
+<td align="right">67</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">160</td>
+<td align="right">286</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">108</td>
+<td align="right">1</td>
+<td align="right">1.5</td>
+<td align="right">2</td>
+<td align="left">3.0</td>
+<td align="left">3.0</td>
+<td align="right">2</td>
+</tr>
+<tr class="odd">
+<td align="right">3</td>
+<td align="right">67</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">120</td>
+<td align="right">229</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">129</td>
+<td align="right">1</td>
+<td align="right">2.6</td>
+<td align="right">2</td>
+<td align="left">2.0</td>
+<td align="left">7.0</td>
+<td align="right">1</td>
+</tr>
+<tr class="even">
+<td align="right">4</td>
+<td align="right">37</td>
+<td align="right">1</td>
+<td align="right">3</td>
+<td align="right">130</td>
+<td align="right">250</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">187</td>
+<td align="right">0</td>
+<td align="right">3.5</td>
+<td align="right">3</td>
+<td align="left">0.0</td>
+<td align="left">3.0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">5</td>
+<td align="right">41</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">130</td>
+<td align="right">204</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">172</td>
+<td align="right">0</td>
+<td align="right">1.4</td>
+<td align="right">1</td>
+<td align="left">0.0</td>
+<td align="left">3.0</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="right">6</td>
+<td align="right">56</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">120</td>
+<td align="right">236</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">178</td>
+<td align="right">0</td>
+<td align="right">0.8</td>
+<td align="right">1</td>
+<td align="left">0.0</td>
+<td align="left">3.0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">7</td>
+<td align="right">62</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">140</td>
+<td align="right">268</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">160</td>
+<td align="right">0</td>
+<td align="right">3.6</td>
+<td align="right">3</td>
+<td align="left">2.0</td>
+<td align="left">3.0</td>
+<td align="right">3</td>
+</tr>
+<tr class="even">
+<td align="right">8</td>
+<td align="right">57</td>
+<td align="right">0</td>
+<td align="right">4</td>
+<td align="right">120</td>
+<td align="right">354</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">163</td>
+<td align="right">1</td>
+<td align="right">0.6</td>
+<td align="right">1</td>
+<td align="left">0.0</td>
+<td align="left">3.0</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="right">9</td>
+<td align="right">63</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">130</td>
+<td align="right">254</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">147</td>
+<td align="right">0</td>
+<td align="right">1.4</td>
+<td align="right">2</td>
+<td align="left">1.0</td>
+<td align="left">7.0</td>
+<td align="right">2</td>
+</tr>
+<tr class="even">
+<td align="right">10</td>
+<td align="right">53</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">140</td>
+<td align="right">203</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">155</td>
+<td align="right">1</td>
+<td align="right">3.1</td>
+<td align="right">3</td>
+<td align="left">0.0</td>
+<td align="left">7.0</td>
+<td align="right">1</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>names()</code> function will display all the variable names in the data.<br />
+</p>
+<pre class="r"><code>names(df)</code></pre>
+<pre><code>##  [1] &quot;X1&quot;  &quot;V1&quot;  &quot;V2&quot;  &quot;V3&quot;  &quot;V4&quot;  &quot;V5&quot;  &quot;V6&quot;  &quot;V7&quot;  &quot;V8&quot;  &quot;V9&quot;  &quot;V10&quot; &quot;V11&quot;
+## [13] &quot;V12&quot; &quot;V13&quot; &quot;V14&quot;</code></pre>
+</div>
+<div id="rename" class="section level4">
+<h4>rename()</h4>
+<p>For this exercise I will only <code>rename()</code> five variables for demonstration.</p>
+<pre class="r"><code>df_names = rename(df, color=V1, round=V2, length=V3, size=V12, grade=V14)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-2">Table 2: </span>The rename five variables</caption>
+<thead>
+<tr class="header">
+<th align="center">X1</th>
+<th align="center">color</th>
+<th align="center">round</th>
+<th align="center">length</th>
+<th align="center">V4</th>
+<th align="center">V5</th>
+<th align="center">V6</th>
+<th align="center">V7</th>
+<th align="center">V8</th>
+<th align="center">V9</th>
+<th align="center">V10</th>
+<th align="center">V11</th>
+<th align="center">size</th>
+<th align="center">V13</th>
+<th align="center">grade</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">63</td>
+<td align="center">1</td>
+<td align="center">1</td>
+<td align="center">145</td>
+<td align="center">233</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">150</td>
+<td align="center">0</td>
+<td align="center">2.3</td>
+<td align="center">3</td>
+<td align="center">0.0</td>
+<td align="center">6.0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">67</td>
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">160</td>
+<td align="center">286</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">108</td>
+<td align="center">1</td>
+<td align="center">1.5</td>
+<td align="center">2</td>
+<td align="center">3.0</td>
+<td align="center">3.0</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">67</td>
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">120</td>
+<td align="center">229</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">129</td>
+<td align="center">1</td>
+<td align="center">2.6</td>
+<td align="center">2</td>
+<td align="center">2.0</td>
+<td align="center">7.0</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">37</td>
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">130</td>
+<td align="center">250</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">187</td>
+<td align="center">0</td>
+<td align="center">3.5</td>
+<td align="center">3</td>
+<td align="center">0.0</td>
+<td align="center">3.0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">41</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">130</td>
+<td align="center">204</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">172</td>
+<td align="center">0</td>
+<td align="center">1.4</td>
+<td align="center">1</td>
+<td align="center">0.0</td>
+<td align="center">3.0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">56</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">120</td>
+<td align="center">236</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">178</td>
+<td align="center">0</td>
+<td align="center">0.8</td>
+<td align="center">1</td>
+<td align="center">0.0</td>
+<td align="center">3.0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">7</td>
+<td align="center">62</td>
+<td align="center">0</td>
+<td align="center">4</td>
+<td align="center">140</td>
+<td align="center">268</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">160</td>
+<td align="center">0</td>
+<td align="center">3.6</td>
+<td align="center">3</td>
+<td align="center">2.0</td>
+<td align="center">3.0</td>
+<td align="center">3</td>
+</tr>
+<tr class="even">
+<td align="center">8</td>
+<td align="center">57</td>
+<td align="center">0</td>
+<td align="center">4</td>
+<td align="center">120</td>
+<td align="center">354</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">163</td>
+<td align="center">1</td>
+<td align="center">0.6</td>
+<td align="center">1</td>
+<td align="center">0.0</td>
+<td align="center">3.0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">9</td>
+<td align="center">63</td>
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">130</td>
+<td align="center">254</td>
+<td align="center">0</td>
+<td align="center">2</td>
+<td align="center">147</td>
+<td align="center">0</td>
+<td align="center">1.4</td>
+<td align="center">2</td>
+<td align="center">1.0</td>
+<td align="center">7.0</td>
+<td align="center">2</td>
+</tr>
+<tr class="even">
+<td align="center">10</td>
+<td align="center">53</td>
+<td align="center">1</td>
+<td align="center">4</td>
+<td align="center">140</td>
+<td align="center">203</td>
+<td align="center">1</td>
+<td align="center">2</td>
+<td align="center">155</td>
+<td align="center">1</td>
+<td align="center">3.1</td>
+<td align="center">3</td>
+<td align="center">0.0</td>
+<td align="center">7.0</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="select" class="section level4">
+<h4>select()</h4>
+<p>Narrow the data to the five variables that I am interested in analyzing.</p>
+<pre class="r"><code>df_select = select(df_names, grade, size, color, length, round)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-4">Table 3: </span>The selected variables</caption>
+<thead>
+<tr class="header">
+<th align="center">grade</th>
+<th align="center">size</th>
+<th align="center">color</th>
+<th align="center">length</th>
+<th align="center">round</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">0.0</td>
+<td align="center">63</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">3.0</td>
+<td align="center">67</td>
+<td align="center">4</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">2.0</td>
+<td align="center">67</td>
+<td align="center">4</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">0</td>
+<td align="center">0.0</td>
+<td align="center">37</td>
+<td align="center">3</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">0</td>
+<td align="center">0.0</td>
+<td align="center">41</td>
+<td align="center">2</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">0</td>
+<td align="center">0.0</td>
+<td align="center">56</td>
+<td align="center">2</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">2.0</td>
+<td align="center">62</td>
+<td align="center">4</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">0</td>
+<td align="center">0.0</td>
+<td align="center">57</td>
+<td align="center">4</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">1.0</td>
+<td align="center">63</td>
+<td align="center">4</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">0.0</td>
+<td align="center">53</td>
+<td align="center">4</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="filter" class="section level4">
+<h4>filter()</h4>
+<p>Refine the variables to only display the grade variable when it is equal to four.</p>
+<pre class="r"><code>df_filter = filter(df_select, grade == 4)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-6">Table 4: </span>Filter out all grade = 4 records</caption>
+<thead>
+<tr class="header">
+<th align="center">grade</th>
+<th align="center">size</th>
+<th align="center">color</th>
+<th align="center">length</th>
+<th align="center">round</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">4</td>
+<td align="center">2.0</td>
+<td align="center">60</td>
+<td align="center">4</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">3.0</td>
+<td align="center">65</td>
+<td align="center">4</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">4</td>
+<td align="center">1.0</td>
+<td align="center">58</td>
+<td align="center">3</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">0.0</td>
+<td align="center">50</td>
+<td align="center">4</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">4</td>
+<td align="center">3.0</td>
+<td align="center">63</td>
+<td align="center">4</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">0.0</td>
+<td align="center">70</td>
+<td align="center">4</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">4</td>
+<td align="center">3.0</td>
+<td align="center">57</td>
+<td align="center">4</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">1.0</td>
+<td align="center">55</td>
+<td align="center">4</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">4</td>
+<td align="center">3.0</td>
+<td align="center">77</td>
+<td align="center">4</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">2.0</td>
+<td align="center">64</td>
+<td align="center">4</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="group_by-and-summarize" class="section level4">
+<h4>group_by() and summarize()</h4>
+<p>Further refine and summarize the data. This returns a count of each size.</p>
+<pre class="r"><code>by_size = group_by(df_filter, size) %&gt;% summarize(count = n())</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-8">Table 5: </span>The size variable</caption>
+<thead>
+<tr class="header">
+<th align="center">size</th>
+<th align="center">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0.0</td>
+<td align="center">3</td>
+</tr>
+<tr class="even">
+<td align="center">1.0</td>
+<td align="center">3</td>
+</tr>
+<tr class="odd">
+<td align="center">2.0</td>
+<td align="center">2</td>
+</tr>
+<tr class="even">
+<td align="center">3.0</td>
+<td align="center">5</td>
+</tr>
+</tbody>
+</table>
+<p><br />
+</p>
+</div>
+<div id="conclusion" class="section level4">
+<h4>Conclusion</h4>
+<p>This article covered the dplyr package from the tidyverse in R. To set up the data first, the readr() package loaded the dataset into a working data frame or “tibble” Each time a function runs, the output is in a labeled table. The table comes from knitr and the <code>kable()</code> function. Table 1 described the dataset and showed the first ten records. The <code>name()</code> function lists the variable or column names as a starting point. For the exercise, I was interested in five variables: V1, V2, V3, V12, &amp; V14. I put them in a new data frame df_names and renamed them descriptively as: “color”, “round”, “length”, “size”, and “grade” with the <code>rename</code> function. The result is in table 2. I used the <code>select()</code> function to only show the five variables of interest in table 3. The further refine the data, the <code>filter()</code> function helped to narrow down all the “grade” variables that are number four and shown in table 4. To go a bit further in the data the <code>group_by</code> function insolated the “size” variable and <code>summarize()</code> by <code>count = n()</code> to output on the four categories of “size” and the number of instances in the data, shown in table 5. The functions used from the dplyr package very useful when exploring the data. See the documentation for the other functions <code>arrange()</code> and <code>merge()</code> not covered for this example.</p>
+</div>
+<div id="references" class="section level4">
+<h4>References</h4>
+<p>Peng, R. D. (2015). Exploratory Data Analysis with R. Retrieved from: <a href="https://leanpub.com/exdata" class="uri">https://leanpub.com/exdata</a></p>
+<p>RDocumentation. (2018). Introduction to dplyr. Retrieved from: <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html" class="uri">https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html</a></p>
+<p>Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. p. 43-75, O’Reilly.</p>
+</div>
