@@ -1,0 +1,2558 @@
+---
+title: Data Exploration - The Chicago Dataset
+author: 'Bryan '
+date: '2018-07-07'
+slug: data-exploration-the-chicago-dataset
+categories:
+  - Data Analysis
+  - Exploratory Data Analysis
+  - R Programming
+tags:
+  - EDA in Data Science
+  - data transformation
+  - data manipulation
+  - dplyr package
+  - data wrangling
+  - lubridate package
+  - tidyverse 
+  - statistical analysis
+---
+
+
+
+<div id="introduction" class="section level4">
+<h4>Introduction</h4>
+<p>This article is about using the tidyverse package in R to explore data. The Chicago dataset is the basis for this analysis. The data is air quality measurements taken over 19 years. The focus is on using the dplyr package to do the analysis. The dplyr package is part of the tidyverse in R and a suite of tools to analyze, transform, plot, and manipulate data. The base version of R does all of this; however, dplyr will work faster and cost fewer computing resources when used on big data. The functions used to explore the data are as follows:</p>
+<ul>
+<li><code>names()</code></li>
+<li><code>select()</code></li>
+<li><code>filter()</code></li>
+<li><code>summarize()</code></li>
+<li><code>arrange()</code></li>
+<li><code>rename()</code></li>
+<li><code>mutate()</code></li>
+<li><code>transmute()</code></li>
+<li><code>group_by()</code></li>
+<li><code>%&gt;%</code> (pipe)</li>
+</ul>
+<p>Additional packages used are:</p>
+<ul>
+<li>Tidyverse</li>
+<li>Readr</li>
+<li>Lubridate</li>
+<li>Skimr</li>
+<li>Knitr</li>
+</ul>
+<p><br />
+</p>
+</div>
+<div id="read_rds" class="section level4">
+<h4>read_rds()</h4>
+<p>I start with importing the data into a data frame with the readr package, and the structure of the data is a tibble, which is the tidyverse data frame structure. In the output, the tibble structure will list the first ten rows of data and column headers with the data types in this dataset.</p>
+<ul>
+<li><code>chr</code> is characters</li>
+<li><code>dbl</code> is real numbers</li>
+<li><code>date</code> are dates</li>
+</ul>
+<p>Not shown in this data but worth mentioning:</p>
+<ul>
+<li><code>int</code> is integers</li>
+<li><code>dttm</code> is date-time</li>
+<li><code>lgl</code> is logical</li>
+<li><code>fctr</code> is factors or categorical</li>
+</ul>
+<pre class="r"><code>chicago = as_tibble(readr::read_rds(&quot;../../static/data/chicago.rds&quot;))</code></pre>
+<pre class="r"><code>(chicago)</code></pre>
+<pre><code>## # A tibble: 6,940 x 8
+##    city   tmpd  dptp date       pm25tmean2 pm10tmean2 o3tmean2 no2tmean2
+##    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;date&gt;          &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 chic   31.5  31.5 1987-01-01         NA       34       4.25      20.0
+##  2 chic   33    29.9 1987-01-02         NA       NA       3.30      23.2
+##  3 chic   33    27.4 1987-01-03         NA       34.2     3.33      23.8
+##  4 chic   29    28.6 1987-01-04         NA       47       4.38      30.4
+##  5 chic   32    28.9 1987-01-05         NA       NA       4.75      30.3
+##  6 chic   40    35.1 1987-01-06         NA       48       5.83      25.8
+##  7 chic   34.5  26.8 1987-01-07         NA       41       9.29      20.6
+##  8 chic   29    22   1987-01-08         NA       36      11.3       17.0
+##  9 chic   26.5  29   1987-01-09         NA       33.3     4.5       23.4
+## 10 chic   32.5  27.8 1987-01-10         NA       NA       4.96      19.5
+## # ... with 6,930 more rows</code></pre>
+<table>
+<caption><span id="tab:table">Table 1: </span>The Chicago Dataset</caption>
+<thead>
+<tr class="header">
+<th align="left">city</th>
+<th align="right">tmpd</th>
+<th align="right">dptp</th>
+<th align="left">date</th>
+<th align="right">pm25tmean2</th>
+<th align="right">pm10tmean2</th>
+<th align="right">o3tmean2</th>
+<th align="right">no2tmean2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">chic</td>
+<td align="right">31.5</td>
+<td align="right">31.500</td>
+<td align="left">1987-01-01</td>
+<td align="right">NA</td>
+<td align="right">34.00000</td>
+<td align="right">4.250000</td>
+<td align="right">19.98810</td>
+</tr>
+<tr class="even">
+<td align="left">chic</td>
+<td align="right">33.0</td>
+<td align="right">29.875</td>
+<td align="left">1987-01-02</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">3.304348</td>
+<td align="right">23.19099</td>
+</tr>
+<tr class="odd">
+<td align="left">chic</td>
+<td align="right">33.0</td>
+<td align="right">27.375</td>
+<td align="left">1987-01-03</td>
+<td align="right">NA</td>
+<td align="right">34.16667</td>
+<td align="right">3.333333</td>
+<td align="right">23.81548</td>
+</tr>
+<tr class="even">
+<td align="left">chic</td>
+<td align="right">29.0</td>
+<td align="right">28.625</td>
+<td align="left">1987-01-04</td>
+<td align="right">NA</td>
+<td align="right">47.00000</td>
+<td align="right">4.375000</td>
+<td align="right">30.43452</td>
+</tr>
+<tr class="odd">
+<td align="left">chic</td>
+<td align="right">32.0</td>
+<td align="right">28.875</td>
+<td align="left">1987-01-05</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">4.750000</td>
+<td align="right">30.33333</td>
+</tr>
+<tr class="even">
+<td align="left">chic</td>
+<td align="right">40.0</td>
+<td align="right">35.125</td>
+<td align="left">1987-01-06</td>
+<td align="right">NA</td>
+<td align="right">48.00000</td>
+<td align="right">5.833333</td>
+<td align="right">25.77233</td>
+</tr>
+<tr class="odd">
+<td align="left">chic</td>
+<td align="right">34.5</td>
+<td align="right">26.750</td>
+<td align="left">1987-01-07</td>
+<td align="right">NA</td>
+<td align="right">41.00000</td>
+<td align="right">9.291667</td>
+<td align="right">20.58171</td>
+</tr>
+<tr class="even">
+<td align="left">chic</td>
+<td align="right">29.0</td>
+<td align="right">22.000</td>
+<td align="left">1987-01-08</td>
+<td align="right">NA</td>
+<td align="right">36.00000</td>
+<td align="right">11.291667</td>
+<td align="right">17.03723</td>
+</tr>
+<tr class="odd">
+<td align="left">chic</td>
+<td align="right">26.5</td>
+<td align="right">29.000</td>
+<td align="left">1987-01-09</td>
+<td align="right">NA</td>
+<td align="right">33.28571</td>
+<td align="right">4.500000</td>
+<td align="right">23.38889</td>
+</tr>
+<tr class="even">
+<td align="left">chic</td>
+<td align="right">32.5</td>
+<td align="right">27.750</td>
+<td align="left">1987-01-10</td>
+<td align="right">NA</td>
+<td align="right">NA</td>
+<td align="right">4.958333</td>
+<td align="right">19.54167</td>
+</tr>
+</tbody>
+</table>
+<p>In table 1, the Chicago dataset has eight variables and 6940 rows. The city variable appears as ‘chic’ for Chicago, and the missing data is filled in by default with <code>NA</code>. Also, the date is in the y/m/d format. We can see the different readings for the real numbers, from 1 to 6 decimal places.</p>
+</div>
+<div id="names" class="section level4">
+<h4>names()</h4>
+<p><code>names()</code> function lists all the variable names in the data.</p>
+<pre class="r"><code>names(chicago) </code></pre>
+<pre><code>## [1] &quot;city&quot;       &quot;tmpd&quot;       &quot;dptp&quot;       &quot;date&quot;       &quot;pm25tmean2&quot;
+## [6] &quot;pm10tmean2&quot; &quot;o3tmean2&quot;   &quot;no2tmean2&quot;</code></pre>
+<p>List the first three names with the index[:]. Note R is a little different than Python. R will display the last index position [3], where Python would display 1 &amp; 2.</p>
+<pre class="r"><code>names(chicago)[1:3]</code></pre>
+<pre><code>## [1] &quot;city&quot; &quot;tmpd&quot; &quot;dptp&quot;</code></pre>
+<p>List the last three variables.</p>
+<pre class="r"><code>names(chicago)[6:8] </code></pre>
+<pre><code>## [1] &quot;pm10tmean2&quot; &quot;o3tmean2&quot;   &quot;no2tmean2&quot;</code></pre>
+</div>
+<div id="summary-statistics-with-skimr" class="section level4">
+<h4>Summary Statistics with <code>skimr</code></h4>
+<p>The <code>skim()</code> function in the skimr package gives a good idea, in one place, of what the data looks like in table 2. Noting there are 4447 NA’s in pm25tmean2 and 242 NA’s in pm10tmean2. The date range is from 1987 to 2005. The histogram shows us the skew of each variable and a nice feature for skimr.</p>
+<p>In base R, I would also use the <code>summary()</code> function. As you will see, the tidyverse does not have a summary function that doesn’t require multiple lines of code. I will generate some of these statistics, but it takes more time than typing in one line into the console.</p>
+<pre class="r"><code>skimr::skim(chicago)</code></pre>
+<table>
+<caption><span id="tab:unnamed-chunk-5">Table 2: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">chicago</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">6940</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">8</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">1</td>
+</tr>
+<tr class="odd">
+<td align="left">Date</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">6</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">city</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">4</td>
+<td align="right">4</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: Date</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">min</th>
+<th align="left">max</th>
+<th align="left">median</th>
+<th align="right">n_unique</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">date</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">1987-01-01</td>
+<td align="left">2005-12-31</td>
+<td align="left">1996-07-01</td>
+<td align="right">6940</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">tmpd</td>
+<td align="right">1</td>
+<td align="right">1.00</td>
+<td align="right">50.31</td>
+<td align="right">19.41</td>
+<td align="right">-16.00</td>
+<td align="right">35.00</td>
+<td align="right">51.00</td>
+<td align="right">67.00</td>
+<td align="right">92.00</td>
+<td align="left">▁▃▇▇▅</td>
+</tr>
+<tr class="even">
+<td align="left">dptp</td>
+<td align="right">2</td>
+<td align="right">1.00</td>
+<td align="right">40.34</td>
+<td align="right">18.49</td>
+<td align="right">-25.62</td>
+<td align="right">27.00</td>
+<td align="right">39.88</td>
+<td align="right">55.75</td>
+<td align="right">78.25</td>
+<td align="left">▁▂▇▇▅</td>
+</tr>
+<tr class="odd">
+<td align="left">pm25tmean2</td>
+<td align="right">4447</td>
+<td align="right">0.36</td>
+<td align="right">16.23</td>
+<td align="right">8.70</td>
+<td align="right">1.70</td>
+<td align="right">9.70</td>
+<td align="right">14.66</td>
+<td align="right">20.60</td>
+<td align="right">61.50</td>
+<td align="left">▇▇▂▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">pm10tmean2</td>
+<td align="right">242</td>
+<td align="right">0.97</td>
+<td align="right">33.90</td>
+<td align="right">17.97</td>
+<td align="right">2.00</td>
+<td align="right">21.50</td>
+<td align="right">30.28</td>
+<td align="right">42.00</td>
+<td align="right">365.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">o3tmean2</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">19.44</td>
+<td align="right">11.39</td>
+<td align="right">0.15</td>
+<td align="right">10.07</td>
+<td align="right">18.52</td>
+<td align="right">27.00</td>
+<td align="right">66.59</td>
+<td align="left">▇▇▅▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">no2tmean2</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">25.23</td>
+<td align="right">7.99</td>
+<td align="right">6.16</td>
+<td align="right">19.65</td>
+<td align="right">24.56</td>
+<td align="right">30.14</td>
+<td align="right">62.48</td>
+<td align="left">▂▇▃▁▁</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="select" class="section level4">
+<h4>select()</h4>
+<p>To view specific variables, I use the <code>select()</code> function. Perhaps this small dataset in not going to show the benefits of <code>select()</code>, however, with hundreds or thousands of variables, <code>select()</code> will prove a worthy function. Here in table 3, we can isolate the variables city through dptp very quickly.</p>
+<pre class="r"><code>select(chicago, 
+       city:dptp)</code></pre>
+<pre><code>## # A tibble: 6,940 x 3
+##    city   tmpd  dptp
+##    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 chic   31.5  31.5
+##  2 chic   33    29.9
+##  3 chic   33    27.4
+##  4 chic   29    28.6
+##  5 chic   32    28.9
+##  6 chic   40    35.1
+##  7 chic   34.5  26.8
+##  8 chic   29    22  
+##  9 chic   26.5  29  
+## 10 chic   32.5  27.8
+## # ... with 6,930 more rows</code></pre>
+<table>
+<caption><span id="tab:select3">Table 3: </span>Select the first three variables.</caption>
+<thead>
+<tr class="header">
+<th align="left">city</th>
+<th align="right">tmpd</th>
+<th align="right">dptp</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">chic</td>
+<td align="right">31.5</td>
+<td align="right">31.500</td>
+</tr>
+<tr class="even">
+<td align="left">chic</td>
+<td align="right">33.0</td>
+<td align="right">29.875</td>
+</tr>
+<tr class="odd">
+<td align="left">chic</td>
+<td align="right">33.0</td>
+<td align="right">27.375</td>
+</tr>
+<tr class="even">
+<td align="left">chic</td>
+<td align="right">29.0</td>
+<td align="right">28.625</td>
+</tr>
+<tr class="odd">
+<td align="left">chic</td>
+<td align="right">32.0</td>
+<td align="right">28.875</td>
+</tr>
+<tr class="even">
+<td align="left">chic</td>
+<td align="right">40.0</td>
+<td align="right">35.125</td>
+</tr>
+<tr class="odd">
+<td align="left">chic</td>
+<td align="right">34.5</td>
+<td align="right">26.750</td>
+</tr>
+<tr class="even">
+<td align="left">chic</td>
+<td align="right">29.0</td>
+<td align="right">22.000</td>
+</tr>
+<tr class="odd">
+<td align="left">chic</td>
+<td align="right">26.5</td>
+<td align="right">29.000</td>
+</tr>
+<tr class="even">
+<td align="left">chic</td>
+<td align="right">32.5</td>
+<td align="right">27.750</td>
+</tr>
+</tbody>
+</table>
+<p>In table 4, <code>select()</code> can also do the inverse of city:dptp and exclude those variables to display the remaining variables.</p>
+<pre class="r"><code>select(chicago, -(city:dptp))</code></pre>
+<pre><code>## # A tibble: 6,940 x 5
+##    date       pm25tmean2 pm10tmean2 o3tmean2 no2tmean2
+##    &lt;date&gt;          &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 1987-01-01         NA       34       4.25      20.0
+##  2 1987-01-02         NA       NA       3.30      23.2
+##  3 1987-01-03         NA       34.2     3.33      23.8
+##  4 1987-01-04         NA       47       4.38      30.4
+##  5 1987-01-05         NA       NA       4.75      30.3
+##  6 1987-01-06         NA       48       5.83      25.8
+##  7 1987-01-07         NA       41       9.29      20.6
+##  8 1987-01-08         NA       36      11.3       17.0
+##  9 1987-01-09         NA       33.3     4.5       23.4
+## 10 1987-01-10         NA       NA       4.96      19.5
+## # ... with 6,930 more rows</code></pre>
+<table>
+<caption><span id="tab:invertselect">Table 4: </span>Select all except first three variables.</caption>
+<thead>
+<tr class="header">
+<th align="center">date</th>
+<th align="center">pm25tmean2</th>
+<th align="center">pm10tmean2</th>
+<th align="center">o3tmean2</th>
+<th align="center">no2tmean2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1987-01-01</td>
+<td align="center">NA</td>
+<td align="center">34.00000</td>
+<td align="center">4.250000</td>
+<td align="center">19.98810</td>
+</tr>
+<tr class="even">
+<td align="center">1987-01-02</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">3.304348</td>
+<td align="center">23.19099</td>
+</tr>
+<tr class="odd">
+<td align="center">1987-01-03</td>
+<td align="center">NA</td>
+<td align="center">34.16667</td>
+<td align="center">3.333333</td>
+<td align="center">23.81548</td>
+</tr>
+<tr class="even">
+<td align="center">1987-01-04</td>
+<td align="center">NA</td>
+<td align="center">47.00000</td>
+<td align="center">4.375000</td>
+<td align="center">30.43452</td>
+</tr>
+<tr class="odd">
+<td align="center">1987-01-05</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">4.750000</td>
+<td align="center">30.33333</td>
+</tr>
+<tr class="even">
+<td align="center">1987-01-06</td>
+<td align="center">NA</td>
+<td align="center">48.00000</td>
+<td align="center">5.833333</td>
+<td align="center">25.77233</td>
+</tr>
+<tr class="odd">
+<td align="center">1987-01-07</td>
+<td align="center">NA</td>
+<td align="center">41.00000</td>
+<td align="center">9.291667</td>
+<td align="center">20.58171</td>
+</tr>
+<tr class="even">
+<td align="center">1987-01-08</td>
+<td align="center">NA</td>
+<td align="center">36.00000</td>
+<td align="center">11.291667</td>
+<td align="center">17.03723</td>
+</tr>
+<tr class="odd">
+<td align="center">1987-01-09</td>
+<td align="center">NA</td>
+<td align="center">33.28571</td>
+<td align="center">4.500000</td>
+<td align="center">23.38889</td>
+</tr>
+<tr class="even">
+<td align="center">1987-01-10</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">4.958333</td>
+<td align="center">19.54167</td>
+</tr>
+</tbody>
+</table>
+<p>Table 5 demonstrates the <code>ends_with()</code> and table 6 the <code>starts_with()</code> functions that only work inside of <code>select()</code>. Additional functions here would be:</p>
+<ul>
+<li><code>matches()</code></li>
+<li><code>num_range()</code></li>
+<li><code>one_of()</code></li>
+<li><code>everything()</code></li>
+<li><code>contains()</code></li>
+</ul>
+<p>Lets find all the variables that end with the number 2 in table 5.</p>
+<pre class="r"><code>select(chicago, 
+       ends_with(&quot;2&quot;)) </code></pre>
+<pre><code>## # A tibble: 6,940 x 4
+##    pm25tmean2 pm10tmean2 o3tmean2 no2tmean2
+##         &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1         NA       34       4.25      20.0
+##  2         NA       NA       3.30      23.2
+##  3         NA       34.2     3.33      23.8
+##  4         NA       47       4.38      30.4
+##  5         NA       NA       4.75      30.3
+##  6         NA       48       5.83      25.8
+##  7         NA       41       9.29      20.6
+##  8         NA       36      11.3       17.0
+##  9         NA       33.3     4.5       23.4
+## 10         NA       NA       4.96      19.5
+## # ... with 6,930 more rows</code></pre>
+<table>
+<caption><span id="tab:endswith">Table 5: </span>Select variables ending in 2.</caption>
+<thead>
+<tr class="header">
+<th align="center">pm25tmean2</th>
+<th align="center">pm10tmean2</th>
+<th align="center">o3tmean2</th>
+<th align="center">no2tmean2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">34.00000</td>
+<td align="center">4.250000</td>
+<td align="center">19.98810</td>
+</tr>
+<tr class="even">
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">3.304348</td>
+<td align="center">23.19099</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">34.16667</td>
+<td align="center">3.333333</td>
+<td align="center">23.81548</td>
+</tr>
+<tr class="even">
+<td align="center">NA</td>
+<td align="center">47.00000</td>
+<td align="center">4.375000</td>
+<td align="center">30.43452</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">4.750000</td>
+<td align="center">30.33333</td>
+</tr>
+<tr class="even">
+<td align="center">NA</td>
+<td align="center">48.00000</td>
+<td align="center">5.833333</td>
+<td align="center">25.77233</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">41.00000</td>
+<td align="center">9.291667</td>
+<td align="center">20.58171</td>
+</tr>
+<tr class="even">
+<td align="center">NA</td>
+<td align="center">36.00000</td>
+<td align="center">11.291667</td>
+<td align="center">17.03723</td>
+</tr>
+<tr class="odd">
+<td align="center">NA</td>
+<td align="center">33.28571</td>
+<td align="center">4.500000</td>
+<td align="center">23.38889</td>
+</tr>
+<tr class="even">
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">4.958333</td>
+<td align="center">19.54167</td>
+</tr>
+</tbody>
+</table>
+<p>Let’s find all the variables that start with the letter “d” in table 6.</p>
+<pre class="r"><code>select(chicago, 
+       starts_with(&quot;d&quot;))</code></pre>
+<pre><code>## # A tibble: 6,940 x 2
+##     dptp date      
+##    &lt;dbl&gt; &lt;date&gt;    
+##  1  31.5 1987-01-01
+##  2  29.9 1987-01-02
+##  3  27.4 1987-01-03
+##  4  28.6 1987-01-04
+##  5  28.9 1987-01-05
+##  6  35.1 1987-01-06
+##  7  26.8 1987-01-07
+##  8  22   1987-01-08
+##  9  29   1987-01-09
+## 10  27.8 1987-01-10
+## # ... with 6,930 more rows</code></pre>
+<table>
+<caption><span id="tab:startswith">Table 6: </span>Select variables starting with the letter d.</caption>
+<thead>
+<tr class="header">
+<th align="center">dptp</th>
+<th align="center">date</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">31.500</td>
+<td align="center">1987-01-01</td>
+</tr>
+<tr class="even">
+<td align="center">29.875</td>
+<td align="center">1987-01-02</td>
+</tr>
+<tr class="odd">
+<td align="center">27.375</td>
+<td align="center">1987-01-03</td>
+</tr>
+<tr class="even">
+<td align="center">28.625</td>
+<td align="center">1987-01-04</td>
+</tr>
+<tr class="odd">
+<td align="center">28.875</td>
+<td align="center">1987-01-05</td>
+</tr>
+<tr class="even">
+<td align="center">35.125</td>
+<td align="center">1987-01-06</td>
+</tr>
+<tr class="odd">
+<td align="center">26.750</td>
+<td align="center">1987-01-07</td>
+</tr>
+<tr class="even">
+<td align="center">22.000</td>
+<td align="center">1987-01-08</td>
+</tr>
+<tr class="odd">
+<td align="center">29.000</td>
+<td align="center">1987-01-09</td>
+</tr>
+<tr class="even">
+<td align="center">27.750</td>
+<td align="center">1987-01-10</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="filter" class="section level4">
+<h4>filter()</h4>
+<p>The <code>filter()</code> function is a way to find values in the data. Here the results are placed in table 7. Shown is filtering all pm25tmean2 variables that are greater than 30. We can do any combination of variables with specific parameters. The tibble output indicates there are 194 instances where pm25tmean2 is above a reading of 30.</p>
+<pre class="r"><code>filter(chicago, 
+       pm25tmean2 &gt; 30)</code></pre>
+<pre><code>## # A tibble: 194 x 8
+##    city   tmpd  dptp date       pm25tmean2 pm10tmean2 o3tmean2 no2tmean2
+##    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;date&gt;          &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 chic     23  21.9 1998-01-17       38.1       32.5     3.18      25.3
+##  2 chic     28  25.8 1998-01-23       34.0       38.7     1.75      29.4
+##  3 chic     55  51.3 1998-04-30       39.4       34      10.8       25.3
+##  4 chic     59  53.7 1998-05-01       35.4       28.5    14.3       31.4
+##  5 chic     57  52   1998-05-02       33.3       35      20.7       26.8
+##  6 chic     57  56   1998-05-07       32.1       34.5    24.3       34.0
+##  7 chic     75  65.8 1998-05-15       56.5       91      38.6       29.0
+##  8 chic     61  59   1998-06-09       33.8       26      17.9       25.5
+##  9 chic     73  60.3 1998-07-13       30.3       64.5    37.0       37.9
+## 10 chic     78  67.1 1998-07-14       41.4       75      40.1       32.6
+## # ... with 184 more rows</code></pre>
+<table>
+<caption><span id="tab:filtervar">Table 7: </span>Filter variable pm25tmean2 greater than 30.</caption>
+<thead>
+<tr class="header">
+<th align="center">city</th>
+<th align="center">tmpd</th>
+<th align="center">dptp</th>
+<th align="center">date</th>
+<th align="center">pm25tmean2</th>
+<th align="center">pm10tmean2</th>
+<th align="center">o3tmean2</th>
+<th align="center">no2tmean2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">23</td>
+<td align="center">21.9</td>
+<td align="center">1998-01-17</td>
+<td align="center">38.10</td>
+<td align="center">32.46154</td>
+<td align="center">3.180556</td>
+<td align="center">25.30000</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">28</td>
+<td align="center">25.8</td>
+<td align="center">1998-01-23</td>
+<td align="center">33.95</td>
+<td align="center">38.69231</td>
+<td align="center">1.750000</td>
+<td align="center">29.37630</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">55</td>
+<td align="center">51.3</td>
+<td align="center">1998-04-30</td>
+<td align="center">39.40</td>
+<td align="center">34.00000</td>
+<td align="center">10.786232</td>
+<td align="center">25.31310</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">59</td>
+<td align="center">53.7</td>
+<td align="center">1998-05-01</td>
+<td align="center">35.40</td>
+<td align="center">28.50000</td>
+<td align="center">14.295125</td>
+<td align="center">31.42905</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">57</td>
+<td align="center">52.0</td>
+<td align="center">1998-05-02</td>
+<td align="center">33.30</td>
+<td align="center">35.00000</td>
+<td align="center">20.662879</td>
+<td align="center">26.79861</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">57</td>
+<td align="center">56.0</td>
+<td align="center">1998-05-07</td>
+<td align="center">32.10</td>
+<td align="center">34.50000</td>
+<td align="center">24.270422</td>
+<td align="center">33.99167</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">75</td>
+<td align="center">65.8</td>
+<td align="center">1998-05-15</td>
+<td align="center">56.50</td>
+<td align="center">91.00000</td>
+<td align="center">38.573007</td>
+<td align="center">29.03261</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">61</td>
+<td align="center">59.0</td>
+<td align="center">1998-06-09</td>
+<td align="center">33.80</td>
+<td align="center">26.00000</td>
+<td align="center">17.890810</td>
+<td align="center">25.49668</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">73</td>
+<td align="center">60.3</td>
+<td align="center">1998-07-13</td>
+<td align="center">30.30</td>
+<td align="center">64.50000</td>
+<td align="center">37.018864</td>
+<td align="center">37.93056</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">78</td>
+<td align="center">67.1</td>
+<td align="center">1998-07-14</td>
+<td align="center">41.40</td>
+<td align="center">75.00000</td>
+<td align="center">40.080902</td>
+<td align="center">32.59054</td>
+</tr>
+</tbody>
+</table>
+<p>Table 8 filters all values of the variable pm25tmean2 greater than 30, and I summarize to refine that to the minimum and maximum values. The table is showing that 30.05 is the lowest, and 61.5 is the highest value after filtering the variable. <code>%&gt;%</code> is shown in the code and a way to write a few sequence operations together.</p>
+<pre class="r"><code>chicago %&gt;%
+  filter(pm25tmean2 &gt; 30) %&gt;%
+  summarize(minValue = min(pm25tmean2), 
+            maxValue = max(pm25tmean2))</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   minValue maxValue
+##      &lt;dbl&gt;    &lt;dbl&gt;
+## 1     30.0     61.5</code></pre>
+<table>
+<caption><span id="tab:filter30">Table 8: </span>Variable pm25tmean2 greater than 30.</caption>
+<thead>
+<tr class="header">
+<th align="center">minValue</th>
+<th align="center">maxValue</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">30.05</td>
+<td align="center">61.5</td>
+</tr>
+</tbody>
+</table>
+<p>Table 9 is a refinement in table 8. Here I want to find the values higher than 30 in pm25tmean2 and values greater than 80 in tmpd. In the output tibble, there are only 17 instances where this condition is true and a little clustering in 2001, 2002, and 2005.</p>
+<pre class="r"><code>chicago %&gt;%
+  select(date, tmpd, pm25tmean2) %&gt;%
+  filter(pm25tmean2 &gt; 30 &amp; tmpd &gt; 80)</code></pre>
+<pre><code>## # A tibble: 17 x 3
+##    date        tmpd pm25tmean2
+##    &lt;date&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1 1998-08-23    81       39.6
+##  2 1998-09-06    81       31.5
+##  3 2001-07-20    82       32.3
+##  4 2001-08-01    84       43.7
+##  5 2001-08-08    85       38.8
+##  6 2001-08-09    84       38.2
+##  7 2002-06-20    82       33  
+##  8 2002-06-23    82       42.5
+##  9 2002-07-08    81       33.1
+## 10 2002-07-18    82       38.8
+## 11 2003-06-25    82       33.9
+## 12 2003-07-04    84       32.9
+## 13 2005-06-24    86       31.9
+## 14 2005-06-27    82       51.5
+## 15 2005-06-28    85       31.2
+## 16 2005-07-17    84       32.7
+## 17 2005-08-03    84       37.9</code></pre>
+<table>
+<caption><span id="tab:filtertmpd">Table 9: </span>Filter pm25tmean2 &gt;30 &amp; tmpd &gt;80 with date.</caption>
+<thead>
+<tr class="header">
+<th align="center">date</th>
+<th align="center">tmpd</th>
+<th align="center">pm25tmean2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1998-08-23</td>
+<td align="center">81</td>
+<td align="center">39.60000</td>
+</tr>
+<tr class="even">
+<td align="center">1998-09-06</td>
+<td align="center">81</td>
+<td align="center">31.50000</td>
+</tr>
+<tr class="odd">
+<td align="center">2001-07-20</td>
+<td align="center">82</td>
+<td align="center">32.30000</td>
+</tr>
+<tr class="even">
+<td align="center">2001-08-01</td>
+<td align="center">84</td>
+<td align="center">43.70000</td>
+</tr>
+<tr class="odd">
+<td align="center">2001-08-08</td>
+<td align="center">85</td>
+<td align="center">38.83750</td>
+</tr>
+<tr class="even">
+<td align="center">2001-08-09</td>
+<td align="center">84</td>
+<td align="center">38.20000</td>
+</tr>
+<tr class="odd">
+<td align="center">2002-06-20</td>
+<td align="center">82</td>
+<td align="center">33.00000</td>
+</tr>
+<tr class="even">
+<td align="center">2002-06-23</td>
+<td align="center">82</td>
+<td align="center">42.50000</td>
+</tr>
+<tr class="odd">
+<td align="center">2002-07-08</td>
+<td align="center">81</td>
+<td align="center">33.10000</td>
+</tr>
+<tr class="even">
+<td align="center">2002-07-18</td>
+<td align="center">82</td>
+<td align="center">38.85000</td>
+</tr>
+<tr class="odd">
+<td align="center">2003-06-25</td>
+<td align="center">82</td>
+<td align="center">33.90000</td>
+</tr>
+<tr class="even">
+<td align="center">2003-07-04</td>
+<td align="center">84</td>
+<td align="center">32.90000</td>
+</tr>
+<tr class="odd">
+<td align="center">2005-06-24</td>
+<td align="center">86</td>
+<td align="center">31.85714</td>
+</tr>
+<tr class="even">
+<td align="center">2005-06-27</td>
+<td align="center">82</td>
+<td align="center">51.53750</td>
+</tr>
+<tr class="odd">
+<td align="center">2005-06-28</td>
+<td align="center">85</td>
+<td align="center">31.20000</td>
+</tr>
+<tr class="even">
+<td align="center">2005-07-17</td>
+<td align="center">84</td>
+<td align="center">32.70000</td>
+</tr>
+<tr class="odd">
+<td align="center">2005-08-03</td>
+<td align="center">84</td>
+<td align="center">37.90000</td>
+</tr>
+</tbody>
+</table>
+<p>This filtering collects all values above 80 for the tmpd variable and then summarizes to find the minimum and maximum values. 80.5 is the minimum, and 92 is the maximum.</p>
+<pre class="r"><code>chicago %&gt;%
+  filter(tmpd &gt; 80) %&gt;%
+  summarize(minValue = min(tmpd), 
+            maxValue = max(tmpd))</code></pre>
+<pre><code>## # A tibble: 1 x 2
+##   minValue maxValue
+##      &lt;dbl&gt;    &lt;dbl&gt;
+## 1     80.5       92</code></pre>
+</div>
+<div id="arrange" class="section level4">
+<h4>arrange()</h4>
+<p>Table 10 shows the <code>arrange()</code> function and sorts the o3tmean2 variable. Default from lowest to highest numerical values.</p>
+<pre class="r"><code>chicago %&gt;%
+  arrange(o3tmean2)</code></pre>
+<pre><code>## # A tibble: 6,940 x 8
+##    city   tmpd  dptp date       pm25tmean2 pm10tmean2 o3tmean2 no2tmean2
+##    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;date&gt;          &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 chic   43.5  39   1994-12-05       NA         47.5    0.153      27.2
+##  2 chic   32.5  34.4 1994-12-15       NA         43.5    0.361      30.5
+##  3 chic   38.5  38.5 1993-12-17       NA         16      0.427      23.9
+##  4 chic   23.5  16.9 1994-12-13       NA         48.5    0.492      33.3
+##  5 chic   34    33.9 2001-01-14       28         22      0.5        26.2
+##  6 chic   33    37.5 1995-01-11       NA         68      0.517      37.8
+##  7 chic   40.5  44.9 1993-01-03       NA         21.5    0.528      19.8
+##  8 chic   61    59.3 1998-12-04       31.6       42.5    0.556      24.4
+##  9 chic   35.5  34   1993-01-21       NA         19      0.653      27.0
+## 10 chic   36.5  36   1994-12-16       NA         41      0.694      34.4
+## # ... with 6,930 more rows</code></pre>
+<table>
+<caption><span id="tab:arrangeO3">Table 10: </span>Arrange O3 mean variable.</caption>
+<thead>
+<tr class="header">
+<th align="center">city</th>
+<th align="center">tmpd</th>
+<th align="center">dptp</th>
+<th align="center">date</th>
+<th align="center">pm25tmean2</th>
+<th align="center">pm10tmean2</th>
+<th align="center">o3tmean2</th>
+<th align="center">no2tmean2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">43.5</td>
+<td align="center">39.000</td>
+<td align="center">1994-12-05</td>
+<td align="center">NA</td>
+<td align="center">47.5</td>
+<td align="center">0.1527778</td>
+<td align="center">27.20399</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">32.5</td>
+<td align="center">34.375</td>
+<td align="center">1994-12-15</td>
+<td align="center">NA</td>
+<td align="center">43.5</td>
+<td align="center">0.3611111</td>
+<td align="center">30.45452</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">38.5</td>
+<td align="center">38.500</td>
+<td align="center">1993-12-17</td>
+<td align="center">NA</td>
+<td align="center">16.0</td>
+<td align="center">0.4270833</td>
+<td align="center">23.92361</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">23.5</td>
+<td align="center">16.875</td>
+<td align="center">1994-12-13</td>
+<td align="center">NA</td>
+<td align="center">48.5</td>
+<td align="center">0.4915459</td>
+<td align="center">33.34242</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">34.0</td>
+<td align="center">33.900</td>
+<td align="center">2001-01-14</td>
+<td align="center">28.0</td>
+<td align="center">22.0</td>
+<td align="center">0.5000000</td>
+<td align="center">26.18750</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">33.0</td>
+<td align="center">37.500</td>
+<td align="center">1995-01-11</td>
+<td align="center">NA</td>
+<td align="center">68.0</td>
+<td align="center">0.5169082</td>
+<td align="center">37.77083</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">40.5</td>
+<td align="center">44.875</td>
+<td align="center">1993-01-03</td>
+<td align="center">NA</td>
+<td align="center">21.5</td>
+<td align="center">0.5277778</td>
+<td align="center">19.82500</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">61.0</td>
+<td align="center">59.300</td>
+<td align="center">1998-12-04</td>
+<td align="center">31.6</td>
+<td align="center">42.5</td>
+<td align="center">0.5555556</td>
+<td align="center">24.39167</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">35.5</td>
+<td align="center">34.000</td>
+<td align="center">1993-01-21</td>
+<td align="center">NA</td>
+<td align="center">19.0</td>
+<td align="center">0.6527778</td>
+<td align="center">27.00284</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">36.5</td>
+<td align="center">36.000</td>
+<td align="center">1994-12-16</td>
+<td align="center">NA</td>
+<td align="center">41.0</td>
+<td align="center">0.6944444</td>
+<td align="center">34.39167</td>
+</tr>
+</tbody>
+</table>
+<p>Table 11 sorts the tmpd variable lowest to highest.</p>
+<pre class="r"><code>chicago %&gt;%
+  arrange(tmpd)</code></pre>
+<pre><code>## # A tibble: 6,940 x 8
+##    city   tmpd   dptp date       pm25tmean2 pm10tmean2 o3tmean2 no2tmean2
+##    &lt;chr&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;date&gt;          &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 chic  -16   -25.6  1994-01-18         NA       27      14.7       22.1
+##  2 chic  -12   -18.9  1996-02-03         NA       25.6     7.74      30.1
+##  3 chic  -10.5 -23.1  1994-01-15         NA       36      12.0       24.7
+##  4 chic  -10.5 -21    1996-02-02         NA       35       9.56      31.5
+##  5 chic   -8    -2.38 1994-01-19         NA       24.5     4.86      36.6
+##  6 chic   -6.5 -15.8  1988-01-05         NA       24      13.2       17.2
+##  7 chic   -6.5 -23    1989-12-21         NA       49      16.7       19.5
+##  8 chic   -6    -7.88 1996-02-04         NA       21       9.58      30.0
+##  9 chic   -5.5 -15.1  1988-01-06         NA       75       7.15      27.7
+## 10 chic   -4.5 -11.9  1989-12-22         NA       49       9.42      29.4
+## # ... with 6,930 more rows</code></pre>
+<table>
+<caption><span id="tab:arrangetmpd">Table 11: </span>Arrange tmpd variable.</caption>
+<thead>
+<tr class="header">
+<th align="center">city</th>
+<th align="center">tmpd</th>
+<th align="center">dptp</th>
+<th align="center">date</th>
+<th align="center">pm25tmean2</th>
+<th align="center">pm10tmean2</th>
+<th align="center">o3tmean2</th>
+<th align="center">no2tmean2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">-16.0</td>
+<td align="center">-25.625</td>
+<td align="center">1994-01-18</td>
+<td align="center">NA</td>
+<td align="center">27.00000</td>
+<td align="center">14.656250</td>
+<td align="center">22.10236</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">-12.0</td>
+<td align="center">-18.875</td>
+<td align="center">1996-02-03</td>
+<td align="center">NA</td>
+<td align="center">25.61538</td>
+<td align="center">7.736111</td>
+<td align="center">30.13542</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">-10.5</td>
+<td align="center">-23.125</td>
+<td align="center">1994-01-15</td>
+<td align="center">NA</td>
+<td align="center">36.00000</td>
+<td align="center">12.010417</td>
+<td align="center">24.70139</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">-10.5</td>
+<td align="center">-21.000</td>
+<td align="center">1996-02-02</td>
+<td align="center">NA</td>
+<td align="center">35.00000</td>
+<td align="center">9.555556</td>
+<td align="center">31.47917</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">-8.0</td>
+<td align="center">-2.375</td>
+<td align="center">1994-01-19</td>
+<td align="center">NA</td>
+<td align="center">24.50000</td>
+<td align="center">4.864583</td>
+<td align="center">36.59796</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">-6.5</td>
+<td align="center">-15.750</td>
+<td align="center">1988-01-05</td>
+<td align="center">NA</td>
+<td align="center">24.00000</td>
+<td align="center">13.166667</td>
+<td align="center">17.22083</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">-6.5</td>
+<td align="center">-23.000</td>
+<td align="center">1989-12-21</td>
+<td align="center">NA</td>
+<td align="center">49.00000</td>
+<td align="center">16.666667</td>
+<td align="center">19.50000</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">-6.0</td>
+<td align="center">-7.875</td>
+<td align="center">1996-02-04</td>
+<td align="center">NA</td>
+<td align="center">21.00000</td>
+<td align="center">9.583333</td>
+<td align="center">29.95833</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">-5.5</td>
+<td align="center">-15.125</td>
+<td align="center">1988-01-06</td>
+<td align="center">NA</td>
+<td align="center">75.00000</td>
+<td align="center">7.145833</td>
+<td align="center">27.66594</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">-4.5</td>
+<td align="center">-11.875</td>
+<td align="center">1989-12-22</td>
+<td align="center">NA</td>
+<td align="center">49.00000</td>
+<td align="center">9.416667</td>
+<td align="center">29.41667</td>
+</tr>
+</tbody>
+</table>
+<p>In table 12 we can sort the tmpd variable in descending order by adding the parameter to the <code>arrange()</code> function.</p>
+<pre class="r"><code>chicago %&gt;%
+  arrange(desc(tmpd))</code></pre>
+<pre><code>## # A tibble: 6,940 x 8
+##    city   tmpd  dptp date       pm25tmean2 pm10tmean2 o3tmean2 no2tmean2
+##    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;date&gt;          &lt;dbl&gt;      &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;
+##  1 chic   92    76.4 1995-07-13       NA         92.5     58.5      27.3
+##  2 chic   91.5  75.6 1995-07-14       NA         54.5     52.0      24.8
+##  3 chic   90    77.1 1999-07-30       NA         54       34.2      27.5
+##  4 chic   90    70.9 2005-07-24       22.0       44       47.6      12.0
+##  5 chic   89.5  70.4 1988-08-02       NA         67       49.8      25.9
+##  6 chic   89    71.1 1988-08-01       NA         67.2     44.1      26.0
+##  7 chic   88.5  70.2 1988-06-20       NA         88       61.7      25.6
+##  8 chic   88    67.4 1988-08-03       NA         65       40.6      27.7
+##  9 chic   88    66.4 1988-08-17       NA         71       39.3      23.5
+## 10 chic   88    71.2 1991-07-22       NA         70       34.9      24.6
+## # ... with 6,930 more rows</code></pre>
+<table>
+<caption><span id="tab:arrangetmpddescend">Table 12: </span>Arrange tmpd variable descending.</caption>
+<thead>
+<tr class="header">
+<th align="center">city</th>
+<th align="center">tmpd</th>
+<th align="center">dptp</th>
+<th align="center">date</th>
+<th align="center">pm25tmean2</th>
+<th align="center">pm10tmean2</th>
+<th align="center">o3tmean2</th>
+<th align="center">no2tmean2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">92.0</td>
+<td align="center">76.375</td>
+<td align="center">1995-07-13</td>
+<td align="center">NA</td>
+<td align="center">92.5</td>
+<td align="center">58.54952</td>
+<td align="center">27.31775</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">91.5</td>
+<td align="center">75.625</td>
+<td align="center">1995-07-14</td>
+<td align="center">NA</td>
+<td align="center">54.5</td>
+<td align="center">52.00397</td>
+<td align="center">24.77355</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">90.0</td>
+<td align="center">77.100</td>
+<td align="center">1999-07-30</td>
+<td align="center">NA</td>
+<td align="center">54.0</td>
+<td align="center">34.17065</td>
+<td align="center">27.47977</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">90.0</td>
+<td align="center">70.900</td>
+<td align="center">2005-07-24</td>
+<td align="center">22.05</td>
+<td align="center">44.0</td>
+<td align="center">47.60417</td>
+<td align="center">11.96354</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">89.5</td>
+<td align="center">70.375</td>
+<td align="center">1988-08-02</td>
+<td align="center">NA</td>
+<td align="center">67.0</td>
+<td align="center">49.84949</td>
+<td align="center">25.91973</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">89.0</td>
+<td align="center">71.125</td>
+<td align="center">1988-08-01</td>
+<td align="center">NA</td>
+<td align="center">67.2</td>
+<td align="center">44.14991</td>
+<td align="center">25.96309</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">88.5</td>
+<td align="center">70.250</td>
+<td align="center">1988-06-20</td>
+<td align="center">NA</td>
+<td align="center">88.0</td>
+<td align="center">61.67708</td>
+<td align="center">25.64027</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">88.0</td>
+<td align="center">67.375</td>
+<td align="center">1988-08-03</td>
+<td align="center">NA</td>
+<td align="center">65.0</td>
+<td align="center">40.64176</td>
+<td align="center">27.73958</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">88.0</td>
+<td align="center">66.375</td>
+<td align="center">1988-08-17</td>
+<td align="center">NA</td>
+<td align="center">71.0</td>
+<td align="center">39.31240</td>
+<td align="center">23.50521</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">88.0</td>
+<td align="center">71.250</td>
+<td align="center">1991-07-22</td>
+<td align="center">NA</td>
+<td align="center">70.0</td>
+<td align="center">34.85781</td>
+<td align="center">24.55123</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="rename" class="section level4">
+<h4>rename()</h4>
+<p>The <code>rename()</code> function will be beneficial if you need to give the variables a descriptive name. In this example, table 13, I shorten the variable name and process these all in one line of code.</p>
+<pre class="r"><code>chicago %&gt;%
+  rename(temp=tmpd, 
+         dewpoint=dptp, 
+         pm25=pm25tmean2, 
+         pm10=pm10tmean2, 
+         O3=o3tmean2, 
+         NO2=no2tmean2) </code></pre>
+<pre><code>## # A tibble: 6,940 x 8
+##    city   temp dewpoint date        pm25  pm10    O3   NO2
+##    &lt;chr&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;date&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+##  1 chic   31.5     31.5 1987-01-01    NA  34    4.25  20.0
+##  2 chic   33       29.9 1987-01-02    NA  NA    3.30  23.2
+##  3 chic   33       27.4 1987-01-03    NA  34.2  3.33  23.8
+##  4 chic   29       28.6 1987-01-04    NA  47    4.38  30.4
+##  5 chic   32       28.9 1987-01-05    NA  NA    4.75  30.3
+##  6 chic   40       35.1 1987-01-06    NA  48    5.83  25.8
+##  7 chic   34.5     26.8 1987-01-07    NA  41    9.29  20.6
+##  8 chic   29       22   1987-01-08    NA  36   11.3   17.0
+##  9 chic   26.5     29   1987-01-09    NA  33.3  4.5   23.4
+## 10 chic   32.5     27.8 1987-01-10    NA  NA    4.96  19.5
+## # ... with 6,930 more rows</code></pre>
+<table>
+<caption><span id="tab:rename">Table 13: </span>Rename variables.</caption>
+<thead>
+<tr class="header">
+<th align="center">city</th>
+<th align="center">temp</th>
+<th align="center">dewpoint</th>
+<th align="center">date</th>
+<th align="center">pm25</th>
+<th align="center">pm10</th>
+<th align="center">O3</th>
+<th align="center">NO2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">31.5</td>
+<td align="center">31.500</td>
+<td align="center">1987-01-01</td>
+<td align="center">NA</td>
+<td align="center">34.00000</td>
+<td align="center">4.250000</td>
+<td align="center">19.98810</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">33.0</td>
+<td align="center">29.875</td>
+<td align="center">1987-01-02</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">3.304348</td>
+<td align="center">23.19099</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">33.0</td>
+<td align="center">27.375</td>
+<td align="center">1987-01-03</td>
+<td align="center">NA</td>
+<td align="center">34.16667</td>
+<td align="center">3.333333</td>
+<td align="center">23.81548</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">29.0</td>
+<td align="center">28.625</td>
+<td align="center">1987-01-04</td>
+<td align="center">NA</td>
+<td align="center">47.00000</td>
+<td align="center">4.375000</td>
+<td align="center">30.43452</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">32.0</td>
+<td align="center">28.875</td>
+<td align="center">1987-01-05</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">4.750000</td>
+<td align="center">30.33333</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">40.0</td>
+<td align="center">35.125</td>
+<td align="center">1987-01-06</td>
+<td align="center">NA</td>
+<td align="center">48.00000</td>
+<td align="center">5.833333</td>
+<td align="center">25.77233</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">34.5</td>
+<td align="center">26.750</td>
+<td align="center">1987-01-07</td>
+<td align="center">NA</td>
+<td align="center">41.00000</td>
+<td align="center">9.291667</td>
+<td align="center">20.58171</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">29.0</td>
+<td align="center">22.000</td>
+<td align="center">1987-01-08</td>
+<td align="center">NA</td>
+<td align="center">36.00000</td>
+<td align="center">11.291667</td>
+<td align="center">17.03723</td>
+</tr>
+<tr class="odd">
+<td align="center">chic</td>
+<td align="center">26.5</td>
+<td align="center">29.000</td>
+<td align="center">1987-01-09</td>
+<td align="center">NA</td>
+<td align="center">33.28571</td>
+<td align="center">4.500000</td>
+<td align="center">23.38889</td>
+</tr>
+<tr class="even">
+<td align="center">chic</td>
+<td align="center">32.5</td>
+<td align="center">27.750</td>
+<td align="center">1987-01-10</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">4.958333</td>
+<td align="center">19.54167</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="mutate" class="section level4">
+<h4>mutate()</h4>
+<p>In this example, the <code>mutate()</code> function adds a new variable to the data. In this case, we can take the mean of no2tmean2 and subtract it from itself to standardize the variable. This will show if the mean is above or below the average of 25.23 (taken from table 2). In this one line, I calculated and created a new variable for the data called no2detrend. A positive detrend indicates above the mean, and a negative value indicates below the mean for that individual record. See table 14.</p>
+<pre class="r"><code>smlchicago &lt;- chicago %&gt;%
+  select(tmpd, dptp, o3tmean2, no2tmean2)
+
+smlchicago %&gt;%
+  mutate(nO2detrend = no2tmean2 - mean(no2tmean2, na.rm=TRUE))</code></pre>
+<pre><code>## # A tibble: 6,940 x 5
+##     tmpd  dptp o3tmean2 no2tmean2 nO2detrend
+##    &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1  31.5  31.5     4.25      20.0     -5.24 
+##  2  33    29.9     3.30      23.2     -2.04 
+##  3  33    27.4     3.33      23.8     -1.42 
+##  4  29    28.6     4.38      30.4      5.20 
+##  5  32    28.9     4.75      30.3      5.10 
+##  6  40    35.1     5.83      25.8      0.540
+##  7  34.5  26.8     9.29      20.6     -4.65 
+##  8  29    22      11.3       17.0     -8.19 
+##  9  26.5  29       4.5       23.4     -1.84 
+## 10  32.5  27.8     4.96      19.5     -5.69 
+## # ... with 6,930 more rows</code></pre>
+<table>
+<caption><span id="tab:mutate">Table 14: </span>Create a new variable (difference from the mean).</caption>
+<thead>
+<tr class="header">
+<th align="center">tmpd</th>
+<th align="center">dptp</th>
+<th align="center">o3tmean2</th>
+<th align="center">no2tmean2</th>
+<th align="center">nO2detrend</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">31.5</td>
+<td align="center">31.500</td>
+<td align="center">4.250000</td>
+<td align="center">19.98810</td>
+<td align="center">-5.2437869</td>
+</tr>
+<tr class="even">
+<td align="center">33.0</td>
+<td align="center">29.875</td>
+<td align="center">3.304348</td>
+<td align="center">23.19099</td>
+<td align="center">-2.0408884</td>
+</tr>
+<tr class="odd">
+<td align="center">33.0</td>
+<td align="center">27.375</td>
+<td align="center">3.333333</td>
+<td align="center">23.81548</td>
+<td align="center">-1.4164060</td>
+</tr>
+<tr class="even">
+<td align="center">29.0</td>
+<td align="center">28.625</td>
+<td align="center">4.375000</td>
+<td align="center">30.43452</td>
+<td align="center">5.2026417</td>
+</tr>
+<tr class="odd">
+<td align="center">32.0</td>
+<td align="center">28.875</td>
+<td align="center">4.750000</td>
+<td align="center">30.33333</td>
+<td align="center">5.1014512</td>
+</tr>
+<tr class="even">
+<td align="center">40.0</td>
+<td align="center">35.125</td>
+<td align="center">5.833333</td>
+<td align="center">25.77233</td>
+<td align="center">0.5404485</td>
+</tr>
+<tr class="odd">
+<td align="center">34.5</td>
+<td align="center">26.750</td>
+<td align="center">9.291667</td>
+<td align="center">20.58171</td>
+<td align="center">-4.6501722</td>
+</tr>
+<tr class="even">
+<td align="center">29.0</td>
+<td align="center">22.000</td>
+<td align="center">11.291667</td>
+<td align="center">17.03723</td>
+<td align="center">-8.1946513</td>
+</tr>
+<tr class="odd">
+<td align="center">26.5</td>
+<td align="center">29.000</td>
+<td align="center">4.500000</td>
+<td align="center">23.38889</td>
+<td align="center">-1.8429933</td>
+</tr>
+<tr class="even">
+<td align="center">32.5</td>
+<td align="center">27.750</td>
+<td align="center">4.958333</td>
+<td align="center">19.54167</td>
+<td align="center">-5.6902155</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="transmute" class="section level4">
+<h4>transmute()</h4>
+<p>The transmute() does the same as above but breaks the new variables out into a tibble or data frame. In table 15, the three new variables create a new tibble. The temperature <code>tmpd</code> variable now gives a better idea of where it is in comparison to the mean average temperature.</p>
+<pre class="r"><code>transmute(chicago, 
+          tmpdS = tmpd - mean(tmpd, na.rm=TRUE), 
+          o3detrend = o3tmean2 - mean(o3tmean2, na.rm=TRUE), 
+          nO2detrend = no2tmean2 - mean(no2tmean2, na.rm=TRUE))</code></pre>
+<pre><code>## # A tibble: 6,940 x 3
+##    tmpdS o3detrend nO2detrend
+##    &lt;dbl&gt;     &lt;dbl&gt;      &lt;dbl&gt;
+##  1 -18.8    -15.2      -5.24 
+##  2 -17.3    -16.1      -2.04 
+##  3 -17.3    -16.1      -1.42 
+##  4 -21.3    -15.1       5.20 
+##  5 -18.3    -14.7       5.10 
+##  6 -10.3    -13.6       0.540
+##  7 -15.8    -10.1      -4.65 
+##  8 -21.3     -8.14     -8.19 
+##  9 -23.8    -14.9      -1.84 
+## 10 -17.8    -14.5      -5.69 
+## # ... with 6,930 more rows</code></pre>
+<table>
+<caption><span id="tab:transmute">Table 15: </span>Breakout 3 new variables to new tibble.</caption>
+<thead>
+<tr class="header">
+<th align="center">tmpdS</th>
+<th align="center">o3detrend</th>
+<th align="center">nO2detrend</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">-18.80934</td>
+<td align="center">-15.185513</td>
+<td align="center">-5.2437869</td>
+</tr>
+<tr class="even">
+<td align="center">-17.30934</td>
+<td align="center">-16.131165</td>
+<td align="center">-2.0408884</td>
+</tr>
+<tr class="odd">
+<td align="center">-17.30934</td>
+<td align="center">-16.102180</td>
+<td align="center">-1.4164060</td>
+</tr>
+<tr class="even">
+<td align="center">-21.30934</td>
+<td align="center">-15.060513</td>
+<td align="center">5.2026417</td>
+</tr>
+<tr class="odd">
+<td align="center">-18.30934</td>
+<td align="center">-14.685513</td>
+<td align="center">5.1014512</td>
+</tr>
+<tr class="even">
+<td align="center">-10.30934</td>
+<td align="center">-13.602180</td>
+<td align="center">0.5404485</td>
+</tr>
+<tr class="odd">
+<td align="center">-15.80934</td>
+<td align="center">-10.143846</td>
+<td align="center">-4.6501722</td>
+</tr>
+<tr class="even">
+<td align="center">-21.30934</td>
+<td align="center">-8.143846</td>
+<td align="center">-8.1946513</td>
+</tr>
+<tr class="odd">
+<td align="center">-23.80934</td>
+<td align="center">-14.935513</td>
+<td align="center">-1.8429933</td>
+</tr>
+<tr class="even">
+<td align="center">-17.80934</td>
+<td align="center">-14.477180</td>
+<td align="center">-5.6902155</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="group_by" class="section level4">
+<h4>group_by()</h4>
+</div>
+<div id="summarize" class="section level4">
+<h4>summarize()</h4>
+<p>Table 16 shows how to transform the data. I created a new variable “year” The year is extracted from the y/m/d string using lubridates <code>year()</code> function. The data is organized by year. The <code>summarize()</code> function creates six new columns of min/max measurements per year for three variables. The pm25tmean2 didn’t have any records for ten years until 1998.</p>
+<pre class="r"><code>mutate(chicago, year = (lubridate::year(date))) %&gt;%
+  group_by(year) %&gt;% 
+  summarize( 
+          pm25min=min(pm25tmean2, na.rm=TRUE),
+          pm25max=max(pm25tmean2, na.rm=TRUE),
+          o3min=min(o3tmean2, na.rm=TRUE),
+          o3max=max(o3tmean2, na.rm=TRUE),
+          no2mmin=min(no2tmean2, na.rm=TRUE),
+          no2max=max(no2tmean2, na.rm=TRUE)
+          )</code></pre>
+<pre><code>## # A tibble: 19 x 7
+##     year pm25min pm25max o3min o3max no2mmin no2max
+##    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;
+##  1  1987  Inf     -Inf   2.12   63.0    7.87   57.5
+##  2  1988  Inf     -Inf   2.38   61.7    7.73   62.5
+##  3  1989  Inf     -Inf   2      59.7    9.58   59.5
+##  4  1990  Inf     -Inf   2.12   52.2    6.73   46.2
+##  5  1991  Inf     -Inf   2      63.1    6.39   55.5
+##  6  1992  Inf     -Inf   2      50.8    9.96   49.8
+##  7  1993  Inf     -Inf   0.427  44.3   10.3    48.9
+##  8  1994  Inf     -Inf   0.153  52.2   10.9    53.9
+##  9  1995  Inf     -Inf   0.517  66.6    8.93   53.1
+## 10  1996  Inf     -Inf   1.17   58.4   10.5    52.7
+## 11  1997  Inf     -Inf   0.957  56.5    7.73   53.0
+## 12  1998    2.1     56.5 0.556  50.7    8.8    47.8
+## 13  1999    5.18    49.0 0.854  57.5    7.64   49.5
+## 14  2000    2.8     46.7 1.04   55.8    6.16   50.8
+## 15  2001    3.2     49.5 0.5    51.8    8.65   48.7
+## 16  2002    2.91    44.0 2.10   54.9    7.80   47.8
+## 17  2003    2.5     47.7 1.10   56.2    7.70   57.6
+## 18  2004    2.6     48.2 2.20   44.5    7.55   45.0
+## 19  2005    1.7     61.5 1.77   58.8    8.83   48.6</code></pre>
+<table>
+<caption><span id="tab:summarize">Table 16: </span>Minimum-Maximum values per year over 19 years.</caption>
+<thead>
+<tr class="header">
+<th align="center">year</th>
+<th align="center">pm25min</th>
+<th align="center">pm25max</th>
+<th align="center">o3min</th>
+<th align="center">o3max</th>
+<th align="center">no2mmin</th>
+<th align="center">no2max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1987</td>
+<td align="center">Inf</td>
+<td align="center">-Inf</td>
+<td align="center">2.1250000</td>
+<td align="center">62.96966</td>
+<td align="center">7.866667</td>
+<td align="center">57.52542</td>
+</tr>
+<tr class="even">
+<td align="center">1988</td>
+<td align="center">Inf</td>
+<td align="center">-Inf</td>
+<td align="center">2.3750000</td>
+<td align="center">61.67708</td>
+<td align="center">7.733333</td>
+<td align="center">62.47998</td>
+</tr>
+<tr class="odd">
+<td align="center">1989</td>
+<td align="center">Inf</td>
+<td align="center">-Inf</td>
+<td align="center">2.0000000</td>
+<td align="center">59.72727</td>
+<td align="center">9.580729</td>
+<td align="center">59.51562</td>
+</tr>
+<tr class="even">
+<td align="center">1990</td>
+<td align="center">Inf</td>
+<td align="center">-Inf</td>
+<td align="center">2.1250000</td>
+<td align="center">52.22917</td>
+<td align="center">6.726172</td>
+<td align="center">46.19444</td>
+</tr>
+<tr class="odd">
+<td align="center">1991</td>
+<td align="center">Inf</td>
+<td align="center">-Inf</td>
+<td align="center">2.0000000</td>
+<td align="center">63.10417</td>
+<td align="center">6.385417</td>
+<td align="center">55.48958</td>
+</tr>
+<tr class="even">
+<td align="center">1992</td>
+<td align="center">Inf</td>
+<td align="center">-Inf</td>
+<td align="center">2.0000000</td>
+<td align="center">50.82870</td>
+<td align="center">9.962500</td>
+<td align="center">49.77714</td>
+</tr>
+<tr class="odd">
+<td align="center">1993</td>
+<td align="center">Inf</td>
+<td align="center">-Inf</td>
+<td align="center">0.4270833</td>
+<td align="center">44.30093</td>
+<td align="center">10.263768</td>
+<td align="center">48.90139</td>
+</tr>
+<tr class="even">
+<td align="center">1994</td>
+<td align="center">Inf</td>
+<td align="center">-Inf</td>
+<td align="center">0.1527778</td>
+<td align="center">52.17844</td>
+<td align="center">10.944444</td>
+<td align="center">53.89485</td>
+</tr>
+<tr class="odd">
+<td align="center">1995</td>
+<td align="center">Inf</td>
+<td align="center">-Inf</td>
+<td align="center">0.5169082</td>
+<td align="center">66.58750</td>
+<td align="center">8.925000</td>
+<td align="center">53.13333</td>
+</tr>
+<tr class="even">
+<td align="center">1996</td>
+<td align="center">Inf</td>
+<td align="center">-Inf</td>
+<td align="center">1.1666667</td>
+<td align="center">58.39583</td>
+<td align="center">10.458333</td>
+<td align="center">52.68850</td>
+</tr>
+<tr class="odd">
+<td align="center">1997</td>
+<td align="center">Inf</td>
+<td align="center">-Inf</td>
+<td align="center">0.9565217</td>
+<td align="center">56.54167</td>
+<td align="center">7.729167</td>
+<td align="center">53.01042</td>
+</tr>
+<tr class="even">
+<td align="center">1998</td>
+<td align="center">2.1000</td>
+<td align="center">56.50000</td>
+<td align="center">0.5555556</td>
+<td align="center">50.66250</td>
+<td align="center">8.800000</td>
+<td align="center">47.81558</td>
+</tr>
+<tr class="odd">
+<td align="center">1999</td>
+<td align="center">5.1800</td>
+<td align="center">49.04286</td>
+<td align="center">0.8541667</td>
+<td align="center">57.48864</td>
+<td align="center">7.641667</td>
+<td align="center">49.54924</td>
+</tr>
+<tr class="even">
+<td align="center">2000</td>
+<td align="center">2.8000</td>
+<td align="center">46.70000</td>
+<td align="center">1.0416667</td>
+<td align="center">55.76103</td>
+<td align="center">6.158333</td>
+<td align="center">50.81123</td>
+</tr>
+<tr class="odd">
+<td align="center">2001</td>
+<td align="center">3.2000</td>
+<td align="center">49.47143</td>
+<td align="center">0.5000000</td>
+<td align="center">51.81984</td>
+<td align="center">8.650000</td>
+<td align="center">48.71875</td>
+</tr>
+<tr class="even">
+<td align="center">2002</td>
+<td align="center">2.9125</td>
+<td align="center">44.04286</td>
+<td align="center">2.0964674</td>
+<td align="center">54.88043</td>
+<td align="center">7.802083</td>
+<td align="center">47.76042</td>
+</tr>
+<tr class="odd">
+<td align="center">2003</td>
+<td align="center">2.5000</td>
+<td align="center">47.73750</td>
+<td align="center">1.0978261</td>
+<td align="center">56.16608</td>
+<td align="center">7.697917</td>
+<td align="center">57.56439</td>
+</tr>
+<tr class="even">
+<td align="center">2004</td>
+<td align="center">2.6000</td>
+<td align="center">48.15714</td>
+<td align="center">2.1965580</td>
+<td align="center">44.48240</td>
+<td align="center">7.552083</td>
+<td align="center">44.97817</td>
+</tr>
+<tr class="odd">
+<td align="center">2005</td>
+<td align="center">1.7000</td>
+<td align="center">61.50000</td>
+<td align="center">1.7708333</td>
+<td align="center">58.84126</td>
+<td align="center">8.833333</td>
+<td align="center">48.59722</td>
+</tr>
+</tbody>
+</table>
+<p>Table 17 displays the same min/max data for the three variables; pm25tmean2, o3tmean2, and no2tmean2. And using the <code>group_by()</code> I extracted the <code>month()</code> out with lubridate. This breakdown shows further relationships in the data and has transformed the original data into something to devise a hypothesis.</p>
+<pre class="r"><code>mutate(chicago, month = (lubridate::month(date))) %&gt;%
+  group_by(month) %&gt;%
+  summarize( 
+          pm25min=min(pm25tmean2, na.rm=TRUE),
+          pm25max=max(pm25tmean2, na.rm=TRUE),
+          o3min=min(o3tmean2, na.rm=TRUE),
+          o3max=max(o3tmean2, na.rm=TRUE),
+          no2min=min(no2tmean2, na.rm=TRUE),
+          no2max=max(no2tmean2, na.rm=TRUE)
+)</code></pre>
+<pre><code>## # A tibble: 12 x 7
+##    month pm25min pm25max o3min o3max no2min no2max
+##    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1     1    3.3     49.5 0.5    28.2   7.73   52.4
+##  2     2    3.8     61.5 1.05   37.4  10.5    57.6
+##  3     3    5.4     47.7 1.13   39.0   7.73   53.9
+##  4     4    1.7     46.7 7.24   47.9   7.80   57.5
+##  5     5    2.4     56.5 4.06   52.8   7.95   51.3
+##  6     6    2.8     51.5 6.13   66.6   6.39   52.2
+##  7     7    3       41.4 9.69   59.5   7.06   62.5
+##  8     8    2.5     44.5 4.90   54.0   7.30   55.9
+##  9     9    3.2     56.5 2.71   57.5   6.16   53.1
+## 10    10    4       43.6 1.14   47.1   6.73   59.5
+## 11    11    3.28    41.7 0.854  29.5   7.35   50  
+## 12    12    3.91    42.3 0.153  27.7   9.20   50.3</code></pre>
+<table>
+<caption><span id="tab:summarizemonth">Table 17: </span>Minimum-Maximum values per month over 19 years.</caption>
+<thead>
+<tr class="header">
+<th align="center">month</th>
+<th align="center">pm25min</th>
+<th align="center">pm25max</th>
+<th align="center">o3min</th>
+<th align="center">o3max</th>
+<th align="center">no2mmin</th>
+<th align="center">no2max</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">3.300000</td>
+<td align="center">49.47143</td>
+<td align="center">0.5000000</td>
+<td align="center">28.22222</td>
+<td align="center">7.729167</td>
+<td align="center">52.44697</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">3.800000</td>
+<td align="center">61.50000</td>
+<td align="center">1.0492424</td>
+<td align="center">37.37500</td>
+<td align="center">10.490972</td>
+<td align="center">57.56439</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">5.400000</td>
+<td align="center">47.73750</td>
+<td align="center">1.1316425</td>
+<td align="center">39.05000</td>
+<td align="center">7.733333</td>
+<td align="center">53.89485</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">1.700000</td>
+<td align="center">46.70000</td>
+<td align="center">7.2409656</td>
+<td align="center">47.94907</td>
+<td align="center">7.802083</td>
+<td align="center">57.52542</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">2.400000</td>
+<td align="center">56.50000</td>
+<td align="center">4.0615942</td>
+<td align="center">52.75000</td>
+<td align="center">7.947917</td>
+<td align="center">51.28535</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">2.800000</td>
+<td align="center">51.53750</td>
+<td align="center">6.1296212</td>
+<td align="center">66.58750</td>
+<td align="center">6.385417</td>
+<td align="center">52.20833</td>
+</tr>
+<tr class="odd">
+<td align="center">7</td>
+<td align="center">3.000000</td>
+<td align="center">41.40000</td>
+<td align="center">9.6912202</td>
+<td align="center">59.54167</td>
+<td align="center">7.064513</td>
+<td align="center">62.47998</td>
+</tr>
+<tr class="even">
+<td align="center">8</td>
+<td align="center">2.500000</td>
+<td align="center">44.48750</td>
+<td align="center">4.8981884</td>
+<td align="center">53.96701</td>
+<td align="center">7.295592</td>
+<td align="center">55.90522</td>
+</tr>
+<tr class="odd">
+<td align="center">9</td>
+<td align="center">3.200000</td>
+<td align="center">56.50000</td>
+<td align="center">2.7121706</td>
+<td align="center">57.48864</td>
+<td align="center">6.158333</td>
+<td align="center">53.13333</td>
+</tr>
+<tr class="even">
+<td align="center">10</td>
+<td align="center">4.000000</td>
+<td align="center">43.60000</td>
+<td align="center">1.1443511</td>
+<td align="center">47.09275</td>
+<td align="center">6.726172</td>
+<td align="center">59.51562</td>
+</tr>
+<tr class="odd">
+<td align="center">11</td>
+<td align="center">3.275000</td>
+<td align="center">41.70000</td>
+<td align="center">0.8541667</td>
+<td align="center">29.45833</td>
+<td align="center">7.350000</td>
+<td align="center">50.00000</td>
+</tr>
+<tr class="even">
+<td align="center">12</td>
+<td align="center">3.914286</td>
+<td align="center">42.30000</td>
+<td align="center">0.1527778</td>
+<td align="center">27.70833</td>
+<td align="center">9.204167</td>
+<td align="center">50.28154</td>
+</tr>
+</tbody>
+</table>
+<p>Table 18 focuses on per year measurements. Rather than min/max (0% and 100% percentiles), we can look at the quantiles of 20-80 and get a better understanding of the probability distribution by year.</p>
+<pre class="r"><code>mutate(chicago, year = (lubridate::year(date))) %&gt;%
+  group_by(year) %&gt;%
+  summarize( 
+          pm25Q20=quantile(pm25tmean2, 0.2, na.rm=TRUE),
+          pm25Q80=quantile(pm25tmean2, 0.8, na.rm=TRUE),
+          o3Q20=quantile(o3tmean2, 0.2, na.rm=TRUE),
+          o3Q80=quantile(o3tmean2, 0.8, na.rm=TRUE),
+          no2Q20=quantile(no2tmean2, 0.2, na.rm=TRUE),
+          no2Q80=quantile(no2tmean2, 0.8, na.rm=TRUE)
+          )</code></pre>
+<pre><code>## # A tibble: 19 x 7
+##     year pm25Q20 pm25Q80 o3Q20 o3Q80 no2Q20 no2Q80
+##    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1  1987   NA       NA    9.02  31.2   18.3   32.3
+##  2  1988   NA       NA    9.33  34.1   18.7   31.4
+##  3  1989   NA       NA    9.55  30.9   20.0   33.2
+##  4  1990   NA       NA    9.40  29.0   15.8   29.3
+##  5  1991   NA       NA    9.18  29.6   15.5   27.9
+##  6  1992   NA       NA    6.77  23.7   20.2   30.9
+##  7  1993   NA       NA    6.85  24.7   20.0   31.6
+##  8  1994   NA       NA    7.97  26.6   21.1   35.9
+##  9  1995   NA       NA    6.84  27.6   20.7   34.9
+## 10  1996   NA       NA    6.34  25.1   20.7   33.2
+## 11  1997   NA       NA    8.13  28.5   19.0   32.2
+## 12  1998   10.5     25.4  6.80  30.0   18.6   30.9
+## 13  1999   10.4     25.3  8.50  30.3   18.7   30.9
+## 14  2000    9.54    24.2  8.31  27.6   16.8   31.0
+## 15  2001    9.1     23.5  8.13  29.2   19.3   31.3
+## 16  2002    8.51    21.0 10.4   30.5   17.9   29.3
+## 17  2003    8.58    21.1 10.7   31.1   18.7   31.6
+## 18  2004    7.89    19.4 11.2   28.9   17.3   29.4
+## 19  2005    7.9     22.2 11.4   34.5   16.6   28.6</code></pre>
+<table>
+<caption><span id="tab:summarizequantileyears">Table 18: </span>Quantiles 20-80 per year distribution.</caption>
+<thead>
+<tr class="header">
+<th align="center">year</th>
+<th align="center">pm25Q20</th>
+<th align="center">pm25Q80</th>
+<th align="center">o3Q20</th>
+<th align="center">o3Q80</th>
+<th align="center">no2Q20</th>
+<th align="center">no2Q80</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1987</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">9.015942</td>
+<td align="center">31.17821</td>
+<td align="center">18.27433</td>
+<td align="center">32.33631</td>
+</tr>
+<tr class="even">
+<td align="center">1988</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">9.333333</td>
+<td align="center">34.06250</td>
+<td align="center">18.65417</td>
+<td align="center">31.37754</td>
+</tr>
+<tr class="odd">
+<td align="center">1989</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">9.550000</td>
+<td align="center">30.89374</td>
+<td align="center">20.04166</td>
+<td align="center">33.24937</td>
+</tr>
+<tr class="even">
+<td align="center">1990</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">9.395652</td>
+<td align="center">29.02654</td>
+<td align="center">15.77971</td>
+<td align="center">29.32133</td>
+</tr>
+<tr class="odd">
+<td align="center">1991</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">9.183333</td>
+<td align="center">29.58202</td>
+<td align="center">15.51984</td>
+<td align="center">27.91394</td>
+</tr>
+<tr class="even">
+<td align="center">1992</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">6.770833</td>
+<td align="center">23.66204</td>
+<td align="center">20.20698</td>
+<td align="center">30.87500</td>
+</tr>
+<tr class="odd">
+<td align="center">1993</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">6.845169</td>
+<td align="center">24.65485</td>
+<td align="center">20.02333</td>
+<td align="center">31.60217</td>
+</tr>
+<tr class="even">
+<td align="center">1994</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">7.966667</td>
+<td align="center">26.55242</td>
+<td align="center">21.07083</td>
+<td align="center">35.85169</td>
+</tr>
+<tr class="odd">
+<td align="center">1995</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">6.844192</td>
+<td align="center">27.57417</td>
+<td align="center">20.65522</td>
+<td align="center">34.94202</td>
+</tr>
+<tr class="even">
+<td align="center">1996</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">6.335824</td>
+<td align="center">25.11111</td>
+<td align="center">20.69792</td>
+<td align="center">33.22391</td>
+</tr>
+<tr class="odd">
+<td align="center">1997</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">8.127778</td>
+<td align="center">28.49761</td>
+<td align="center">19.00802</td>
+<td align="center">32.19722</td>
+</tr>
+<tr class="even">
+<td align="center">1998</td>
+<td align="center">10.520000</td>
+<td align="center">25.40000</td>
+<td align="center">6.796860</td>
+<td align="center">30.00888</td>
+<td align="center">18.63361</td>
+<td align="center">30.94758</td>
+</tr>
+<tr class="odd">
+<td align="center">1999</td>
+<td align="center">10.377500</td>
+<td align="center">25.33429</td>
+<td align="center">8.496717</td>
+<td align="center">30.28982</td>
+<td align="center">18.71836</td>
+<td align="center">30.88763</td>
+</tr>
+<tr class="even">
+<td align="center">2000</td>
+<td align="center">9.540000</td>
+<td align="center">24.19714</td>
+<td align="center">8.305556</td>
+<td align="center">27.58080</td>
+<td align="center">16.79167</td>
+<td align="center">31.04167</td>
+</tr>
+<tr class="odd">
+<td align="center">2001</td>
+<td align="center">9.100000</td>
+<td align="center">23.51600</td>
+<td align="center">8.131966</td>
+<td align="center">29.24917</td>
+<td align="center">19.29803</td>
+<td align="center">31.26060</td>
+</tr>
+<tr class="even">
+<td align="center">2002</td>
+<td align="center">8.510000</td>
+<td align="center">20.96000</td>
+<td align="center">10.408333</td>
+<td align="center">30.50463</td>
+<td align="center">17.90625</td>
+<td align="center">29.29532</td>
+</tr>
+<tr class="odd">
+<td align="center">2003</td>
+<td align="center">8.580000</td>
+<td align="center">21.14000</td>
+<td align="center">10.738095</td>
+<td align="center">31.06458</td>
+<td align="center">18.66014</td>
+<td align="center">31.62000</td>
+</tr>
+<tr class="even">
+<td align="center">2004</td>
+<td align="center">7.887143</td>
+<td align="center">19.43000</td>
+<td align="center">11.166667</td>
+<td align="center">28.85202</td>
+<td align="center">17.30729</td>
+<td align="center">29.37500</td>
+</tr>
+<tr class="odd">
+<td align="center">2005</td>
+<td align="center">7.900000</td>
+<td align="center">22.20000</td>
+<td align="center">11.426826</td>
+<td align="center">34.53244</td>
+<td align="center">16.59653</td>
+<td align="center">28.55060</td>
+</tr>
+</tbody>
+</table>
+<p>Table 19 is the break down of per month probability distribution using 20/80. The break down helps us explore the data deeper and find if the data is normal or skewed over a monthly trend.</p>
+<pre class="r"><code>mutate(chicago, month = (lubridate::month(date))) %&gt;%
+  group_by(month) %&gt;%
+  summarize( 
+          pm25Q20=quantile(pm25tmean2, 0.2, na.rm=TRUE),
+          pm25Q80=quantile(pm25tmean2, 0.8, na.rm=TRUE),
+          o3Q20=quantile(o3tmean2, 0.2, na.rm=TRUE),
+          o3Q80=quantile(o3tmean2, 0.8, na.rm=TRUE),
+          no2Q20=quantile(no2tmean2, 0.2, na.rm=TRUE),
+          no2Q80=quantile(no2tmean2, 0.8, na.rm=TRUE)
+          )</code></pre>
+<pre><code>## # A tibble: 12 x 7
+##    month pm25Q20 pm25Q80 o3Q20 o3Q80 no2Q20 no2Q80
+##    &lt;dbl&gt;   &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1     1   10.9     24.4  4.45  13.5   19.9   32.1
+##  2     2   10.5     27.6  7.90  18.5   21.0   33.2
+##  3     3    9.7     25.5 12.5   26.6   19.9   33.3
+##  4     4    7.72    18.4 18.1   30.5   18.6   32.6
+##  5     5    7.8     19.1 20.9   33.5   17.9   31.5
+##  6     6    8.7     21.8 22.5   40.5   19.0   32.8
+##  7     7    9.24    23.1 22.5   38.3   16.4   29.3
+##  8     8    9.24    23.2 19.3   33.3   17.5   30.3
+##  9     9    7.62    22.7 12.6   28.7   18.2   33.0
+## 10    10    7.6     19.3  8.13  18.4   18.3   31.5
+## 11    11    8.50    20.5  4.16  12.4   17.6   29.6
+## 12    12   10.6     23.3  3.26  11.2   19.5   29.9</code></pre>
+<table>
+<caption><span id="tab:summarizequantilemonth">Table 19: </span>Quantiles 20-80 per month distibution.</caption>
+<thead>
+<tr class="header">
+<th align="center">month</th>
+<th align="center">pm25Q20</th>
+<th align="center">pm25Q80</th>
+<th align="center">o3Q20</th>
+<th align="center">o3Q80</th>
+<th align="center">no2Q20</th>
+<th align="center">no2Q80</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">10.920000</td>
+<td align="center">24.41333</td>
+<td align="center">4.445652</td>
+<td align="center">13.46167</td>
+<td align="center">19.88214</td>
+<td align="center">32.08750</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">10.470000</td>
+<td align="center">27.61714</td>
+<td align="center">7.899758</td>
+<td align="center">18.51063</td>
+<td align="center">20.99167</td>
+<td align="center">33.17778</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">9.700000</td>
+<td align="center">25.46500</td>
+<td align="center">12.525000</td>
+<td align="center">26.62478</td>
+<td align="center">19.86111</td>
+<td align="center">33.27674</td>
+</tr>
+<tr class="even">
+<td align="center">4</td>
+<td align="center">7.724286</td>
+<td align="center">18.42000</td>
+<td align="center">18.090657</td>
+<td align="center">30.48091</td>
+<td align="center">18.61875</td>
+<td align="center">32.58999</td>
+</tr>
+<tr class="odd">
+<td align="center">5</td>
+<td align="center">7.800000</td>
+<td align="center">19.10000</td>
+<td align="center">20.944556</td>
+<td align="center">33.54967</td>
+<td align="center">17.86199</td>
+<td align="center">31.46076</td>
+</tr>
+<tr class="even">
+<td align="center">6</td>
+<td align="center">8.700000</td>
+<td align="center">21.85000</td>
+<td align="center">22.476235</td>
+<td align="center">40.49473</td>
+<td align="center">19.00893</td>
+<td align="center">32.78384</td>
+</tr>
+<tr class="odd">
+<td align="center">7</td>
+<td align="center">9.240000</td>
+<td align="center">23.08500</td>
+<td align="center">22.522239</td>
+<td align="center">38.30213</td>
+<td align="center">16.40743</td>
+<td align="center">29.28919</td>
+</tr>
+<tr class="even">
+<td align="center">8</td>
+<td align="center">9.240000</td>
+<td align="center">23.17500</td>
+<td align="center">19.326223</td>
+<td align="center">33.28750</td>
+<td align="center">17.47797</td>
+<td align="center">30.29226</td>
+</tr>
+<tr class="odd">
+<td align="center">9</td>
+<td align="center">7.617143</td>
+<td align="center">22.66714</td>
+<td align="center">12.640212</td>
+<td align="center">28.65187</td>
+<td align="center">18.18177</td>
+<td align="center">33.00062</td>
+</tr>
+<tr class="even">
+<td align="center">10</td>
+<td align="center">7.600000</td>
+<td align="center">19.28000</td>
+<td align="center">8.134375</td>
+<td align="center">18.38452</td>
+<td align="center">18.25942</td>
+<td align="center">31.51581</td>
+</tr>
+<tr class="odd">
+<td align="center">11</td>
+<td align="center">8.495000</td>
+<td align="center">20.51714</td>
+<td align="center">4.161111</td>
+<td align="center">12.40333</td>
+<td align="center">17.56083</td>
+<td align="center">29.62459</td>
+</tr>
+<tr class="even">
+<td align="center">12</td>
+<td align="center">10.580000</td>
+<td align="center">23.26667</td>
+<td align="center">3.257699</td>
+<td align="center">11.18927</td>
+<td align="center">19.52083</td>
+<td align="center">29.87431</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="conclusion" class="section level4">
+<h4>Conclusion</h4>
+<p>The article covered several of the main tools found in the tidyverse package for R. I demonstrated around ten different ways to manipulate and transform a dataset using the dplyr functions. We learned the Chicago data records over 19 years of air quality measurements. The pm25tmeans2 was not measured for the first ten years and showed by 4447 missing values. The primary dplyr functions used and combined are:</p>
+<ul>
+<li><code>names()</code></li>
+<li><code>select()</code></li>
+<li><code>filter()</code></li>
+<li><code>summarize()</code></li>
+<li><code>arrange()</code></li>
+<li><code>rename()</code></li>
+<li><code>mutate()</code></li>
+<li><code>transmute()</code></li>
+<li><code>group_by()</code></li>
+<li><code>%&gt;%</code></li>
+</ul>
+</div>
+<div id="references" class="section level4">
+<h4>References</h4>
+<p>Peng, R. D. (n.d.). Chicago dataset. Retrieved from: <a href="http://www.biostat.jhsph.edu/~rpeng/leanpub/rprog/chicago_data.zip" class="uri">http://www.biostat.jhsph.edu/~rpeng/leanpub/rprog/chicago_data.zip</a></p>
+<p>Peng, R. D. (2016). Exploratory Data Analysis with R. p. 4-17. Retrieved from: <a href="https://leanpub.com/exdata" class="uri">https://leanpub.com/exdata</a></p>
+<p>RDocumentation. (2018). Introduction to dplyr. Retrieved from: <a href="https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html" class="uri">https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html</a></p>
+<p>Wickham, H., &amp; Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. p. 43-75, O’Reilly.</p>
+</div>

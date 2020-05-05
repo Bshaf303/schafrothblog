@@ -1,0 +1,503 @@
+---
+title: Data Exploration - The Chicago Dataset
+author: 'Bryan '
+date: '2018-07-07'
+slug: data-exploration-the-chicago-dataset
+categories:
+  - Data Analysis
+  - Exploratory Data Analysis
+  - R Programming
+tags:
+  - EDA in Data Science
+  - data transformation
+  - data manipulation
+  - dplyr package
+  - data wrangling
+  - lubridate package
+  - tidyverse 
+  - statistical analysis
+---
+
+#### Introduction
+
+This article is about using the tidyverse package in R to explore data. The Chicago dataset is the basis for this analysis. The data is air quality measurements taken over 19 years. The focus is on using the dplyr package to do the analysis. The dplyr package is part of the tidyverse in R and a suite of tools to analyze, transform, plot, and manipulate data. The base version of R does all of this; however, dplyr will work faster and cost fewer computing resources when used on big data. The functions used to explore the data are as follows:
+
+- `names()`
+- `select()`
+- `filter()`
+- `summarize()`
+- `arrange()`
+- `rename()`
+- `mutate()`
+- `transmute()`
+- `group_by()`
+- `%>%` (pipe)
+
+Additional packages used are:
+
+- Tidyverse
+- Readr
+- Lubridate
+- Skimr
+- Knitr
+
+```{r raw_data,include=FALSE}
+
+library(tidyverse)
+```
+\
+
+#### read_rds()
+
+I start with importing the data into a data frame with the readr package, and the structure of the data is a tibble, which is the tidyverse data frame structure. In the output, the tibble structure will list the first ten rows of data and column headers with the data types in this dataset. 
+
+- `chr` is characters
+- `dbl` is real numbers
+- `date` are dates
+
+Not shown in this data but worth mentioning:
+
+- `int` is integers
+- `dttm` is date-time
+- `lgl` is logical
+- `fctr` is factors or categorical
+
+
+```{r read data, warning=FALSE}
+chicago = as_tibble(readr::read_rds("../../static/data/chicago.rds"))
+```
+
+```{r}
+(chicago)
+```
+
+```{r table, echo=FALSE}
+knitr::kable(chicago[1:10, ], caption="The Chicago Dataset")
+```
+
+In table 1, the Chicago dataset has eight variables and 6940 rows. The city variable appears as 'chic' for Chicago, and the missing data is filled in by default with `NA`. Also, the date is in the y/m/d format. We can see the different readings for the real numbers, from 1 to 6 decimal places. 
+
+#### names()
+
+`names()` function lists all the variable names in the data.
+```{r}
+names(chicago) 
+```
+
+List the first three names with the index[:]. Note R is a little different than Python. R will display the last index position [3], where Python would display 1 & 2.
+
+```{r}
+names(chicago)[1:3]
+```
+
+List the last three variables.
+
+```{r}
+names(chicago)[6:8] 
+```
+
+#### Summary Statistics with `skimr`
+
+The `skim()` function in the skimr package gives a good idea, in one place, of what the data looks like in table 2. Noting there are 4447 NA's in pm25tmean2 and 242 NA's in pm10tmean2. The date range is from 1987 to 2005. The histogram shows us the skew of each variable and a nice feature for skimr.
+
+In base R, I would also use the `summary()` function. As you will see, the tidyverse does not have a summary function that doesn't require multiple lines of code. I will generate some of these statistics, but it takes more time than typing in one line into the console.
+
+```{r}
+skimr::skim(chicago)
+
+```
+
+#### select()
+
+To view specific variables, I use the `select()` function. Perhaps this small dataset in not going to show the benefits of `select()`, however, with hundreds or thousands of variables, `select()` will prove a worthy function. Here in table 3, we can isolate the variables city through dptp very quickly. 
+
+```{r}
+select(chicago, 
+       city:dptp)
+```
+
+```{r select3, echo=FALSE}
+knitr::kable((select(chicago, 
+                     city:dptp)[1:10, ]), 
+             caption="Select the first three variables.")
+``` 
+
+In table 4, `select()` can also do the inverse of city:dptp and exclude those variables to display the remaining variables.
+
+```{r}
+select(chicago, -(city:dptp))
+```
+
+```{r invertselect, echo=FALSE}
+knitr::kable((select(chicago, 
+                     -(city:dptp))[1:10, ]), 
+             align = 'c', 
+             caption="Select all except first three variables.")
+```
+
+Table 5 demonstrates the `ends_with()` and table 6 the `starts_with()` functions that only work inside of `select()`. Additional functions here would be: 
+
+- `matches()`
+- `num_range()`
+- `one_of()`
+- `everything()`
+- `contains()`
+
+Lets find all the variables that end with the number 2 in table 5.
+
+```{r}
+select(chicago, 
+       ends_with("2")) 
+```
+
+```{r endswith, echo=FALSE}
+knitr::kable((select(chicago, 
+                     ends_with("2"))[1:10, ]), 
+             align = 'c', 
+             caption="Select variables ending in 2.")
+```
+
+Let's find all the variables that start with the letter "d" in table 6. 
+
+```{r}
+select(chicago, 
+       starts_with("d"))
+```
+
+```{r startswith, echo=FALSE}
+knitr::kable((select(chicago, 
+                     starts_with("d"))[1:10, ]), 
+             align = 'c', 
+             caption="Select variables starting with the letter d.")
+```
+
+#### filter()
+
+The `filter()` function is a way to find values in the data. Here the results are placed in table 7. Shown is filtering all pm25tmean2 variables that are greater than 30. We can do any combination of variables with specific parameters. The tibble output indicates there are 194 instances where pm25tmean2 is above a reading of 30.
+
+```{r}
+filter(chicago, 
+       pm25tmean2 > 30)
+```
+
+```{r filtervar, echo=FALSE}
+knitr::kable((filter(chicago, 
+                     pm25tmean2 > 30)[1:10, ]), 
+             align = 'c',
+             caption="Filter variable pm25tmean2 greater than 30.")
+```
+
+Table 8 filters all values of the variable pm25tmean2 greater than 30, and I summarize to refine that to the minimum and maximum values. The table is showing that 30.05 is the lowest, and 61.5 is the highest value after filtering the variable. `%>%` is shown in the code and a way to write a few sequence operations together.
+
+```{r}
+chicago %>%
+  filter(pm25tmean2 > 30) %>%
+  summarize(minValue = min(pm25tmean2), 
+            maxValue = max(pm25tmean2))
+
+```
+
+```{r filter30, echo=FALSE}
+knitr::kable(chicago %>%
+  filter(pm25tmean2 > 30) %>%
+  summarize(minValue = min(pm25tmean2), 
+            maxValue = max(pm25tmean2)), 
+  align = 'c', 
+  caption="Variable pm25tmean2 greater than 30.")
+```
+
+Table 9 is a refinement in table 8. Here I want to find the values higher than 30 in pm25tmean2 and values greater than 80 in tmpd. In the output tibble, there are only 17 instances where this condition is true and a little clustering in 2001, 2002, and 2005.
+
+```{r}
+chicago %>%
+  select(date, tmpd, pm25tmean2) %>%
+  filter(pm25tmean2 > 30 & tmpd > 80)
+```
+
+```{r filtertmpd, echo=FALSE}
+knitr::kable(chicago %>%
+  select(date, tmpd, pm25tmean2) %>%
+  filter(pm25tmean2 > 30 & tmpd > 80), 
+  align = 'c', 
+  caption="Filter pm25tmean2 >30 & tmpd >80 with date.")
+```
+
+This filtering collects all values above 80 for the tmpd variable and then summarizes to find the minimum and maximum values. 80.5 is the minimum, and 92 is the maximum.
+
+```{r}
+chicago %>%
+  filter(tmpd > 80) %>%
+  summarize(minValue = min(tmpd), 
+            maxValue = max(tmpd))
+```
+
+#### arrange()
+
+Table 10 shows the `arrange()` function and sorts the o3tmean2 variable. Default from lowest to highest numerical values.
+
+```{r}
+chicago %>%
+  arrange(o3tmean2)
+```
+
+```{r arrangeO3, echo=FALSE}
+knitr::kable((arrange(chicago, 
+                      o3tmean2)[1:10, ]),
+             align = 'c', 
+             caption = "Arrange O3 mean variable."
+)
+```
+
+Table 11 sorts the tmpd variable lowest to highest.
+
+```{r}
+chicago %>%
+  arrange(tmpd)
+```
+
+```{r arrangetmpd, echo=FALSE}
+knitr::kable((arrange(chicago, 
+                      tmpd)[1:10, ]),
+             align = 'c',
+             caption = "Arrange tmpd variable."
+)
+```
+
+In table 12 we can sort the tmpd variable in descending order by adding the parameter to the `arrange()` function. 
+
+```{r}
+chicago %>%
+  arrange(desc(tmpd))
+```
+
+```{r arrangetmpddescend, echo=FALSE}
+knitr::kable((arrange(chicago,
+                      desc(tmpd))[1:10, ]),
+             align = 'c',
+             caption = "Arrange tmpd variable descending."
+)
+```
+
+#### rename()
+
+The `rename()` function will be beneficial if you need to give the variables a descriptive name. In this example, table 13, I shorten the variable name and process these all in one line of code.  
+
+```{r}
+chicago %>%
+  rename(temp=tmpd, 
+         dewpoint=dptp, 
+         pm25=pm25tmean2, 
+         pm10=pm10tmean2, 
+         O3=o3tmean2, 
+         NO2=no2tmean2) 
+```
+
+```{r rename, echo=FALSE}
+knitr::kable((rename(chicago, 
+                     temp=tmpd, dewpoint=dptp, 
+                     pm25=pm25tmean2, 
+                     pm10=pm10tmean2, 
+                     O3=o3tmean2, 
+                     NO2=no2tmean2)[1:10, ]),
+             align = 'c',
+             caption = "Rename variables."
+)
+```
+
+
+#### mutate()
+
+In this example, the `mutate()` function adds a new variable to the data. In this case, we can take the mean of no2tmean2 and subtract it from itself to standardize the variable. This will show if the mean is above or below the average of 25.23 (taken from table 2). In this one line, I calculated and created a new variable for the data called no2detrend. A positive detrend indicates above the mean, and a negative value indicates below the mean for that individual record. See table 14.  
+
+```{r}
+smlchicago <- chicago %>%
+  select(tmpd, dptp, o3tmean2, no2tmean2)
+
+smlchicago %>%
+  mutate(nO2detrend = no2tmean2 - mean(no2tmean2, na.rm=TRUE))
+
+```
+
+```{r mutate, echo=FALSE}
+knitr::kable((mutate(smlchicago,
+                     nO2detrend = no2tmean2 - mean(no2tmean2, na.rm=TRUE))[1:10, ]),
+             align = 'c',
+             caption = "Create a new variable (difference from the mean)."
+)
+```
+
+#### transmute()
+
+The transmute() does the same as above but breaks the new variables out into a tibble or data frame. In table 15, the three new variables create a new tibble. The temperature `tmpd` variable now gives a better idea of where it is in comparison to the mean average temperature.
+
+```{r}
+transmute(chicago, 
+          tmpdS = tmpd - mean(tmpd, na.rm=TRUE), 
+          o3detrend = o3tmean2 - mean(o3tmean2, na.rm=TRUE), 
+          nO2detrend = no2tmean2 - mean(no2tmean2, na.rm=TRUE))
+```
+
+```{r transmute, echo=FALSE}
+knitr::kable((transmute(chicago, 
+                        tmpdS = tmpd - mean(tmpd, na.rm=TRUE), 
+                        o3detrend = o3tmean2 - mean(o3tmean2, na.rm=TRUE), 
+                        nO2detrend = no2tmean2 - mean(no2tmean2, na.rm=TRUE))[1:10, ]),
+             align = 'c',
+             caption = "Breakout 3 new variables to new tibble."
+)
+```
+
+#### group_by()
+
+#### summarize()
+
+Table 16 shows how to transform the data. I created a new variable "year" The year is extracted from the y/m/d string using lubridates `year()` function. The data is organized by year. The `summarize()` function creates six new columns of min/max measurements per year for three variables. The pm25tmean2 didn't have any records for ten years until 1998.
+
+```{r}
+mutate(chicago, year = (lubridate::year(date))) %>%
+  group_by(year) %>% 
+  summarize( 
+          pm25min=min(pm25tmean2, na.rm=TRUE),
+          pm25max=max(pm25tmean2, na.rm=TRUE),
+          o3min=min(o3tmean2, na.rm=TRUE),
+          o3max=max(o3tmean2, na.rm=TRUE),
+          no2mmin=min(no2tmean2, na.rm=TRUE),
+          no2max=max(no2tmean2, na.rm=TRUE)
+          )
+```
+
+```{r summarize, echo=FALSE}
+knitr::kable(
+  mutate(chicago, year = (lubridate::year(date))) %>%
+  group_by(year) %>% 
+  summarize( 
+          pm25min=min(pm25tmean2, na.rm=TRUE),
+          pm25max=max(pm25tmean2, na.rm=TRUE),
+          o3min=min(o3tmean2, na.rm=TRUE),
+          o3max=max(o3tmean2, na.rm=TRUE),
+          no2mmin=min(no2tmean2, na.rm=TRUE),
+          no2max=max(no2tmean2, na.rm=TRUE)),
+  align = 'c', 
+  caption = "Minimum-Maximum values per year over 19 years."
+)
+```
+
+Table 17 displays the same min/max data for the three variables; pm25tmean2, o3tmean2, and no2tmean2. And using the `group_by()` I extracted the `month()` out with lubridate. This breakdown shows further relationships in the data and has transformed the original data into something to devise a hypothesis.
+
+```{r}
+mutate(chicago, month = (lubridate::month(date))) %>%
+  group_by(month) %>%
+  summarize( 
+          pm25min=min(pm25tmean2, na.rm=TRUE),
+          pm25max=max(pm25tmean2, na.rm=TRUE),
+          o3min=min(o3tmean2, na.rm=TRUE),
+          o3max=max(o3tmean2, na.rm=TRUE),
+          no2min=min(no2tmean2, na.rm=TRUE),
+          no2max=max(no2tmean2, na.rm=TRUE)
+)
+```
+
+```{r summarizemonth, echo=FALSE}
+knitr::kable(
+  mutate(chicago, month = (lubridate::month(date))) %>%
+  group_by(month) %>% 
+  summarize( 
+          pm25min=min(pm25tmean2, na.rm=TRUE),
+          pm25max=max(pm25tmean2, na.rm=TRUE),
+          o3min=min(o3tmean2, na.rm=TRUE),
+          o3max=max(o3tmean2, na.rm=TRUE),
+          no2mmin=min(no2tmean2, na.rm=TRUE),
+          no2max=max(no2tmean2, na.rm=TRUE)),
+  align = 'c', 
+  caption = "Minimum-Maximum values per month over 19 years."
+)
+```
+
+Table 18 focuses on per year measurements. Rather than min/max (0% and 100% percentiles), we can look at the quantiles of 20-80 and get a better understanding of the probability distribution by year.
+
+```{r}
+mutate(chicago, year = (lubridate::year(date))) %>%
+  group_by(year) %>%
+  summarize( 
+          pm25Q20=quantile(pm25tmean2, 0.2, na.rm=TRUE),
+          pm25Q80=quantile(pm25tmean2, 0.8, na.rm=TRUE),
+          o3Q20=quantile(o3tmean2, 0.2, na.rm=TRUE),
+          o3Q80=quantile(o3tmean2, 0.8, na.rm=TRUE),
+          no2Q20=quantile(no2tmean2, 0.2, na.rm=TRUE),
+          no2Q80=quantile(no2tmean2, 0.8, na.rm=TRUE)
+          )
+```
+
+```{r summarizequantileyears, echo=FALSE}
+knitr::kable(mutate(chicago, year = (lubridate::year(date))) %>%
+  group_by(year) %>%
+  summarize( 
+          pm25Q20=quantile(pm25tmean2, 0.2, na.rm=TRUE),
+          pm25Q80=quantile(pm25tmean2, 0.8, na.rm=TRUE),
+          o3Q20=quantile(o3tmean2, 0.2, na.rm=TRUE),
+          o3Q80=quantile(o3tmean2, 0.8, na.rm=TRUE),
+          no2Q20=quantile(no2tmean2, 0.2, na.rm=TRUE),
+          no2Q80=quantile(no2tmean2, 0.8, na.rm=TRUE)
+          ),
+  align = 'c', 
+  caption = "Quantiles 20-80 per year distribution."
+)  
+```  
+
+Table 19 is the break down of per month probability distribution using 20/80. The break down helps us explore the data deeper and find if the data is normal or skewed over a monthly trend. 
+
+```{r}
+mutate(chicago, month = (lubridate::month(date))) %>%
+  group_by(month) %>%
+  summarize( 
+          pm25Q20=quantile(pm25tmean2, 0.2, na.rm=TRUE),
+          pm25Q80=quantile(pm25tmean2, 0.8, na.rm=TRUE),
+          o3Q20=quantile(o3tmean2, 0.2, na.rm=TRUE),
+          o3Q80=quantile(o3tmean2, 0.8, na.rm=TRUE),
+          no2Q20=quantile(no2tmean2, 0.2, na.rm=TRUE),
+          no2Q80=quantile(no2tmean2, 0.8, na.rm=TRUE)
+          )
+```
+
+```{r summarizequantilemonth, echo=FALSE}
+knitr::kable(mutate(chicago, month = (lubridate::month(date))) %>%
+  group_by(month) %>%
+  summarize( 
+          pm25Q20=quantile(pm25tmean2, 0.2, na.rm=TRUE),
+          pm25Q80=quantile(pm25tmean2, 0.8, na.rm=TRUE),
+          o3Q20=quantile(o3tmean2, 0.2, na.rm=TRUE),
+          o3Q80=quantile(o3tmean2, 0.8, na.rm=TRUE),
+          no2Q20=quantile(no2tmean2, 0.2, na.rm=TRUE),
+          no2Q80=quantile(no2tmean2, 0.8, na.rm=TRUE)
+          ),
+  align = 'c', 
+  caption = "Quantiles 20-80 per month distibution."
+)  
+```
+
+
+#### Conclusion
+
+The article covered several of the main tools found in the tidyverse package for R. I demonstrated around ten different ways to manipulate and transform a dataset using the dplyr functions. We learned the Chicago data records over 19 years of air quality measurements. The pm25tmeans2 was not measured for the first ten years and showed by 4447 missing values. The primary dplyr functions used and combined are:
+
+- `names()`
+- `select()`
+- `filter()`
+- `summarize()`
+- `arrange()`
+- `rename()`
+- `mutate()`
+- `transmute()`
+- `group_by()`
+- `%>%`
+
+
+#### References
+
+Peng, R. D. (n.d.). Chicago dataset. Retrieved from: http://www.biostat.jhsph.edu/~rpeng/leanpub/rprog/chicago_data.zip
+
+Peng, R. D. (2016). Exploratory Data Analysis with R. p. 4-17. Retrieved from: https://leanpub.com/exdata
+
+RDocumentation. (2018). Introduction to dplyr. Retrieved from: https://cran.r-project.org/web/packages/dplyr/vignettes/dplyr.html
+
+Wickham, H., & Grolemund, G. (2016). R for data science: import, tidy, transform, visualize, and model data. p. 43-75, O’Reilly. 
