@@ -1,0 +1,137 @@
+---
+title: Simple data exploration with base R functions
+author: 'Bryan '
+date: '2018-07-02'
+slug: simple-data-exploration-with-base-r-functions
+categories:
+  - Exploratory Data Analysis
+  - Data Analysis
+  - R Programming
+tags:
+  - data collection
+  - data manipulation
+---
+
+#### Exploring the data with base R functions
+
+The purpose of this post is to show the basic fucntions in R to start a data analysis project. I look at the iris dataset that comes with Rstudio shown below.
+This briefly covers `head()`, `str()`, `attributes()`, `summary()`, `dim()`, `names()`, indexing [], `table()`, and `plot()` functions that come with base R. Simple to use. 
+
+#### Load the iris dataset
+
+```{r}
+data("iris") 
+```
+
+#### head()
+
+Look at the iris dataset with the `head()` function and lists the first five rows. 
+
+```{r}
+head(iris)  
+```
+
+#### str()
+
+View the structure of the dataset. 150 objects and 5 variables.
+
+```{r}
+str(iris) 
+```
+
+#### attributes()
+
+View the object attributes.
+
+```{r}
+attributes(iris)
+```
+
+#### summary()
+
+Here is the summary statistics. Min/Max, Mean/Median, Quantiles, also a place to see if there is missing data (NA) which there is none in this iris data set. 
+
+```{r}
+summary(iris) 
+```
+
+#### dim()
+
+#### names()
+
+We can use the `dim()` function, `names()` function to view this information. Which `str()` did for use above more completely.  
+
+```{r}
+dim(iris) 
+names(iris)
+```
+
+#### index [a,b
+]
+Below is the view of rows and columns and shows the proper syntax for doing this. [12,2] is the index for row 12 column 2 of the data frame. 
+
+```{r}
+iris[12, 2]
+```
+
+Or you can view row 12 in total by indexing [12, ]
+
+```{r}
+iris[12, ] 
+```
+
+You can index into the middle and view rows 10 through 15. 
+
+```{r}
+iris[10:15, ] 
+```
+
+Here is the way to view column 5. 
+
+```{r}
+iris[ ,5]
+```
+
+View rows 1, 5, 19, 15 and the respective column variables.
+
+```{r}
+iris[c(1,5,10,15), ] 
+```
+
+Or view rows 1, 5, 10, 15 in column 1 only. Note by default this converts the column to a row in R.
+
+```{r}
+iris[c(1,5,10,15), 1]
+```
+
+#### table()
+
+Here we can view the data in a table and basic plot. The tables show the three categorical variables (factors in R) and Petal.Width and Sepal.Width variables (integers). We can see a pattern develop with each Species/Petal.Width and Species/Sepal.Width when plotted.   
+
+```{r}
+table(iris$Species, iris$Petal.Width)
+petwidth <- table(iris$Species, iris$Petal.Width)
+```
+
+#### plot()
+
+The plot is multi-dimensional.
+```{r}
+barplot(petwidth, main = "Petal Width")
+plot(petwidth, main = "Petal Width", col = "green")
+```
+
+#### table()
+
+```{r}
+table(iris$Species, iris$Sepal.Width)
+sepwidth <- table(iris$Species, iris$Sepal.Width)
+
+```
+
+#### plot()
+
+```{r}
+barplot(sepwidth, main = "Sepal Width")
+plot(sepwidth, main = "Sepal Width", col = "orange")
+```

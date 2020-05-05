@@ -207,6 +207,16 @@ Or hover mouse over slide and scroll through:
     </item>
     
     <item>
+      <title>Simple data exploration with base R functions</title>
+      <link>/post/2018/07/02/simple-data-exploration-with-base-r-functions/</link>
+      <pubDate>Mon, 02 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/07/02/simple-data-exploration-with-base-r-functions/</guid>
+      <description>Exploring the data with base R functionsThe purpose of this post is to show the basic fucntions in R to start a data analysis project. I look at the iris dataset that comes with Rstudio shown below.This briefly covers head(), str(), attributes(), summary(), dim(), names(), indexing [], table(), and plot() functions that come with base R. Simple to use.
+Load the iris datasetdata(&amp;quot;iris&amp;quot;) head()Look at the iris dataset with the head() function and lists the first five rows.</description>
+    </item>
+    
+    <item>
       <title>Real-Time Data and Smart Cities</title>
       <link>/post/2018/03/20/real-time-data-and-smart-cities/</link>
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>

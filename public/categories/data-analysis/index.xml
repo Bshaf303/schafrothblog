@@ -30,5 +30,15 @@
 get insights from the data intuitivelyfind hidden trendsfind outliers and anomalous datatest assumptionshelp develop models that the data will fitThe dplyr package is used by many data scientists and analysts to manipulate data.</description>
     </item>
     
+    <item>
+      <title>Simple data exploration with base R functions</title>
+      <link>/post/2018/07/02/simple-data-exploration-with-base-r-functions/</link>
+      <pubDate>Mon, 02 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/07/02/simple-data-exploration-with-base-r-functions/</guid>
+      <description>Exploring the data with base R functionsThe purpose of this post is to show the basic fucntions in R to start a data analysis project. I look at the iris dataset that comes with Rstudio shown below.This briefly covers head(), str(), attributes(), summary(), dim(), names(), indexing [], table(), and plot() functions that come with base R. Simple to use.
+Load the iris datasetdata(&amp;quot;iris&amp;quot;) head()Look at the iris dataset with the head() function and lists the first five rows.</description>
+    </item>
+    
   </channel>
 </rss>
