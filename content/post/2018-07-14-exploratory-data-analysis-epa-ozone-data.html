@@ -1,0 +1,1161 @@
+---
+title: Exploratory Data Analysis - EPA Ozone Data
+author: 'Bryan'
+date: '2018-07-14'
+slug: exploratory-data-analysis-epa-ozone-data
+categories:
+  - Exploratory Data Analysis
+  - R Programming
+tags:
+  - data manipulation
+  - data transformation
+  - data wrangling
+  - EDA in Data Science
+  - Data Exploration
+---
+
+
+
+<div id="introduction" class="section level4">
+<h4>Introduction</h4>
+<p>This exploratory data analysis will use the “hourly_44201_2014” data set obtained from the web site: <a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw" class="uri">https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw</a> The data is “Criteria Gases” and labeled “Ozone (44201)” for this particular data set. The data is loaded into RStudio and shows 9,060,694 rows and 24 variables.</p>
+<p>There are 24 variables in this data set. Looking through the variables, we can see the first four are coded presumably by the EPA. The Latitude, Longitude, and Datum are geo-location data. Datum NAD83 is the coordinate system for North American datum, while the WGS84 is a world coordinate system and tells that there are measurements taken presumably in another region or territory of the U.S. The “Date_Local” variable is clearly showing 365 unique dates, which cover the number of days in a year. The “Time_local” variable indicates 24 individual observations and covers each hour in a day. We see the variable measurements labeled as “Sample_Measurement” and then some more coded variables. The last variables are the “State_Name”, “County_Name”. The 53 individual names in the “State_Name” variable stand out, and this possibly coincides with the WGS84 coordinate system for U.S. States outside of the 48 States and are territories.
+In summary, we have essential geographic information, time/date information, and an Ozone measurement available in the data set. For this analysis, we can disregard the internal coding from the EPA.</p>
+</div>
+<div id="load-the-tidyverse-library" class="section level4">
+<h4>Load the Tidyverse Library</h4>
+<pre class="r"><code>library(tidyverse)</code></pre>
+</div>
+<div id="importing-the-data-into-r-studio" class="section level4">
+<h4>Importing the Data into R Studio</h4>
+<p>A note about loading the data: this data analysis is using R and the Tidyverse package. Tidyverse at this writing, can not download and open .zip files from a URL. Thus a temp file is created, and the .zip data file is loaded into it then unzipped from this temp location, which then read into a tibble or data frame. In this coding step, I have identified the variables’ data type per the EPA specifications describing this data. Knowing the data type may not be the case in other data sets pulled from the web, or identifying the data type after performing the summary statistics. The last line of code is to keep with acceptable coding standards and format the variable names to work with R by removing white spaces and placing an underscore between descriptors.</p>
+<pre class="r"><code># place data into frame
+url = &quot;https://aqs.epa.gov/aqsweb/airdata/hourly_44201_2014.zip&quot; 
+# create temp file for the zip file
+zip_file = tempfile(fileext = &quot;.zip&quot;) 
+# unzip data into temp location
+download.file(url, zip_file, method = &#39;libcurl&#39;, mode = &quot;wb&quot;) 
+# read data into a tibble and specify data type for each variable, see EPA data source
+ozn = readr::read_csv(zip_file, col_types = &quot;iiiiinnccDtDtncnlccicccc&quot;) 
+# remove spaces in variables and replace with underscore
+names(ozn) = gsub(&quot;\\s&quot;, &quot;_&quot;, names(ozn)) 
+unlink(zip_file)</code></pre>
+</div>
+<div id="viewing-the-dataset" class="section level4">
+<h4>Viewing the Dataset</h4>
+<p>Showing the variable names using the <code>names()</code> function.</p>
+<pre class="r"><code>names(ozn)</code></pre>
+<pre><code>##  [1] &quot;State_Code&quot;          &quot;County_Code&quot;         &quot;Site_Num&quot;           
+##  [4] &quot;Parameter_Code&quot;      &quot;POC&quot;                 &quot;Latitude&quot;           
+##  [7] &quot;Longitude&quot;           &quot;Datum&quot;               &quot;Parameter_Name&quot;     
+## [10] &quot;Date_Local&quot;          &quot;Time_Local&quot;          &quot;Date_GMT&quot;           
+## [13] &quot;Time_GMT&quot;            &quot;Sample_Measurement&quot;  &quot;Units_of_Measure&quot;   
+## [16] &quot;MDL&quot;                 &quot;Uncertainty&quot;         &quot;Qualifier&quot;          
+## [19] &quot;Method_Type&quot;         &quot;Method_Code&quot;         &quot;Method_Name&quot;        
+## [22] &quot;State_Name&quot;          &quot;County_Name&quot;         &quot;Date_of_Last_Change&quot;</code></pre>
+<p>Using <code>glimpse()</code> can quickly display the data when in a tibble format.
+- <code>chr</code> are characters
+- <code>dbl</code> are real numbers
+- <code>int</code> are integers
+- <code>date</code>
+- <code>time</code>
+- <code>lgl</code> is logical
+- <code>fctr</code> is factors or categorical</p>
+<pre class="r"><code>tibble::glimpse(ozn)</code></pre>
+<pre><code>## Rows: 9,060,694
+## Columns: 24
+## $ State_Code          &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
+## $ County_Code         &lt;int&gt; 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3,...
+## $ Site_Num            &lt;int&gt; 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10,...
+## $ Parameter_Code      &lt;int&gt; 44201, 44201, 44201, 44201, 44201, 44201, 44201...
+## $ POC                 &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,...
+## $ Latitude            &lt;dbl&gt; 30.49748, 30.49748, 30.49748, 30.49748, 30.4974...
+## $ Longitude           &lt;dbl&gt; -87.88026, -87.88026, -87.88026, -87.88026, -87...
+## $ Datum               &lt;chr&gt; &quot;NAD83&quot;, &quot;NAD83&quot;, &quot;NAD83&quot;, &quot;NAD83&quot;, &quot;NAD83&quot;, &quot;N...
+## $ Parameter_Name      &lt;chr&gt; &quot;Ozone&quot;, &quot;Ozone&quot;, &quot;Ozone&quot;, &quot;Ozone&quot;, &quot;Ozone&quot;, &quot;O...
+## $ Date_Local          &lt;date&gt; 2014-03-01, 2014-03-01, 2014-03-01, 2014-03-01...
+## $ Time_Local          &lt;time&gt; 01:00:00, 02:00:00, 03:00:00, 04:00:00, 05:00:...
+## $ Date_GMT            &lt;date&gt; 2014-03-01, 2014-03-01, 2014-03-01, 2014-03-01...
+## $ Time_GMT            &lt;time&gt; 07:00:00, 08:00:00, 09:00:00, 10:00:00, 11:00:...
+## $ Sample_Measurement  &lt;dbl&gt; 0.047, 0.047, 0.043, 0.038, 0.035, 0.035, 0.034...
+## $ Units_of_Measure    &lt;chr&gt; &quot;Parts per million&quot;, &quot;Parts per million&quot;, &quot;Part...
+## $ MDL                 &lt;dbl&gt; 0.005, 0.005, 0.005, 0.005, 0.005, 0.005, 0.005...
+## $ Uncertainty         &lt;lgl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ Qualifier           &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,...
+## $ Method_Type         &lt;chr&gt; &quot;FEM&quot;, &quot;FEM&quot;, &quot;FEM&quot;, &quot;FEM&quot;, &quot;FEM&quot;, &quot;FEM&quot;, &quot;FEM&quot;...
+## $ Method_Code         &lt;int&gt; 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47, 47,...
+## $ Method_Name         &lt;chr&gt; &quot;INSTRUMENTAL - ULTRA VIOLET&quot;, &quot;INSTRUMENTAL - ...
+## $ State_Name          &lt;chr&gt; &quot;Alabama&quot;, &quot;Alabama&quot;, &quot;Alabama&quot;, &quot;Alabama&quot;, &quot;Al...
+## $ County_Name         &lt;chr&gt; &quot;Baldwin&quot;, &quot;Baldwin&quot;, &quot;Baldwin&quot;, &quot;Baldwin&quot;, &quot;Ba...
+## $ Date_of_Last_Change &lt;chr&gt; &quot;2014-06-30&quot;, &quot;2014-06-30&quot;, &quot;2014-06-30&quot;, &quot;2014...</code></pre>
+<table>
+<caption><span id="tab:table">Table 1: </span>The EPA Hourly Ozone Dataset - First 10 Rows</caption>
+<thead>
+<tr class="header">
+<th align="center">State_Code</th>
+<th align="center">County_Code</th>
+<th align="center">Site_Num</th>
+<th align="center">Parameter_Code</th>
+<th align="center">POC</th>
+<th align="center">Latitude</th>
+<th align="center">Longitude</th>
+<th align="center">Datum</th>
+<th align="center">Parameter_Name</th>
+<th align="center">Date_Local</th>
+<th align="center">Time_Local</th>
+<th align="center">Date_GMT</th>
+<th align="center">Time_GMT</th>
+<th align="center">Sample_Measurement</th>
+<th align="center">Units_of_Measure</th>
+<th align="center">MDL</th>
+<th align="center">Uncertainty</th>
+<th align="center">Qualifier</th>
+<th align="center">Method_Type</th>
+<th align="center">Method_Code</th>
+<th align="center">Method_Name</th>
+<th align="center">State_Name</th>
+<th align="center">County_Name</th>
+<th align="center">Date_of_Last_Change</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">10</td>
+<td align="center">44201</td>
+<td align="center">1</td>
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+<td align="center">NAD83</td>
+<td align="center">Ozone</td>
+<td align="center">2014-03-01</td>
+<td align="center">01:00:00</td>
+<td align="center">2014-03-01</td>
+<td align="center">07:00:00</td>
+<td align="center">0.047</td>
+<td align="center">Parts per million</td>
+<td align="center">0.005</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">FEM</td>
+<td align="center">47</td>
+<td align="center">INSTRUMENTAL - ULTRA VIOLET</td>
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">2014-06-30</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">10</td>
+<td align="center">44201</td>
+<td align="center">1</td>
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+<td align="center">NAD83</td>
+<td align="center">Ozone</td>
+<td align="center">2014-03-01</td>
+<td align="center">02:00:00</td>
+<td align="center">2014-03-01</td>
+<td align="center">08:00:00</td>
+<td align="center">0.047</td>
+<td align="center">Parts per million</td>
+<td align="center">0.005</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">FEM</td>
+<td align="center">47</td>
+<td align="center">INSTRUMENTAL - ULTRA VIOLET</td>
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">2014-06-30</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">10</td>
+<td align="center">44201</td>
+<td align="center">1</td>
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+<td align="center">NAD83</td>
+<td align="center">Ozone</td>
+<td align="center">2014-03-01</td>
+<td align="center">03:00:00</td>
+<td align="center">2014-03-01</td>
+<td align="center">09:00:00</td>
+<td align="center">0.043</td>
+<td align="center">Parts per million</td>
+<td align="center">0.005</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">FEM</td>
+<td align="center">47</td>
+<td align="center">INSTRUMENTAL - ULTRA VIOLET</td>
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">2014-06-30</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">10</td>
+<td align="center">44201</td>
+<td align="center">1</td>
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+<td align="center">NAD83</td>
+<td align="center">Ozone</td>
+<td align="center">2014-03-01</td>
+<td align="center">04:00:00</td>
+<td align="center">2014-03-01</td>
+<td align="center">10:00:00</td>
+<td align="center">0.038</td>
+<td align="center">Parts per million</td>
+<td align="center">0.005</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">FEM</td>
+<td align="center">47</td>
+<td align="center">INSTRUMENTAL - ULTRA VIOLET</td>
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">2014-06-30</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">10</td>
+<td align="center">44201</td>
+<td align="center">1</td>
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+<td align="center">NAD83</td>
+<td align="center">Ozone</td>
+<td align="center">2014-03-01</td>
+<td align="center">05:00:00</td>
+<td align="center">2014-03-01</td>
+<td align="center">11:00:00</td>
+<td align="center">0.035</td>
+<td align="center">Parts per million</td>
+<td align="center">0.005</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">FEM</td>
+<td align="center">47</td>
+<td align="center">INSTRUMENTAL - ULTRA VIOLET</td>
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">2014-06-30</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">10</td>
+<td align="center">44201</td>
+<td align="center">1</td>
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+<td align="center">NAD83</td>
+<td align="center">Ozone</td>
+<td align="center">2014-03-01</td>
+<td align="center">06:00:00</td>
+<td align="center">2014-03-01</td>
+<td align="center">12:00:00</td>
+<td align="center">0.035</td>
+<td align="center">Parts per million</td>
+<td align="center">0.005</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">FEM</td>
+<td align="center">47</td>
+<td align="center">INSTRUMENTAL - ULTRA VIOLET</td>
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">2014-06-30</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">10</td>
+<td align="center">44201</td>
+<td align="center">1</td>
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+<td align="center">NAD83</td>
+<td align="center">Ozone</td>
+<td align="center">2014-03-01</td>
+<td align="center">07:00:00</td>
+<td align="center">2014-03-01</td>
+<td align="center">13:00:00</td>
+<td align="center">0.034</td>
+<td align="center">Parts per million</td>
+<td align="center">0.005</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">FEM</td>
+<td align="center">47</td>
+<td align="center">INSTRUMENTAL - ULTRA VIOLET</td>
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">2014-06-30</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">10</td>
+<td align="center">44201</td>
+<td align="center">1</td>
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+<td align="center">NAD83</td>
+<td align="center">Ozone</td>
+<td align="center">2014-03-01</td>
+<td align="center">08:00:00</td>
+<td align="center">2014-03-01</td>
+<td align="center">14:00:00</td>
+<td align="center">0.037</td>
+<td align="center">Parts per million</td>
+<td align="center">0.005</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">FEM</td>
+<td align="center">47</td>
+<td align="center">INSTRUMENTAL - ULTRA VIOLET</td>
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">2014-06-30</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">10</td>
+<td align="center">44201</td>
+<td align="center">1</td>
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+<td align="center">NAD83</td>
+<td align="center">Ozone</td>
+<td align="center">2014-03-01</td>
+<td align="center">09:00:00</td>
+<td align="center">2014-03-01</td>
+<td align="center">15:00:00</td>
+<td align="center">0.044</td>
+<td align="center">Parts per million</td>
+<td align="center">0.005</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">FEM</td>
+<td align="center">47</td>
+<td align="center">INSTRUMENTAL - ULTRA VIOLET</td>
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">2014-06-30</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">3</td>
+<td align="center">10</td>
+<td align="center">44201</td>
+<td align="center">1</td>
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+<td align="center">NAD83</td>
+<td align="center">Ozone</td>
+<td align="center">2014-03-01</td>
+<td align="center">10:00:00</td>
+<td align="center">2014-03-01</td>
+<td align="center">16:00:00</td>
+<td align="center">0.046</td>
+<td align="center">Parts per million</td>
+<td align="center">0.005</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">FEM</td>
+<td align="center">47</td>
+<td align="center">INSTRUMENTAL - ULTRA VIOLET</td>
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">2014-06-30</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="data-summary-function" class="section level4">
+<h4>Data Summary Function</h4>
+<p>The summary function displays the data format and shows a nice breakdown of the data. The “Site_Num” variable indicates 9,997 total monitoring sites. I specified the data type and the data/time came in precisely when imported into the tibble. The “Sample_Measurement” shows no missing data indicated by NA’s and a min of -0.005 to 0.213 max measurement with the mean around 0.03027. The “Method_Name” is describing the ultraviolet method of measure with a chemiluminescence API model. The “State_Name” variable lists familiar names as well as the “County_Name” variable. The data is reasonably clean and looking ahead, and we could exclude much of the variables for a few vital variables (ozone, county, state, time, date, latitude, longitude).</p>
+<pre class="r"><code>summary(ozn)</code></pre>
+<pre><code>##    State_Code     County_Code        Site_Num    Parameter_Code       POC      
+##  Min.   : 1.00   Min.   :  1.00   Min.   :   1   Min.   :44201   Min.   :1.00  
+##  1st Qu.: 8.00   1st Qu.: 23.00   1st Qu.:   6   1st Qu.:44201   1st Qu.:1.00  
+##  Median :25.00   Median : 61.00   Median :  27   Median :44201   Median :1.00  
+##  Mean   :26.52   Mean   : 76.71   Mean   :1362   Mean   :44201   Mean   :1.07  
+##  3rd Qu.:42.00   3rd Qu.:103.00   3rd Qu.:1016   3rd Qu.:44201   3rd Qu.:1.00  
+##  Max.   :80.00   Max.   :800.00   Max.   :9997   Max.   :44201   Max.   :6.00  
+##     Latitude       Longitude          Datum           Parameter_Name    
+##  Min.   :18.18   Min.   :-158.09   Length:9060694     Length:9060694    
+##  1st Qu.:33.92   1st Qu.:-109.91   Class :character   Class :character  
+##  Median :38.01   Median : -92.01   Mode  :character   Mode  :character  
+##  Mean   :37.44   Mean   : -95.35                                        
+##  3rd Qu.:40.92   3rd Qu.: -81.97                                        
+##  Max.   :64.85   Max.   : -65.92                                        
+##    Date_Local          Time_Local          Date_GMT            Time_GMT       
+##  Min.   :2014-01-01   Length:9060694    Min.   :2014-01-01   Length:9060694   
+##  1st Qu.:2014-04-20   Class1:hms        1st Qu.:2014-04-20   Class1:hms       
+##  Median :2014-07-05   Class2:difftime   Median :2014-07-05   Class2:difftime  
+##  Mean   :2014-07-04   Mode  :numeric    Mean   :2014-07-04   Mode  :numeric   
+##  3rd Qu.:2014-09-19                     3rd Qu.:2014-09-20                    
+##  Max.   :2014-12-31                     Max.   :2015-01-01                    
+##  Sample_Measurement Units_of_Measure        MDL         Uncertainty   
+##  Min.   :-0.00500   Length:9060694     Min.   :0.0006   Mode:logical  
+##  1st Qu.: 0.01900   Class :character   1st Qu.:0.0050   NA&#39;s:9060694  
+##  Median : 0.03000   Mode  :character   Median :0.0050                 
+##  Mean   : 0.03027                      Mean   :0.1361                 
+##  3rd Qu.: 0.04100                      3rd Qu.:0.0050                 
+##  Max.   : 0.21300                      Max.   :8.0000                 
+##   Qualifier         Method_Type         Method_Code     Method_Name       
+##  Length:9060694     Length:9060694     Min.   : 19.00   Length:9060694    
+##  Class :character   Class :character   1st Qu.: 47.00   Class :character  
+##  Mode  :character   Mode  :character   Median : 87.00   Mode  :character  
+##                                        Mean   : 71.08                     
+##                                        3rd Qu.: 87.00                     
+##                                        Max.   :901.00                     
+##   State_Name        County_Name        Date_of_Last_Change
+##  Length:9060694     Length:9060694     Length:9060694     
+##  Class :character   Class :character   Class :character   
+##  Mode  :character   Mode  :character   Mode  :character   
+##                                                           
+##                                                           
+## </code></pre>
+<p>Below is the <code>skimr</code> library function and provides an excellent summary of the data, particularly the histogram at the bottom, giving the numeric data types distribution.</p>
+<pre class="r"><code>skimr::skim(ozn)</code></pre>
+<table>
+<caption><span id="tab:loadskimr">Table 2: </span>Data summary</caption>
+<tbody>
+<tr class="odd">
+<td align="left">Name</td>
+<td align="left">ozn</td>
+</tr>
+<tr class="even">
+<td align="left">Number of rows</td>
+<td align="left">9060694</td>
+</tr>
+<tr class="odd">
+<td align="left">Number of columns</td>
+<td align="left">24</td>
+</tr>
+<tr class="even">
+<td align="left">_______________________</td>
+<td align="left"></td>
+</tr>
+<tr class="odd">
+<td align="left">Column type frequency:</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">character</td>
+<td align="left">9</td>
+</tr>
+<tr class="odd">
+<td align="left">Date</td>
+<td align="left">2</td>
+</tr>
+<tr class="even">
+<td align="left">difftime</td>
+<td align="left">2</td>
+</tr>
+<tr class="odd">
+<td align="left">logical</td>
+<td align="left">1</td>
+</tr>
+<tr class="even">
+<td align="left">numeric</td>
+<td align="left">10</td>
+</tr>
+<tr class="odd">
+<td align="left">________________________</td>
+<td align="left"></td>
+</tr>
+<tr class="even">
+<td align="left">Group variables</td>
+<td align="left">None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: character</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">min</th>
+<th align="right">max</th>
+<th align="right">empty</th>
+<th align="right">n_unique</th>
+<th align="right">whitespace</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Datum</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Parameter_Name</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">5</td>
+<td align="right">5</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Units_of_Measure</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">17</td>
+<td align="right">17</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Qualifier</td>
+<td align="right">8937542</td>
+<td align="right">0.01</td>
+<td align="right">1</td>
+<td align="right">2</td>
+<td align="right">0</td>
+<td align="right">19</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Method_Type</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">3</td>
+<td align="right">7</td>
+<td align="right">0</td>
+<td align="right">2</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">Method_Name</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">27</td>
+<td align="right">63</td>
+<td align="right">0</td>
+<td align="right">8</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">State_Name</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">4</td>
+<td align="right">20</td>
+<td align="right">0</td>
+<td align="right">53</td>
+<td align="right">0</td>
+</tr>
+<tr class="even">
+<td align="left">County_Name</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">3</td>
+<td align="right">20</td>
+<td align="right">0</td>
+<td align="right">631</td>
+<td align="right">0</td>
+</tr>
+<tr class="odd">
+<td align="left">Date_of_Last_Change</td>
+<td align="right">0</td>
+<td align="right">1.00</td>
+<td align="right">10</td>
+<td align="right">10</td>
+<td align="right">0</td>
+<td align="right">406</td>
+<td align="right">0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: Date</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">min</th>
+<th align="left">max</th>
+<th align="left">median</th>
+<th align="right">n_unique</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Date_Local</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">2014-01-01</td>
+<td align="left">2014-12-31</td>
+<td align="left">2014-07-05</td>
+<td align="right">365</td>
+</tr>
+<tr class="even">
+<td align="left">Date_GMT</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">2014-01-01</td>
+<td align="left">2015-01-01</td>
+<td align="left">2014-07-05</td>
+<td align="right">366</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: difftime</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="left">min</th>
+<th align="left">max</th>
+<th align="left">median</th>
+<th align="right">n_unique</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Time_Local</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">0 secs</td>
+<td align="left">82800 secs</td>
+<td align="left">43200 secs</td>
+<td align="right">24</td>
+</tr>
+<tr class="even">
+<td align="left">Time_GMT</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="left">0 secs</td>
+<td align="left">82800 secs</td>
+<td align="left">43200 secs</td>
+<td align="right">24</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: logical</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="left">count</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Uncertainty</td>
+<td align="right">9060694</td>
+<td align="right">0</td>
+<td align="right">NaN</td>
+<td align="left">:</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Variable type: numeric</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">skim_variable</th>
+<th align="right">n_missing</th>
+<th align="right">complete_rate</th>
+<th align="right">mean</th>
+<th align="right">sd</th>
+<th align="right">p0</th>
+<th align="right">p25</th>
+<th align="right">p50</th>
+<th align="right">p75</th>
+<th align="right">p100</th>
+<th align="left">hist</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">State_Code</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">26.52</td>
+<td align="right">16.99</td>
+<td align="right">1.00</td>
+<td align="right">8.00</td>
+<td align="right">25.00</td>
+<td align="right">42.00</td>
+<td align="right">80.00</td>
+<td align="left">▇▆▇▂▁</td>
+</tr>
+<tr class="even">
+<td align="left">County_Code</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">76.71</td>
+<td align="right">79.70</td>
+<td align="right">1.00</td>
+<td align="right">23.00</td>
+<td align="right">61.00</td>
+<td align="right">103.00</td>
+<td align="right">800.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Site_Num</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1362.11</td>
+<td align="right">2672.34</td>
+<td align="right">1.00</td>
+<td align="right">6.00</td>
+<td align="right">27.00</td>
+<td align="right">1016.00</td>
+<td align="right">9997.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">Parameter_Code</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">44201.00</td>
+<td align="right">0.00</td>
+<td align="right">44201.00</td>
+<td align="right">44201.00</td>
+<td align="right">44201.00</td>
+<td align="right">44201.00</td>
+<td align="right">44201.00</td>
+<td align="left">▁▁▇▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">POC</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">1.07</td>
+<td align="right">0.33</td>
+<td align="right">1.00</td>
+<td align="right">1.00</td>
+<td align="right">1.00</td>
+<td align="right">1.00</td>
+<td align="right">6.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">Latitude</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">37.44</td>
+<td align="right">5.05</td>
+<td align="right">18.18</td>
+<td align="right">33.92</td>
+<td align="right">38.01</td>
+<td align="right">40.92</td>
+<td align="right">64.85</td>
+<td align="left">▁▆▇▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">Longitude</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">-95.35</td>
+<td align="right">16.32</td>
+<td align="right">-158.09</td>
+<td align="right">-109.91</td>
+<td align="right">-92.01</td>
+<td align="right">-81.97</td>
+<td align="right">-65.92</td>
+<td align="left">▁▂▇▇▇</td>
+</tr>
+<tr class="even">
+<td align="left">Sample_Measurement</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.03</td>
+<td align="right">0.02</td>
+<td align="right">0.00</td>
+<td align="right">0.02</td>
+<td align="right">0.03</td>
+<td align="right">0.04</td>
+<td align="right">0.21</td>
+<td align="left">▇▃▁▁▁</td>
+</tr>
+<tr class="odd">
+<td align="left">MDL</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">0.14</td>
+<td align="right">0.81</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">0.00</td>
+<td align="right">8.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+<tr class="even">
+<td align="left">Method_Code</td>
+<td align="right">0</td>
+<td align="right">1</td>
+<td align="right">71.08</td>
+<td align="right">43.25</td>
+<td align="right">19.00</td>
+<td align="right">47.00</td>
+<td align="right">87.00</td>
+<td align="right">87.00</td>
+<td align="right">901.00</td>
+<td align="left">▇▁▁▁▁</td>
+</tr>
+</tbody>
+</table>
+<p>These next lines are ways to narrow in on the data metrics. First, we can see how many different Latitude and Longitude values there are in each variable. Observed 1,305 unique Latitudes and 1,306 unique Longitudes.</p>
+<pre class="r"><code>ozn %&gt;%
+  summarize(Total_Lat = n_distinct(Latitude)) </code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   Total_Lat
+##       &lt;int&gt;
+## 1      1305</code></pre>
+<pre class="r"><code>ozn %&gt;%
+  summarize(Total_Long = n_distinct(Longitude))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   Total_Long
+##        &lt;int&gt;
+## 1       1306</code></pre>
+<p>I break down all the counties by latitude and longitude based on the variable’s 1,306 unique longitude values. This assumes where the ozone monitors are positioned.</p>
+<pre class="r"><code>ozn %&gt;%
+  group_by(County_Name, Latitude, Longitude) %&gt;%
+  summarize(Lat = n_distinct(Longitude))</code></pre>
+<pre><code>## # A tibble: 1,306 x 4
+## # Groups:   County_Name, Latitude [1,305]
+##    County_Name Latitude Longitude   Lat
+##    &lt;chr&gt;          &lt;dbl&gt;     &lt;dbl&gt; &lt;int&gt;
+##  1 Abbeville       34.3     -82.4     1
+##  2 Ada             43.6    -116.      1
+##  3 Ada             43.6    -116.      1
+##  4 Adair           35.8     -94.7     1
+##  5 Adams           39.8    -105.      1
+##  6 Adams           39.9     -91.3     1
+##  7 Adams           39.9     -77.3     1
+##  8 Adams           39.9     -77.3     1
+##  9 Aiken           33.3     -81.8     1
+## 10 Alachua         29.5     -82.3     1
+## # ... with 1,296 more rows</code></pre>
+<p>If I want to view the first ten rows of Latitude and Longitude and put it into a table, I can specify that in R.</p>
+<table>
+<caption><span id="tab:select3">Table 3: </span>Latitude and Longitude variables.</caption>
+<thead>
+<tr class="header">
+<th align="center">Latitude</th>
+<th align="center">Longitude</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+</tr>
+<tr class="even">
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+</tr>
+<tr class="odd">
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+</tr>
+<tr class="even">
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+</tr>
+<tr class="odd">
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+</tr>
+<tr class="even">
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+</tr>
+<tr class="odd">
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+</tr>
+<tr class="even">
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+</tr>
+<tr class="odd">
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+</tr>
+<tr class="even">
+<td align="center">30.49748</td>
+<td align="center">-87.88026</td>
+</tr>
+</tbody>
+</table>
+<p>Taking the concept further, I can create a table showing the State, County, and Sample Measurement, only displaying the first ten rows of data.</p>
+<table>
+<caption><span id="tab:3VarTable">Table 4: </span>Select State, County, and Measurement variables.</caption>
+<thead>
+<tr class="header">
+<th align="center">State_Name</th>
+<th align="center">County_Name</th>
+<th align="center">Sample_Measurement</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">0.047</td>
+</tr>
+<tr class="even">
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">0.047</td>
+</tr>
+<tr class="odd">
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">0.043</td>
+</tr>
+<tr class="even">
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">0.038</td>
+</tr>
+<tr class="odd">
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">0.035</td>
+</tr>
+<tr class="even">
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">0.035</td>
+</tr>
+<tr class="odd">
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">0.034</td>
+</tr>
+<tr class="even">
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">0.037</td>
+</tr>
+<tr class="odd">
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">0.044</td>
+</tr>
+<tr class="even">
+<td align="center">Alabama</td>
+<td align="center">Baldwin</td>
+<td align="center">0.046</td>
+</tr>
+</tbody>
+</table>
+<p>A more detailed look at the State, County, Count of measurements, and Mean Ozone reading shown in this table.</p>
+<pre class="r"><code>  summarize(group_by(ozn, 
+                     State_Name, 
+                     County_Name), 
+            count = n(), 
+            meanOzone = mean(Sample_Measurement))</code></pre>
+<pre><code>## # A tibble: 797 x 4
+## # Groups:   State_Name [53]
+##    State_Name County_Name count meanOzone
+##    &lt;chr&gt;      &lt;chr&gt;       &lt;int&gt;     &lt;dbl&gt;
+##  1 Alabama    Baldwin      5492    0.0293
+##  2 Alabama    Colbert      5613    0.0249
+##  3 Alabama    DeKalb       8232    0.0320
+##  4 Alabama    Elmore       5585    0.0292
+##  5 Alabama    Etowah       5578    0.0261
+##  6 Alabama    Houston      5562    0.0272
+##  7 Alabama    Jefferson   41443    0.0262
+##  8 Alabama    Madison     11678    0.0300
+##  9 Alabama    Mobile      10874    0.0259
+## 10 Alabama    Montgomery   5560    0.0282
+## # ... with 787 more rows</code></pre>
+<p>Here we can summarize the State and Counties with the lowest Mean Ozone readings. Puerto Rico and Alaska, along with Oklahoma, Oregon, Washington, etc. have the lowest readings of Mean Ozone in this data set. The <code>arrange()</code> function does this in ascending order by default.</p>
+<pre class="r"><code>ozn %&gt;%
+  group_by(State_Name, County_Name) %&gt;%
+  summarize(count = n(), MeanO = mean(Sample_Measurement)) %&gt;%
+  arrange(MeanO)</code></pre>
+<pre><code>## # A tibble: 797 x 4
+## # Groups:   State_Name [53]
+##    State_Name  County_Name          count   MeanO
+##    &lt;chr&gt;       &lt;chr&gt;                &lt;int&gt;   &lt;dbl&gt;
+##  1 Puerto Rico Catano                8038 0.00449
+##  2 Puerto Rico Bayamon               2794 0.00852
+##  3 Alaska      Fairbanks North Star  8575 0.0133 
+##  4 Puerto Rico Juncos                8180 0.0135 
+##  5 Oklahoma    Caddo                 7507 0.0175 
+##  6 Oregon      Washington            9215 0.0196 
+##  7 Washington  Whatcom               3098 0.0201 
+##  8 Louisiana   West Baton Rouge      8635 0.0201 
+##  9 New Jersey  Warren                8620 0.0201 
+## 10 Georgia     DeKalb                8594 0.0205 
+## # ... with 787 more rows</code></pre>
+<p>This table displays the highest Mean Ozone readings per State and County in this data set. Colorado, California, and Wyoming are at the top, with Utah and Nevada.</p>
+<pre class="r"><code>ozn %&gt;%
+  group_by(State_Name, County_Name) %&gt;%
+  summarize(count = n(), MeanO = mean(Sample_Measurement)) %&gt;%
+  arrange(desc(MeanO))</code></pre>
+<pre><code>## # A tibble: 797 x 4
+## # Groups:   State_Name [53]
+##    State_Name County_Name count  MeanO
+##    &lt;chr&gt;      &lt;chr&gt;       &lt;int&gt;  &lt;dbl&gt;
+##  1 Colorado   Clear Creek  6447 0.0502
+##  2 California Mariposa    12130 0.0485
+##  3 California Nevada      12748 0.0482
+##  4 Colorado   Park         8127 0.0480
+##  5 Wyoming    Albany       8056 0.0474
+##  6 Colorado   Chaffee      3748 0.0473
+##  7 California Inyo         8667 0.0447
+##  8 Utah       San Juan    10794 0.0444
+##  9 California El Dorado   16521 0.0436
+## 10 Nevada     Elko         3431 0.0435
+## # ... with 787 more rows</code></pre>
+<p>This summary table shows the number of readings taken per day for the entire year across all states. The summary indicates that not every monitoring station records consistently.</p>
+<pre class="r"><code>ozn %&gt;%
+  group_by(Date_Local) %&gt;%
+  summarize(readings_day = n())</code></pre>
+<pre><code>## # A tibble: 365 x 2
+##    Date_Local readings_day
+##    &lt;date&gt;            &lt;int&gt;
+##  1 2014-01-01        18115
+##  2 2014-01-02        17901
+##  3 2014-01-03        17992
+##  4 2014-01-04        17929
+##  5 2014-01-05        17769
+##  6 2014-01-06        17561
+##  7 2014-01-07        17433
+##  8 2014-01-08        17706
+##  9 2014-01-09        17820
+## 10 2014-01-10        18156
+## # ... with 355 more rows</code></pre>
+<p>As eluded to earlier, the data records once an hour of a day totaling 24 measurements a day for each monitoring station. However, by the previous table, we see that the number of readings per day is not the same every day of the year and should be noted. We can further display the number of days monitoring occurs at 365 days. And finally, across 53 states and territories. We saw earlier Puerto Rico counts as a State. The next table will itemize each State.</p>
+<pre class="r"><code>ozn %&gt;%
+  summarize(Times_Recorded = n_distinct(Time_Local))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   Times_Recorded
+##            &lt;int&gt;
+## 1             24</code></pre>
+<pre class="r"><code>ozn %&gt;%
+  summarize(Total_Days_Recorded = n_distinct(Date_Local))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   Total_Days_Recorded
+##                 &lt;int&gt;
+## 1                 365</code></pre>
+<pre class="r"><code>ozn %&gt;%
+  summarize(Total_n_States = n_distinct(State_Name))</code></pre>
+<pre><code>## # A tibble: 1 x 1
+##   Total_n_States
+##            &lt;int&gt;
+## 1             53</code></pre>
+<p>Below is the table with each State name. Looking through the table are the 48 contiguous States, including Alaska and Hawaii. Then the District of Columbia, Puerto Rico, and Country of Mexico totaling 53. This information can lead us to further analysis using the latitude and longitude to find data that we may desire for continued research, particularly the “Country of Mexico”; is that measurement station desirable in our analysis? Or maybe we are only interested in the continental U.S. for analysis.</p>
+<pre class="r"><code>ozn %&gt;%
+  group_by(State_Name) %&gt;%
+  distinct(State_Name)</code></pre>
+<pre><code>## # A tibble: 53 x 1
+## # Groups:   State_Name [53]
+##    State_Name          
+##    &lt;chr&gt;               
+##  1 Alabama             
+##  2 Alaska              
+##  3 Arizona             
+##  4 Arkansas            
+##  5 California          
+##  6 Colorado            
+##  7 Connecticut         
+##  8 Delaware            
+##  9 District Of Columbia
+## 10 Florida             
+## # ... with 43 more rows</code></pre>
+<p>The “Sample_Measurement” can be further analyzed by itemizing each State by breaking out the measurements into quantiles of 10%, 25%, 50%, 75%, and 99%.</p>
+<pre class="r"><code>probs = c(0.01, 0.25, 0.5, 0.75, 0.99)
+ozn %&gt;%
+  group_by(State_Name) %&gt;%
+  summarize(p =list(probs), q = list(quantile(Sample_Measurement, probs))) %&gt;%
+  unnest(cols = c(p, q))</code></pre>
+<pre><code>## # A tibble: 265 x 3
+##    State_Name     p     q
+##    &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;
+##  1 Alabama     0.01 0    
+##  2 Alabama     0.25 0.014
+##  3 Alabama     0.5  0.027
+##  4 Alabama     0.75 0.039
+##  5 Alabama     0.99 0.062
+##  6 Alaska      0.01 0    
+##  7 Alaska      0.25 0.011
+##  8 Alaska      0.5  0.022
+##  9 Alaska      0.75 0.032
+## 10 Alaska      0.99 0.051
+## # ... with 255 more rows</code></pre>
+<p>In an earlier table, Clear Creek County, Colorado, was showing the highest Sample_Measurement value. Here is the measurement of ozone for each month. The ozone value climbs in April/May, peaking in June then dropping in July.</p>
+<pre class="r"><code>ozn %&gt;%
+  filter(State_Name == &quot;Colorado&quot; &amp; County_Name == &quot;Clear Creek&quot;) %&gt;%
+  mutate(Month = lubridate::month(Date_Local, label = TRUE)) %&gt;%
+  group_by(Month) %&gt;%
+  summarize(Ozone = mean(Sample_Measurement))</code></pre>
+<pre><code>## # A tibble: 11 x 2
+##    Month  Ozone
+##    &lt;ord&gt;  &lt;dbl&gt;
+##  1 Jan   0.0471
+##  2 Feb   0.0474
+##  3 Apr   0.0585
+##  4 May   0.0592
+##  5 Jun   0.0621
+##  6 Jul   0.0529
+##  7 Aug   0.0494
+##  8 Sep   0.0473
+##  9 Oct   0.0471
+## 10 Nov   0.0448
+## 11 Dec   0.0443</code></pre>
+<p>Washington County, Oregon, was listed in the top six lowest measurements of ozone in a previous table. Below is the summary of Washington County, Oregon, by each month. The data summary is missing readings from January through April. The data would further our exploratory analysis and noting this as missing data. A point to look for a more thorough analysis.</p>
+<pre class="r"><code>ozn %&gt;%
+filter(State_Name == &quot;Oregon&quot; &amp; County_Name == &quot;Washington&quot;) %&gt;%
+  mutate(Month = lubridate::month(Date_Local, label=TRUE)) %&gt;%
+  group_by(Month) %&gt;%
+  summarize(Ozone = mean(Sample_Measurement))</code></pre>
+<pre><code>## # A tibble: 8 x 2
+##   Month  Ozone
+##   &lt;ord&gt;  &lt;dbl&gt;
+## 1 May   0.0261
+## 2 Jun   0.0199
+## 3 Jul   0.0219
+## 4 Aug   0.0209
+## 5 Sep   0.0201
+## 6 Oct   0.0108
+## 7 Nov   0.0155
+## 8 Dec   0.0123</code></pre>
+<p>After this analysis one would start to develop a hypothesis or business question that we can answer with the data. Also graphical representations of the data should be employed to better visualize the relationships in the data. We use graphics in other posts.</p>
+</div>
+<div id="references" class="section level4">
+<h4>References</h4>
+<p>EPA - United States Environmental Protection Agency (2017). Pre-Generated Data Files. Retrieved from: <a href="https://aqs.epa.gov/aqsweb/airdata/download_files.html" class="uri">https://aqs.epa.gov/aqsweb/airdata/download_files.html</a></p>
+<p>EPA - United States Environmmental Protection Agency (2017). AirData Download Files Documentation. Retrieved from: <a href="https://aqs.epa.gov/aqsweb/airdata/FileFormats.html" class="uri">https://aqs.epa.gov/aqsweb/airdata/FileFormats.html</a></p>
+<p>Grolemund, G., Wickham, H. (2017) R for Data Science. Retrieved from: <a href="https://r4ds.had.co.nz/" class="uri">https://r4ds.had.co.nz/</a></p>
+<p>Peng, R. D. (2015). Exploratory Data Analysis with R. Retrieved from: <a href="https://leanpub.com/exdata" class="uri">https://leanpub.com/exdata</a></p>
+</div>

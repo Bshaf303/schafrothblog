@@ -273,6 +273,46 @@
   </url>
   
   <url>
+    <loc>/tags/data-exploration/</loc>
+    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/data-manipulation/</loc>
+    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/data-transformation/</loc>
+    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/data-wrangling/</loc>
+    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/eda-in-data-science/</loc>
+    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/exploratory-data-analysis/</loc>
+    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</loc>
+    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r-programming/</loc>
+    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/data-analysis/</loc>
     <lastmod>2018-07-07T00:00:00+00:00</lastmod>
   </url>
@@ -283,42 +323,12 @@
   </url>
   
   <url>
-    <loc>/tags/data-manipulation/</loc>
-    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-transformation/</loc>
-    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-wrangling/</loc>
-    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/dplyr-package/</loc>
     <lastmod>2018-07-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/eda-in-data-science/</loc>
-    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/exploratory-data-analysis/</loc>
-    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/lubridate-package/</loc>
-    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/r-programming/</loc>
     <lastmod>2018-07-07T00:00:00+00:00</lastmod>
   </url>
   

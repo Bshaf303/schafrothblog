@@ -1,0 +1,228 @@
+---
+title: Exploratory Data Analysis - EPA Ozone Data
+author: 'Bryan'
+date: '2018-07-14'
+slug: exploratory-data-analysis-epa-ozone-data
+categories:
+  - Exploratory Data Analysis
+  - R Programming
+tags:
+  - data manipulation
+  - data transformation
+  - data wrangling
+  - EDA in Data Science
+  - Data Exploration
+---
+
+#### Introduction
+
+This exploratory data analysis will use the "hourly_44201_2014" data set obtained from the web site: https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw  The data is "Criteria Gases" and labeled "Ozone (44201)" for this particular data set. The data is loaded into RStudio and shows 9,060,694 rows and 24 variables.  
+
+There are 24 variables in this data set. Looking through the variables, we can see the first four are coded presumably by the EPA. The Latitude, Longitude, and Datum are geo-location data. Datum NAD83 is the coordinate system for North American datum, while the WGS84 is a world coordinate system and tells that there are measurements taken presumably in another region or territory of the U.S. The "Date_Local" variable is clearly showing 365 unique dates, which cover the number of days in a year. The "Time_local" variable indicates 24 individual observations and covers each hour in a day. We see the variable measurements labeled as "Sample_Measurement" and then some more coded variables. The last variables are the "State_Name", "County_Name". The 53 individual names in the "State_Name" variable stand out, and this possibly coincides with the WGS84 coordinate system for U.S. States outside of the 48 States and are territories.
+In summary, we have essential geographic information, time/date information, and an Ozone measurement available in the data set. For this analysis, we can disregard the internal coding from the EPA.  
+
+#### Load the Tidyverse Library 
+
+```{r loadlibrary, message = FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+#### Importing the Data into R Studio
+
+A note about loading the data: this data analysis is using R and the Tidyverse package. Tidyverse at this writing, can not download and open .zip files from a URL. Thus a temp file is created, and the .zip data file is loaded into it then unzipped from this temp location, which then read into a tibble or data frame. In this coding step, I have identified the variables' data type per the EPA specifications describing this data. Knowing the data type may not be the case in other data sets pulled from the web, or identifying the data type after performing the summary statistics. The last line of code is to keep with acceptable coding standards and format the variable names to work with R by removing white spaces and placing an underscore between descriptors. 
+
+```{r importdata, cache = TRUE, warning = FALSE, message = FALSE, cache.lazy=FALSE}
+# place data into frame
+url = "https://aqs.epa.gov/aqsweb/airdata/hourly_44201_2014.zip" 
+# create temp file for the zip file
+zip_file = tempfile(fileext = ".zip") 
+# unzip data into temp location
+download.file(url, zip_file, method = 'libcurl', mode = "wb") 
+# read data into a tibble and specify data type for each variable, see EPA data source
+ozn = readr::read_csv(zip_file, col_types = "iiiiinnccDtDtncnlccicccc") 
+# remove spaces in variables and replace with underscore
+names(ozn) = gsub("\\s", "_", names(ozn)) 
+unlink(zip_file)
+```
+
+#### Viewing the Dataset
+
+Showing the variable names using the `names()` function. 
+
+```{r}
+names(ozn)
+```
+
+Using `glimpse()` can quickly display the data when in a tibble format. 
+- `chr` are characters
+- `dbl` are real numbers
+- `int` are integers
+- `date` 
+- `time`
+- `lgl` is logical
+- `fctr` is factors or categorical
+
+```{r}
+tibble::glimpse(ozn)
+```
+
+
+```{r table, echo=FALSE}
+knitr::kable(ozn[1:10, ], align = 'c', caption="The EPA Hourly Ozone Dataset - First 10 Rows")
+```
+
+#### Data Summary Function
+
+The summary function displays the data format and shows a nice breakdown of the data. The "Site_Num" variable indicates 9,997 total monitoring sites. I specified the data type and the data/time came in precisely when imported into the tibble. The "Sample_Measurement" shows no missing data indicated by NA's and a min of -0.005 to 0.213 max measurement with the mean around 0.03027. The "Method_Name" is describing the ultraviolet method of measure with a chemiluminescence API model. The "State_Name" variable lists familiar names as well as the "County_Name" variable. The data is reasonably clean and looking ahead, and we could exclude much of the variables for a few vital variables (ozone, county, state, time, date, latitude, longitude).
+
+```{r}
+summary(ozn)
+```
+
+Below is the `skimr` library function and provides an excellent summary of the data, particularly the histogram at the bottom, giving the numeric data types distribution.
+
+```{r loadskimr, warning = FALSE, message = FALSE}
+skimr::skim(ozn)
+```
+
+These next lines are ways to narrow in on the data metrics. First, we can see how many different Latitude and Longitude values there are in each variable. Observed 1,305 unique Latitudes and 1,306 unique Longitudes.
+
+```{r}
+ozn %>%
+  summarize(Total_Lat = n_distinct(Latitude)) 
+```
+```{r}
+ozn %>%
+  summarize(Total_Long = n_distinct(Longitude))
+```
+
+I break down all the counties by latitude and longitude based on the variable's 1,306 unique longitude values. This assumes where the ozone monitors are positioned.
+
+```{r}
+ozn %>%
+  group_by(County_Name, Latitude, Longitude) %>%
+  summarize(Lat = n_distinct(Longitude))
+```
+
+If I want to view the first ten rows of Latitude and Longitude and put it into a table, I can specify that in R.
+
+```{r select3, echo=FALSE}
+knitr::kable((select(ozn,
+                     Latitude:Longitude)[1:10, ]), 
+             align = 'c',
+             caption="Latitude and Longitude variables.")
+``` 
+
+Taking the concept further, I can create a table showing the State, County, and Sample Measurement, only displaying the first ten rows of data.   
+
+```{r 3VarTable, echo=FALSE}
+knitr::kable((select(ozn,
+                     State_Name, County_Name, Sample_Measurement)[1:10, ]), 
+             align = 'c',
+             caption="Select State, County, and Measurement variables.")
+```
+
+A more detailed look at the State, County, Count of measurements, and Mean Ozone reading shown in this table. 
+
+```{r}
+  summarize(group_by(ozn, 
+                     State_Name, 
+                     County_Name), 
+            count = n(), 
+            meanOzone = mean(Sample_Measurement))
+```
+
+Here we can summarize the State and Counties with the lowest Mean Ozone readings. Puerto Rico and Alaska, along with Oklahoma, Oregon, Washington, etc. have the lowest readings of Mean Ozone in this data set. The `arrange()` function does this in ascending order by default.  
+
+```{r}
+ozn %>%
+  group_by(State_Name, County_Name) %>%
+  summarize(count = n(), MeanO = mean(Sample_Measurement)) %>%
+  arrange(MeanO)
+          
+```
+
+This table displays the highest Mean Ozone readings per State and County in this data set. Colorado, California, and Wyoming are at the top, with Utah and Nevada. 
+
+```{r}
+ozn %>%
+  group_by(State_Name, County_Name) %>%
+  summarize(count = n(), MeanO = mean(Sample_Measurement)) %>%
+  arrange(desc(MeanO))
+          
+```
+
+This summary table shows the number of readings taken per day for the entire year across all states. The summary indicates that not every monitoring station records consistently.  
+
+```{r}
+ozn %>%
+  group_by(Date_Local) %>%
+  summarize(readings_day = n())
+```
+
+As eluded to earlier, the data records once an hour of a day totaling 24 measurements a day for each monitoring station. However, by the previous table, we see that the number of readings per day is not the same every day of the year and should be noted. We can further display the number of days monitoring occurs at 365 days. And finally, across 53 states and territories. We saw earlier Puerto Rico counts as a State. The next table will itemize each State. 
+
+```{r}
+ozn %>%
+  summarize(Times_Recorded = n_distinct(Time_Local))
+```
+```{r}
+ozn %>%
+  summarize(Total_Days_Recorded = n_distinct(Date_Local))
+```
+```{r}
+ozn %>%
+  summarize(Total_n_States = n_distinct(State_Name))
+```
+
+Below is the table with each State name. Looking through the table are the 48 contiguous States, including Alaska and Hawaii. Then the District of Columbia, Puerto Rico, and Country of Mexico totaling 53. This information can lead us to further analysis using the latitude and longitude to find data that we may desire for continued research, particularly the "Country of Mexico"; is that measurement station desirable in our analysis? Or maybe we are only interested in the continental U.S. for analysis.
+
+```{r}
+ozn %>%
+  group_by(State_Name) %>%
+  distinct(State_Name)
+```
+
+The "Sample_Measurement " can be further analyzed by itemizing each State by breaking out the measurements into quantiles of 10%, 25%, 50%, 75%, and 99%. 
+
+```{r}
+probs = c(0.01, 0.25, 0.5, 0.75, 0.99)
+ozn %>%
+  group_by(State_Name) %>%
+  summarize(p =list(probs), q = list(quantile(Sample_Measurement, probs))) %>%
+  unnest(cols = c(p, q))
+```
+
+In an earlier table, Clear Creek County, Colorado, was showing the highest Sample_Measurement value. Here is the measurement of ozone for each month. The ozone value climbs in April/May, peaking in June then dropping in July.
+
+```{r}
+ozn %>%
+  filter(State_Name == "Colorado" & County_Name == "Clear Creek") %>%
+  mutate(Month = lubridate::month(Date_Local, label = TRUE)) %>%
+  group_by(Month) %>%
+  summarize(Ozone = mean(Sample_Measurement))
+```
+
+Washington County, Oregon, was listed in the top six lowest measurements of ozone in a previous table. Below is the summary of Washington County, Oregon, by each month. The data summary is missing readings from January through April. The data would further our exploratory analysis and noting this as missing data. A point to look for a more thorough analysis. 
+
+```{r}
+ozn %>%
+filter(State_Name == "Oregon" & County_Name == "Washington") %>%
+  mutate(Month = lubridate::month(Date_Local, label=TRUE)) %>%
+  group_by(Month) %>%
+  summarize(Ozone = mean(Sample_Measurement))
+```
+
+After this analysis one would start to develop a hypothesis or business question that we can answer with the data. Also graphical representations of the data should be employed to better visualize the relationships in the data. We use graphics in other posts. 
+
+
+#### References
+
+EPA - United States Environmental Protection Agency (2017). Pre-Generated Data Files. Retrieved from: https://aqs.epa.gov/aqsweb/airdata/download_files.html
+
+EPA - United States Environmmental Protection Agency (2017). AirData Download Files Documentation. Retrieved from: https://aqs.epa.gov/aqsweb/airdata/FileFormats.html
+
+Grolemund, G., Wickham, H. (2017) R for Data Science. Retrieved from: https://r4ds.had.co.nz/
+
+Peng, R. D. (2015). Exploratory Data Analysis with R. Retrieved from: https://leanpub.com/exdata
+

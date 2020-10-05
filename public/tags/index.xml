@@ -228,9 +228,18 @@
     </item>
     
     <item>
+      <title>Data Exploration</title>
+      <link>/tags/data-exploration/</link>
+      <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/data-exploration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>data manipulation</title>
       <link>/tags/data-manipulation/</link>
-      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/data-manipulation/</guid>
       <description></description>
@@ -239,7 +248,7 @@
     <item>
       <title>data transformation</title>
       <link>/tags/data-transformation/</link>
-      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/data-transformation/</guid>
       <description></description>
@@ -248,9 +257,18 @@
     <item>
       <title>data wrangling</title>
       <link>/tags/data-wrangling/</link>
-      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/data-wrangling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EDA in Data Science</title>
+      <link>/tags/eda-in-data-science/</link>
+      <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/eda-in-data-science/</guid>
       <description></description>
     </item>
     
@@ -260,15 +278,6 @@
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/dplyr-package/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>EDA in Data Science</title>
-      <link>/tags/eda-in-data-science/</link>
-      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/eda-in-data-science/</guid>
       <description></description>
     </item>
     

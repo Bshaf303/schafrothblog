@@ -188,6 +188,16 @@ Or hover mouse over slide and scroll through:
     </item>
     
     <item>
+      <title>Exploratory Data Analysis - EPA Ozone Data</title>
+      <link>/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</link>
+      <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</guid>
+      <description>IntroductionThis exploratory data analysis will use the “hourly_44201_2014” data set obtained from the web site: https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw The data is “Criteria Gases” and labeled “Ozone (44201)” for this particular data set. The data is loaded into RStudio and shows 9,060,694 rows and 24 variables.
+There are 24 variables in this data set. Looking through the variables, we can see the first four are coded presumably by the EPA. The Latitude, Longitude, and Datum are geo-location data.</description>
+    </item>
+    
+    <item>
       <title>Data Exploration - The Chicago Dataset</title>
       <link>/post/2018/07/07/data-exploration-the-chicago-dataset/</link>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
