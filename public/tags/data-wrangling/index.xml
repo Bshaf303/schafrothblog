@@ -30,5 +30,14 @@ There are 24 variables in this data set. Looking through the variables, we can s
       <description>IntroductionThis article is about using the tidyverse package in R to explore data. The Chicago dataset is the basis for this analysis. The data is air quality measurements taken over 19 years. The focus is on using the dplyr package to do the analysis. The dplyr package is part of the tidyverse in R and a suite of tools to analyze, transform, plot, and manipulate data. The base version of R does all of this; however, dplyr will work faster and cost fewer computing resources when used on big data.</description>
     </item>
     
+    <item>
+      <title>Data Preprocessing - Diamonds Dataset</title>
+      <link>/post/2018/05/13/data-preprocessing-diamonds-dataset/</link>
+      <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/05/13/data-preprocessing-diamonds-dataset/</guid>
+      <description>Data PreprocessingThe following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with one-hot encoding or dummy variables, scaling data, normalizing data.</description>
+    </item>
+    
   </channel>
 </rss>

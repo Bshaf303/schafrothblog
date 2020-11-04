@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Data Preprocessing - Diamonds Dataset | Bryan Schafroth Portfolio</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/post/">Posts</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Data Preprocessing - Diamonds Dataset</span></h1>
+<h2 class="author">Bryan</h2>
+<h2 class="date">2018/05/13</h2>
+</div>
+
+<main>
+
+
+
+<div id="data-preprocessing" class="section level4">
+<h4>Data Preprocessing</h4>
+<p>The following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with <em>one-hot encoding</em> or dummy variables, scaling data, normalizing data. The majority of code is not the focus of this analysis but rest assured, and there are close to 700 lines written for the graphing presented in this article.</p>
+<p>The tidyverse package is the primary tool used in R for this analysis in addition to a few other R packages.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+</div>
+<div id="import-the-data" class="section level4">
+<h4>Import the Data</h4>
+<p>The data imports into the <code>diamonds</code> tibble, also specify the data type for each data column as factors (categorical), doubles (digits), and an integer.</p>
+<pre class="r"><code>diamonds &lt;- read_csv(&quot;https://github.com/tidyverse/ggplot2/raw/master/data-raw/diamonds.csv&quot;, col_types = &quot;dfffddiddd&quot;)</code></pre>
+</div>
+<div id="data-summary" class="section level4">
+<h4>Data Summary</h4>
+<p>R’s summary methods are <code>summary</code> from base R and <code>glimpse</code> from the tidyverse. The data has 53,940 records and ten columns of data. There are three categorical data types: <code>cut</code>, <code>color</code>, and <code>clarity</code>, while the remaining variables <code>carat</code>, <code>depth</code>, <code>table</code>, <code>x, y, &amp; z</code> are digits and <code>price</code> (integers). Within the categorical variables of <code>cut, color</code>, and <code>clarity</code>, there is an imbalance and noted if using machine learning algorithms in modeling the data. The min and max values of <code>x, y, z</code> standout in the numeric data. As shown later, <code>x, y, z</code> are measurements, and a zero measurement would not be possible. The <code>price</code> variable has an $18,497 range. The median is $2401, indicating the possibility of outlier values, and the <code>carat</code> range from 0.2 to 5.0, with a median of 0.7 carats. And overall, there are no missing values or NA’s in this data.</p>
+<pre class="r"><code>tibble::glimpse(diamonds)</code></pre>
+<pre><code>## Rows: 53,940
+## Columns: 10
+## $ carat   &lt;dbl&gt; 0.23, 0.21, 0.23, 0.29, 0.31, 0.24, 0.24, 0.26, 0.22, 0.23,...
+## $ cut     &lt;fct&gt; Ideal, Premium, Good, Premium, Good, Very Good, Very Good, ...
+## $ color   &lt;fct&gt; E, E, E, I, J, J, I, H, E, H, J, J, F, J, E, E, I, J, J, J,...
+## $ clarity &lt;fct&gt; SI2, SI1, VS1, VS2, SI2, VVS2, VVS1, SI1, VS2, VS1, SI1, VS...
+## $ depth   &lt;dbl&gt; 61.5, 59.8, 56.9, 62.4, 63.3, 62.8, 62.3, 61.9, 65.1, 59.4,...
+## $ table   &lt;dbl&gt; 55, 61, 65, 58, 58, 57, 57, 55, 61, 61, 55, 56, 61, 54, 62,...
+## $ price   &lt;int&gt; 326, 326, 327, 334, 335, 336, 336, 337, 337, 338, 339, 340,...
+## $ x       &lt;dbl&gt; 3.95, 3.89, 4.05, 4.20, 4.34, 3.94, 3.95, 4.07, 3.87, 4.00,...
+## $ y       &lt;dbl&gt; 3.98, 3.84, 4.07, 4.23, 4.35, 3.96, 3.98, 4.11, 3.78, 4.05,...
+## $ z       &lt;dbl&gt; 2.43, 2.31, 2.31, 2.63, 2.75, 2.48, 2.47, 2.53, 2.49, 2.39,...</code></pre>
+<pre class="r"><code>summary(diamonds)</code></pre>
+<pre><code>##      carat               cut        color        clarity          depth      
+##  Min.   :0.2000   Ideal    :21551   E: 9797   SI1    :13065   Min.   :43.00  
+##  1st Qu.:0.4000   Premium  :13791   I: 5422   VS2    :12258   1st Qu.:61.00  
+##  Median :0.7000   Good     : 4906   J: 2808   SI2    : 9194   Median :61.80  
+##  Mean   :0.7979   Very Good:12082   H: 8304   VS1    : 8171   Mean   :61.75  
+##  3rd Qu.:1.0400   Fair     : 1610   F: 9542   VVS2   : 5066   3rd Qu.:62.50  
+##  Max.   :5.0100                     G:11292   VVS1   : 3655   Max.   :79.00  
+##                                     D: 6775   (Other): 2531                  
+##      table           price             x                y         
+##  Min.   :43.00   Min.   :  326   Min.   : 0.000   Min.   : 0.000  
+##  1st Qu.:56.00   1st Qu.:  950   1st Qu.: 4.710   1st Qu.: 4.720  
+##  Median :57.00   Median : 2401   Median : 5.700   Median : 5.710  
+##  Mean   :57.46   Mean   : 3933   Mean   : 5.731   Mean   : 5.735  
+##  3rd Qu.:59.00   3rd Qu.: 5324   3rd Qu.: 6.540   3rd Qu.: 6.540  
+##  Max.   :95.00   Max.   :18823   Max.   :10.740   Max.   :58.900  
+##                                                                   
+##        z         
+##  Min.   : 0.000  
+##  1st Qu.: 2.910  
+##  Median : 3.530  
+##  Mean   : 3.539  
+##  3rd Qu.: 4.040  
+##  Max.   :31.800  
+## </code></pre>
+</div>
+<div id="identify-the-zero-values-in-x-y-z" class="section level4">
+<h4>Identify the Zero Values in x, y, z</h4>
+<p>The summary table above lists the <code>x, y, and z</code> variables having a minimum value of 0. The minimum value of zero would not be possible. Table 1 lists out all the instances of <code>x, y, z</code> == 0, and there are twenty observations total. These rows are removed from the data because the sample is low and won’t impact the analysis or modeling later. Table 2 below shows that the values are removed and correctly display the lowest <code>x, y , z</code> values in the data.</p>
+<pre class="r"><code>xyzZero = filter(diamonds, x == 0 | y == 0 | z == 0)</code></pre>
+<table>
+<caption><span id="tab:ZeroValuesTable">Table 1: </span>Values Equal to Zero in x, y, z Variables</caption>
+<thead>
+<tr class="header">
+<th align="center">carat</th>
+<th align="center">cut</th>
+<th align="center">color</th>
+<th align="center">clarity</th>
+<th align="center">depth</th>
+<th align="center">table</th>
+<th align="center">price</th>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center">z</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Premium</td>
+<td align="center">G</td>
+<td align="center">SI2</td>
+<td align="center">59</td>
+<td align="center">59</td>
+<td align="center">3142</td>
+<td align="center">7</td>
+<td align="center">6</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">Premium</td>
+<td align="center">H</td>
+<td align="center">I1</td>
+<td align="center">58</td>
+<td align="center">59</td>
+<td align="center">3167</td>
+<td align="center">7</td>
+<td align="center">7</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Premium</td>
+<td align="center">G</td>
+<td align="center">SI2</td>
+<td align="center">63</td>
+<td align="center">59</td>
+<td align="center">3696</td>
+<td align="center">6</td>
+<td align="center">6</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">Premium</td>
+<td align="center">F</td>
+<td align="center">SI2</td>
+<td align="center">59</td>
+<td align="center">58</td>
+<td align="center">3837</td>
+<td align="center">6</td>
+<td align="center">6</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">Good</td>
+<td align="center">G</td>
+<td align="center">I1</td>
+<td align="center">64</td>
+<td align="center">61</td>
+<td align="center">4731</td>
+<td align="center">7</td>
+<td align="center">7</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">Ideal</td>
+<td align="center">F</td>
+<td align="center">SI2</td>
+<td align="center">62</td>
+<td align="center">56</td>
+<td align="center">4954</td>
+<td align="center">0</td>
+<td align="center">7</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Very Good</td>
+<td align="center">H</td>
+<td align="center">VS2</td>
+<td align="center">63</td>
+<td align="center">53</td>
+<td align="center">5139</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">Ideal</td>
+<td align="center">G</td>
+<td align="center">VS2</td>
+<td align="center">59</td>
+<td align="center">56</td>
+<td align="center">5564</td>
+<td align="center">7</td>
+<td align="center">7</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Fair</td>
+<td align="center">G</td>
+<td align="center">VS1</td>
+<td align="center">58</td>
+<td align="center">67</td>
+<td align="center">6381</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">Premium</td>
+<td align="center">H</td>
+<td align="center">SI2</td>
+<td align="center">59</td>
+<td align="center">61</td>
+<td align="center">12631</td>
+<td align="center">8</td>
+<td align="center">8</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">Ideal</td>
+<td align="center">G</td>
+<td align="center">VS2</td>
+<td align="center">62</td>
+<td align="center">54</td>
+<td align="center">12800</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">Premium</td>
+<td align="center">I</td>
+<td align="center">SI1</td>
+<td align="center">61</td>
+<td align="center">58</td>
+<td align="center">15397</td>
+<td align="center">9</td>
+<td align="center">8</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Premium</td>
+<td align="center">D</td>
+<td align="center">VVS1</td>
+<td align="center">62</td>
+<td align="center">59</td>
+<td align="center">15686</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">Premium</td>
+<td align="center">H</td>
+<td align="center">SI1</td>
+<td align="center">61</td>
+<td align="center">59</td>
+<td align="center">17265</td>
+<td align="center">8</td>
+<td align="center">8</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">2</td>
+<td align="center">Premium</td>
+<td align="center">H</td>
+<td align="center">SI2</td>
+<td align="center">63</td>
+<td align="center">59</td>
+<td align="center">18034</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">2</td>
+<td align="center">Premium</td>
+<td align="center">H</td>
+<td align="center">VS2</td>
+<td align="center">63</td>
+<td align="center">53</td>
+<td align="center">18207</td>
+<td align="center">8</td>
+<td align="center">8</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">3</td>
+<td align="center">Good</td>
+<td align="center">G</td>
+<td align="center">SI2</td>
+<td align="center">64</td>
+<td align="center">58</td>
+<td align="center">18788</td>
+<td align="center">9</td>
+<td align="center">9</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">Good</td>
+<td align="center">F</td>
+<td align="center">SI2</td>
+<td align="center">64</td>
+<td align="center">60</td>
+<td align="center">2130</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">Good</td>
+<td align="center">F</td>
+<td align="center">SI2</td>
+<td align="center">64</td>
+<td align="center">60</td>
+<td align="center">2130</td>
+<td align="center">0</td>
+<td align="center">0</td>
+<td align="center">0</td>
+</tr>
+<tr class="even">
+<td align="center">1</td>
+<td align="center">Premium</td>
+<td align="center">G</td>
+<td align="center">I1</td>
+<td align="center">60</td>
+<td align="center">59</td>
+<td align="center">2383</td>
+<td align="center">7</td>
+<td align="center">7</td>
+<td align="center">0</td>
+</tr>
+</tbody>
+</table>
+<p>Remove all <code>x, y, z</code> equal to zero rows from data. A total of 20 rows will be removed.</p>
+<table>
+<caption><span id="tab:joindata">Table 2: </span>Removed All x,y,z Equal to Zero Values</caption>
+<thead>
+<tr class="header">
+<th align="center">carat</th>
+<th align="center">cut</th>
+<th align="center">color</th>
+<th align="center">clarity</th>
+<th align="center">depth</th>
+<th align="center">table</th>
+<th align="center">price</th>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center">z</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">0.23</td>
+<td align="center">Ideal</td>
+<td align="center">E</td>
+<td align="center">SI2</td>
+<td align="center">61.5</td>
+<td align="center">55</td>
+<td align="center">326</td>
+<td align="center">3.95</td>
+<td align="center">3.98</td>
+<td align="center">2.43</td>
+</tr>
+<tr class="even">
+<td align="center">0.21</td>
+<td align="center">Premium</td>
+<td align="center">E</td>
+<td align="center">SI1</td>
+<td align="center">59.8</td>
+<td align="center">61</td>
+<td align="center">326</td>
+<td align="center">3.89</td>
+<td align="center">3.84</td>
+<td align="center">2.31</td>
+</tr>
+<tr class="odd">
+<td align="center">0.23</td>
+<td align="center">Good</td>
+<td align="center">E</td>
+<td align="center">VS1</td>
+<td align="center">56.9</td>
+<td align="center">65</td>
+<td align="center">327</td>
+<td align="center">4.05</td>
+<td align="center">4.07</td>
+<td align="center">2.31</td>
+</tr>
+<tr class="even">
+<td align="center">0.29</td>
+<td align="center">Premium</td>
+<td align="center">I</td>
+<td align="center">VS2</td>
+<td align="center">62.4</td>
+<td align="center">58</td>
+<td align="center">334</td>
+<td align="center">4.20</td>
+<td align="center">4.23</td>
+<td align="center">2.63</td>
+</tr>
+<tr class="odd">
+<td align="center">0.31</td>
+<td align="center">Good</td>
+<td align="center">J</td>
+<td align="center">SI2</td>
+<td align="center">63.3</td>
+<td align="center">58</td>
+<td align="center">335</td>
+<td align="center">4.34</td>
+<td align="center">4.35</td>
+<td align="center">2.75</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="categorical-variables---cut-color-clarity" class="section level4">
+<h4>Categorical Variables - (Cut, Color, Clarity)</h4>
+<div class="figure"><span id="fig:diamondImages"></span>
+<img src="/diam/diamondfactoring.jpg" alt="Diamond Metrics for Quality. Four of the ways diamonds are factored and rated. Clarity, Color, Cut, and Carat. From Gemological Appraisal Industry. (2018). Diamond Education. Retrieved from: https://gailab.org/content/diamond-education" width="100%" />
+<p class="caption">
+Figure 1: Diamond Metrics for Quality. Four of the ways diamonds are factored and rated. Clarity, Color, Cut, and Carat. From Gemological Appraisal Industry. (2018). Diamond Education. Retrieved from: <a href="https://gailab.org/content/diamond-education" class="uri">https://gailab.org/content/diamond-education</a>
+</p>
+</div>
+<p>Figure 1 depicts the four primary classifications of diamond quality and is proportional to value according to the Gemological Appraisal Industry (2018a), an independent company that does gemstone appraisals and services. <code>Clarity</code> describes the type and amount of blemishing in the diamond stone. <code>Color</code> is the lightness of the diamond. <code>Cut</code> is the dimensions of the stone. <code>Carat</code> is the weight and proportional to the size of the stone. In the data, <code>cut</code> is a grading while <code>depth</code>, <code>table</code>, <code>x</code>, <code>y</code>, <code>z</code> are the measurements leading to the cut proportions.</p>
+</div>
+<div id="diamonds-cut-variable" class="section level4">
+<h4>Diamonds Cut Variable</h4>
+<div class="figure"><span id="fig:diamondcut"></span>
+<img src="/diam/cut.jpg" alt="Diamond Cut. The data contains the cut variable labeled Fair, Good, Very Good, &amp; Ideal. `Cut` is a grade assigned describing the quality of refracted light. Three optical effects: brightness, fire, scintillation, describe the way light appears inside of the stone, from the Gemological Institute of America Inc. (2018a). Diamond Quality Factors. https://www.gia.edu/diamond-quality-factor" width="50%" />
+<p class="caption">
+Figure 2: Diamond Cut. The data contains the cut variable labeled Fair, Good, Very Good, &amp; Ideal. <code>Cut</code> is a grade assigned describing the quality of refracted light. Three optical effects: brightness, fire, scintillation, describe the way light appears inside of the stone, from the Gemological Institute of America Inc. (2018a). Diamond Quality Factors. <a href="https://www.gia.edu/diamond-quality-factor" class="uri">https://www.gia.edu/diamond-quality-factor</a>
+</p>
+</div>
+<p>The graph below is the categorical variable <code>cut</code> and the distribution of records within the dataset. <code>Ideal</code>, <code>Premium</code>, <code>Very Good</code>, <code>Good</code>, and <code>Fair</code> make up the <code>cut</code> category. 21,548 or 40% of the data is an <code>Ideal</code> cut. 1,609 or 3% of the dataset is <code>Fair</code> cut. Thus an imbalance within the <code>cut</code> variable.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/barchart_CUT-1.png" width="672" /></p>
+</div>
+<div id="diamonds-color-variable" class="section level4">
+<h4>Diamonds Color Variable</h4>
+<div class="figure"><span id="fig:diamondcolor"></span>
+<img src="/diam/colorchart.jpg" alt="Detail of Diamond Color Grades. The data contains seven color grades from light to colorless: D, E, F, G, H, I, J. From the Gemological Institute of America Inc. (2018a). Diamond Quality Factors. https://www.gia.edu/diamond-quality-factor" width="70%" />
+<p class="caption">
+Figure 3: Detail of Diamond Color Grades. The data contains seven color grades from light to colorless: D, E, F, G, H, I, J. From the Gemological Institute of America Inc. (2018a). Diamond Quality Factors. <a href="https://www.gia.edu/diamond-quality-factor" class="uri">https://www.gia.edu/diamond-quality-factor</a>
+</p>
+</div>
+<p>The data contains the <code>color</code> categorical variable and has seven classes: <code>D, E, F, G, H, I, J</code> in order from colorless to light yellow. The <code>G</code> color class makes up 11,284 or 21% of the total data, and the <code>J</code> color class makes up 2,808 or 5% of the total data. There is an imbalance of the classes in <code>color</code>.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/colorVar-1.png" width="672" /></p>
+</div>
+<div id="diamonds-clarity-variable" class="section level4">
+<h4>Diamonds Clarity Variable</h4>
+<div class="figure"><span id="fig:diamondclarity"></span>
+<img src="/diam/claritychart.jpg" alt="Detail of Diamond Clarity Grades. The data contains eight clarity ratings from low to high: I1, SI1, SI2, VS1, VS2, VVS1, VVS2, IF. The diamond has inclusions and surface blemishes or irregularities, or lack thereof. Clarity is related to the size, number, position, nature, and color of the diamond, from the Gemological Appraisal Industry, (2018). Diamond Education. Retrieved from: https://gailab.org/content/diamond-education" width="70%" />
+<p class="caption">
+Figure 4: Detail of Diamond Clarity Grades. The data contains eight clarity ratings from low to high: I1, SI1, SI2, VS1, VS2, VVS1, VVS2, IF. The diamond has inclusions and surface blemishes or irregularities, or lack thereof. Clarity is related to the size, number, position, nature, and color of the diamond, from the Gemological Appraisal Industry, (2018). Diamond Education. Retrieved from: <a href="https://gailab.org/content/diamond-education" class="uri">https://gailab.org/content/diamond-education</a>
+</p>
+</div>
+<p>The data has a third categorical variable <code>clarity</code> and contains eight classes: <code>IF, VVS1, VVS2, VS1, VS2, SI1, SI2, I1</code> grades in descending order of clarity in the stone. The lower grade <code>SI1</code> is 13,063 or 24% of the total data, while the highest grade <code>I1</code> is 738 or 1.2% of the total data. There is an imbalance in the ‘clarity’ classes.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/ClarityVar-1.png" width="672" /></p>
+</div>
+<div id="alluvial-plot---color" class="section level4">
+<h4>Alluvial Plot - Color</h4>
+<p>The following section is the categorical variables plotted using the alluvial plot method suitable for categorical variables. The alluvial plot will help see the relationship between these three complex categorical variables with multiple classes per variable.</p>
+<pre class="r"><code>library(alluvial)</code></pre>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/AlluvialPLotColor-1.png" width="672" /></p>
+<p>The above diagram highlights where the <code>color</code> classes on the right spread out through the <code>cut</code> classes and then into the <code>clarity</code> classes. Yes, this is a complicated-looking pattern of lines; however, there are patterns in the <code>E</code> class moving into the <code>Ideal</code> class and from the <code>Ideal</code> class spanning out into <code>SI2, SI1, VS1, VS2</code> with fewer occurrences into <code>VVS1, VVS2, I1, &amp; IF</code>.</p>
+</div>
+<div id="alluvial-plot---cut" class="section level4">
+<h4>Alluvial Plot - Cut</h4>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/AlluvialPLotCut-1.png" width="672" /></p>
+<p>The Alluvial plot above gives a focus on the <code>cut</code> variable classes. The <code>Ideal</code> class has green lines moving left into a clear direction into the majority of <code>SI2, SI1, VS1, &amp; VS2</code>. On the right side, <code>Idea</code> moves into all the classes of <code>color</code>; however, a strong move into class <code>E</code> of <code>color</code> variable. Patterns can be observed in orange from the <code>Premium</code> class and magenta <code>Very Good</code> class. Further down is the itemization of these cut classes out into the <code>clarity</code> and <code>color</code> classes.</p>
+</div>
+<div id="alluvial-plot---clarity" class="section level4">
+<h4>Alluvial Plot - Clarity</h4>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/AlluvialPLotClarity-1.png" width="672" /></p>
+<p>The alluvial plot above describes the movement of <code>clarity</code> through <code>cut</code> and into <code>color</code>. The relationships are discernable, and the relationship that all classes of <code>clarity</code> and <code>cut</code> span out into the <code>color</code> classes.</p>
+</div>
+<div id="alluvial-plot---fair" class="section level4">
+<h4>Alluvial Plot - Fair</h4>
+<p>The next five alluvial plots make the variable relationship clearer showing the relationship of <code>cut</code> and its classes to <code>clarity</code> and <code>color</code>. The patterns become much clearer in this format.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/Fair-1.png" width="672" /></p>
+</div>
+<div id="alluvial-plot---very-good" class="section level4">
+<h4>Alluvial Plot - Very Good</h4>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/VeryGood-1.png" width="672" /></p>
+</div>
+<div id="alluvial-plot---good" class="section level4">
+<h4>Alluvial Plot - Good</h4>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/Good-1.png" width="672" /></p>
+</div>
+<div id="alluvial-plot---premium" class="section level4">
+<h4>Alluvial Plot - Premium</h4>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/Premium-1.png" width="672" /></p>
+</div>
+<div id="alluvial-plot---ideal" class="section level4">
+<h4>Alluvial Plot - Ideal</h4>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/Ideal-1.png" width="672" /></p>
+</div>
+<div id="correlation-matrix-analysis" class="section level4">
+<h4>Correlation Matrix Analysis</h4>
+<p>Before going further with the individual numeric variables, this section will present the correlation between the numeric variables. Table 3 is the correlation matrix, and Spearman’s Rank Correlation Heat Map is below. One of the better robust measures of correlation is Spearman’s. The data shows skewness with long tails and many outliers; thus, using a robust correlation method. I did look at Pearson’s, and there were minor differences in this analysis, which may not be the case with other datasets.</p>
+<table>
+<caption><span id="tab:UpperMatrix">Table 3: </span>Spearman’s Correlation Matrix - Upper Matrix</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="center">carat</th>
+<th align="center">depth</th>
+<th align="center">table</th>
+<th align="center">price</th>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center">z</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>carat</td>
+<td align="center">1</td>
+<td align="center">0.03</td>
+<td align="center">0.19</td>
+<td align="center">0.96</td>
+<td align="center">1.00</td>
+<td align="center">1.00</td>
+<td align="center">0.99</td>
+</tr>
+<tr class="even">
+<td>depth</td>
+<td align="center">NA</td>
+<td align="center">1.00</td>
+<td align="center">-0.25</td>
+<td align="center">0.01</td>
+<td align="center">-0.02</td>
+<td align="center">-0.03</td>
+<td align="center">0.10</td>
+</tr>
+<tr class="odd">
+<td>table</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">1.00</td>
+<td align="center">0.17</td>
+<td align="center">0.20</td>
+<td align="center">0.20</td>
+<td align="center">0.16</td>
+</tr>
+<tr class="even">
+<td>price</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">1.00</td>
+<td align="center">0.96</td>
+<td align="center">0.96</td>
+<td align="center">0.96</td>
+</tr>
+<tr class="odd">
+<td>x</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">1.00</td>
+<td align="center">1.00</td>
+<td align="center">0.99</td>
+</tr>
+<tr class="even">
+<td>y</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">1.00</td>
+<td align="center">0.99</td>
+</tr>
+<tr class="odd">
+<td>z</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">NA</td>
+<td align="center">1.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="spearmans-correlation-matrix" class="section level4">
+<h4>Spearman’s Correlation Matrix</h4>
+<p>Purple shows the highest positive correlation between variables, and the lighter gold color shows no linear correlation between variables. Close to a coefficient of 0 indicates no linear relationship between variables. We consider any value below 0.3 or -0.3 as a weak correlation between variables, while a strong positive/negative linear relationship is any value 0.7 to -0.7.
+The <code>carat</code> variable displays a strong positive uphill relationship of 1 - 0.99 to the <code>x</code>, <code>y</code>, &amp; <code>z</code> variables. See Figure 5 below that demonstrates where the <code>x, y, z</code> measurements are taken on the diamond stone. Larger measurements certainly mean a larger stone, equating to a higher carat weight. Note the relationship in <code>carat</code>wt to the <code>x, y, z</code> in Table 4 below. And as we will see, the <code>price</code> and <code>carat</code> are strongly correlated. Oddly the <code>depth</code> shows practically no linear relationship to <code>z</code>, and <code>table</code> shows a weak linear relationship to <code>x</code>. However, Figure 5 indicates <code>depth</code> and <code>table</code> derived from <code>z</code> &amp; <code>x</code>.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/CorrPlotMatrix-1.png" width="672" /></p>
+<div class="figure"><span id="fig:diamondcutxyz"></span>
+<img src="/diam/xyztabledepth.png" alt="Diamond Cut Dimensional Chart. The data contains five cut dimensions: depth, table, x, y, and z that describe the dimensions in (mm) of the diamond. From Wickham, H.(2016).ggplot2 Elegant Graphics for Data Analysis. 2nd ed, pg. 65 Springer. doi:10.1007/978-3-319-24277-4" width="50%" />
+<p class="caption">
+Figure 5: Diamond Cut Dimensional Chart. The data contains five cut dimensions: depth, table, x, y, and z that describe the dimensions in (mm) of the diamond. From Wickham, H.(2016).ggplot2 Elegant Graphics for Data Analysis. 2nd ed, pg. 65 Springer. <a href="doi:10.1007/978-3-319-24277-4" class="uri">doi:10.1007/978-3-319-24277-4</a>
+</p>
+</div>
+<p>Note the relationship in <code>carat wt</code> to the <code>x, y, z</code> in Table 4. The smaller sizes are smaller carats, while the larger sizes are higher carats. Dimensions are proportional to the carat weight.</p>
+<table>
+<caption><span id="tab:CaratSizeSampletoXYZ">Table 4: </span>Carat relation to x, y, z (mm)</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="center">carat</th>
+<th align="center">x</th>
+<th align="center">y</th>
+<th align="center">z</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td></td>
+<td align="center">Min. :0.2000</td>
+<td align="center">Min. : 3.730</td>
+<td align="center">Min. : 3.680</td>
+<td align="center">Min. : 1.07</td>
+</tr>
+<tr class="even">
+<td></td>
+<td align="center">1st Qu.:0.4000</td>
+<td align="center">1st Qu.: 4.710</td>
+<td align="center">1st Qu.: 4.720</td>
+<td align="center">1st Qu.: 2.91</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td align="center">Median :0.7000</td>
+<td align="center">Median : 5.700</td>
+<td align="center">Median : 5.710</td>
+<td align="center">Median : 3.53</td>
+</tr>
+<tr class="even">
+<td></td>
+<td align="center">Mean :0.7977</td>
+<td align="center">Mean : 5.732</td>
+<td align="center">Mean : 5.735</td>
+<td align="center">Mean : 3.54</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td align="center">3rd Qu.:1.0400</td>
+<td align="center">3rd Qu.: 6.540</td>
+<td align="center">3rd Qu.: 6.540</td>
+<td align="center">3rd Qu.: 4.04</td>
+</tr>
+<tr class="even">
+<td></td>
+<td align="center">Max. :5.0100</td>
+<td align="center">Max. :10.740</td>
+<td align="center">Max. :58.900</td>
+<td align="center">Max. :31.80</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="remove-x-y-z-variables" class="section level4">
+<h4>Remove x, y, z Variables</h4>
+<p>The decision is to remove the <code>x</code>, <code>y</code>, and <code>z</code> variable from the dataset.</p>
+<pre class="r"><code>diamonds = select(diamonds, carat, cut, color, clarity, depth, table, price)</code></pre>
+</div>
+<div id="analysis-of-numeric-variables---caret-price-depth-table" class="section level4">
+<h4>Analysis of Numeric Variables - (Caret, Price, Depth, Table)</h4>
+<p>This next section explores the remaining numeric variables in the diamonds dataset. The variables: <code>carat</code>, <code>depth</code>, <code>table</code>, <code>price</code> are the remaining numeric variables in the dataset.
+I will explore the population distribution, standard deviation, medians and quartiles, skew, outliers, and normal probability variables. There is a summary table for each variable, histogram with normal distribution curve imposed on it, showing how well the data fits a normal distribution. The normal probability plot for continuous variables determines if it from a normally distributed sample with a reference line to look for closest to a straight line. And finally, a boxplot to also describe the distribution of data. They show the whole range of the variable where the whiskers end—Left and right of the box in the 25th and 75th percentiles. The upper/lower whisker projects from the hinge 1.5 x the interquartile range (IQR). A solid black line through the box is the median, and the red circles are the outliers in the variable. The summary table summarizes the variable: min, 25%, mean, median, 75%, max, sd, and the lower and upper IQR and the number of outliers beyond the IQR* 1.5.</p>
+<div class="figure"><span id="fig:diamondcarat"></span>
+<img src="/diam/carat.jpg" alt="Diamond Carat Chart. The data contains carat sizes from 0.20ct to 5.01ct. The image above shows the carat and dimension in (mm). Carats are a diamond's weight in metric carats (ct.). And the carat is proportional to the `x` dimension, which was removed from the data—this image from Tremonti Fine Gems &amp; Jewellery. (2012). Buying diamonds safely - Why we won't let you get caught out. http://tremontijewellery.blogspot.com/2012/07/buying-diamonds-safely-why-we-wont-let.html  " width="70%" />
+<p class="caption">
+Figure 6: Diamond Carat Chart. The data contains carat sizes from 0.20ct to 5.01ct. The image above shows the carat and dimension in (mm). Carats are a diamond’s weight in metric carats (ct.). And the carat is proportional to the <code>x</code> dimension, which was removed from the data—this image from Tremonti Fine Gems &amp; Jewellery. (2012). Buying diamonds safely - Why we won’t let you get caught out. <a href="http://tremontijewellery.blogspot.com/2012/07/buying-diamonds-safely-why-we-wont-let.html" class="uri">http://tremontijewellery.blogspot.com/2012/07/buying-diamonds-safely-why-we-wont-let.html</a>
+</p>
+</div>
+</div>
+<div id="carat" class="section level4">
+<h4>Carat</h4>
+<p>The range of <code>carat</code> size is 0.2ct. up to 5.01ct., and the median is 0.7ct, which is a robust estimate not influenced by the extreme outliers. The histogram shows the heavily grouped size between 0.25ct. and 0.5ct. However, a median of 0.7 and a standard deviation of 0.47 puts the bulk of data between 0.23ct and 1.17ct. The standard deviation (squared deviation) is not robust to the outliers that skewed the data. However, the majority of the data points are between 0.2ct. and 2ct. The interquartile range is 0.64. The data has a positive skew to the right indicated by the data points curving from above to below the line then back above it on the Q-Q plot. From the boxplot, the 1,883 outliers skew the variable to the right.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/grid_carat-1.png" width="672" /></p>
+</div>
+<div id="price" class="section level4">
+<h4>Price</h4>
+<p>The <code>price</code> histogram shows the distribution of data points with a majority in the lower price range. There is an $18,497 range in price across the data points. The median is $2,401, which is not influenced by the upper value of $18,823. We can see a skew from the median with a 75% percentile of $5,323. The $3,532 outliers affect the standard deviation above the IQR*1.5. The IQR range is $4,374. The data has a positive skew to the right, shown by the Q-Q Plot. The points curve from above the line to below the line and then back above the Q-Q Plotline. However, the upper points return closer to the line at the end. <code>Price</code> is not a normal distribution. However, <code>price</code> is the predictor variable at a future point.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/grid_price-1.png" width="672" /></p>
+</div>
+<div id="depth" class="section level4">
+<h4>Depth</h4>
+<p>The <code>depth</code> variable displays a normal curve; however, there is a peak that increases kurtosis. There are long tails on either side of the 25% and 75% quartiles due to the 2,543 outliers. The standard deviation is 1.43 and is not too affected by outliers. There seems like an even distribution of outliers on either side of the IQR*1.5 whiskers. The Q-Q Plot has data points below the line and then at the red bar and finishing above it. The data indicates a normal distribution with a sharp peak and fatter tails relative to a normal distribution.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/grid_depth-1.png" width="672" /></p>
+</div>
+<div id="table" class="section level4">
+<h4>Table</h4>
+<p><code>Table</code> produces and normal distribution with a sharp peak and more sweeping tails due to outliers. The median is 57 and tight between the 25th and 75th percentiles. The Q-Q plot shows some kurtosis but little skew. The standard deviation is 2.23 and seems high, given the normal-looking curve. Standard deviation is affected by the outliers again and may not be the best measure. There are 604 outliers in the <code>table</code> data points.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/grid_table-1.png" width="672" /></p>
+</div>
+<div id="carat-and-price" class="section level4">
+<h4>CARAT AND PRICE</h4>
+<p>We noticed a strong uphill correlation of 0.96 between the <code>price</code> and <code>carat</code> in the Spearman Matrix above. The plot below displays that correlated relationship to a point on the <code>carat</code> scale. However, we can see a large dispersion of prices for the same carat weight, which should happen based on the other factors that grade the diamond. The anomalous drop in price occurs at 2.25ct, and the loess smoothing curve dips in price to approximately 3.25ct and then resumes its climb, but doesn’t exceed in price until after 4ct. Thus 2.25ct to 4ct sees a drop in the linear price. Also, the data becomes very disperse after 2.5ct. According to the <code>carat</code> boxplot from earlier, the outliers start around 2ct. and above. On the graph, the blue line is climbing sharply and begins to stop climbing 1.75ct. as it approaches the 2.0ct mark.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/caratPricePlot-1.png" width="672" /></p>
+<p>This graph takes a randomized sample and plots a scatterplot of the <code>price</code> and <code>carat</code> to help visualize where the loess curve begins to decline or deviate from its upward growth in price/carat relationship. Around 2ct, the data starts to ease up and at 2.25ct starts to fall in price. Not sure why this is happening; however, let’s look at some more data relationships.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/CaratPriceSampleCurve-1.png" width="672" /></p>
+<p>The <code>price-carat</code> boxplot is more telling but very similar to the scatterplot in a curve over <code>carat</code> weight and price. The boxplot was made by binning the carat sizes down from 5.25ct to 0.2ct in 0.5ct intervals. Grouping the <code>carat</code> helped organize the plots and better visualize 1ct and 1.25ct standout, showing a skew with many outliers and spanning the price range $2000/$2500 up to the $18,000 limit. Thus, other variables determine the <code>price</code> as not only the diamond’s carat weight. Note the sparseness of the data points after 3.5ct. The table is a summary of the grouping of <code>carat</code> into 0.5ct intervals. The table reiterates what is in the histogram plot from earlier. The majority of diamond data points are in the 0.25ct to 1.25ct range, with the most extensive grouping 0.25ct to 0.75ct. The sparse data points after 2.25ct jump out and will consider what to do with the data pre-modeling.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/boxplotSummaryTable-1.png" width="672" /></p>
+<p>The grouping and distribution plot below shows the dispersion of carat weights binned into 0.5ct groups. 0.25ct to 0.75ct hold the most observations at 29,496, which is 54.7% of the total data, followed by the next size group 0.75ct to 1.25ct, which is 29.6% of the entire data. The question I have is there enough data after 2.75ct to 5ct to determine or predict diamond prices? More than likely, not, and maybe we remove this data.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/histoCaratBinned-1.png" width="672" /></p>
+</div>
+<div id="color-and-price" class="section level4">
+<h4>COLOR AND PRICE</h4>
+<div class="figure"><span id="fig:colorPrice"></span>
+<img src="/diam/color_price.jpg" alt="Color to Price Expectation. According to GIA, a diamond's price can differ based on color only regardless of the clarity, carat, and cut. From Gemological Institute of America Inc. (2018a). Diamond Quality Factors. https://www.gia.edu/diamond-quality-factor" width="70%" />
+<p class="caption">
+Figure 7: Color to Price Expectation. According to GIA, a diamond’s price can differ based on color only regardless of the clarity, carat, and cut. From Gemological Institute of America Inc. (2018a). Diamond Quality Factors. <a href="https://www.gia.edu/diamond-quality-factor" class="uri">https://www.gia.edu/diamond-quality-factor</a>
+</p>
+</div>
+<p>The scatter plot demonstrates the <code>carat</code> to <code>price</code> and introduces a diamond <code>color</code> grade. However, there is a trend; it’s the <code>D, E, F</code> considered higher grades that are colorless, which seem to be in the smaller carat weights and span across the entire price range. The outlier carat weights above 3ct are <code>H, I, J</code>, which have more color than the <code>D, E, F</code>, and assumes that there are few large carat colorless diamonds, certainly in this dataset.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/colorPricePlot-1.png" width="672" /></p>
+<p>The <code>color</code> and <code>price</code> boxplot shows low to high median value left to right and the outliers in red. Again <code>H, I, &amp; J</code> all have higher prices, while <code>D</code>, <code>E</code>, &amp; <code>F</code> have lower prices, but their outliers reach up into the higher cost diamonds. The number in the boxes gives the distribution of color numbers in the total dataset. <code>G</code> has the most observations, followed by <code>E</code> and <code>F</code> color grades.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/BoxplotPriceColor-1.png" width="672" /></p>
+<p>The density curve demonstrates the skewed color data to the right and the distribution of data points in the data. It’s another way to see what is happening with <code>color</code> and <code>price</code>.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/densityPriceColor-1.png" width="672" /></p>
+<p>The box plot above summarized the distribution of <code>color</code>, and here is each color grade that shows the skewness of each grading. Heavy skew to the right. Notice the increase of price in <code>H, I, &amp; J</code> around the $4,500 to $5,000 mark.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/FacetPriceColor-1.png" width="672" /></p>
+</div>
+<div id="clarity-and-price" class="section level4">
+<h4>CLARITY AND PRICE</h4>
+<div class="figure"><span id="fig:clarityPrice"></span>
+<img src="/diam/clarity_price.jpg" alt="Clarity to Price Expectation. According to GIA, the clarity of a diamond is unique to each stone. Clarity can affect the price because the higher up the scale, the more rare the clarity. From Gemological Institute of America Inc. (2018a). Diamond Quality Factors. https://www.gia.edu/diamond-quality-factor" width="70%" />
+<p class="caption">
+Figure 8: Clarity to Price Expectation. According to GIA, the clarity of a diamond is unique to each stone. Clarity can affect the price because the higher up the scale, the more rare the clarity. From Gemological Institute of America Inc. (2018a). Diamond Quality Factors. <a href="https://www.gia.edu/diamond-quality-factor" class="uri">https://www.gia.edu/diamond-quality-factor</a>
+</p>
+</div>
+<p>The plot below is for the <code>price</code>, <code>carat</code>, and &amp; <code>clarity</code>. This graphic is a bit better because we can see the clear bands of color representing each of the <code>clarity</code> grades in proportion to <code>price</code> and <code>carat</code> weight. <code>I1</code> is the “Included” rating and in the lowest clarity rating because it has more blemishes and irregularities compared to the <code>IF</code> (internally flawless). We find the <code>I1</code> clarity in the higher carat wt diamonds, and there are outliers in the higher price range. With this scatterplot, it is clear that the <code>clarity</code> grades are following a curve and span a defined <code>carat</code> range but extent through all prices from lowest to highest price.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/clarityPricePlot-1.png" width="672" /></p>
+<p>The price/clarity boxplot gives more insight into what is happening. All the <code>clarity</code> grades span the price range, but all of them are outliers at higher prices. <code>SI1</code>, <code>VS1</code> &amp; <code>SI2</code> make up the majority of the data for <code>clarity</code>. The boxes are in ascending order of each median, and the lower quality <code>clarity</code> grades are higher in price than the top clarity grades <code>IF, VVS1, &amp; VVS2</code>. Figure 8 does elude to higher the clarity the rarer the diamond, but in this data, <code>IF</code> is the second-lowest distribution above <code>I1</code>, but <code>I1</code> isn’t considered rare it’s the least clear diamond, and the outliers are few however do reach the higher prices. The five clarity grades to the plots right all have a 75th percentile hovering around $5,000 in price.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/BoxplotPriceClarity-1.png" width="672" /></p>
+<p>The density plot of price to clarity gets confusing because of the overlap in <code>color</code> and the low price. The <code>IF</code> clarity is in more of the lower-priced diamonds. And so is <code>I1</code>.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/densityPriceClarity-1.png" width="672" /></p>
+<p>These histograms show the distribution of each clarity grade to price. We find a heavy skew right, and the graphs show the majority of clarity grades are in the lower cost diamonds. <code>SI2</code> &amp; <code>I1</code> have a broader price range, with many costing up to $5,000. The two from the left edge are under $2,500 and are the highest clarity grade.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/FacetPriceClarity-1.png" width="672" /></p>
+</div>
+<div id="cut-and-price" class="section level4">
+<h4>CUT AND PRICE</h4>
+<div class="figure"><span id="fig:cutPrice"></span>
+<img src="/diam/cut_price.jpg" alt="Cut to Price Expectation. Left to Right: Ideal, Good, Fair. The diamonds cut affects the way light refracts in the diamond. The brighter the diamond, the higher the cut grade. The cut is a combination of the proportionate dimensions to optimize the brilliance and fire of the stone. The GIA does not mention if cut affects the price. From Gemological Institute of America Inc. (2018c). Diamond Cut: The wow factor. https://www.gia.edu/diamond-cut/diamond-cut-basic-overview" width="70%" />
+<p class="caption">
+Figure 9: Cut to Price Expectation. Left to Right: Ideal, Good, Fair. The diamonds cut affects the way light refracts in the diamond. The brighter the diamond, the higher the cut grade. The cut is a combination of the proportionate dimensions to optimize the brilliance and fire of the stone. The GIA does not mention if cut affects the price. From Gemological Institute of America Inc. (2018c). Diamond Cut: The wow factor. <a href="https://www.gia.edu/diamond-cut/diamond-cut-basic-overview" class="uri">https://www.gia.edu/diamond-cut/diamond-cut-basic-overview</a>
+</p>
+</div>
+<p>The fair cut appears to follow the larger carat sizes similar to the <code>I1</code> clarity grade above, and the fair cut is found on the biggest diamonds and at the highest prices. The Ideal cut in red spans the carat range densely from 0.2ct to approximately 1.5ct then becomes more dispersed in the higher carat ranges, yet the price is higher when the <code>carat</code> and <code>Ideal</code> grade are together.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/cutPricePlot-1.png" width="672" /></p>
+<p>The boxplot explains the <code>cut</code> distribution better. The <code>Ideal</code> cut is the largest proportion of the dataset, followed by <code>Premium</code> and <code>Very Good</code>, <code>Premium</code> is the grade with a 75th percentile over $5,000 in the price above <code>Very Good</code> and then <code>Fair</code>. All cut grades have outliers that reach the highest prices and possibly <code>Ideal</code> with the most outliers extending the price range. But statistically, the <code>Premium</code> grade extends the IQR*1.5 the highest in price.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/BoxplotPriceCut-1.png" width="672" /></p>
+<p>The density curve is more clear to read with fewer categories. We can see this in the boxplots, and here <code>Ideal</code> takes the majority of data points followed by <code>Premium</code>. The <code>Fair</code> grade has a narrow price range, as seen in the boxplot, with the lowest number of observations in the data.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/densityPriceCut-1.png" width="672" /></p>
+<p>No big surprise at this point that the data is skewed right because of outliers. The histogram plots give some more view into how the cut dispersed in the data. The properties combined with the boxplot and density curve show that most of the data reside in the under $5,000 price range and under the 2.5ct weight range.</p>
+<p><img src="/post/2018-05-13-data-preprocessing-diamonds-dataset_files/figure-html/FacetPriceCut-1.png" width="672" /></p>
+</div>
+<div id="conclusion" class="section level4">
+<h4>Conclusion</h4>
+<p>It is best to look at the outliers and decide if they should be taken out of the data or stay. For regression analysis, it recommends removing outliers and normalizing the data to represent a normal distribution. Also, scaling the data would help with the accuracy of the algorithm. If we wanted to use machine learning algorithms on this data, I would remove extreme outliers, normalize/scale the data and one-hot-encode all of the categorical variables. I am leaning toward using a decision tree classifier and may post up future analysis. I would like to continue this process in a future post when time is available.</p>
+</div>
+<div id="references" class="section level4">
+<h4>References</h4>
+<p>Gemological Appraisal Industry. (2018). Diamond Education. Retrieved from: <a href="https://gailab.org/content/diamond-education" class="uri">https://gailab.org/content/diamond-education</a></p>
+<p>Gemological Institute of America Inc. (2018a). Diamond Quality Factors. Retrieved from: <a href="https://www.gia.edu/diamond-quality-factor" class="uri">https://www.gia.edu/diamond-quality-factor</a></p>
+<p>Gemological Institute of America Inc. (2018b). Diamonds - Overview. Retrieved from: <a href="https://www.gia.edu/diamond" class="uri">https://www.gia.edu/diamond</a></p>
+<p>Gemological Institute of America Inc. (2018c). Diamond Cut: The wow factor. Retrieved from: <a href="https://www.gia.edu/diamond-cut/diamond-cut-basic-overview" class="uri">https://www.gia.edu/diamond-cut/diamond-cut-basic-overview</a></p>
+<p>STHDA, Statistical tools for high-throughput data analysis. (2018). ggplot2: Quick correlation matrix heatmap - R software and data visualization. Retrieved from: (<a href="http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization" class="uri">http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization</a></p>
+<p>Tidyverse/ggplot2. (2018). diamonds.R. [Data file]. Retrieved from: <a href="https://github.com/tidyverse/ggplot2/tree/master/data-raw" class="uri">https://github.com/tidyverse/ggplot2/tree/master/data-raw</a></p>
+<p>Tremonti Fine Gems &amp; Jewellery. (2012). Buying diamonds safely - Why we won’t let you get caught out. Retrieved from: <a href="http://tremontijewellery.blogspot.com/2012/07/buying-diamonds-safely-why-we-wont-let.html" class="uri">http://tremontijewellery.blogspot.com/2012/07/buying-diamonds-safely-why-we-wont-let.html</a></p>
+<p>Wickham, H.(2016).ggplot2 Elegant Graphics for Data Analysis. 2nd ed, pg. 65 Springer. <a href="doi:10.1007/978-3-319-24277-4" class="uri">doi:10.1007/978-3-319-24277-4</a></p>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-38508489-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  
+  <hr/>
+  © <a href="https://www.bryanschafroth.com">Bryan Schafroth</a> 2020 | <a href="https://www.linkedin.com/in/bryanschafroth">LinkedIn</a>
+  
+  </footer>
+  </body>
+</html>
+

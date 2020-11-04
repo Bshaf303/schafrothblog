@@ -1,0 +1,859 @@
+---
+title: Data Preprocessing - Diamonds Dataset
+author: 'Bryan'
+date: '2018-05-13'
+slug: data-preprocessing-diamonds-dataset
+categories:
+  - Exploratory Data Analysis
+  - Data Analysis
+tags:
+  - Data Exploration
+  - data manipulation
+  - data wrangling
+  - data preprocessing
+  - R Tidyverse
+  - ggplot2
+  - Alluvial Plots
+  - boxplots
+  - Spearmans Correlation
+---
+
+#### Data Preprocessing
+
+The following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with *one-hot encoding* or dummy variables, scaling data, normalizing data. The majority of code is not the focus of this analysis but rest assured, and there are close to 700 lines written for the graphing presented in this article. 
+ 
+
+The tidyverse package is the primary tool used in R for this analysis in addition to a few other R packages.
+ 
+```{r load_lib, include=TRUE, message=FALSE, warning=FALSE}
+library(tidyverse)
+```
+
+#### Import the Data
+
+The data imports into the `diamonds` tibble, also specify the data type for each data column as factors (categorical), doubles (digits), and an integer.
+
+```{r read_data, cache = TRUE, warning = FALSE, message = FALSE}
+diamonds <- read_csv("https://github.com/tidyverse/ggplot2/raw/master/data-raw/diamonds.csv", col_types = "dfffddiddd")
+```
+
+
+#### Data Summary
+
+R's summary methods are `summary` from base R and `glimpse` from the tidyverse. The data has 53,940 records and ten columns of data. There are three categorical data types: `cut`, `color`, and `clarity`, while the remaining variables `carat`, `depth`, `table`, `x, y, & z` are digits and `price` (integers). Within the categorical variables of `cut, color`, and `clarity`, there is an imbalance and noted if using machine learning algorithms in modeling the data. The min and max values of `x, y, z` standout in the numeric data. As shown later, `x, y, z` are measurements, and a zero measurement would not be possible. The `price` variable has an \$18,497 range. The median is \$2401, indicating the possibility of outlier values, and the `carat` range from 0.2 to 5.0, with a median of 0.7 carats. And overall, there are no missing values or NA's in this data.   
+
+```{r}
+tibble::glimpse(diamonds)
+summary(diamonds)
+```
+
+#### Identify the Zero Values in x, y, z
+
+The summary table above lists the `x, y, and z` variables having a minimum value of 0. The minimum value of zero would not be possible. Table 1 lists out all the instances of `x, y, z` == 0, and there are twenty observations total. These rows are removed from the data because the sample is low and won't impact the analysis or modeling later. Table 2 below shows that the values are removed and correctly display the lowest `x, y , z` values in the data. 
+
+```{r xyzEqualtoZero, echo=TRUE}
+xyzZero = filter(diamonds, x == 0 | y == 0 | z == 0)
+```
+
+```{r ZeroValuesTable, echo=FALSE}
+knitr::kable(xyzZero[1:20, ], caption="Values Equal to Zero in x, y, z Variables", align= 'c', digits=0)
+```
+
+Remove all `x, y, z` equal to zero rows from data. A total of 20 rows will be removed.
+
+```{r joindata, echo=FALSE, message=FALSE, cache = TRUE}
+diamonds = diamonds %>% anti_join(xyzZero)
+
+knitr::kable(
+(diamonds %>%
+  anti_join(xyzZero))[1:5, ], 
+  caption="Removed All x,y,z Equal to Zero Values", 
+  align= 'c', 
+  digits=2
+)
+```
+
+#### Categorical Variables - (Cut, Color, Clarity) 
+
+```{r diamondImages, echo=FALSE, fig.cap="Diamond Metrics for Quality. Four of the ways diamonds are factored and rated. Clarity, Color, Cut, and Carat. From Gemological Appraisal Industry. (2018). Diamond Education. Retrieved from: https://gailab.org/content/diamond-education", out.width='100%'}
+knitr::include_graphics('/diam/diamondfactoring.jpg', error=FALSE)
+```
+
+Figure 1 depicts the four primary classifications of diamond quality and is proportional to value according to the Gemological Appraisal Industry (2018a), an independent company that does gemstone appraisals and services. `Clarity` describes the type and amount of blemishing in the diamond stone. `Color` is the lightness of the diamond. `Cut` is the dimensions of the stone. `Carat` is the weight and proportional to the size of the stone. In the data, `cut` is a grading while `depth`, `table`, `x`, `y`, `z` are the measurements leading to the cut proportions. 
+
+```{r loadgridExtra, include=FALSE,  message=FALSE}
+library(gridExtra)
+```
+
+#### Diamonds Cut Variable 
+
+```{r diamondcut, echo=FALSE, fig.cap="Diamond Cut. The data contains the cut variable labeled Fair, Good, Very Good, & Ideal. `Cut` is a grade assigned describing the quality of refracted light. Three optical effects: brightness, fire, scintillation, describe the way light appears inside of the stone, from the Gemological Institute of America Inc. (2018a). Diamond Quality Factors. https://www.gia.edu/diamond-quality-factor", out.width='50%'}
+knitr::include_graphics('/diam/cut.jpg', error=FALSE)
+```
+
+The graph below is the categorical variable `cut` and the distribution of records within the dataset. `Ideal`, `Premium`, `Very Good`, `Good`, and `Fair` make up the `cut` category. 21,548 or 40% of the data is an `Ideal` cut.  1,609 or 3% of the dataset is `Fair` cut. Thus an imbalance within the `cut` variable. 
+
+```{r barchart_CUT, echo=FALSE} 
+count_data = diamonds %>%
+  count(cut)
+
+ggplot(count_data, aes(x = reorder(cut, -n), y =n, fill=cut)) +
+  geom_bar(stat = "identity", show.legend= FALSE, color="white", alpha =0.5) +
+  geom_text(aes(label= n), vjust=-0.25) +
+  labs(x = "DIAMOND CUT", y="COUNT",
+       title = "Cut Variable Distribution")
+```
+
+#### Diamonds Color Variable
+
+```{r diamondcolor, echo=FALSE, fig.cap="Detail of Diamond Color Grades. The data contains seven color grades from light to colorless: D, E, F, G, H, I, J. From the Gemological Institute of America Inc. (2018a). Diamond Quality Factors. https://www.gia.edu/diamond-quality-factor", out.width='70%'}
+knitr::include_graphics('/diam/colorchart.jpg', error=FALSE)
+```
+
+The data contains the `color` categorical variable and has seven classes: `D, E, F, G, H, I, J` in order from colorless to light yellow. The `G` color class makes up 11,284 or 21% of the total data, and the `J` color class makes up 2,808 or 5% of the total data. There is an imbalance of the classes in `color`. 
+
+```{r colorVar, echo=FALSE}
+count_data = diamonds %>%
+  count(color)
+
+ggplot(count_data, aes(x = reorder(color, -n), y =n, fill=color)) +
+  geom_bar(stat = "identity", show.legend= FALSE, color="white", alpha =0.5) +
+  geom_text(aes(label= n), vjust=-0.25) +
+  labs(x = "DIAMOND COLOR", y="COUNT",
+       title = "Color Variable Distribution")
+
+```
+   
+#### Diamonds Clarity Variable
+
+```{r diamondclarity, echo=FALSE, fig.cap="Detail of Diamond Clarity Grades. The data contains eight clarity ratings from low to high: I1, SI1, SI2, VS1, VS2, VVS1, VVS2, IF. The diamond has inclusions and surface blemishes or irregularities, or lack thereof. Clarity is related to the size, number, position, nature, and color of the diamond, from the Gemological Appraisal Industry, (2018). Diamond Education. Retrieved from: https://gailab.org/content/diamond-education", out.width='70%'}
+knitr::include_graphics('/diam/claritychart.jpg', error=FALSE)
+```
+
+The data has a third categorical variable `clarity` and contains eight classes: `IF, VVS1, VVS2, VS1, VS2, SI1, SI2, I1` grades in descending order of clarity in the stone. The lower grade `SI1` is 13,063 or 24% of the total data, while the highest grade `I1` is 738 or 1.2% of the total data. There is an imbalance in the 'clarity' classes. 
+
+```{r ClarityVar, echo=FALSE}
+count_data = diamonds %>%
+  count(clarity)
+
+ggplot(count_data, aes(x = reorder(clarity, -n), y =n, fill=clarity)) +
+  geom_bar(stat = "identity", show.legend= FALSE, color="white", alpha =0.5) +
+  geom_text(aes(label= n), vjust=-0.25) +
+  labs(x = "DIAMOND CLARITY", y="COUNT",
+       title = "Clarity Variable Distribution")
+```
+
+#### Alluvial Plot - Color
+
+The following section is the categorical variables plotted using the alluvial plot method suitable for categorical variables. The alluvial plot will help see the relationship between these three complex categorical variables with multiple classes per variable. 
+
+```{r LoadAlluvialLib, echo=TRUE, message=FALSE}
+library(alluvial)
+```
+
+```{r AlluvialPLotColor, echo=FALSE, warning=FALSE, message=FALSE}
+dmd = diamonds %>%
+  select(cut, color, clarity) %>%
+  count(cut,color,clarity)
+
+pal = RColorBrewer::brewer.pal(8, "Spectral")
+
+with(dmd,
+     alluvial(clarity, cut, color, 
+              freq = n, 
+              alpha=1,
+              border = "grey55",
+              cex = 0.7,
+              col = pal[as.numeric(color)]
+))
+```
+
+The above diagram highlights where the `color` classes on the right spread out through the `cut` classes and then into the `clarity` classes. Yes, this is a complicated-looking pattern of lines; however, there are patterns in the `E` class moving into the `Ideal` class and from the `Ideal` class spanning out into `SI2, SI1, VS1, VS2` with fewer occurrences into `VVS1, VVS2, I1, & IF`. 
+
+#### Alluvial Plot - Cut 
+
+```{r AlluvialPLotCut, echo=FALSE}
+dmd = diamonds %>%
+  select(cut, color, clarity) %>%
+  count(cut,color,clarity)
+
+pal = RColorBrewer::brewer.pal(8, "Dark2")
+
+with(dmd,
+     alluvial(clarity, cut, color, 
+              freq = n, 
+              alpha=1,
+              border = "grey55",
+              cex = 0.7,
+              col = pal[as.numeric(cut)]
+))
+```
+
+The Alluvial plot above gives a focus on the `cut` variable classes. The `Ideal` class has green lines moving left into a clear direction into the majority of `SI2, SI1, VS1, & VS2`. On the right side, `Idea`  moves into all the classes of `color`; however, a strong move into class `E` of `color` variable. Patterns can be observed in orange from the `Premium` class and magenta `Very Good` class. Further down is the itemization of these cut classes out into the `clarity` and `color` classes. 
+
+#### Alluvial Plot - Clarity
+
+```{r AlluvialPLotClarity, echo=FALSE}
+dmd = diamonds %>%
+  select(cut, color, clarity) %>%
+  count(cut,color,clarity)
+
+#dmd = as.data.frame(dmd, stringsAsFactors = FALSE)
+
+pal = RColorBrewer::brewer.pal(8, "Spectral")
+
+with(dmd,
+     alluvial(clarity, cut, color, 
+              freq = n, 
+              alpha=1,
+              border = "grey55",
+              cex = 0.7,
+              #blocks = FALSE,
+              col = pal[as.numeric(clarity)]
+))
+```
+
+The alluvial plot above describes the movement of `clarity` through `cut` and into `color`. The relationships are discernable, and the relationship that all classes of `clarity` and `cut` span out into the `color` classes. 
+
+#### Alluvial Plot - Fair
+
+The next five alluvial plots make the variable relationship clearer showing the relationship of `cut` and its classes to `clarity` and `color`. The patterns become much clearer in this format. 
+
+```{r Fair, echo=FALSE}
+
+dmd %>% group_by(clarity, cut, color) %>%
+   summarize(n = sum(n)) -> tit3d
+alluvial(tit3d[,1:3], 
+         freq = tit3d$n,
+         hide=tit3d$cut == "Very Good" | tit3d$cut == "Good" | tit3d$cut == "Premium" | tit3d$cut == "Ideal",
+         col=ifelse(tit3d$cut =="Fair", "gold3", "hotpink3"), 
+         alpha=1, 
+         cex = 0.7,
+         border = "gold3"
+         )
+
+```
+
+#### Alluvial Plot - Very Good
+
+```{r VeryGood, echo=FALSE}
+
+dmd %>% group_by(clarity, cut, color) %>%
+   summarize(n = sum(n)) -> tit3d
+alluvial(tit3d[,1:3], 
+         freq = tit3d$n,
+         hide=tit3d$cut == "Fair" | tit3d$cut == "Good" | tit3d$cut == "Premium" | tit3d$cut == "Ideal",
+         col=ifelse(tit3d$cut =="Very Good", "deeppink3", "hotpink3"), 
+         alpha=1, 
+         cex = 0.7,
+         border = "deeppink3"
+         )
+
+```
+
+#### Alluvial Plot - Good
+
+```{r Good, echo=FALSE}
+
+dmd %>% group_by(clarity, cut, color) %>%
+   summarize(n = sum(n)) -> tit3d
+alluvial(tit3d[,1:3], 
+         freq = tit3d$n,
+         hide=tit3d$cut == "Very Good" | tit3d$cut == "Fair" | tit3d$cut == "Premium" | tit3d$cut == "Ideal",
+         col=ifelse(tit3d$cut =="Good", "mediumpurple3", "hotpink3"), 
+         alpha=1, 
+         cex = 0.7,
+         border = "mediumpurple3"
+         )
+
+```
+
+#### Alluvial Plot - Premium
+
+```{r Premium, echo=FALSE}
+
+dmd %>% group_by(clarity, cut, color) %>%
+   summarize(n = sum(n)) -> tit3d
+alluvial(tit3d[,1:3], 
+         freq = tit3d$n,
+         hide=tit3d$cut == "Very Good" | tit3d$cut == "Good" | tit3d$cut == "Fair" | tit3d$cut == "Ideal",
+         col=ifelse(tit3d$cut =="Premium", "darkorange3", "hotpink3"), 
+         alpha=1, 
+         cex = 0.7,
+         border = "darkorange3"
+         )
+
+```
+
+#### Alluvial Plot - Ideal
+
+```{r Ideal, echo=FALSE}
+
+dmd %>% group_by(clarity, cut, color) %>%
+   summarize(n = sum(n)) -> tit3d
+alluvial(tit3d[,1:3], 
+         freq = tit3d$n,
+         hide=tit3d$cut == "Very Good" | tit3d$cut == "Good" | tit3d$cut == "Premium" | tit3d$cut == "Fair",
+         col=ifelse(tit3d$cut =="Ideal", "seagreen", "hotpink3"), 
+         alpha=1, 
+         cex = 0.7,
+         border = "seagreen"
+         )
+
+```
+
+#### Correlation Matrix Analysis
+
+Before going further with the individual numeric variables, this section will present the correlation between the numeric variables. Table 3 is the correlation matrix, and Spearman's Rank Correlation Heat Map is below.  One of the better robust measures of correlation is Spearman's. The data shows skewness with long tails and many outliers; thus, using a robust correlation method. I did look at Pearson's, and there were minor differences in this analysis, which may not be the case with other datasets. 
+
+```{r roundvalues2digits, echo=FALSE}
+correlNum = round(cor(diamonds %>% select(carat, depth, table, price,x,y,z), method = "spearman"), 2)
+```
+
+```{r createUpperLowerMatrix, echo=FALSE}
+# Creates top triangle and NA's the Lower Traingle of the Matrix
+get_lower_tri = function(correlNum) {
+  correlNum[upper.tri(correlNum)] = NA
+  return(correlNum)
+}
+get_upper_tri = function(correlNum) {
+  correlNum[lower.tri(correlNum)] = NA
+  return(correlNum)
+}
+```
+
+```{r UpperMatrix, echo=FALSE}
+upper_tri = get_upper_tri(correlNum)
+knitr::kable(
+upper_tri,
+caption="Spearman's Correlation Matrix - Upper Matrix", align= 'c', digits=2
+)
+```
+
+```{r HclusterOrganizeHierach, echo=FALSE}
+reorder_correlNum = function(correlNum) {
+  dd = as.dist((1-correlNum)/2)
+  hc = hclust(dd)
+correlNum = correlNum[hc$order, hc$order]
+}
+```
+
+#### Spearman's Correlation Matrix
+
+Purple shows the highest positive correlation between variables, and the lighter gold color shows no linear correlation between variables. Close to a coefficient of 0 indicates no linear relationship between variables. We consider any value below 0.3 or -0.3 as a weak correlation between variables, while a strong positive/negative linear relationship is any value 0.7 to -0.7. 
+The `carat` variable displays a strong positive uphill relationship of 1 - 0.99 to the `x`, `y`, & `z` variables. See Figure 5 below that demonstrates where the `x, y, z` measurements are taken on the diamond stone. Larger measurements certainly mean a larger stone, equating to a higher carat weight. Note the relationship in `carat`wt to the `x, y, z` in Table 4 below. And as we will see, the `price` and `carat` are strongly correlated.  Oddly the `depth` shows practically no linear relationship to `z`, and `table` shows a weak linear relationship to `x`. However, Figure 5 indicates `depth` and `table` derived from `z` & `x`.
+
+```{r CorrPlotMatrix, echo=FALSE}
+correlNum = reorder_correlNum(correlNum)
+upper_tri = get_upper_tri(correlNum)
+melt_cN = reshape2::melt(upper_tri, na.rm=TRUE)
+ggheatmap = ggplot(melt_cN, aes(Var2, Var1, fill = value)) +
+  geom_tile(color = 'white') + 
+  scale_fill_gradient2(low = 'brown3', high = 'slateblue1', mid = 'yellow3',
+                       midpoint = 0, limit=c(-1,1), space ='Lab',
+                       name ='Spearman Rank\n Correlation') +
+theme_minimal() +
+theme(axis.text.x = element_text(angle = 45, vjust = 1,
+                                 size = 12, hjust = 1)) +
+coord_fixed()
+
+ggheatmap + 
+geom_text(aes(Var2, Var1, label = value), color = "black", size = 4) +
+theme(
+  axis.title.x = element_blank(),
+  axis.title.y = element_blank(),
+  panel.grid.major = element_blank(),
+  panel.border = element_blank(),
+  panel.background = element_blank(),
+  axis.ticks = element_blank(),
+  legend.justification = c(1, 0),
+  legend.position = c(0.5, 0.7),
+  legend.direction = "horizontal")+
+  guides(fill = guide_colorbar(barwidth = 7, barheight = 2,
+                title.position = "top", title.hjust = 0.5))
+```
+
+```{r diamondcutxyz, echo=FALSE, fig.cap="Diamond Cut Dimensional Chart. The data contains five cut dimensions: depth, table, x, y, and z that describe the dimensions in (mm) of the diamond. From Wickham, H.(2016).ggplot2 Elegant Graphics for Data Analysis. 2nd ed, pg. 65 Springer. doi:10.1007/978-3-319-24277-4", out.width='50%'}
+knitr::include_graphics('/diam/xyztabledepth.png', error=FALSE)
+```
+
+Note the relationship in `carat wt` to the `x, y, z` in Table 4. The smaller sizes are smaller carats, while the larger sizes are higher carats. Dimensions are proportional to the carat weight.  
+
+```{r CaratSizeSampletoXYZ, echo= FALSE, message=FALSE, warning=FALSE}
+knitr::kable(summary(select(diamonds, carat, x,y,z)),
+                       caption= "Carat relation to x, y, z (mm)",
+                       align='c',
+                       digits = 2
+)
+```
+
+#### Remove x, y, z Variables
+
+The decision is to remove the `x`, `y`, and `z` variable from the dataset. 
+
+```{r removeXYZ, message=FALSE}
+diamonds = select(diamonds, carat, cut, color, clarity, depth, table, price)
+```
+
+#### Analysis of Numeric Variables - (Caret, Price, Depth, Table)
+
+This next section explores the remaining numeric variables in the diamonds dataset. The variables: `carat`, `depth`, `table`, `price` are the remaining numeric variables in the dataset. 
+I will explore the population distribution, standard deviation, medians and quartiles, skew, outliers, and normal probability variables. There is a summary table for each variable, histogram with normal distribution curve imposed on it, showing how well the data fits a normal distribution. The normal probability plot for continuous variables determines if it from a normally distributed sample with a reference line to look for closest to a straight line. And finally, a boxplot to also describe the distribution of data. They show the whole range of the variable where the whiskers end—Left and right of the box in the 25th and 75th percentiles. The upper/lower whisker projects from the hinge 1.5 x the interquartile range (IQR). A solid black line through the box is the median, and the red circles are the outliers in the variable. The summary table summarizes the variable: min, 25%, mean, median, 75%, max, sd, and the lower and upper IQR and the number of outliers beyond the IQR*  1.5. 
+
+```{r diamondcarat, echo=FALSE, fig.cap="Diamond Carat Chart. The data contains carat sizes from 0.20ct to 5.01ct. The image above shows the carat and dimension in (mm). Carats are a diamond's weight in metric carats (ct.). And the carat is proportional to the `x` dimension, which was removed from the data—this image from Tremonti Fine Gems & Jewellery. (2012). Buying diamonds safely - Why we won't let you get caught out. http://tremontijewellery.blogspot.com/2012/07/buying-diamonds-safely-why-we-wont-let.html  ", out.width='70%'}
+knitr::include_graphics('/diam/carat.jpg', error=FALSE)
+```
+
+#### Carat
+
+The range of `carat` size is 0.2ct. up to 5.01ct., and the median is 0.7ct, which is a robust estimate not influenced by the extreme outliers. The histogram shows the heavily grouped size between 0.25ct. and 0.5ct. However, a median of 0.7 and a standard deviation of 0.47 puts the bulk of data between 0.23ct and 1.17ct. The standard deviation (squared deviation) is not robust to the outliers that skewed the data. However, the majority of the data points are between 0.2ct. and 2ct. The interquartile range is 0.64. The data has a positive skew to the right indicated by the data points curving from above to below the line then back above it on the Q-Q plot. From the boxplot, the 1,883 outliers skew the variable to the right. 
+
+```{r grid_carat, echo=FALSE}
+b3 = boxplot.stats(diamonds$carat)
+
+grid.arrange(
+  
+ggplot(diamonds, aes(carat)) + 
+  geom_histogram(aes(y=..density..), 
+                 binwidth = 0.2, 
+                 color="white", fill="gold4") +
+  stat_function(fun=dnorm, 
+                args = list(mean=mean(diamonds$carat), 
+                            sd=sd(diamonds$carat)),
+                lwd= 1, 
+                color="red"), ncol=2,
+
+ggplot(diamonds, aes(sample=carat)) +
+  stat_qq(shape=1, 
+          size=4, 
+          color="gold4") + 
+  stat_qq_line(color="red", 
+               lwd=1),
+
+ggplot(diamonds, aes(carat)) + 
+  stat_boxplot(geom = "errorbar", width =0.2) +
+  geom_boxplot( 
+    outlier.color = 'red', 
+    outlier.shape=1, 
+    outlier.size=3), 
+
+gtable_combine(
+  tableGrob(
+          round(summarize(diamonds,
+                          min=min(carat),
+                          "25%"=quantile(carat, 0.25),
+                          mean=mean(carat), 
+                          median=median(carat), 
+                          "75%"=quantile(carat, 0.75),
+                          max=max(carat)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8)),
+  tableGrob(
+          round(summarize(diamonds, 
+                          sd=sd(carat),
+                          lowIQR=b3$stats[1],
+                          upIQR=b3$stats[5],
+                          outliers=length(b3$out)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8))
+  
+, along=2)#closegtable
+
+)
+```
+
+#### Price
+
+The `price` histogram shows the distribution of data points with a majority in the lower price range. There is an \$18,497 range in price across the data points. The median is \$2,401, which is not influenced by the upper value of \$18,823. We can see a skew from the median with a 75% percentile of \$5,323. The \$3,532 outliers affect the standard deviation above the IQR*1.5. The IQR range is \$4,374. The data has a positive skew to the right, shown by the Q-Q Plot. The points curve from above the line to below the line and then back above the Q-Q Plotline. However, the upper points return closer to the line at the end. `Price` is not a normal distribution. However, `price` is the predictor variable at a future point. 
+
+```{r grid_price, echo=FALSE}
+b1 = boxplot.stats(diamonds$price)
+
+grid.arrange(
+  
+ggplot(diamonds, aes(price)) + 
+  geom_histogram(aes(y=..density..), 
+                 binwidth = 700, 
+                 color="white", fill="forestgreen") +
+  stat_function(fun=dnorm, 
+                args = list(mean=mean(diamonds$price), 
+                            sd=sd(diamonds$price)),
+                lwd= 1, 
+                color="red"), ncol=2,
+
+ggplot(diamonds, aes(sample=price)) +
+  stat_qq(shape=1, 
+          size=4, 
+          color="forestgreen") + 
+  stat_qq_line(color="red", 
+               lwd=1),
+
+ggplot(diamonds, aes(price)) + 
+  stat_boxplot(geom = "errorbar", width =0.2) +
+  geom_boxplot( 
+    outlier.color = 'red', 
+    outlier.shape=1, 
+    outlier.size=3), 
+
+gtable_combine(
+  tableGrob(
+          round(summarize(diamonds,
+                          min=min(price),
+                          "25%"=quantile(price, 0.25),
+                          mean=mean(price), 
+                          median=median(price), 
+                          "75%"=quantile(price, 0.75),
+                          max=max(price)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8)),
+  tableGrob(
+          round(summarize(diamonds, 
+                          sd=sd(price),
+                          lowIQR=b1$stats[1],
+                          upIQR=b1$stats[5],
+                          outliers=length(b1$out)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8))
+  
+, along=2)#closegtable
+
+)
+```
+
+#### Depth
+
+The `depth` variable displays a normal curve; however, there is a peak that increases kurtosis. There are long tails on either side of the 25% and 75% quartiles due to the 2,543 outliers. The standard deviation is 1.43 and is not too affected by outliers. There seems like an even distribution of outliers on either side of the IQR*1.5 whiskers. The Q-Q Plot has data points below the line and then at the red bar and finishing above it. The data indicates a normal distribution with a sharp peak and fatter tails relative to a normal distribution. 
+
+```{r grid_depth,echo=FALSE}
+b4 = boxplot.stats(diamonds$depth)
+
+grid.arrange(
+  
+ggplot(diamonds, aes(depth)) + 
+  geom_histogram(aes(y=..density..), 
+                 binwidth = 1, 
+                 color="white", fill="purple3") +
+  stat_function(fun=dnorm, 
+                args = list(mean=mean(diamonds$depth), 
+                            sd=sd(diamonds$depth)),
+                lwd= 1, 
+                color="red"), ncol=2,
+
+ggplot(diamonds, aes(sample=depth)) +
+  stat_qq(shape=1, 
+          size=4, 
+          color="purple3") + 
+  stat_qq_line(color="red", 
+               lwd=1),
+
+ggplot(diamonds, aes(depth)) + 
+  stat_boxplot(geom = "errorbar", width =0.2) +
+  geom_boxplot( 
+    outlier.color = 'red', 
+    outlier.shape=1, 
+    outlier.size=3), 
+
+gtable_combine(
+  tableGrob(
+          round(summarize(diamonds,
+                          min=min(depth),
+                          "25%"=quantile(depth, 0.25),
+                          mean=mean(depth), 
+                          median=median(depth), 
+                          "75%"=quantile(depth, 0.75),
+                          max=max(depth)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8)),
+  tableGrob(
+          round(summarize(diamonds, 
+                          sd=sd(depth),
+                          lowIQR=b4$stats[1],
+                          upIQR=b4$stats[5],
+                          outliers=length(b4$out)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8))
+  
+, along=2)#closegtable
+
+)
+```
+
+#### Table
+
+`Table` produces and normal distribution with a sharp peak and more sweeping tails due to outliers. The median is 57 and tight between the 25th and 75th percentiles. The Q-Q plot shows some kurtosis but little skew. The standard deviation is 2.23 and seems high, given the normal-looking curve. Standard deviation is affected by the outliers again and may not be the best measure. There are 604 outliers in the `table` data points.
+
+```{r grid_table, echo=FALSE}
+b2 = boxplot.stats(diamonds$table)
+
+grid.arrange(
+  
+ggplot(diamonds, aes(table)) + 
+  geom_histogram(aes(y=..density..), 
+                 binwidth = 1.25, 
+                 color="white", fill="deepskyblue2") +
+  stat_function(fun=dnorm, 
+                args = list(mean=mean(diamonds$table), 
+                            sd=sd(diamonds$table)),
+                lwd= 1, 
+                color="red"), ncol=2,
+
+ggplot(diamonds, aes(sample=table)) +
+  stat_qq(shape=1, 
+          size=4, 
+          color="deepskyblue2") + 
+  stat_qq_line(color="red", 
+               lwd=1),
+
+ggplot(diamonds, aes(table)) + 
+  stat_boxplot(geom = "errorbar", width =0.2) +
+  geom_boxplot( 
+    outlier.color = 'red', 
+    outlier.shape=1, 
+    outlier.size=3), 
+
+gtable_combine(
+  tableGrob(
+          round(summarize(diamonds,
+                          min=min(table),
+                          "25%"=quantile(table, 0.25),
+                          mean=mean(table), 
+                          median=median(table), 
+                          "75%"=quantile(table, 0.75),
+                          max=max(table)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8)),
+  tableGrob(
+          round(summarize(diamonds, 
+                          sd=sd(table),
+                          lowIQR=b2$stats[1],
+                          upIQR=b2$stats[5],
+                          outliers=length(b2$out)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8))
+  
+, along=2)#closegtable
+
+)
+```
+
+#### CARAT AND PRICE
+
+We noticed a strong uphill correlation of 0.96 between the `price` and `carat` in the Spearman Matrix above. The plot below displays that correlated relationship to a point on the `carat` scale. However, we can see a large dispersion of prices for the same carat weight, which should happen based on the other factors that grade the diamond. The anomalous drop in price occurs at 2.25ct, and the loess smoothing curve dips in price to approximately 3.25ct and then resumes its climb, but doesn't exceed in price until after 4ct. Thus 2.25ct to 4ct sees a drop in the linear price. Also, the data becomes very disperse after 2.5ct. According to the `carat` boxplot from earlier, the outliers start around 2ct. and above. On the graph, the blue line is climbing sharply and begins to stop climbing 1.75ct. as it approaches the 2.0ct mark.
+
+```{r caratPricePlot, echo=FALSE, message=FALSE}
+ggplot(diamonds, aes(carat, price)) + 
+  geom_point(shape= 1, size=0.75, col="gold4") +
+  geom_smooth(col="blue", lwd=1)
+```
+
+```{r samplePopulation, echo=FALSE}
+set.seed(2)
+smpl<-diamonds[sample(nrow(diamonds), 1000), ]
+```
+
+This graph takes a randomized sample and plots a scatterplot of the `price` and `carat` to help visualize where the loess curve begins to decline or deviate from its upward growth in price/carat relationship. Around 2ct, the data starts to ease up and at 2.25ct starts to fall in price. Not sure why this is happening; however, let's look at some more data relationships.
+
+```{r CaratPriceSampleCurve, echo=FALSE, message=FALSE}
+ggplot(smpl, aes(carat, price)) + 
+  geom_point(shape= 1, size=01, col="gold4") +
+  geom_smooth(col="blue", lwd=1)
+
+```
+
+```{r tableCaratSizes, echo=FALSE, message=FALSE}
+tbl = as.data.frame(table(cut_width(diamonds$carat, width=0.5, closed ="right")))
+```
+
+The `price-carat` boxplot is more telling but very similar to the scatterplot in a curve over `carat` weight and price. The boxplot was made by binning the carat sizes down from 5.25ct to 0.2ct in 0.5ct intervals. Grouping the `carat` helped organize the plots and better visualize 1ct and 1.25ct standout, showing a skew with many outliers and spanning the price range \$2000/\$2500 up to the \$18,000 limit. Thus, other variables determine the `price` as not only the diamond's carat weight. Note the sparseness of the data points after 3.5ct. The table is a summary of the grouping of `carat` into 0.5ct intervals. The table reiterates what is in the histogram plot from earlier. The majority of diamond data points are in the 0.25ct to 1.25ct range, with the most extensive grouping 0.25ct to 0.75ct. The sparse data points after 2.25ct jump out and will consider what to do with the data pre-modeling. 
+
+```{r boxplotSummaryTable, echo=FALSE, message=FALSE}
+grid.arrange( ncol=2, widths = 2:1,
+  ggplot(diamonds, aes(carat, price)) +
+  geom_boxplot(aes(group=cut_width(carat, width=0.25, closed="right")), orientation = "x", outlier.color = 'red', outlier.shape=1, outlier.size=1),
+
+tableGrob(tbl, theme=ttheme_minimal(base_size = 8))
+)
+```
+
+The grouping and distribution plot below shows the dispersion of carat weights binned into 0.5ct groups. 0.25ct to 0.75ct hold the most observations at 29,496, which is 54.7% of the total data, followed by the next size group 0.75ct to 1.25ct, which is 29.6% of the entire data. The question I have is there enough data after 2.75ct to 5ct to determine or predict diamond prices? More than likely, not, and maybe we remove this data. 
+
+```{r histoCaratBinned, echo=FALSE, message=FALSE, warning=FALSE}
+tbl %>%
+ggplot(aes(Var1, Freq)) +
+  geom_histogram(stat="identity", col="red", alpha=0.7, lwd=1) +
+  coord_flip() +
+  scale_x_discrete()+
+  scale_y_discrete() +
+  ggtitle("Carat: 0.5ct. Grouping and Distribution") +
+  xlab("Binned Groups") +
+  ylab("Distribution")
+```
+
+```{r FunctionGiveN, echo=FALSE, message=FALSE}
+give.n <- function(x){
+   return(c(y = mean(x), label = length(x)))
+}
+```
+
+#### COLOR AND PRICE
+
+```{r colorPrice, echo=FALSE, fig.cap="Color to Price Expectation. According to GIA, a diamond's price can differ based on color only regardless of the clarity, carat, and cut. From Gemological Institute of America Inc. (2018a). Diamond Quality Factors. https://www.gia.edu/diamond-quality-factor", out.width='70%'}
+knitr::include_graphics('/diam/color_price.jpg', error=FALSE)
+```
+
+The scatter plot demonstrates the `carat` to `price` and introduces a diamond `color` grade. However, there is a trend; it's the `D, E, F` considered higher grades that are colorless, which seem to be in the smaller carat weights and span across the entire price range. The outlier carat weights above 3ct are `H, I, J`, which have more color than the `D, E, F`, and assumes that there are few large carat colorless diamonds, certainly in this dataset. 
+
+```{r colorPricePlot, echo=FALSE, message=FALSE}
+ggplot(diamonds, aes(carat, price, color=color)) + 
+  geom_point(size=1) +
+  scale_color_brewer(palette = "Dark2") +
+  scale_fill_brewer(palette = "Dark2") +
+  geom_smooth(col= "blue", lwd=1)
+```
+
+The `color` and `price` boxplot shows low to high median value left to right and the outliers in red. Again `H, I, & J` all have higher prices, while `D`, `E`, & `F` have lower prices, but their outliers reach up into the higher cost diamonds. The number in the boxes gives the distribution of color numbers in the total dataset. `G` has the most observations, followed by `E` and `F` color grades.
+
+```{r BoxplotPriceColor,  echo=FALSE, message=FALSE, warning=FALSE}
+#function give.n created in its own code block
+ggplot(diamonds, aes(color, price)) + 
+   geom_boxplot(aes(x=reorder(color, price, FUN=median),fill=color), alpha=0.7, outlier.color = 'red',
+    outlier.shape=3, outlier.size=.7, outlier.alpha = 0.1) +
+   scale_color_brewer(palette = "Dark2") +
+   scale_fill_brewer(palette = "Dark2") +
+   stat_summary(fun.data = give.n, geom = "text")
+  
+```
+
+The density curve demonstrates the skewed color data to the right and the distribution of data points in the data. It's another way to see what is happening with `color` and `price`. 
+
+```{r densityPriceColor,  echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(diamonds, aes(price)) +
+  geom_density(aes(x= price, fill = color), alpha = 0.7) +
+  scale_color_brewer(palette = "Dark2") +
+  scale_fill_brewer(palette = "Dark2")
+```
+
+The box plot above summarized the distribution of `color`, and here is each color grade that shows the skewness of each grading. Heavy skew to the right. Notice the increase of price in `H, I, & J` around the \$4,500 to \$5,000 mark. 
+
+```{r FacetPriceColor,  echo=FALSE, warning=FALSE, message=FALSE}
+ggplot(diamonds, aes(x = price)) +
+geom_histogram(aes(fill = color), binwidth = 150) +
+facet_wrap(~color, scales = "free_y") +
+  scale_color_brewer(palette = "Dark2") +
+  scale_fill_brewer(palette = "Dark2")
+```
+
+#### CLARITY AND PRICE
+
+```{r clarityPrice, echo=FALSE, fig.cap="Clarity to Price Expectation. According to GIA, the clarity of a diamond is unique to each stone. Clarity can affect the price because the higher up the scale, the more rare the clarity. From Gemological Institute of America Inc. (2018a). Diamond Quality Factors. https://www.gia.edu/diamond-quality-factor", out.width='70%'}
+knitr::include_graphics('/diam/clarity_price.jpg', error=FALSE)
+```
+
+The plot below is for the `price`, `carat`, and & `clarity`. This graphic is a bit better because we can see the clear bands of color representing each of the `clarity` grades in proportion to `price` and `carat` weight. `I1` is the "Included" rating and in the lowest clarity rating because it has more blemishes and irregularities compared to the `IF` (internally flawless). We find the `I1` clarity in the higher carat wt diamonds, and there are outliers in the higher price range. With this scatterplot, it is clear that the `clarity` grades are following a curve and span a defined `carat` range but extent through all prices from lowest to highest price. 
+
+```{r clarityPricePlot, echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(diamonds, aes(carat, price, color=clarity)) +
+  geom_point(size = 2) +
+  scale_color_brewer(palette = "Paired") +
+  scale_fill_brewer(palette = "Paired") +
+  geom_smooth(col= "blue", lwd=1)
+```
+
+The price/clarity boxplot gives more insight into what is happening. All the `clarity` grades span the price range, but all of them are outliers at higher prices. `SI1`, `VS1` & `SI2` make up the majority of the data for `clarity`. The boxes are in ascending order of each median, and the lower quality `clarity` grades are higher in price than the top clarity grades `IF, VVS1, & VVS2`. Figure 8 does elude to higher the clarity the rarer the diamond, but in this data, `IF` is the second-lowest distribution above `I1`, but `I1` isn't considered rare it's the least clear diamond, and the outliers are few however do reach the higher prices. The five clarity grades to the plots right all have a 75th percentile hovering around \$5,000 in price. 
+
+```{r BoxplotPriceClarity,  echo=FALSE, message=FALSE, warning=FALSE}
+#function give.n created in its own code block
+ggplot(diamonds, aes(clarity, price)) + 
+   geom_boxplot(aes(x=reorder(clarity, price, FUN=median),fill=clarity), alpha=0.7, outlier.color = 'red', 
+    outlier.shape=3, outlier.size=.7, outlier.alpha = 0.3) +
+   scale_color_brewer(palette = "Paired") +
+   scale_fill_brewer(palette = "Paired") +
+   stat_summary(fun.data = give.n, geom = "text")
+  
+```
+
+The density plot of price to clarity gets confusing because of the overlap in `color` and the low price. The `IF` clarity is in more of the lower-priced diamonds. And so is `I1`.
+
+```{r densityPriceClarity,  echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(diamonds, aes(price)) +
+  geom_density(aes(x = price, fill = clarity), alpha = 0.5) +
+  scale_color_brewer(palette = "Paired") +
+  scale_fill_brewer(palette = "Paired")
+```
+
+These histograms show the distribution of each clarity grade to price. We find a heavy skew right, and the graphs show the majority of clarity grades are in the lower cost diamonds. `SI2` & `I1` have a broader price range, with many costing up to \$5,000. The two from the left edge are under \$2,500 and are the highest clarity grade.
+
+```{r FacetPriceClarity,  echo=FALSE, warning=FALSE, message=FALSE}
+ggplot(diamonds, aes(x = price)) +
+geom_histogram(aes(fill = clarity), binwidth = 150) +
+facet_wrap(~clarity, scales = "free_y") +
+  scale_color_brewer(palette = "Paired") +
+  scale_fill_brewer(palette = "Paired")
+```
+
+#### CUT AND PRICE 
+
+```{r cutPrice, echo=FALSE, fig.cap="Cut to Price Expectation. Left to Right: Ideal, Good, Fair. The diamonds cut affects the way light refracts in the diamond. The brighter the diamond, the higher the cut grade. The cut is a combination of the proportionate dimensions to optimize the brilliance and fire of the stone. The GIA does not mention if cut affects the price. From Gemological Institute of America Inc. (2018c). Diamond Cut: The wow factor. https://www.gia.edu/diamond-cut/diamond-cut-basic-overview", out.width='70%'}
+knitr::include_graphics('/diam/cut_price.jpg', error=FALSE)
+```
+
+The fair cut appears to follow the larger carat sizes similar to the `I1` clarity grade above, and the fair cut is found on the biggest diamonds and at the highest prices. The Ideal cut in red spans the carat range densely from 0.2ct to approximately 1.5ct then becomes more dispersed in the higher carat ranges, yet the price is higher when the `carat` and `Ideal` grade are together. 
+
+```{r cutPricePlot, echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(diamonds, aes(carat, price, color=cut)) +
+geom_point(size = 1) +
+  scale_color_brewer(palette = "Spectral") +
+  scale_fill_brewer(palette = "Spectral") +
+  geom_smooth(col= "blue", lwd=1)
+```
+
+The boxplot explains the `cut` distribution better. The `Ideal` cut is the largest proportion of the dataset, followed by `Premium` and `Very Good`, `Premium` is the grade with a 75th percentile over $5,000 in the price above `Very Good` and then `Fair`. All cut grades have outliers that reach the highest prices and possibly `Ideal` with the most outliers extending the price range. But statistically, the `Premium` grade extends the IQR*1.5 the highest in price. 
+
+```{r BoxplotPriceCut,  echo=FALSE, message=FALSE, warning=FALSE}
+#function give.n created in its own code block
+ggplot(diamonds, aes(cut, price)) + 
+   geom_boxplot(aes(x=reorder(cut, price, FUN=median),fill=cut), alpha=0.7, outlier.color = 'red', 
+    outlier.shape=3, outlier.size=.7, outlier.alpha = 0.2) +
+   scale_color_brewer(palette = "Spectral") +
+   scale_fill_brewer(palette = "Spectral") +
+   stat_summary(fun.data = give.n, geom = "text")
+  
+```
+
+The density curve is more clear to read with fewer categories. We can see this in the boxplots, and here `Ideal` takes the majority of data points followed by `Premium`. The `Fair` grade has a narrow price range, as seen in the boxplot, with the lowest number of observations in the data. 
+
+```{r densityPriceCut,  echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(diamonds, aes(price)) +
+  geom_density(aes(x = price, fill = cut), alpha = 0.7) +
+  scale_color_brewer(palette = "Spectral") +
+  scale_fill_brewer(palette = "Spectral")
+```
+
+No big surprise at this point that the data is skewed right because of outliers. The histogram plots give some more view into how the cut dispersed in the data. The properties combined with the boxplot and density curve show that most of the data reside in the under \$5,000 price range and under the 2.5ct weight range.
+
+```{r FacetPriceCut,  echo=FALSE, warning=FALSE, message=FALSE}
+ggplot(diamonds, aes(x = price)) +
+geom_histogram(aes(fill = cut), binwidth = 100) +
+facet_wrap(~cut, scales = "free_y") +
+  scale_color_brewer(palette = "Spectral") +
+  scale_fill_brewer(palette = "Spectral")
+```
+
+#### Conclusion
+
+It is best to look at the outliers and decide if they should be taken out of the data or stay. For regression analysis, it recommends removing outliers and normalizing the data to represent a normal distribution. Also, scaling the data would help with the accuracy of the algorithm. If we wanted to use machine learning algorithms on this data, I would remove extreme outliers, normalize/scale the data and one-hot-encode all of the categorical variables. I am leaning toward using a decision tree classifier and may post up future analysis. I would like to continue this process in a future post when time is available. 
+
+
+
+
+
+
+#### References
+
+Gemological Appraisal Industry. (2018). Diamond Education. Retrieved from: https://gailab.org/content/diamond-education
+
+Gemological Institute of America Inc. (2018a). Diamond Quality Factors. Retrieved from: https://www.gia.edu/diamond-quality-factor
+
+Gemological Institute of America Inc. (2018b). Diamonds - Overview. Retrieved from: https://www.gia.edu/diamond
+
+Gemological Institute of America Inc. (2018c). Diamond Cut: The wow factor. Retrieved from: https://www.gia.edu/diamond-cut/diamond-cut-basic-overview
+
+STHDA, Statistical tools for high-throughput data analysis. (2018). ggplot2: Quick correlation matrix heatmap - R software and data visualization. Retrieved from: (http://www.sthda.com/english/wiki/ggplot2-quick-correlation-matrix-heatmap-r-software-and-data-visualization
+
+Tidyverse/ggplot2. (2018). diamonds.R. [Data file]. Retrieved from: https://github.com/tidyverse/ggplot2/tree/master/data-raw
+
+Tremonti Fine Gems & Jewellery. (2012). Buying diamonds safely - Why we won't let you get caught out. Retrieved from: http://tremontijewellery.blogspot.com/2012/07/buying-diamonds-safely-why-we-wont-let.html
+
+Wickham, H.(2016).ggplot2 Elegant Graphics for Data Analysis. 2nd ed, pg. 65 Springer. doi:10.1007/978-3-319-24277-4

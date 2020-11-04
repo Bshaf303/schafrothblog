@@ -40,5 +40,14 @@
 Load the iris datasetdata(&amp;quot;iris&amp;quot;) head()Look at the iris dataset with the head() function and lists the first five rows.</description>
     </item>
     
+    <item>
+      <title>Data Preprocessing - Diamonds Dataset</title>
+      <link>/post/2018/05/13/data-preprocessing-diamonds-dataset/</link>
+      <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/05/13/data-preprocessing-diamonds-dataset/</guid>
+      <description>Data PreprocessingThe following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with one-hot encoding or dummy variables, scaling data, normalizing data.</description>
+    </item>
+    
   </channel>
 </rss>
