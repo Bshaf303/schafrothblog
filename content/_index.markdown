@@ -4,12 +4,20 @@ title: Home
 
 [<img src="https://simpleicons.org/icons/github.svg" style="max-width:15%;min-width:40px;float:right;" alt="Github repo" />](https://github.com/yihui/hugo-xmin)
 
-# Data Science Portfolio
+# Bryan Schafroth's Project Portfolio
 
-## Welcome to my project portfolio
+**Highlights:**
 
-The website posts are personal projects done in my free time over the course of several years and do not reflect any projects or work for my employer as there is a confidentiality agreement.
-The website content is provided under the Creative Commons (CC-BY) 4.0 licence and all the data is sourced from public sources and provided under MIT license. 
+* [Data Exploration](https://www.bryanschafroth.com/post/2018/05/13/data-preprocessing-diamonds-dataset/)
 
-See the [posts](/post/) tab for various data science projects and papers discussing key concepts. The [categories](/categories/) and [tags](/tags/) can be used to search for specific topics. 
+* [Image Classification Problem and Machine Learning](https://www.bryanschafroth.com/post/2018/10/21/classification-problem-using-machine-learning-forest-cover-type/)
+
+* [Classification Problem using Machine Learning](https://www.bryanschafroth.com/post/2018/10/21/classification-problem-using-machine-learning-forest-cover-type/)
+
+* [Real-Time Data and the Smart Cities - Internet of Things](https://www.bryanschafroth.com/post/2018/03/20/real-time-data-and-smart-cities/)
+
+
+
+### Various Data Science Projects and Papers Discussing Key Data Concepts.
+
 
