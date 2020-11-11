@@ -1,0 +1,779 @@
+---
+title: K-Nearest Neighbor (KNN) - Heart Disease Dataset
+author: 'Bryan '
+date: '2018-05-20'
+slug: k-nearest-neighbor-KNN-heart-disease-dataset
+categories:
+  - Machine Learning
+  - R Programming
+  - Data Analysis
+  - Alogrithms
+tags:
+  - k-nearest neighbor
+  - 10-fold cross validation
+  - machine learning
+  - classification
+  - algorithms
+  - lazy learner
+  - euclidian distance
+  - supervised learning
+---
+
+
+
+<div id="introduction-to-k-nearest-neighbor" class="section level4">
+<h4>Introduction to K-Nearest Neighbor</h4>
+<p>KNN is a supervised learning algorithm and uses a training sample from the dataset, which classifies groups into different classes. It is a classifier used to predict the level of an unknown point (observation) and does this by measuring the points nearest to the unknown point. It works well in measuring the differences between multiple classes that are complex and hard to detect. KNN is considered a simple classification and regression algorithm. In classification, new data points are grouped into a given class, while in regression, a new data point is labeled based on the average value of k nearest neighbor. KNN is a “lazy learner” because it doesn’t learn more than the training data</p>
+</div>
+<div id="distance-measurements-used-in-knn" class="section level4">
+<h4>Distance measurements used in KNN?</h4>
+<p>One of the KNN algorithm’s only freedoms where we can play around and pick different things resulting in different classifiers and performance is the algorithm’s distance parameter. The Euclidean distance is the default measure. A useful application for numeric attributes with continuous data. Symmetric, spherical, and treats all dimensions equally. Sensitive to extreme differences (outliers) in single variables. The Minkowski distance is a p-norm or generalization of the Euclidean distance. KNN can also do the Manhattan distance (adds the difference across each coordinate point) by setting p =1 or set p=0 for Hamming distance (suitable for categorical attributes). Also found the Kullback-Leibler (KL) divergence for histograms (is asymmetrical) and mentions a custom distance measurement called BM25 for text.</p>
+</div>
+<div id="applications-of-the-knn-algorithm" class="section level4">
+<h4>Applications of the KNN Algorithm</h4>
+<p>Applications using KNN are facial recognition, character recognition in video and images. Traffic monitoring systems that stream video of traffic patterns and maps out predictions. Another application is a recommender system for consumer products that predicts products for consumers. The biomedical industry also uses KNN to predict biologically related occurrences such as tumor detection or onset of diabetes. Another area is the scientific and environmental analysis of various elements occurring at a site.</p>
+</div>
+<div id="pros-and-cons-of-using-the-k-nearest-neighbor-algorithm" class="section level4">
+<h4>Pros and Cons of using the K-Nearest Neighbor Algorithm</h4>
+<p><strong>Pro:</strong>
+The KNN is simple and effective, according to the experts, and said to be impressive for a simpler method. The decision line can be any shape versus a straight line in other classifiers, and this is beneficial for complex, multiple groups of data all clustered together. The algorithm always separates the training set precisely because of the “noise cell” made by the decision boundary around the points. It’s non-linear and reflects classes well. There is a lot of freedom to fit the training data. The distance measure is a benefit because we can choose one appropriate to the data’s complexity or type of data. There is no over/under fitting of the model, as the <code>k</code> value is adjusted appropriately.</p>
+<p><strong>Con:</strong>
+Data needs scaling, which is adjusted before running the data, which adds a step to the process. Watch for units of measurement like the height of a tree compared to the width of its leaves. Meters verse mm can severely alter the decision boundary. If the data is overly noisy with no clear definition between classes, KNN may not work at its best. The computation cost is high and will use resources; thus, speed can be a factor. Outliers and mislabeled points can alter the decision boundary significantly. Missing values need to be filled in with something and can’t be left empty – use imputation or remove data. We don’t want these small changes to the training set to affect the classifier problem. There is no notion of prior states – no confidence in the class prior. Making the <code>k</code> value too big the algorithm will classify everything as the most probable. Making <code>k</code> too small leads to unstable decision boundaries and high variability. The small changes in the training set magnify changes in classification.</p>
+</div>
+<div id="k-nearest-neighbor-example" class="section level4">
+<h4>K-Nearest Neighbor Example</h4>
+<p>This project example uses the UCI data sets (<a href="https://archive.ics.uci.edu/ml/datasets/Heart+Disease" class="uri">https://archive.ics.uci.edu/ml/datasets/Heart+Disease</a>) “Heart-Disease” and specifically the “processed.cleveland.data” for this analysis. The data has fourteen attributes. We note one of the attributes (variables), <code>num</code> is the predicted attribute for this KNN model exercise. Eight attributes are categorical, and five attributes are numerical. We will create dummy variables for the eight categorical and scale the five numeric variables. The predictor attribute is a factor. And is changed to either No presence of the angiographic disease or Yes for the angiographic disease.</p>
+</div>
+<div id="load-the-libraries" class="section level4">
+<h4>Load the Libraries</h4>
+<pre class="r"><code>library(tidyverse)
+library(caret)
+library(pROC)
+library(corrplot)
+library(gridExtra)
+library(psych)</code></pre>
+</div>
+<div id="load-the-dataset" class="section level4">
+<h4>Load the Dataset</h4>
+<pre class="r"><code>HD = read_csv(&quot;https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data&quot;, 
+            col_names = c(&quot;age&quot;,&quot;sex&quot;,&quot;cp&quot;,&quot;trestbps&quot;,&quot;chol&quot;,
+                          &quot;fbs&quot;,&quot;restecg&quot;,&quot;thalach&quot;,&quot;exang&quot;,&quot;oldspeak&quot;,
+                          &quot;slope&quot;,&quot;ca&quot;,&quot;thal&quot;,&quot;num&quot;))</code></pre>
+</div>
+<div id="dataset-description" class="section level4">
+<h4>Dataset Description</h4>
+<p>Attribute Information:</p>
+<ol style="list-style-type: decimal">
+<li><code>age</code> (in years)</li>
+<li><code>sex</code> (1=male, 0=female)</li>
+<li><code>cp</code> (chest pain type: 1:=typical angina, 2:=atypical angina, 3=non-anginal pain, 4=asymptomatic)</li>
+<li><code>trestbps</code> (resting blood pressure in mm Hg on admission to the hospital)</li>
+<li><code>chol</code> (serum cholesterol in mg/dl)</li>
+<li><code>fbs</code> (fasting blood sugar &gt; 120 mg/dl, 1 = true; 0 = false)</li>
+<li><code>restecg</code> (resting electrocardiograph results, 0=normal, 1=ST-T wave abnormality, T wave inversions and/or ST elevation or depression of &gt; 0.05 mV, 2=showing probable or definite left ventricular hypertrophy by Estes’ criteria)</li>
+<li><code>thalach</code> (maximum heart rate achieved)</li>
+<li><code>exang</code> (exercise induced angina, 1 = yes; 0 = no)</li>
+<li><code>oldpeak</code> (ST depression induced by exercise relative to rest)</li>
+<li><code>slope</code> (the slope of the peak exercise ST segment, 1=upsloping, 2= flat, 3=downsloping</li>
+<li><code>ca</code> (number of major vessels (0-3) colored by flourosopy)</li>
+<li><code>thal</code> (3 = normal; 6 = fixed defect; 7 = reversible defect)</li>
+<li><code>num</code> (the predicted attribute, diagnosis of heart disease, angiographic disease status, 0: &lt; 50% diameter narrowing, 1: &gt; 50% diameter narrowing)</li>
+</ol>
+</div>
+<div id="data-summary" class="section level4">
+<h4>Data Summary</h4>
+<pre><code>## Rows: 303
+## Columns: 14
+## $ age      &lt;dbl&gt; 63, 67, 67, 37, 41, 56, 62, 57, 63, 53, 57, 56, 56, 44, 52...
+## $ sex      &lt;dbl&gt; 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1...
+## $ cp       &lt;dbl&gt; 1, 4, 4, 3, 2, 2, 4, 4, 4, 4, 4, 2, 3, 2, 3, 3, 2, 4, 3, 2...
+## $ trestbps &lt;dbl&gt; 145, 160, 120, 130, 130, 120, 140, 120, 130, 140, 140, 140...
+## $ chol     &lt;dbl&gt; 233, 286, 229, 250, 204, 236, 268, 354, 254, 203, 192, 294...
+## $ fbs      &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0...
+## $ restecg  &lt;dbl&gt; 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 0...
+## $ thalach  &lt;dbl&gt; 150, 108, 129, 187, 172, 178, 160, 163, 147, 155, 148, 153...
+## $ exang    &lt;dbl&gt; 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0...
+## $ oldspeak &lt;dbl&gt; 2.3, 1.5, 2.6, 3.5, 1.4, 0.8, 3.6, 0.6, 1.4, 3.1, 0.4, 1.3...
+## $ slope    &lt;dbl&gt; 3, 2, 2, 3, 1, 1, 3, 1, 2, 3, 2, 2, 2, 1, 1, 1, 3, 1, 1, 1...
+## $ ca       &lt;chr&gt; &quot;0.0&quot;, &quot;3.0&quot;, &quot;2.0&quot;, &quot;0.0&quot;, &quot;0.0&quot;, &quot;0.0&quot;, &quot;2.0&quot;, &quot;0.0&quot;, &quot;1...
+## $ thal     &lt;chr&gt; &quot;6.0&quot;, &quot;3.0&quot;, &quot;7.0&quot;, &quot;3.0&quot;, &quot;3.0&quot;, &quot;3.0&quot;, &quot;3.0&quot;, &quot;3.0&quot;, &quot;7...
+## $ num      &lt;dbl&gt; 0, 2, 1, 0, 0, 0, 3, 0, 2, 1, 0, 0, 2, 0, 0, 0, 1, 0, 0, 0...</code></pre>
+<p>Missing values found in <code>thal</code> and <code>ca</code>. Changing the character type to a numeric type, this will replace missing with <code>NA</code>.</p>
+<pre class="r"><code>HD$thal = as.double(HD$thal)
+HD$ca = as.double(HD$ca)</code></pre>
+<pre><code>##       age             sex               cp           trestbps    
+##  Min.   :29.00   Min.   :0.0000   Min.   :1.000   Min.   : 94.0  
+##  1st Qu.:48.00   1st Qu.:0.0000   1st Qu.:3.000   1st Qu.:120.0  
+##  Median :56.00   Median :1.0000   Median :3.000   Median :130.0  
+##  Mean   :54.44   Mean   :0.6799   Mean   :3.158   Mean   :131.7  
+##  3rd Qu.:61.00   3rd Qu.:1.0000   3rd Qu.:4.000   3rd Qu.:140.0  
+##  Max.   :77.00   Max.   :1.0000   Max.   :4.000   Max.   :200.0  
+##                                                                  
+##       chol            fbs            restecg          thalach     
+##  Min.   :126.0   Min.   :0.0000   Min.   :0.0000   Min.   : 71.0  
+##  1st Qu.:211.0   1st Qu.:0.0000   1st Qu.:0.0000   1st Qu.:133.5  
+##  Median :241.0   Median :0.0000   Median :1.0000   Median :153.0  
+##  Mean   :246.7   Mean   :0.1485   Mean   :0.9901   Mean   :149.6  
+##  3rd Qu.:275.0   3rd Qu.:0.0000   3rd Qu.:2.0000   3rd Qu.:166.0  
+##  Max.   :564.0   Max.   :1.0000   Max.   :2.0000   Max.   :202.0  
+##                                                                   
+##      exang           oldspeak        slope             ca        
+##  Min.   :0.0000   Min.   :0.00   Min.   :1.000   Min.   :0.0000  
+##  1st Qu.:0.0000   1st Qu.:0.00   1st Qu.:1.000   1st Qu.:0.0000  
+##  Median :0.0000   Median :0.80   Median :2.000   Median :0.0000  
+##  Mean   :0.3267   Mean   :1.04   Mean   :1.601   Mean   :0.6722  
+##  3rd Qu.:1.0000   3rd Qu.:1.60   3rd Qu.:2.000   3rd Qu.:1.0000  
+##  Max.   :1.0000   Max.   :6.20   Max.   :3.000   Max.   :3.0000  
+##                                                  NA&#39;s   :4       
+##       thal            num        
+##  Min.   :3.000   Min.   :0.0000  
+##  1st Qu.:3.000   1st Qu.:0.0000  
+##  Median :3.000   Median :0.0000  
+##  Mean   :4.734   Mean   :0.9373  
+##  3rd Qu.:7.000   3rd Qu.:2.0000  
+##  Max.   :7.000   Max.   :4.0000  
+##  NA&#39;s   :2</code></pre>
+<p>Remove the NA missing values from the data. Four in <code>ca</code> and two in <code>thal</code>.</p>
+<pre class="r"><code>HD = drop_na(HD)</code></pre>
+<p>Change those categorical variables to factor type, and these will be re-encoded in later steps.</p>
+<pre class="r"><code>HD = HD %&gt;% mutate_at(c(&quot;cp&quot;, &quot;restecg&quot;, &quot;slope&quot;, &quot;ca&quot;, &quot;thal&quot;), as.factor)</code></pre>
+</div>
+<div id="correlation-matrix" class="section level4">
+<h4>Correlation Matrix</h4>
+<p>Observations describing the correlation between the numeric variables: <code>age</code> and <code>oldspeak</code> to <code>thalach</code> and <code>trestbps</code> show a weak negative relationship. The remaining variable shows no linear relationship if only slight.</p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/CorrPlot-1.png" width="672" /></p>
+</div>
+<div id="categorical-variables" class="section level4">
+<h4>Categorical Variables</h4>
+<p>Next is a look at the nine categorical variables.</p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/sexVariablePlot-1.png" width="672" /></p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/cpVariablePlot-1.png" width="672" /></p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/fbsVariablePlot-1.png" width="672" /></p>
+<p><code>restecg</code> has an imbalance of its three classes. There will be an issue when splitting the training and testing data, and there won’t be enough points representing <code>restecg</code> == 1. It may be best to remove class 1.</p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/restecgVariablePlot-1.png" width="672" /></p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/exangVariablePlot-1.png" width="672" /></p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/slopeVariablePlot-1.png" width="672" /></p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/caVariablePlot-1.png" width="672" /></p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/thalVariablePlot-1.png" width="672" /></p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/numVariablePlot-1.png" width="672" /></p>
+<p>I assume to consolidate the values greater than 0 into the value of 1 and describe 1 as a positive “yes” reading for heart disease. (The information about the data only mentions 0 or 1) I then recode zero and one into “No” and “Yes” as factors for the KNN classifier below.</p>
+<pre class="r"><code>HD$num[HD$num &gt; 0] = 1
+HD$num = recode(HD$num, &#39;0&#39; = &quot;No&quot;, &#39;1&#39; = &quot;Yes&quot;)
+HD$num = factor(HD$num)</code></pre>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/confirmNumPlot-1.png" width="672" /></p>
+</div>
+<div id="numeric-variable-summary-statistics" class="section level4">
+<h4>Numeric Variable Summary Statistics</h4>
+<p>This table shows all of the numeric variables’ statistics. I am looking for outliers, overly skewed distributions, and whether to center the data or not.</p>
+<table>
+<caption><span id="tab:SummaryTableNumeric">Table 1: </span>Summary of Numeric Data</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th align="center">vars</th>
+<th align="center">n</th>
+<th align="center">mean</th>
+<th align="center">sd</th>
+<th align="center">median</th>
+<th align="center">trimmed</th>
+<th align="center">mad</th>
+<th align="center">min</th>
+<th align="center">max</th>
+<th align="center">range</th>
+<th align="center">skew</th>
+<th align="center">kurtosis</th>
+<th align="center">se</th>
+<th align="center">Q0.25</th>
+<th align="center">Q0.75</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>age</td>
+<td align="center">1</td>
+<td align="center">297</td>
+<td align="center">54.54</td>
+<td align="center">9.05</td>
+<td align="center">56.0</td>
+<td align="center">54.73</td>
+<td align="center">8.90</td>
+<td align="center">29</td>
+<td align="center">77.0</td>
+<td align="center">48.0</td>
+<td align="center">-0.22</td>
+<td align="center">-0.55</td>
+<td align="center">0.53</td>
+<td align="center">48</td>
+<td align="center">61.0</td>
+</tr>
+<tr class="even">
+<td>sex</td>
+<td align="center">2</td>
+<td align="center">297</td>
+<td align="center">0.68</td>
+<td align="center">0.47</td>
+<td align="center">1.0</td>
+<td align="center">0.72</td>
+<td align="center">0.00</td>
+<td align="center">0</td>
+<td align="center">1.0</td>
+<td align="center">1.0</td>
+<td align="center">-0.75</td>
+<td align="center">-1.44</td>
+<td align="center">0.03</td>
+<td align="center">0</td>
+<td align="center">1.0</td>
+</tr>
+<tr class="odd">
+<td>trestbps</td>
+<td align="center">4</td>
+<td align="center">297</td>
+<td align="center">131.69</td>
+<td align="center">17.76</td>
+<td align="center">130.0</td>
+<td align="center">130.48</td>
+<td align="center">14.83</td>
+<td align="center">94</td>
+<td align="center">200.0</td>
+<td align="center">106.0</td>
+<td align="center">0.69</td>
+<td align="center">0.76</td>
+<td align="center">1.03</td>
+<td align="center">120</td>
+<td align="center">140.0</td>
+</tr>
+<tr class="even">
+<td>chol</td>
+<td align="center">5</td>
+<td align="center">297</td>
+<td align="center">247.35</td>
+<td align="center">52.00</td>
+<td align="center">243.0</td>
+<td align="center">244.70</td>
+<td align="center">47.44</td>
+<td align="center">126</td>
+<td align="center">564.0</td>
+<td align="center">438.0</td>
+<td align="center">1.11</td>
+<td align="center">4.30</td>
+<td align="center">3.02</td>
+<td align="center">211</td>
+<td align="center">276.0</td>
+</tr>
+<tr class="odd">
+<td>fbs</td>
+<td align="center">6</td>
+<td align="center">297</td>
+<td align="center">0.14</td>
+<td align="center">0.35</td>
+<td align="center">0.0</td>
+<td align="center">0.06</td>
+<td align="center">0.00</td>
+<td align="center">0</td>
+<td align="center">1.0</td>
+<td align="center">1.0</td>
+<td align="center">2.01</td>
+<td align="center">2.04</td>
+<td align="center">0.02</td>
+<td align="center">0</td>
+<td align="center">0.0</td>
+</tr>
+<tr class="even">
+<td>thalach</td>
+<td align="center">8</td>
+<td align="center">297</td>
+<td align="center">149.60</td>
+<td align="center">22.94</td>
+<td align="center">153.0</td>
+<td align="center">150.91</td>
+<td align="center">22.24</td>
+<td align="center">71</td>
+<td align="center">202.0</td>
+<td align="center">131.0</td>
+<td align="center">-0.53</td>
+<td align="center">-0.09</td>
+<td align="center">1.33</td>
+<td align="center">133</td>
+<td align="center">166.0</td>
+</tr>
+<tr class="odd">
+<td>exang</td>
+<td align="center">9</td>
+<td align="center">297</td>
+<td align="center">0.33</td>
+<td align="center">0.47</td>
+<td align="center">0.0</td>
+<td align="center">0.28</td>
+<td align="center">0.00</td>
+<td align="center">0</td>
+<td align="center">1.0</td>
+<td align="center">1.0</td>
+<td align="center">0.74</td>
+<td align="center">-1.46</td>
+<td align="center">0.03</td>
+<td align="center">0</td>
+<td align="center">1.0</td>
+</tr>
+<tr class="even">
+<td>oldspeak</td>
+<td align="center">10</td>
+<td align="center">297</td>
+<td align="center">1.06</td>
+<td align="center">1.17</td>
+<td align="center">0.8</td>
+<td align="center">0.88</td>
+<td align="center">1.19</td>
+<td align="center">0</td>
+<td align="center">6.2</td>
+<td align="center">6.2</td>
+<td align="center">1.23</td>
+<td align="center">1.44</td>
+<td align="center">0.07</td>
+<td align="center">0</td>
+<td align="center">1.6</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="numeric-variables-summary-plots---histogram-q-q-plot-boxplot-summary-table" class="section level4">
+<h4>Numeric Variables Summary Plots - Histogram, Q-Q Plot, Boxplot, Summary Table</h4>
+<p>These next series of plots give a good visual understanding of the above statistics in Table 1.</p>
+</div>
+<div id="the-age-variable" class="section level4">
+<h4>The age Variable</h4>
+<p>The points show a broader peak (obtuse) with narrow tails and a negative kurtosis close to a normal distribution.</p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/grid_age-1.png" width="672" /></p>
+</div>
+<div id="the-trestbps-variable" class="section level4">
+<h4>The trestbps Variable</h4>
+<p>There are nine outliers found in <code>trestbps</code>. I am noting the positive skew (right).</p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/grid_trestbps-1.png" width="672" /></p>
+</div>
+<div id="the-chol-variable" class="section level4">
+<h4>The chol Variable</h4>
+<p>There are five outliers in <code>chol</code>, which skews to the right. Removing the outliers will help</p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/grid_chol-1.png" width="672" /></p>
+</div>
+<div id="the-thalach-variable" class="section level4">
+<h4>The thalach Variable</h4>
+<p>There is one outlier in <code>thalach</code>. I am observing a left or negative skew.</p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/grid_thalach-1.png" width="672" /></p>
+</div>
+<div id="the-oldspeak-variable" class="section level4">
+<h4>The oldspeak Variable</h4>
+<p>The variable <code>oldspeak</code> has five outliers and is right-skewed.</p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/grid_oldspeak-1.png" width="672" /></p>
+</div>
+<div id="outliers" class="section level4">
+<h4>Outliers</h4>
+<p>Table 2 summarizes all of the outliers taken from the boxplot statistics above. The outlier is any value above the 75% quartile and below the 25% quartile. KNN is sensitive to these values per distance from the IQR.</p>
+<table>
+<caption><span id="tab:OutlierValues">Table 2: </span>Outlier values</caption>
+<thead>
+<tr class="header">
+<th align="center">Value</th>
+<th align="center">Freq</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">4.2</td>
+<td align="center">2</td>
+</tr>
+<tr class="even">
+<td align="center">4.4</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">5.6</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">6.2</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">71</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">172</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">174</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">178</td>
+<td align="center">2</td>
+</tr>
+<tr class="odd">
+<td align="center">180</td>
+<td align="center">3</td>
+</tr>
+<tr class="even">
+<td align="center">192</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">200</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">394</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">407</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">409</td>
+<td align="center">1</td>
+</tr>
+<tr class="odd">
+<td align="center">417</td>
+<td align="center">1</td>
+</tr>
+<tr class="even">
+<td align="center">564</td>
+<td align="center">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="remove-outliers" class="section level4">
+<h4>Remove Outliers</h4>
+<pre class="r"><code>outL = filter(HD, trestbps &gt;= 172 | chol &gt;= 394 | thalach == 71 | oldspeak &gt;= 4.2)
+HD = HD %&gt;% anti_join(outL)</code></pre>
+</div>
+<div id="scale-the-five-numeric-variables" class="section level4">
+<h4>Scale the Five Numeric Variables</h4>
+<pre class="r"><code>rescaledata &lt;- function(x) {
+  return ((x - min(x)) / (max(x) - min(x)))
+  }</code></pre>
+<pre class="r"><code>HD = HD %&gt;% mutate_at(c(&quot;age&quot;, &quot;trestbps&quot;, &quot;chol&quot;, &quot;thalach&quot;, &quot;oldspeak&quot;), rescaledata)</code></pre>
+</div>
+<div id="rescaling-summary" class="section level4">
+<h4>Rescaling Summary</h4>
+<pre><code>## Rows: 278
+## Columns: 14
+## $ age      &lt;dbl&gt; 0.7083333, 0.7916667, 0.7916667, 0.1666667, 0.2500000, 0.5...
+## $ sex      &lt;dbl&gt; 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1...
+## $ cp       &lt;fct&gt; 1, 4, 4, 3, 2, 2, 4, 4, 4, 4, 4, 2, 3, 2, 3, 2, 4, 3, 2, 1...
+## $ trestbps &lt;dbl&gt; 0.6710526, 0.8684211, 0.3421053, 0.4736842, 0.4736842, 0.3...
+## $ chol     &lt;dbl&gt; 0.4572650, 0.6837607, 0.4401709, 0.5299145, 0.3333333, 0.4...
+## $ fbs      &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0...
+## $ restecg  &lt;fct&gt; 2, 2, 2, 0, 2, 0, 2, 0, 2, 2, 0, 2, 2, 0, 0, 0, 0, 0, 0, 2...
+## $ thalach  &lt;dbl&gt; 0.5438596, 0.1754386, 0.3596491, 0.8684211, 0.7368421, 0.7...
+## $ exang    &lt;dbl&gt; 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 1...
+## $ oldspeak &lt;dbl&gt; 0.575, 0.375, 0.650, 0.875, 0.350, 0.200, 0.900, 0.150, 0....
+## $ slope    &lt;fct&gt; 3, 2, 2, 3, 1, 1, 3, 1, 2, 3, 2, 2, 2, 1, 1, 3, 1, 1, 1, 2...
+## $ ca       &lt;fct&gt; 0, 3, 2, 0, 0, 0, 2, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0...
+## $ thal     &lt;fct&gt; 6, 3, 7, 3, 3, 3, 3, 3, 7, 7, 6, 3, 6, 7, 3, 7, 3, 3, 3, 3...
+## $ num      &lt;fct&gt; No, Yes, Yes, No, No, No, Yes, No, Yes, Yes, No, No, Yes, ...</code></pre>
+</div>
+<div id="re-encode-categorical-variables" class="section level4">
+<h4>Re-encode Categorical Variables</h4>
+<p>Below is the code for creating new data columns from the categorical variables with classes more than two. I leave the variables with two classes or binary 0 &amp; 1 because collinearity could happen if I broke them out into their columns. Thus they don’t need to be one-hot-encoded into dummy variables. <code>sex</code>, <code>fbs</code>, <code>exang</code> are binary, and the remaining are encoded.</p>
+<pre class="r"><code>HDn = bind_cols(HD,
+  (as_tibble(
+    predict(dummyVars(~ cp+restecg+slope+ca+thal, 
+                data = HD, 
+                levelsOnly = FALSE, 
+                sep = &quot;_&quot;), 
+      newdata = HD)))
+)</code></pre>
+<p>Remove variables that the dummy variables replaced.</p>
+<pre class="r"><code>HD = select(HDn, -c(cp, restecg, slope, ca, thal, restecg_1))</code></pre>
+</div>
+<div id="data-summary-after-cleaning" class="section level4">
+<h4>Data Summary after Cleaning</h4>
+<pre><code>## Rows: 278
+## Columns: 25
+## $ age       &lt;dbl&gt; 0.7083333, 0.7916667, 0.7916667, 0.1666667, 0.2500000, 0....
+## $ sex       &lt;dbl&gt; 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, ...
+## $ trestbps  &lt;dbl&gt; 0.6710526, 0.8684211, 0.3421053, 0.4736842, 0.4736842, 0....
+## $ chol      &lt;dbl&gt; 0.4572650, 0.6837607, 0.4401709, 0.5299145, 0.3333333, 0....
+## $ fbs       &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, ...
+## $ thalach   &lt;dbl&gt; 0.5438596, 0.1754386, 0.3596491, 0.8684211, 0.7368421, 0....
+## $ exang     &lt;dbl&gt; 0, 1, 1, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, ...
+## $ oldspeak  &lt;dbl&gt; 0.575, 0.375, 0.650, 0.875, 0.350, 0.200, 0.900, 0.150, 0...
+## $ num       &lt;fct&gt; No, Yes, Yes, No, No, No, Yes, No, Yes, Yes, No, No, Yes,...
+## $ cp_1      &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+## $ cp_2      &lt;dbl&gt; 0, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, ...
+## $ cp_3      &lt;dbl&gt; 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, ...
+## $ cp_4      &lt;dbl&gt; 0, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 1, 0, 0, ...
+## $ restecg_0 &lt;dbl&gt; 0, 0, 0, 1, 0, 1, 0, 1, 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 1, ...
+## $ restecg_2 &lt;dbl&gt; 1, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, ...
+## $ slope_1   &lt;dbl&gt; 0, 0, 0, 0, 1, 1, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, ...
+## $ slope_2   &lt;dbl&gt; 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 1, 0, 0, 0, 0, 0, 0, ...
+## $ slope_3   &lt;dbl&gt; 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, ...
+## $ ca_0      &lt;dbl&gt; 1, 0, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, ...
+## $ ca_1      &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, ...
+## $ ca_2      &lt;dbl&gt; 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+## $ ca_3      &lt;dbl&gt; 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ...
+## $ thal_3    &lt;dbl&gt; 0, 1, 0, 1, 1, 1, 1, 1, 0, 0, 0, 1, 0, 0, 1, 0, 1, 1, 1, ...
+## $ thal_6    &lt;dbl&gt; 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0, ...
+## $ thal_7    &lt;dbl&gt; 0, 0, 1, 0, 0, 0, 0, 0, 1, 1, 0, 0, 0, 1, 0, 1, 0, 0, 0, ...</code></pre>
+</div>
+<div id="data-splitting" class="section level4">
+<h4>Data Splitting</h4>
+<p>To create proportionate random splits of the data, I use the function <code>createDataPartition</code>. If the <code>y</code> argument to this function is a factor, random sampling occurs within each class. It preserves the overall class distribution of the data (stratified random sampling in the classes). Here I create the training data and testing data for the KNN classifier. I pick an arbitrary 70%/30% training/testing data split. Training is to build the KNN model, and the testing is to qualify the model performance.</p>
+<pre class="r"><code>set.seed(1254)
+HD_Index &lt;- createDataPartition(HD$num, p=0.7, list = FALSE, times = 1)
+HD_train &lt;- HD[HD_Index, ]
+HD_test &lt;- HD[-HD_Index, ]</code></pre>
+</div>
+<div id="training-and-test-data-split" class="section level4">
+<h4>Training and Test Data Split</h4>
+<pre><code>## [1] 195</code></pre>
+<pre><code>## [1] 83</code></pre>
+</div>
+<div id="k-nearest-neighbor-using-the-caret-library" class="section level4">
+<h4>k-Nearest Neighbor Using the Caret Library</h4>
+<p>The optimal starting value for <code>k</code> is the square root of the training data. The value is rounded to an odd value. Thus we should see significant improvements after <code>k = 15</code>, but will run this from <code>k=1</code> for demonstration.</p>
+<pre class="r"><code>sqrt(nrow(HD_train))</code></pre>
+<pre><code>## [1] 13.96424</code></pre>
+</div>
+<div id="k-fold-cross-validataion" class="section level4">
+<h4>k-Fold Cross-Validataion</h4>
+<p>The resampling method of repeated tenfold cross-fold, ten times (3 is normal), is repeated multiple times, results aggregated, and 100 hold-out sets used to estimate the model efficacy. The model will do class probability on binary or two class predictors and indicated by the last two arguments in <code>trainControl</code> below. The twoClassSummary function computes the area under the ROC curve and the specificity and sensitivity under the 50% cutoff.</p>
+<pre class="r"><code>ctrl &lt;- trainControl(method=&#39;repeatedcv&#39;, 
+                    number=10, 
+                    repeats=10,
+                    classProbs = TRUE,
+                    summaryFunction = twoClassSummary
+                    )</code></pre>
+</div>
+<div id="tuning-parameters" class="section level4">
+<h4>Tuning Parameters</h4>
+<p>See below for the basic syntax for fitting this model using repeated cross-validation. Here I set the parameters using resampling and performance measures.
+The first two arguments to the <code>train</code> function are the predictor and outcome data objects. The third argument, method = KNN, specifies the KNN algorithm. The fourth is the summary metric; we will evaluate the model for the receiver operator characteristic curve (ROC), and that will also give us the Area Under the Curve (AUC). The data is pre-processed by centering (I scaled the data earlier, or do it here in this argument). The <code>train</code> function can automatically create a grid of tuning parameters. Also, I can specify the <code>tuneGrid</code> below. <code>k</code> starting at one and increasing by four up until 21, then increases by 20 up to 101 (odd <code>k</code> values only). Thus <code>k</code> == 1, 3, 5, 9, 13, 17, 21, 41, 61, 81, 101. I tried higher <code>k</code> but the ROC diminished.</p>
+<pre class="r"><code>set.seed(23)
+KNNFit = train(num ~ ., 
+               data = HD_train,
+               method = &quot;knn&quot;,
+               metric = &quot;ROC&quot;,
+               preProc = c(&quot;center&quot;),
+               tuneGrid = data.frame(.k = c(4*(0:5)+1,
+                                            20*(1:5)+1)),
+               trControl = ctrl)</code></pre>
+</div>
+<div id="summary-of-the-training" class="section level4">
+<h4>Summary of the Training</h4>
+<p>Optimal <code>k</code> is 81. ROC of 92.2%, Sensitivity of 92.8% and Specificity of 73.6%</p>
+<pre><code>## k-Nearest Neighbors 
+## 
+## 195 samples
+##  24 predictor
+##   2 classes: &#39;No&#39;, &#39;Yes&#39; 
+## 
+## Pre-processing: centered (24) 
+## Resampling: Cross-Validated (10 fold, repeated 10 times) 
+## Summary of sample sizes: 175, 175, 176, 176, 175, 177, ... 
+## Resampling results across tuning parameters:
+## 
+##   k    ROC        Sens       Spec     
+##     1  0.7312942  0.7727273  0.6898611
+##     5  0.8486572  0.8401818  0.7302778
+##     9  0.8832936  0.8765455  0.7397222
+##    13  0.8896749  0.8625455  0.7498611
+##    17  0.8936199  0.8790909  0.7591667
+##    21  0.8964564  0.8958182  0.7704167
+##    41  0.9150537  0.9190000  0.7465278
+##    61  0.9199495  0.9087273  0.7372222
+##    81  0.9224066  0.9289091  0.7362500
+##   101  0.9184438  0.9460000  0.7195833
+## 
+## ROC was used to select the optimal model using the largest value.
+## The final value used for the model was k = 81.</code></pre>
+</div>
+<div id="plot-of-k-increment-up-to-k-101" class="section level4">
+<h4>Plot of <code>k</code> increment up to <code>k</code> = 101</h4>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/plotKNNFit-1.png" width="672" /></p>
+</div>
+<div id="run-the-optimal-model-on-test-data---shows-probabilities" class="section level4">
+<h4>Run the Optimal Model on Test Data - Shows Probabilities</h4>
+<pre class="r"><code>kpred = predict(KNNFit, newdata = HD_test, type= &quot;prob&quot;)</code></pre>
+<pre><code>##          No       Yes
+## 1 0.3580247 0.6419753
+## 2 0.8888889 0.1111111
+## 3 0.8024691 0.1975309
+## 4 0.8888889 0.1111111
+## 5 0.8765432 0.1234568
+## 6 0.8271605 0.1728395</code></pre>
+<p>Merge the <code>k</code> parameters with the predicted values.</p>
+<pre class="r"><code>KNNFit$pred = merge(KNNFit$pred, KNNFit$bestTune)</code></pre>
+</div>
+<div id="summary-table" class="section level4">
+<h4>Summary Table</h4>
+<p>The sensitivity is the rate of prediction that “No” is correct (true positive rate), and specificity is the rate of prediction of the “Yes” is correct (false positive rate). This problem is challenging because of the potential cost of life, such as heart disease going undetected by the algorithm (false negative) or making a false positive prediction of heart disease when the subject is not at risk. The receiver operating character curve (ROC) will summarize the two metrics. For data with two classes, there are specialized functions for measuring model performance.
+We are looking for the best ROC value and will be a balance between sensitivity and specificity. The higher sensitivity means the model predicts the potential of the subject having heart disease a higher percentage of the actual cases with heart disease. At the same time, the specificity predicts the non-heart disease samples more accurately. In Table 3, <code>k</code> == 81 is optimal with a ROC of 92.2 and a sensitivity of 92.9%, and specificity of 73.6%. Meaning subjects without the disease may be diagnosed with it if we use this model. However, the model catches a large percentage of cases that have the disease.</p>
+<table>
+<caption><span id="tab:ShowKBestFitTable">Table 3: </span>Different k Values Applied to Find Optimal k</caption>
+<thead>
+<tr class="header">
+<th align="center">k</th>
+<th align="center">ROC</th>
+<th align="center">Sens</th>
+<th align="center">Spec</th>
+<th align="center">ROCSD</th>
+<th align="center">SensSD</th>
+<th align="center">SpecSD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">1</td>
+<td align="center">0.731</td>
+<td align="center">0.773</td>
+<td align="center">0.690</td>
+<td align="center">0.097</td>
+<td align="center">0.125</td>
+<td align="center">0.154</td>
+</tr>
+<tr class="even">
+<td align="center">5</td>
+<td align="center">0.849</td>
+<td align="center">0.840</td>
+<td align="center">0.730</td>
+<td align="center">0.087</td>
+<td align="center">0.111</td>
+<td align="center">0.155</td>
+</tr>
+<tr class="odd">
+<td align="center">9</td>
+<td align="center">0.883</td>
+<td align="center">0.877</td>
+<td align="center">0.740</td>
+<td align="center">0.074</td>
+<td align="center">0.086</td>
+<td align="center">0.154</td>
+</tr>
+<tr class="even">
+<td align="center">13</td>
+<td align="center">0.890</td>
+<td align="center">0.863</td>
+<td align="center">0.750</td>
+<td align="center">0.072</td>
+<td align="center">0.097</td>
+<td align="center">0.143</td>
+</tr>
+<tr class="odd">
+<td align="center">17</td>
+<td align="center">0.894</td>
+<td align="center">0.879</td>
+<td align="center">0.759</td>
+<td align="center">0.069</td>
+<td align="center">0.093</td>
+<td align="center">0.140</td>
+</tr>
+<tr class="even">
+<td align="center">21</td>
+<td align="center">0.896</td>
+<td align="center">0.896</td>
+<td align="center">0.770</td>
+<td align="center">0.072</td>
+<td align="center">0.089</td>
+<td align="center">0.140</td>
+</tr>
+<tr class="odd">
+<td align="center">41</td>
+<td align="center">0.915</td>
+<td align="center">0.919</td>
+<td align="center">0.747</td>
+<td align="center">0.062</td>
+<td align="center">0.079</td>
+<td align="center">0.140</td>
+</tr>
+<tr class="even">
+<td align="center">61</td>
+<td align="center">0.920</td>
+<td align="center">0.909</td>
+<td align="center">0.737</td>
+<td align="center">0.062</td>
+<td align="center">0.088</td>
+<td align="center">0.149</td>
+</tr>
+<tr class="odd">
+<td align="center">81</td>
+<td align="center">0.922</td>
+<td align="center">0.929</td>
+<td align="center">0.736</td>
+<td align="center">0.060</td>
+<td align="center">0.082</td>
+<td align="center">0.156</td>
+</tr>
+<tr class="even">
+<td align="center">101</td>
+<td align="center">0.918</td>
+<td align="center">0.946</td>
+<td align="center">0.720</td>
+<td align="center">0.063</td>
+<td align="center">0.069</td>
+<td align="center">0.164</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="receiver-operator-curve" class="section level4">
+<h4>Receiver Operator Curve</h4>
+<pre class="r"><code>KNNROC = roc(response = HD_test$num,
+             predictor = kpred$Yes,
+             levels = rev(levels(HD_test$num)),
+               auc = TRUE,
+               quiet = TRUE,
+               grid=TRUE,
+               percent = TRUE,
+               ci = TRUE
+               )</code></pre>
+</div>
+<div id="roc-plot" class="section level4">
+<h4>ROC Plot</h4>
+<p>The ROC gives the range of possible classification performances. The below graph is the ROC plot of Table 3. This model has a good time predicting the “No” or no presence of heart disease (92.9%); however, it struggles to predict the “Yes” for heart disease (Specificity = 73.6%). Lower specificity possibly attributed to the class imbalances we saw above in the categorical variables.</p>
+<p><img src="/post/2018-05-20-k-nearest-neighbor-knn-heart-disease-dataset_files/figure-html/PlotROCcurve-1.png" width="672" /></p>
+</div>
+<div id="confusion-matrix" class="section level4">
+<h4>Confusion Matrix</h4>
+<p>The other method of evaluating the model fit is the confusion matrix and describes the <code>k</code>= 81 model predicted to actual classes. The metrics are True Positive, True Negative, False Positive, and False Negative. Accuracy is a product of the four results. The model’s accuracy predicted 44 “No” values correctly and 27 “Yes” Values correctly. The overall accuracy is 85.5% with a Kappa of 70.1%. Kappa does show moderate agreement between the actual and predicted classes; however, these metrics don’t distinguish the type of errors made or the frequencies of each class. Hence the ROC was a more appropriate measure for this exercise.</p>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction No Yes
+##        No  44  10
+##        Yes  2  27
+##                                          
+##                Accuracy : 0.8554         
+##                  95% CI : (0.7611, 0.923)
+##     No Information Rate : 0.5542         
+##     P-Value [Acc &gt; NIR] : 4.732e-09      
+##                                          
+##                   Kappa : 0.7011         
+##                                          
+##  Mcnemar&#39;s Test P-Value : 0.04331        
+##                                          
+##             Sensitivity : 0.9565         
+##             Specificity : 0.7297         
+##          Pos Pred Value : 0.8148         
+##          Neg Pred Value : 0.9310         
+##              Prevalence : 0.5542         
+##          Detection Rate : 0.5301         
+##    Detection Prevalence : 0.6506         
+##       Balanced Accuracy : 0.8431         
+##                                          
+##        &#39;Positive&#39; Class : No             
+## </code></pre>
+</div>
+<div id="references" class="section level4">
+<h4>References</h4>
+<p>Bali, R., Sarkar, D. (2016). R Machine Learning by Example. Packt Publishing. (Chapter 2: KNN). ISBN-10:1784390844</p>
+<p>James, G., Witten, D., Hastie, T., and Tibshirabi, R. (2013). An Introduction to Statistical Learning with Applications in R. DOI: 10.1007/978-1-4614-7138-7</p>
+<p>Johnson, K., Kuhn, M. (2013). Applied Predictive Modeling. Springer-Verlag, DOI: 10.1007/978-1-4614-6849-3</p>
+<p>Kinnal, K. (2017). The KNN Algorithm: A quick tutorial. Retrieved from: <a href="https://www.youtube.com/watch?v=nEivmykTijo" class="uri">https://www.youtube.com/watch?v=nEivmykTijo</a></p>
+<p>Lavrenko, V. (2014). k nearest neighbor (KNN): how it works. Retrieved from: <a href="https://www.youtube.com/watch?v=k_7gMp5wh5A" class="uri">https://www.youtube.com/watch?v=k_7gMp5wh5A</a></p>
+<p>MIT OpenCourseWare (2014). 10. Introduction to Learning, Nearest Neighbors. Retrieved from: <a href="https://www.youtube.com/watch?v=09mb78oiPkA" class="uri">https://www.youtube.com/watch?v=09mb78oiPkA</a></p>
+<p>Saxena, A. (2011). Supervised Learning (CS5350/6350) - KNN. Cornell University. Retrieved from: <a href="http://www.cs.cornell.edu/courses/CS4758/2013sp/materials/cs4758-KNN-lectureslides.pdf" class="uri">http://www.cs.cornell.edu/courses/CS4758/2013sp/materials/cs4758-KNN-lectureslides.pdf</a></p>
+<p>servr::daemon_stop(1)</p>
+</div>

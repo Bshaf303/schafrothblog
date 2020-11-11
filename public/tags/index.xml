@@ -318,6 +318,60 @@
     </item>
     
     <item>
+      <title>algorithms</title>
+      <link>/tags/algorithms/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/algorithms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>classification</title>
+      <link>/tags/classification/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/classification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>euclidian distance</title>
+      <link>/tags/euclidian-distance/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/euclidian-distance/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>k-nearest neighbor</title>
+      <link>/tags/k-nearest-neighbor/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/k-nearest-neighbor/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>lazy learner</title>
+      <link>/tags/lazy-learner/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/lazy-learner/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>supervised learning</title>
+      <link>/tags/supervised-learning/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/supervised-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Alluvial Plots</title>
       <link>/tags/alluvial-plots/</link>
       <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
@@ -368,15 +422,6 @@
       <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/spearmans-correlation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>algorithms</title>
-      <link>/tags/algorithms/</link>
-      <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/algorithms/</guid>
       <description></description>
     </item>
     

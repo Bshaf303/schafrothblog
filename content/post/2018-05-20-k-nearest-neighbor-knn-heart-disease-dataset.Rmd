@@ -1,0 +1,762 @@
+---
+title: K-Nearest Neighbor (KNN) - Heart Disease Dataset
+author: 'Bryan '
+date: '2018-05-20'
+slug: k-nearest-neighbor-KNN-heart-disease-dataset
+categories:
+  - Machine Learning
+  - R Programming
+  - Data Analysis
+  - Alogrithms
+  - KNN
+tags:
+  - k-nearest neighbor
+  - 10-fold cross validation
+  - machine learning
+  - classification
+  - algorithms
+  - lazy learner
+  - euclidian distance
+  - supervised learning
+  - ROC receiver operating character curve
+  - AUC area under the curve
+  - confusion matrix
+  - caret library
+---
+
+#### Introduction to K-Nearest Neighbor 
+
+KNN is a supervised learning algorithm and uses a training sample from the dataset, which classifies groups into different classes. It is a classifier used to predict the level of an unknown point (observation) and does this by measuring the points nearest to the unknown point. It works well in measuring the differences between multiple classes that are complex and hard to detect. KNN is considered a simple classification and regression algorithm. In classification, new data points are grouped into a given class, while in regression, a new data point is labeled based on the average value of k nearest neighbor. KNN is a "lazy learner" because it doesn't learn more than the training data 
+ 
+#### Distance measurements used in KNN?
+ 
+One of the KNN algorithm's only freedoms where we can play around and pick different things resulting in different classifiers and performance is the algorithm's distance parameter. The Euclidean distance is the default measure. A useful application for numeric attributes with continuous data. Symmetric, spherical, and treats all dimensions equally. Sensitive to extreme differences (outliers) in single variables. The Minkowski distance is a p-norm or generalization of the Euclidean distance. KNN can also do the Manhattan distance (adds the difference across each coordinate point) by setting p =1 or set p=0 for Hamming distance (suitable for categorical attributes). Also found the Kullback-Leibler (KL) divergence for histograms (is asymmetrical) and mentions a custom distance measurement called BM25 for text. 
+ 
+#### Applications of the KNN Algorithm
+ 
+Applications using KNN are facial recognition, character recognition in video and images. Traffic monitoring systems that stream video of traffic patterns and maps out predictions. Another application is a recommender system for consumer products that predicts products for consumers. The biomedical industry also uses KNN to predict biologically related occurrences such as tumor detection or onset of diabetes. Another area is the scientific and environmental analysis of various elements occurring at a site. 
+ 
+#### Pros and Cons of using the K-Nearest Neighbor Algorithm
+ 
+**Pro:**
+The KNN is simple and effective, according to the experts, and said to be impressive for a simpler method. The decision line can be any shape versus a straight line in other classifiers, and this is beneficial for complex, multiple groups of data all clustered together. The algorithm always separates the training set precisely because of the “noise cell” made by the decision boundary around the points. It's non-linear and reflects classes well. There is a lot of freedom to fit the training data. The distance measure is a benefit because we can choose one appropriate to the data's complexity or type of data. There is no over/under fitting of the model, as the `k` value is adjusted appropriately. 
+
+**Con:**
+Data needs scaling, which is adjusted before running the data, which adds a step to the process. Watch for units of measurement like the height of a tree compared to the width of its leaves. Meters verse mm can severely alter the decision boundary. If the data is overly noisy with no clear definition between classes, KNN may not work at its best. The computation cost is high and will use resources; thus, speed can be a factor. Outliers and mislabeled points can alter the decision boundary significantly. Missing values need to be filled in with something and can’t be left empty – use imputation or remove data. We don’t want these small changes to the training set to affect the classifier problem. There is no notion of prior states – no confidence in the class prior. Making the `k` value too big the algorithm will classify everything as the most probable. Making `k` too small leads to unstable decision boundaries and high variability. The small changes in the training set magnify changes in classification. 
+
+#### K-Nearest Neighbor Example
+
+This project example uses the UCI data sets (https://archive.ics.uci.edu/ml/datasets/Heart+Disease) "Heart-Disease" and specifically the "processed.cleveland.data" for this analysis. The data has fourteen attributes. We note one of the attributes (variables), `num` is the predicted attribute for this KNN model exercise. Eight attributes are categorical, and five attributes are numerical. We will create dummy variables for the eight categorical and scale the five numeric variables. The predictor attribute is a factor. And is changed to either No presence of the angiographic disease or Yes for the angiographic disease. 
+
+#### Load the Libraries
+
+```{r loadLibraries, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(caret)
+library(pROC)
+library(corrplot)
+library(gridExtra)
+library(psych)
+```
+
+#### Load the Dataset
+
+```{r loadDataset, cache=TRUE, warning=FALSE, message=FALSE}
+HD = read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/heart-disease/processed.cleveland.data", 
+            col_names = c("age","sex","cp","trestbps","chol",
+                          "fbs","restecg","thalach","exang","oldspeak",
+                          "slope","ca","thal","num"))
+```
+
+#### Dataset Description
+
+Attribute Information:
+
+1. `age` (in years)
+2. `sex` (1=male, 0=female)
+3. `cp` (chest pain type: 1:=typical angina, 2:=atypical angina, 3=non-anginal pain, 4=asymptomatic)
+4. `trestbps` (resting blood pressure in mm Hg on admission to the hospital) 
+5. `chol` (serum cholesterol in mg/dl) 
+6. `fbs` (fasting blood sugar > 120 mg/dl, 1 = true; 0 = false) 
+7. `restecg` (resting electrocardiograph results, 0=normal, 1=ST-T wave abnormality, T wave inversions and/or ST elevation or depression of > 0.05 mV, 2=showing probable or definite left ventricular hypertrophy by Estes' criteria) 
+8. `thalach` (maximum heart rate achieved)
+9. `exang` (exercise induced angina, 1 = yes; 0 = no) 
+10. `oldpeak` (ST depression induced by exercise relative to rest) 
+11. `slope` (the slope of the peak exercise ST segment, 1=upsloping, 2= flat, 3=downsloping 
+12. `ca` (number of major vessels (0-3) colored by flourosopy) 
+13. `thal` (3 = normal; 6 = fixed defect; 7 = reversible defect) 
+14. `num` (the predicted attribute,  diagnosis of heart disease, angiographic disease status, 0: < 50% diameter narrowing, 1: > 50% diameter narrowing) 
+
+#### Data Summary
+
+```{r dataSummary, echo=FALSE}
+glimpse(HD)
+```
+Missing values found in `thal` and `ca`. Changing the character type to a numeric type, this will replace missing with `NA`.
+```{r characterTOdigits, message=FALSE, warning=FALSE}
+HD$thal = as.double(HD$thal)
+HD$ca = as.double(HD$ca)
+```
+
+```{r checkColumnSummary, echo=FALSE}
+summary(HD)
+```
+
+Remove the NA missing values from the data. Four in `ca` and two in `thal`.
+
+```{r NAsOmit}
+HD = drop_na(HD)
+```
+
+Change those categorical variables to factor type, and these will be re-encoded in later steps.
+
+```{r Factors, message=FALSE}
+HD = HD %>% mutate_at(c("cp", "restecg", "slope", "ca", "thal"), as.factor)
+```
+
+#### Correlation Matrix
+
+Observations describing the correlation between the numeric variables: `age` and `oldspeak` to `thalach` and `trestbps` show a weak negative relationship. The remaining variable shows no linear relationship if only slight.
+
+```{r GroupNumericVars, echo=FALSE}
+cor1 <- round(cor(HD %>% select(age, trestbps, chol, thalach, oldspeak)),2)
+```
+
+```{r CorrPlot, echo=FALSE}
+corrplot::corrplot(cor1, method = "color", type= "upper", order = "FPC", tl.col ="black", addCoef.col = "Black", tl.srt = 45)
+
+```
+
+#### Categorical Variables
+
+Next is a look at the nine categorical variables. 
+
+```{r sexVariablePlot, echo=FALSE}
+count_data = HD %>%
+  count(sex)
+
+ggplot(count_data, aes(x = reorder(sex, -n), y =n, fill=sex)) +
+  geom_bar(stat = "identity", show.legend= FALSE, color="white", alpha =0.5) +
+  geom_text(aes(label= n), vjust=-0.25) +
+  labs(x = "sex", y="COUNT",
+       title = "The 'sex' Variable Distribution")
+```
+
+```{r cpVariablePlot, echo=FALSE}
+count_data = HD %>%
+  count(cp)
+
+ggplot(count_data, aes(x = reorder(cp, -n), y =n, fill=cp)) +
+  geom_bar(stat = "identity", show.legend= FALSE, color="white", alpha =0.5) +
+  geom_text(aes(label= n), vjust=-0.25) +
+  labs(x = "cp", y="COUNT",
+       title = "The 'cp' Variable Distribution")
+```
+
+```{r fbsVariablePlot, echo=FALSE}
+count_data = HD %>%
+  count(fbs)
+
+ggplot(count_data, aes(x = reorder(fbs, -n), y =n, fill=fbs)) +
+  geom_bar(stat = "identity", show.legend= FALSE, color="white", alpha =0.5) +
+  geom_text(aes(label= n), vjust=-0.25) +
+  labs(x = "fbs", y="COUNT",
+       title = "The 'fbs' Variable Distribution")
+```
+
+`restecg` has an imbalance of its three classes. There will be an issue when splitting the training and testing data, and there won't be enough points representing `restecg` == 1. It may be best to remove class 1.
+
+```{r restecgVariablePlot, echo=FALSE}
+count_data = HD %>%
+  count(restecg)
+
+ggplot(count_data, aes(x = reorder(restecg, -n), y =n, fill=restecg)) +
+  geom_bar(stat = "identity", show.legend= FALSE, color="white", alpha =0.5) +
+  geom_text(aes(label= n), vjust=-0.25) +
+  labs(x = "restecg", y="COUNT",
+       title = "The 'restecg' Variable Distribution")
+```
+
+```{r exangVariablePlot, echo=FALSE}
+count_data = HD %>%
+  count(exang)
+
+ggplot(count_data, aes(x = reorder(exang, -n), y =n, fill=exang)) +
+  geom_bar(stat = "identity", show.legend= FALSE, color="white", alpha =0.5) +
+  geom_text(aes(label= n), vjust=-0.25) +
+  labs(x = "exang", y="COUNT",
+       title = "The 'exang' Variable Distribution")
+```
+
+```{r slopeVariablePlot, echo=FALSE}
+count_data = HD %>%
+  count(slope)
+
+ggplot(count_data, aes(x = reorder(slope, -n), y =n, fill=slope)) +
+  geom_bar(stat = "identity", show.legend= FALSE, color="white", alpha =0.5) +
+  geom_text(aes(label= n), vjust=-0.25) +
+  labs(x = "slope", y="COUNT",
+       title = "The 'slope' Variable Distribution")
+```
+
+```{r caVariablePlot, echo=FALSE}
+count_data = HD %>%
+  count(ca)
+
+ggplot(count_data, aes(x = reorder(ca, -n), y =n, fill=ca)) +
+  geom_bar(stat = "identity", show.legend= FALSE, color="white", alpha =0.5) +
+  geom_text(aes(label= n), vjust=-0.25) +
+  labs(x = "ca", y="COUNT",
+       title = "The 'ca' Variable Distribution")
+```
+
+```{r thalVariablePlot, echo=FALSE}
+count_data = HD %>%
+  count(thal)
+
+ggplot(count_data, aes(x = reorder(thal, -n), y =n, fill=thal)) +
+  geom_bar(stat = "identity", show.legend= FALSE, color="white", alpha =0.5) +
+  geom_text(aes(label= n), vjust=-0.25) +
+  labs(x = "thal", y="COUNT",
+       title = "The 'thal' Variable Distribution")
+```
+
+```{r numVariablePlot, echo=FALSE}
+count_data = HD %>%
+  count(num)
+
+ggplot(count_data, aes(x = reorder(num, -n), y =n, fill=num)) +
+  geom_bar(stat = "identity", show.legend= FALSE, color="white", alpha =0.5) +
+  geom_text(aes(label= n), vjust=-0.25) +
+  labs(x = "num", y="COUNT",
+       title = "The 'num' Predictor Variable Distribution")
+```
+
+I assume to consolidate the values greater than 0 into the value of 1 and describe 1 as a positive "yes" reading for heart disease. (The information about the data only mentions 0 or 1) I then recode zero and one into "No" and "Yes" as factors for the KNN classifier below.
+
+````{r confirmNumVarTable}
+HD$num[HD$num > 0] = 1
+HD$num = recode(HD$num, '0' = "No", '1' = "Yes")
+HD$num = factor(HD$num)
+```
+
+```{r confirmNumPlot, echo=FALSE}
+count_data = HD %>%
+  count(num)
+
+ggplot(count_data, aes(x = reorder(num, -n), y =n, fill=num)) +
+  geom_bar(stat = "identity", show.legend= FALSE, color="white", alpha =0.5) +
+  geom_text(aes(label= n), vjust=-0.25) +
+  labs(x = "num", y="COUNT",
+       title = "The 'num' Variable - Corrected Distribution")
+```
+
+#### Numeric Variable Summary Statistics
+
+This table shows all of the numeric variables' statistics. I am looking for outliers, overly skewed distributions, and whether to center the data or not. 
+
+```{r SummaryTableNumeric, echo=FALSE}
+knitr::kable(
+describe(HD, omit = TRUE, quant = c(0.25,0.75)), digits = 2, align = "c",caption = "Summary of Numeric Data" 
+)
+```
+
+#### Numeric Variables Summary Plots - Histogram, Q-Q Plot, Boxplot, Summary Table
+
+These next series of plots give a good visual understanding of the above statistics in Table 1.
+
+#### The age Variable
+
+The points show a broader peak (obtuse) with narrow tails and a negative kurtosis close to a normal distribution. 
+
+```{r grid_age, echo=FALSE}
+b3 = boxplot.stats(HD$age)
+
+grid.arrange(
+  
+ggplot(HD, aes(age)) + 
+  geom_histogram(aes(y=..density..), 
+                 binwidth = 0.8, 
+                 color="white", fill="orange3") +
+  stat_function(fun=dnorm, 
+                args = list(mean=mean(HD$age), 
+                            sd=sd(HD$age)),
+                lwd= 1, 
+                color="red"), ncol=2,
+
+ggplot(HD, aes(sample=age)) +
+  stat_qq(shape=1, 
+          size=4, 
+          color="orange3") + 
+  stat_qq_line(color="red", 
+               lwd=1),
+
+ggplot(HD, aes(age)) + 
+  stat_boxplot(geom = "errorbar", width =0.2) +
+  geom_boxplot( 
+    outlier.color = 'red', 
+    outlier.shape=1, 
+    outlier.size=3), 
+
+gtable_combine(
+  tableGrob(
+          round(summarize(HD,
+                          min=min(age),
+                          "25%"=quantile(age, 0.25),
+                          mean=mean(age), 
+                          median=median(age), 
+                          "75%"=quantile(age, 0.75),
+                          max=max(age)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8)),
+  tableGrob(
+          round(summarize(HD, 
+                          sd=sd(age),
+                          lowIQR=b3$stats[1],
+                          upIQR=b3$stats[5],
+                          outliers=length(b3$out)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8))
+  
+, along=2)#closegtable
+
+)
+```
+
+#### The trestbps Variable
+
+There are nine outliers found in `trestbps`. I am noting the positive skew (right). 
+
+```{r grid_trestbps, echo=FALSE}
+b2 = boxplot.stats(HD$trestbps)
+
+grid.arrange(
+  
+ggplot(HD, aes(trestbps)) + 
+  geom_histogram(aes(y=..density..), 
+                 binwidth = 1.5, 
+                 color="white", fill="green4") +
+  stat_function(fun=dnorm, 
+                args = list(mean=mean(HD$trestbps), 
+                            sd=sd(HD$trestbps)),
+                lwd= 1, 
+                color="red"), ncol=2,
+
+ggplot(HD, aes(sample=trestbps)) +
+  stat_qq(shape=1, 
+          size=4, 
+          color="green4") + 
+  stat_qq_line(color="red", 
+               lwd=1),
+
+ggplot(HD, aes(trestbps)) + 
+  stat_boxplot(geom = "errorbar", width =0.2) +
+  geom_boxplot( 
+    outlier.color = 'red', 
+    outlier.shape=1, 
+    outlier.size=3), 
+
+gtable_combine(
+  tableGrob(
+          round(summarize(HD,
+                          min=min(trestbps),
+                          "25%"=quantile(trestbps, 0.25),
+                          mean=mean(trestbps), 
+                          median=median(trestbps), 
+                          "75%"=quantile(trestbps, 0.75),
+                          max=max(trestbps)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8)),
+  tableGrob(
+          round(summarize(HD, 
+                          sd=sd(trestbps),
+                          lowIQR=b2$stats[1],
+                          upIQR=b2$stats[5],
+                          outliers=length(b2$out)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8))
+  
+, along=2)#closegtable
+
+)
+```
+
+#### The chol Variable
+
+There are five outliers in `chol`, which skews to the right. Removing the outliers will help
+
+```{r grid_chol, echo=FALSE}
+b1 = boxplot.stats(HD$chol)
+
+grid.arrange(
+  
+ggplot(HD, aes(chol)) + 
+  geom_histogram(aes(y=..density..), 
+                 binwidth = 7, 
+                 color="white", fill="brown3") +
+  stat_function(fun=dnorm, 
+                args = list(mean=mean(HD$chol), 
+                            sd=sd(HD$chol)),
+                lwd= 1, 
+                color="red"), ncol=2,
+
+ggplot(HD, aes(sample=chol)) +
+  stat_qq(shape=1, 
+          size=4, 
+          color="brown3") + 
+  stat_qq_line(color="red", 
+               lwd=1),
+
+ggplot(HD, aes(chol)) + 
+  stat_boxplot(geom = "errorbar", width =0.2) +
+  geom_boxplot( 
+    outlier.color = 'red', 
+    outlier.shape=1, 
+    outlier.size=3), 
+
+gtable_combine(
+  tableGrob(
+          round(summarize(HD,
+                          min=min(chol),
+                          "25%"=quantile(chol, 0.25),
+                          mean=mean(chol), 
+                          median=median(chol), 
+                          "75%"=quantile(chol, 0.75),
+                          max=max(chol)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8)),
+  tableGrob(
+          round(summarize(HD, 
+                          sd=sd(chol),
+                          lowIQR=b1$stats[1],
+                          upIQR=b1$stats[5],
+                          outliers=length(b1$out)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8))
+  
+, along=2)#closegtable
+
+)
+```
+
+#### The thalach Variable
+
+There is one outlier in `thalach`. I am observing a left or negative skew.  
+
+```{r grid_thalach, echo=FALSE}
+b4 = boxplot.stats(HD$thalach)
+
+grid.arrange(
+  
+ggplot(HD, aes(thalach)) + 
+  geom_histogram(aes(y=..density..), 
+                 binwidth = 2, 
+                 color="white", fill="darkorchid3") +
+  stat_function(fun=dnorm, 
+                args = list(mean=mean(HD$thalach), 
+                            sd=sd(HD$thalach)),
+                lwd= 1, 
+                color="red"), ncol=2,
+
+ggplot(HD, aes(sample=thalach)) +
+  stat_qq(shape=1, 
+          size=4, 
+          color="darkorchid3") + 
+  stat_qq_line(color="red", 
+               lwd=1),
+
+ggplot(HD, aes(thalach)) + 
+  stat_boxplot(geom = "errorbar", width =0.2) +
+  geom_boxplot( 
+    outlier.color = 'red', 
+    outlier.shape=1, 
+    outlier.size=3), 
+
+gtable_combine(
+  tableGrob(
+          round(summarize(HD,
+                          min=min(thalach),
+                          "25%"=quantile(thalach, 0.25),
+                          mean=mean(thalach), 
+                          median=median(thalach), 
+                          "75%"=quantile(thalach, 0.75),
+                          max=max(thalach)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8)),
+  tableGrob(
+          round(summarize(HD, 
+                          sd=sd(thalach),
+                          lowIQR=b4$stats[1],
+                          upIQR=b4$stats[5],
+                          outliers=length(b4$out)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8))
+  
+, along=2)#closegtable
+
+)
+```
+
+#### The oldspeak Variable
+
+The variable `oldspeak` has five outliers and is right-skewed.
+
+```{r grid_oldspeak, echo=FALSE}
+b5 = boxplot.stats(HD$oldspeak)
+
+grid.arrange(
+  
+ggplot(HD, aes(oldspeak)) + 
+  geom_histogram(aes(y=..density..), 
+                 binwidth = 0.1, 
+                 color="white", fill="deeppink3") +
+  stat_function(fun=dnorm, 
+                args = list(mean=mean(HD$oldspeak), 
+                            sd=sd(HD$oldspeak)),
+                lwd= 1, 
+                color="red"), ncol=2,
+
+ggplot(HD, aes(sample=oldspeak)) +
+  stat_qq(shape=1, 
+          size=4, 
+          color="deeppink3") + 
+  stat_qq_line(color="red", 
+               lwd=1),
+
+ggplot(HD, aes(oldspeak)) + 
+  stat_boxplot(geom = "errorbar", width =0.2) +
+  geom_boxplot( 
+    outlier.color = 'red', 
+    outlier.shape=1, 
+    outlier.size=3), 
+
+gtable_combine(
+  tableGrob(
+          round(summarize(HD,
+                          min=min(oldspeak),
+                          "25%"=quantile(oldspeak, 0.25),
+                          mean=mean(oldspeak), 
+                          median=median(oldspeak), 
+                          "75%"=quantile(oldspeak, 0.75),
+                          max=max(oldspeak)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8)),
+  tableGrob(
+          round(summarize(HD, 
+                          sd=sd(oldspeak),
+                          lowIQR=b5$stats[1],
+                          upIQR=b5$stats[5],
+                          outliers=length(b5$out)
+                          ),2),rows = NULL, theme=ttheme_minimal(base_size = 8))
+  
+, along=2)#closegtable
+
+)
+```
+
+#### Outliers
+
+Table 2 summarizes all of the outliers taken from the boxplot statistics above. The outlier is any value above the 75% quartile and below the 25% quartile. KNN is sensitive to these values per distance from the IQR.
+
+```{r OutlierValues, echo=FALSE}
+knitr::kable(
+table(c(b1$out,
+b2$out,
+b4$out,
+b5$out)), col.names = c("Value", "Freq"), caption = "Outlier values", align = "c", 
+)
+```
+
+#### Remove Outliers
+
+```{r RemoveOutliers, message=FALSE}
+outL = filter(HD, trestbps >= 172 | chol >= 394 | thalach == 71 | oldspeak >= 4.2)
+HD = HD %>% anti_join(outL)
+```
+
+#### Scale the Five Numeric Variables 
+
+```{r ScalingFunct}
+rescaledata <- function(x) {
+  return ((x - min(x)) / (max(x) - min(x)))
+  }
+```
+
+```{r ScaleApplyFunc}
+HD = HD %>% mutate_at(c("age", "trestbps", "chol", "thalach", "oldspeak"), rescaledata)
+```
+
+#### Rescaling Summary
+
+```{r addDummyVarToHD, echo=FALSE}
+glimpse(HD)
+```
+
+#### Re-encode Categorical Variables
+
+Below is the code for creating new data columns from the categorical variables with classes more than two. I leave the variables with two classes or binary 0 & 1 because collinearity could happen if I broke them out into their columns. Thus they don't need to be one-hot-encoded into dummy variables. `sex`, `fbs`, `exang` are binary, and the remaining are encoded.
+
+```{r}
+HDn = bind_cols(HD,
+  (as_tibble(
+    predict(dummyVars(~ cp+restecg+slope+ca+thal, 
+                data = HD, 
+                levelsOnly = FALSE, 
+                sep = "_"), 
+      newdata = HD)))
+)
+```
+
+Remove variables that the dummy variables replaced.
+
+```{r RemoveFactorVarfromHD}
+HD = select(HDn, -c(cp, restecg, slope, ca, thal, restecg_1))
+```
+
+#### Data Summary after Cleaning
+
+```{r summaryDumVars, echo=FALSE}
+glimpse(HD)
+```
+
+#### Data Splitting
+
+To create proportionate random splits of the data, I use the function `createDataPartition`. If the `y` argument to this function is a factor, random sampling occurs within each class. It preserves the overall class distribution of the data (stratified random sampling in the classes). Here I create the training data and testing data for the KNN classifier. I pick an arbitrary 70%/30% training/testing data split. Training is to build the KNN model, and the testing is to qualify the model performance.
+
+```{r SpiltDataTestTrain, message=FALSE, warning=FALSE}
+set.seed(1254)
+HD_Index <- createDataPartition(HD$num, p=0.7, list = FALSE, times = 1)
+HD_train <- HD[HD_Index, ]
+HD_test <- HD[-HD_Index, ]
+```
+
+#### Training and Test Data Split
+
+```{r showSplit, echo=FALSE}
+nrow(HD_train)
+nrow(HD_test)
+```
+
+#### k-Nearest Neighbor Using the Caret Library                     
+
+The optimal starting value for `k` is the square root of the training data. The value is rounded to an odd value. Thus we should see significant improvements after `k = 15`, but will run this from `k=1` for demonstration.
+
+```{r InitialKvalue, message=FALSE}
+sqrt(nrow(HD_train))
+``` 
+
+#### k-Fold Cross-Validataion
+
+The resampling method of repeated tenfold cross-fold, ten times (3 is normal), is repeated multiple times, results aggregated, and 100 hold-out sets used to estimate the model efficacy. The model will do class probability on binary or two class predictors and indicated by the last two arguments in `trainControl` below. The `twoClassSummary` argument computes the area under the ROC curve and the specificity and sensitivity under the 50% cutoff.
+
+```{r SetControl}
+ctrl <- trainControl(method='repeatedcv', 
+                    number=10, 
+                    repeats=10,
+                    classProbs = TRUE,
+                    summaryFunction = twoClassSummary
+                    )
+```
+
+#### Tuning Parameters
+
+See below for the basic syntax for fitting this model using repeated cross-validation. Here I set the parameters using resampling and performance measures.
+The first two arguments to the `train` function are the predictor and outcome data objects. The third argument, method = KNN, specifies the KNN algorithm. The fourth is the summary metric; we will evaluate the model for the receiver operator characteristic curve (ROC), and that will also give us the area under the curve (AUC). The data is pre-processed by centering (I scaled the data earlier, or do it here in this argument). The `train` function can automatically create a grid of tuning parameters. Also, I can specify the `tuneGrid` below. `k` starting at one and increasing by four up until 21, then increases by 20 up to 101 (odd `k` values only). Thus `k` == 1, 3, 5, 9, 13, 17, 21, 41, 61, 81, 101. I tried higher `k` but the ROC diminished. 
+
+```{r KNNModel1}
+set.seed(23)
+KNNFit = train(num ~ ., 
+               data = HD_train,
+               method = "knn",
+               metric = "ROC",
+               preProc = c("center"),
+               tuneGrid = data.frame(.k = c(4*(0:5)+1,
+                                            20*(1:5)+1)),
+               trControl = ctrl)
+```
+
+#### Summary of the Training
+
+Optimal `k` is 81. ROC of 92.2%, Sensitivity of 92.8% and Specificity of 73.6%
+
+```{r ViewKNNFit, echo=FALSE}
+KNNFit
+```
+
+#### Plot of `k` increment up to `k` = 101 
+
+```{r plotKNNFit, echo=FALSE}
+ggplot(KNNFit)
+```
+
+#### Run the Optimal Model on Test Data - Shows Probabilities
+
+```{r PredicteTestData}
+kpred = predict(KNNFit, newdata = HD_test, type= "prob")
+```
+
+```{r ShowPredictionHead, echo=FALSE}
+head(kpred)
+```
+
+Merge the `k` parameters with the predicted values. 
+
+```{r MergeBestKwithPrediction}
+KNNFit$pred = merge(KNNFit$pred, KNNFit$bestTune)
+```
+
+#### Summary Table 
+
+The sensitivity is the rate of prediction that "No" is correct (true positive rate), and specificity is the rate of prediction of the "Yes" is correct (false positive rate). This problem is challenging because of the potential cost of life, such as heart disease going undetected by the algorithm (false negative) or making a false positive prediction of heart disease when the subject is not at risk. The receiver operating character curve (ROC) will summarize the two metrics. For data with two classes, there are specialized functions for measuring model performance. 
+We are looking for the best ROC value and will be a balance between sensitivity and specificity. The higher sensitivity means the model predicts the potential of the subject having heart disease a higher percentage of the actual cases with heart disease. At the same time, the specificity predicts the non-heart disease samples more accurately. In Table 3, `k` == 81 is optimal with a ROC of 92.2 and a sensitivity of 92.9%, and specificity of 73.6%. Meaning subjects without the disease may be diagnosed with it if we use this model. However, the model catches a large percentage of cases that have the disease.
+
+```{r ShowKBestFitTable, echo=FALSE}
+knitr::kable(
+KNNFit$results, 
+caption = "Different k Values Applied to Find Optimal k", 
+align = "c", 
+digits = 3
+)
+```
+
+#### Receiver Operator Curve
+
+```{r CreateROCdata}
+KNNROC = roc(response = HD_test$num,
+             predictor = kpred$Yes,
+             levels = rev(levels(HD_test$num)),
+               auc = TRUE,
+               quiet = TRUE,
+               grid=TRUE,
+               percent = TRUE,
+               ci = TRUE
+               )
+```
+
+#### ROC Plot
+
+The ROC gives the range of possible classification performances. The below graph is the ROC plot of Table 3. This model has a good time predicting the "No" or no presence of heart disease (92.9%); however, it struggles to predict the "Yes" for heart disease (Specificity = 73.6%). Lower specificity possibly attributed to the class imbalances we saw above in the categorical variables.
+
+```{r PlotROCcurve, echo=FALSE}
+plot(KNNROC, legacy.axes = TRUE, grid=TRUE, col="blue", print.auc=TRUE)
+```
+
+#### Confusion Matrix
+
+The other method of evaluating the model fit is the confusion matrix and describes the `k`= 81 model predicted to actual classes. The metrics are True Positive, True Negative, False Positive, and False Negative. Accuracy is a product of the four results. The model's accuracy predicted 44 "No" values correctly and 27 "Yes" Values correctly. The overall accuracy is 85.5% with a Kappa of 70.1%. Kappa does show moderate agreement between the actual and predicted classes; however, these metrics don't distinguish the type of errors made or the frequencies of each class. Hence the ROC was a more appropriate measure for this exercise.  
+
+```{r ConfusionMatrixAccuracy, echo=FALSE}
+kpredClass = predict(KNNFit, newdata = HD_test)
+confusionMatrix(kpredClass, HD_test$num)
+```
+
+
+
+
+
+
+
+
+#### References
+
+Bali, R., Sarkar, D. (2016). R Machine Learning by Example. Packt Publishing. (Chapter 2: KNN). ISBN-10:1784390844
+
+James, G., Witten, D., Hastie, T., and Tibshirabi, R. (2013). An Introduction to Statistical Learning with Applications in R. DOI: 10.1007/978-1-4614-7138-7 
+
+Johnson, K., Kuhn, M. (2013). Applied Predictive Modeling. Springer-Verlag, DOI: 10.1007/978-1-4614-6849-3
+
+MIT OpenCourseWare (2014). 10. Introduction to Learning, Nearest Neighbors. Retrieved from: https://www.youtube.com/watch?v=09mb78oiPkA
+
+Saxena, A. (2011). Supervised Learning (CS5350/6350) - KNN. Cornell University. Retrieved from: http://www.cs.cornell.edu/courses/CS4758/2013sp/materials/cs4758-KNN-lectureslides.pdf
+
