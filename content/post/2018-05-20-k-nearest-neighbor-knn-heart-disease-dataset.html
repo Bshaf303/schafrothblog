@@ -8,6 +8,7 @@ categories:
   - R Programming
   - Data Analysis
   - Alogrithms
+  - KNN
 tags:
   - k-nearest neighbor
   - 10-fold cross validation
@@ -17,6 +18,10 @@ tags:
   - lazy learner
   - euclidian distance
   - supervised learning
+  - ROC receiver operating character curve
+  - AUC area under the curve
+  - confusion matrix
+  - caret library
 ---
 
 
@@ -539,7 +544,7 @@ HD_test &lt;- HD[-HD_Index, ]</code></pre>
 </div>
 <div id="k-fold-cross-validataion" class="section level4">
 <h4>k-Fold Cross-Validataion</h4>
-<p>The resampling method of repeated tenfold cross-fold, ten times (3 is normal), is repeated multiple times, results aggregated, and 100 hold-out sets used to estimate the model efficacy. The model will do class probability on binary or two class predictors and indicated by the last two arguments in <code>trainControl</code> below. The twoClassSummary function computes the area under the ROC curve and the specificity and sensitivity under the 50% cutoff.</p>
+<p>The resampling method of repeated tenfold cross-fold, ten times (3 is normal), is repeated multiple times, results aggregated, and 100 hold-out sets used to estimate the model efficacy. The model will do class probability on binary or two class predictors and indicated by the last two arguments in <code>trainControl</code> below. The <code>twoClassSummary</code> argument computes the area under the ROC curve and the specificity and sensitivity under the 50% cutoff.</p>
 <pre class="r"><code>ctrl &lt;- trainControl(method=&#39;repeatedcv&#39;, 
                     number=10, 
                     repeats=10,
@@ -550,7 +555,7 @@ HD_test &lt;- HD[-HD_Index, ]</code></pre>
 <div id="tuning-parameters" class="section level4">
 <h4>Tuning Parameters</h4>
 <p>See below for the basic syntax for fitting this model using repeated cross-validation. Here I set the parameters using resampling and performance measures.
-The first two arguments to the <code>train</code> function are the predictor and outcome data objects. The third argument, method = KNN, specifies the KNN algorithm. The fourth is the summary metric; we will evaluate the model for the receiver operator characteristic curve (ROC), and that will also give us the Area Under the Curve (AUC). The data is pre-processed by centering (I scaled the data earlier, or do it here in this argument). The <code>train</code> function can automatically create a grid of tuning parameters. Also, I can specify the <code>tuneGrid</code> below. <code>k</code> starting at one and increasing by four up until 21, then increases by 20 up to 101 (odd <code>k</code> values only). Thus <code>k</code> == 1, 3, 5, 9, 13, 17, 21, 41, 61, 81, 101. I tried higher <code>k</code> but the ROC diminished.</p>
+The first two arguments to the <code>train</code> function are the predictor and outcome data objects. The third argument, method = KNN, specifies the KNN algorithm. The fourth is the summary metric; we will evaluate the model for the receiver operator characteristic curve (ROC), and that will also give us the area under the curve (AUC). The data is pre-processed by centering (I scaled the data earlier, or do it here in this argument). The <code>train</code> function can automatically create a grid of tuning parameters. Also, I can specify the <code>tuneGrid</code> below. <code>k</code> starting at one and increasing by four up until 21, then increases by 20 up to 101 (odd <code>k</code> values only). Thus <code>k</code> == 1, 3, 5, 9, 13, 17, 21, 41, 61, 81, 101. I tried higher <code>k</code> but the ROC diminished.</p>
 <pre class="r"><code>set.seed(23)
 KNNFit = train(num ~ ., 
                data = HD_train,
@@ -771,9 +776,6 @@ We are looking for the best ROC value and will be a balance between sensitivity 
 <p>Bali, R., Sarkar, D. (2016). R Machine Learning by Example. Packt Publishing. (Chapter 2: KNN). ISBN-10:1784390844</p>
 <p>James, G., Witten, D., Hastie, T., and Tibshirabi, R. (2013). An Introduction to Statistical Learning with Applications in R. DOI: 10.1007/978-1-4614-7138-7</p>
 <p>Johnson, K., Kuhn, M. (2013). Applied Predictive Modeling. Springer-Verlag, DOI: 10.1007/978-1-4614-6849-3</p>
-<p>Kinnal, K. (2017). The KNN Algorithm: A quick tutorial. Retrieved from: <a href="https://www.youtube.com/watch?v=nEivmykTijo" class="uri">https://www.youtube.com/watch?v=nEivmykTijo</a></p>
-<p>Lavrenko, V. (2014). k nearest neighbor (KNN): how it works. Retrieved from: <a href="https://www.youtube.com/watch?v=k_7gMp5wh5A" class="uri">https://www.youtube.com/watch?v=k_7gMp5wh5A</a></p>
 <p>MIT OpenCourseWare (2014). 10. Introduction to Learning, Nearest Neighbors. Retrieved from: <a href="https://www.youtube.com/watch?v=09mb78oiPkA" class="uri">https://www.youtube.com/watch?v=09mb78oiPkA</a></p>
 <p>Saxena, A. (2011). Supervised Learning (CS5350/6350) - KNN. Cornell University. Retrieved from: <a href="http://www.cs.cornell.edu/courses/CS4758/2013sp/materials/cs4758-KNN-lectureslides.pdf" class="uri">http://www.cs.cornell.edu/courses/CS4758/2013sp/materials/cs4758-KNN-lectureslides.pdf</a></p>
-<p>servr::daemon_stop(1)</p>
 </div>
