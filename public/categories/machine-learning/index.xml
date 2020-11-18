@@ -6,10 +6,19 @@
     <description>Recent content in Machine Learning on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 May 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 01 Jul 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/machine-learning/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Reinforcement Learning Problem</title>
+      <link>/post/2018/07/01/reinforcement-learing-problem/</link>
+      <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/07/01/reinforcement-learing-problem/</guid>
+      <description>Reinforcement Learning - Grid World ProblemThe first section looks at the grid world concept/problem. The environment is a 3x4 grid and the goal is to move from the start xy (1,1) (called a “state”&#34;) location to the opposite corner (4,3) called the goal state. The actions are up, down, left, right. We have the rewards of +1 &amp;amp; -1. We want the agent to find the shortest sequence of actions to get from start to end (goal).</description>
+    </item>
     
     <item>
       <title>K-Nearest Neighbor (KNN) - Heart Disease Dataset</title>

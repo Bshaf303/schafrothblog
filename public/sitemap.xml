@@ -359,7 +359,22 @@
   
   <url>
     <loc>/tags/algorithms/</loc>
-    <lastmod>2018-05-20T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/machine-learning/</loc>
+    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/reinforcement-learning/</loc>
+    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/07/01/reinforcement-learing-problem/</loc>
+    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -368,7 +383,22 @@
   </url>
   
   <url>
+    <loc>/tags/auc-area-under-the-curve/</loc>
+    <lastmod>2018-05-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/caret-library/</loc>
+    <lastmod>2018-05-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/classification/</loc>
+    <lastmod>2018-05-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/confusion-matrix/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
   </url>
   
@@ -388,12 +418,17 @@
   </url>
   
   <url>
+    <loc>/categories/knn/</loc>
+    <lastmod>2018-05-20T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/lazy-learner/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/machine-learning/</loc>
+    <loc>/tags/roc-receiver-operating-character-curve/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
   </url>
   

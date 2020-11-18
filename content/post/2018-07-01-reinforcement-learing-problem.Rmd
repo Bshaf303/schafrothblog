@@ -1,0 +1,280 @@
+---
+title: Reinforcement Learning Problem
+author: Bryan
+date: '2018-07-01'
+slug: reinforcement-learing-problem
+categories:
+  - Machine Learning
+  - R Programming
+tags:
+  - algorithms
+  - machine learning
+  - reinforcement learning
+---
+
+#### Reinforcement Learning - Grid World Problem
+
+
+The first section looks at the grid world concept/problem. The environment is a 3x4 grid and the goal is to move from the start xy (1,1) (called a "state"") location to the opposite corner (4,3) called the goal state. The actions are up, down, left, right. We have the rewards of +1 & -1. We want the agent to find the shortest sequence of actions to get from start to end (goal). The additional rules are blocking the the state labeled by x=2/y=2 and avoiding the forfeiture state of x=4/y=2. Thus from the start state we can only go up or right. This is a delayed reward state concept because several moves need to be made before getting to the goal state. 
+
+```{r}
+#state, action, rewards, and policy concepts using Grid World concept. 
+#actions: up, down, left , right
+#rewards: +1, -1
+#find the shortest sequence of actions to get to the goal
+actions <- c("U", "D", "L", "R")
+actions
+#construct the environment
+x <- 1:4 #four rows
+x
+y <- 1:3 #three columns
+y
+# construct the states
+states <- expand.grid(x=x, y=y)
+states
+#construct the reward matrix
+rewards <- matrix(rep(0, 12), nrow=3) #3X4 matrix start with 0 values
+rewards
+rewards[2,2] <-NA
+rewards
+rewards[1,4] <- 1 #goal state reward of 1
+rewards[2,4] <- -1 #forefiture state of -1
+#Absorbing rewards
+```
+
+Here is a method to finish the game quickly by adding a small negative reward of -0.04 verses 0. Note the matrix replaced all the 0's with -0.04. 
+
+```{r}
+rewards <- matrix(rep(-0.04, 12), nrow=3) #modify to finish game quickly as possible by adding -0.04 
+rewards[2,2] <- NA
+rewards[1,4] <- 1
+rewards[2,4] <- -1
+rewards #3 X 4 reward matrix note 1 at (4,1)= goal state
+```
+
+The transition probability introduces some notion of uncertainty as to what is the actual action that is implemented when we try to take and action. There is some randomness involved where the action moves. Below we build in the randomness with probability of which direction the agent will move. 
+
+```{r}
+#transition probabilities 80% and 10% probability
+transition <- list("U" = c("U"=0.8, "D"=0, "L"=0.1, "R"=0.1),
+                   "D" = c("D"=0.8, "U"=0, "L"=0.1, "R"=0.1),
+                   "L" = c("L"=0.8, "R"=0, "U"=0.1, "D" =0.1),
+                   "R" = c("R"=0.8, "L"=0, "U"=0.1, "D" =0.1))
+transition
+#action value 1 increases x,Y -1 decreases X,Y. Incrementing the values of x,y to show action values. 
+action.values <- list ("U" = c("X" =0, "Y" =1), 
+                       "D" = c("X" =0, "Y" =-1),
+                       "L" = c("X" =-1, "Y" =0),
+                       "R" = c("X" =1, "Y" =0))
+action.values
+```
+
+The best policy is up, up, right, right, right to the goal "1". Below we get into the reinforcement learning package with an example navigating a 2X2 grid. The agent interacts with the environment and takes actions that effect the state of the environment. There is limited rewards that tell the agent its performance and the goal is to improve behavior with limited rewards. There are only 4 states in this example and a rule set that the action can not be made from x=1/y=1 over to x=2/y=2 (goal) state. The s1,s2,s3 are 1 and goal s4 is 10 reward points. The actions are up, down, left, right. The gridworldEnvironment comes with the package and defines this 2x2 gridworld. 
+
+```{r}
+#########################
+#State-Action-Reward with policy iteration
+library(ReinforcementLearning)
+#2x2 Grid World Environment
+#models all possible actions and rewards in the 2x2 grid
+env <- gridworldEnvironment #simulated environment
+((env))#show how the environment works action/state 
+#Create the states
+states <- c("s1","s2","s3","s4")
+states
+actions <- c("up","down","left","right") #actions vector
+actions
+#sample n=1000 random sequences in the environment. These are the tuples.
+```
+
+The sampleExpereince is a function that generates the environment in the form of state transition tuples. We use 1000 samples and map the states, actions, env to this function. 
+
+```{r sampleDataFrame, message=FALSE, warning=FALSE}
+set.seed(765)
+data <- sampleExperience(N = 1000, env=env, states=states, actions=actions)
+```
+
+The table shows the state, action, reward, and next state. The set.seed is there so we can replicate, in this case s3 move up to s4 and reward of 10 is given it then stays in s4.
+
+```{r}
+#here we see what the agent recorded. Not when moving into s4 is the reward is 10, but being randomly placed in s4 the reward is -1.
+head(data,20)
+#create learning parameters
+#alpha is the learning rate, gamma is the discount factor, as the agent moves through the grid future rewards are counted more heavily if they are recent
+#epsilon is the balance between exploration and exploitation, this has low exploration.
+control <- list(alpha = 0.1, gamma = 0.5, epsilon = 0.1)
+control
+```
+
+Here we execute the function. The State-Action function output shows highest scalar reward see the positive number in the table below. Note s3 the most valuable action is up 9.09. Moving any where out of s4 gives no good reward because that is the goal state we want to stay in. The best policy is listed next: if in s1 go down, if in s2 go right, is in s3 go up, and in s4 go right (which it cant because of a wall, same with s1) 
+
+```{r modelrunning, message=FALSE, warning=FALSE}
+# The reinforcemetn task
+#simulation that converges on the cumulative rewards, and is the expected cumulative reward over time.
+set.seed(12)
+model <- ReinforcementLearning(data, s ="State", a="Action", r="Reward", s_new="NextState", control=control)
+((model))
+#when agent is in s1 and moves up it gets a future cumulative reward of -0.69, while if it moves down the highest reard is 0.71, best policy is down. 
+# in s4 there is no state/action when starting in teh goal place. 
+#Policy states the best options the agent can take.
+##########################Update policy
+#update the optimal policy, exploration, exploitation, epsilon-greedy; action selection 
+#exploration tries new possible actions to learn the reward
+#exploitation uses current knowledge to choose best known action
+#epsilon has random action or greedy action
+#2x2 Grid World environment
+env <- gridworldEnvironment
+((env))
+set.seed(3456)
+#original data
+data <- sampleExperience(N = 1000, env=env, states=states, actions=actions)
+head(data)
+#Reinforcement Learning
+model <- ReinforcementLearning(data, s ="State", a="Action", r="Reward", s_new="NextState", control=control)
+((model)) 
+#Update the existing policy with epsilon-greedy
+#the total reward is now -351
+data_new <- sampleExperience(N = 1000, env=env, states=states, actions=actions, model=model, actionSelection ="epsilon-greedy", control=control)
+head(data_new) #more positive rewards in s3
+model_new <- ReinforcementLearning(data_new, s ="State", a="Action", r="Reward", s_new="NextState", control=control, model=model)
+#cumulative rewards is much higher at 1805
+((model_new))
+plot(model_new) #2 iterations
+```
+
+```{r}
+######Learn Tic-Tac-Toe
+tictactoe1 = ReinforcementLearning::"tictactoe"
+control1 <- list(alpha=0.2, gamma=0.4, epsilon=0.1)
+```
+
+```{R}
+set.seed(567)
+model <- ReinforcementLearning(tictactoe1, s="State", a="Action", r="Reward", s_new="NextState", iter=1, control=control1)
+```
+
+```{r}
+head(model$Q)
+plot(model$Q)
+head(model$Policy)
+head(model$RewardSequence)
+```
+
+Here we use the Markov Decision Process or MDPtoolbox package to compare this method. At this point this is extra practice and not going to be explained due to time limitations. 
+
+```{r loadMDPtool, message=FALSE, warning=FALSE}
+
+###########################
+library(MDPtoolbox)
+```
+
+```{r}
+#enter the probbilities of an action occuring
+#Agent by column s1,s2,s3,s4
+up <- matrix(c(1,0,0,0,
+               0.7,0.2,0.1,0,
+               0,0.1,0.2,0.7,
+               0,0,0,1), nrow=4,ncol=4,byrow=TRUE)
+#when agent is in s1 and tries to go up there is a  100% prob. it will remain in s1, 
+#when agent is in s2 and tries to go up there is a 70% prob that it will go up to s1,
+#20% prob it will remain in s2 and 10% prob it will go right to s3. 
+#if agent is in state s3 and tries to go up there is a 70% prob that it will go up to s4
+#and a 20% prob it will remain in s3 and 10% prob it will move left to s2. 
+#last row if agent is in s4 and tries to go up there is a 100% prob it will remain in s4. 
+up
+#left action probability matrix
+left <- matrix(c(0.9,0.1,0,0,
+                 0.1,0.9,0,0,
+                 0,0.7,0.2,0.1,
+                 0,0,0.1,0.9),
+               nrow=4, ncol=4, byrow=TRUE)
+left
+down <- matrix(c(0.3,0.7,0,0,
+                 0,0.9,0.1,0,
+                 0,0.1,0.9,0,
+                 0,0,0.7,0.3),
+               nrow=4, ncol=4, byrow=TRUE)
+down
+right <- matrix(c(0.9,0.1,0,0,
+                  0.1,0.2,0.7,0,
+                  0,0,0.9,0.1,
+                  0,0,0.1,0.9),
+                nrow=4, ncol=4,byrow=TRUE)
+right
+#all action matricies
+up
+left
+down
+right
+#transition probabilies
+T <- list(up=up, left=left, down=down, right=right)
+T
+#rewards matrix
+R <- matrix(c(-1,-1,-1,-1,
+            -1,-1,-1,-1,
+            -1,-1,-1,-1,
+            10,10,10,10),
+            nrow=4, ncol=4,byrow=TRUE)
+R
+#estimate teh policy witht the parameters and if it is a valid representation or not. 
+mdp_check(T, R) #empty string => ok
+#run the policy iteration and discount factor g=0.9
+m <- mdp_policy_iteration(P=T, R=R, discount=0.9)
+#see optimal policy and value function Vp optimal cumulative value at 100. 
+m
+#same reuslts from teh model free in Reinforcement Learning package
+names(T)[m$policy]
+#####Bellman
+P <- array(0, c(2,2,2))
+P[,,1] <- matrix(c(0.5,0.5,0.8,0.2),
+                 2,2,
+                 byrow=TRUE)
+P[,,2] <- matrix(c(0,1,0.1,0.9),
+                 2,2,
+                 byrow=TRUE)
+P
+R <- matrix(c(5,10,-1,2),
+            2,2,
+            byrow=TRUE)
+R
+#check valid
+mdp_check(P,R)
+#The bellman function
+mdp_bellman_operator(P,R, discount=0.9, Vprev= c(0,0))
+#with sparse matrix
+P <- list()
+P[[1]] <- Matrix(c(0.5,0.5,0.8,0.2),
+                 2,2,
+                 byrow=TRUE,
+                 sparse=TRUE)
+P[[2]] <- Matrix(c(0,1,0.1,0.9),
+                 2,2,
+                 byrow=TRUE,
+                 sparse=TRUE)
+P
+mdp_bellman_operator(P,R,0.9,c(0,0))
+##Iterative evaluation Policy
+#non-sparse matrix
+P <- array(0, c(2,2,2))
+P[,,1] <- matrix(c(0.5,0.5,0.8,0.2),
+                 2,2, byrow=TRUE)
+P[,,2] <- matrix(c(0,1,0.1,0.9),
+                 2,2, byrow=TRUE)
+P
+R <- matrix(c(5,10,-1,2),
+            2,2, byrow=TRUE)
+R
+policy <- c(2,1)
+mdp_eval_policy_iterative(P,R,0.8,policy)
+#with sparse matrix
+P <- list()
+P[[1]] <- Matrix(c(0.5,0.5,0.8,0.2), 
+                 2,2, byrow=TRUE, sparse=TRUE)
+P[[2]] <- Matrix(c(0,1,0.1,0.9),
+                 2,2, byrow=TRUE, sparse=TRUE)
+#best value function improved
+mdp_eval_policy_iterative(P,R,0.8, policy)
+####Q-Learning
+mdp_Q_learning(P,R, 0.9)
+```
+

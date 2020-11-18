@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>reinforcement learning on Bryan Schafroth Portfolio</title>
+    <link>/tags/reinforcement-learning/</link>
+    <description>Recent content in reinforcement learning on Bryan Schafroth Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Jul 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/reinforcement-learning/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Reinforcement Learning Problem</title>
+      <link>/post/2018/07/01/reinforcement-learing-problem/</link>
+      <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/07/01/reinforcement-learing-problem/</guid>
+      <description>Reinforcement Learning - Grid World ProblemThe first section looks at the grid world concept/problem. The environment is a 3x4 grid and the goal is to move from the start xy (1,1) (called a “state”&#34;) location to the opposite corner (4,3) called the goal state. The actions are up, down, left, right. We have the rewards of +1 &amp;amp; -1. We want the agent to find the shortest sequence of actions to get from start to end (goal).</description>
+    </item>
+    
+  </channel>
+</rss>

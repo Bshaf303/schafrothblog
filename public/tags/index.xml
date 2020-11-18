@@ -320,9 +320,36 @@
     <item>
       <title>algorithms</title>
       <link>/tags/algorithms/</link>
-      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/algorithms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>reinforcement learning</title>
+      <link>/tags/reinforcement-learning/</link>
+      <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/reinforcement-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>AUC area under the curve</title>
+      <link>/tags/auc-area-under-the-curve/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/auc-area-under-the-curve/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>caret library</title>
+      <link>/tags/caret-library/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/caret-library/</guid>
       <description></description>
     </item>
     
@@ -332,6 +359,15 @@
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/classification/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>confusion matrix</title>
+      <link>/tags/confusion-matrix/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/confusion-matrix/</guid>
       <description></description>
     </item>
     
@@ -359,6 +395,15 @@
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/lazy-learner/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ROC receiver operating character curve</title>
+      <link>/tags/roc-receiver-operating-character-curve/</link>
+      <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/roc-receiver-operating-character-curve/</guid>
       <description></description>
     </item>
     
