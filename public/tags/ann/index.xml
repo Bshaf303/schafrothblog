@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ann on Bryan Schafroth Portfolio</title>
+    <link>/tags/ann/</link>
+    <description>Recent content in ann on Bryan Schafroth Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/ann/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Artificial Neural Network and Support Vector Machine Analysis</title>
+      <link>/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</link>
+      <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</guid>
+      <description>IntroductionThe data set is the mushroom set retrieved from: http://archive.ics.uci.edu/ml/datasets/Mushroom. It consists of 8124 orbs and 23 variables. The classification variable is the “type” either edible (e) or poisonous (p). The remaining 22 variables are the predictors and consist of multiple levels from 1 to 12 each. The data columns will need to be named and are coded in short for each. There are 2480 NA’s found and in one variable “sr” or stalk root.</description>
+    </item>
+    
+  </channel>
+</rss>

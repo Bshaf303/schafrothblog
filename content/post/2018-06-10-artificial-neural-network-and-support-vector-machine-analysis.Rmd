@@ -1,0 +1,299 @@
+---
+title: Artificial Neural Network and Support Vector Machine Analysis
+author: Bryan
+date: '2018-06-10'
+slug: artificial-neural-network-and-support-vector-machine-analysis
+categories:
+  - Machine Learning
+  - R Programming
+tags:
+  - algorithms
+  - machine learning
+  - ann
+  - svm
+  - support vector machine
+  - artificial neural network
+---
+
+### Introduction
+  
+  The data set is the mushroom set retrieved from: http://archive.ics.uci.edu/ml/datasets/Mushroom. It consists of 8124 orbs and 23 variables. The classification variable is the "type" either edible (e) or poisonous (p). The remaining 22 variables are the predictors and consist of multiple levels from 1 to 12 each. The data columns will need to be named and are coded in short for each. There are 2480 NA's found and in one variable "sr" or stalk root. It is decided to use kNN imputation (k=10) to fill these values in with one of the five levels found in this variable.The imputation works for categorical data and thus chosen for this task. It is decided to create dummy variables into numeric values (1,0), but first the veil-type "vt" only has one level and will be removed, also the imputation creates a sr_imp variable and this is also removed. There will be 117 variables, to reduce collinearity the 2 level variables are reduced to 1 variable (fullRank=T). The dependent variable "type" then added back to the revised set as a factor or 2 levels (e,p). 
+  The first section will analyze the ANN using the nnet() from the nnet package. The second section will analyze the SVM using the ksvm() from the kernlab package.
+
+```{r LoadLibraries, message=FALSE, warning=FALSE}  
+library(VIM)
+library(caret)
+#ANN Libs
+library(nnet)
+library(RCurl)
+library(Metrics)
+```  
+  
+```{r loadData, message=FALSE, warning=FALSE, cache=TRUE}
+agaricus.lepiota <- read.csv("http://archive.ics.uci.edu/ml/machine-learning-databases/mushroom/agaricus-lepiota.data", header=FALSE, row.names=NULL, na.strings="?")
+```
+
+```{r}
+mr <- agaricus.lepiota
+#View(mr)
+str(mr)
+
+names(mr)[1:23] <- c("type","csh", "csf", "cc", "b", "o", "ga", "gs", "gz", "gc", "ss", "sr", "ssar", "ssbr", "scar", "scbr", "vt", "vc", "rn", "rt","spc","p", "h")
+
+str(mr)
+summary(mr, maxsum = 12)
+summary(mr$sr)
+```
+
+```{r}
+#####################Prepare data
+set.seed(1234)
+sr_imp <- kNN(mr, variable = "sr", k=10, impNA=TRUE)
+str(sr_imp)
+mr1 <- sr_imp[c(-17 ,-24)]
+str(mr1)
+summary(mr1, maxsum = 12)
+```
+
+```{r}
+#117 dummy variables
+dmy <- dummyVars("~ .", data = mr1, fullRank = TRUE)
+#transform to data frame
+trsf <- data.frame(predict(dmy, newdata = mr1))
+str(trsf[1:10]) #95 variables
+#remove type.p so we can put column back to original
+mr2 <- trsf[-1]
+str(mr2[1:10])
+mr2 <- data.frame(mr$type, mr2)
+str(mr2[1:10])
+names(mr2)[1] <- ("type")
+#cleaned set type is factor of e or p 
+str(mr2[1])
+#View(mr2)
+#####################################################################################
+```
+
+
+### ARTIFICIAL NEURAL NETWORK (ANN)
+
+In this section the data is split 70/30 with random sampling. We confirm the proportions are the same. 51% edible(e) and 48% poisonous (p). The nnet() model is created and tuned with a size of 10 hidden layers, a decay of 0.0001 and a maxit of 500 passes. The values were selected based on other examples found on the internet. The first pass runs 500 and stops at a final value of 0.057. This indicates a good result as it started from 3839. We do a query with varImp() to find the top variables of importance. The top four are sp.c.r, o.c, o.n, gz.n. (spore-print-color-green, odor-creosote, odor-none, gill-size-narrow). Of interest is the other odor categories are in the 5th and 7th of the top ten. odor-foul, and odor-pungent. It is worth mentioning that the spore-print-color-brown and black are also in the top ten. WE run the prediction on the test set and surprisingly come out with an accuracy of 1 and a kappa of 1 which are both the highest metric value. In the table there are no false positives or false negatives. Is this too good to be true or a valid outcome, we will run a cross validation 10 fold to check the results. We run 517 out of 5687 which is about 10% of the random data. The same parameters are used again (size=4, decay=0.0001, maxit=500). The final value is 0.060 (seems good) The result is 1 across ten  and a mean of 1. There is confusion here as this should be below 1 but maybe it is valid. A second test is ran with the parameters of(size=5, decay=0.1, and maxit=5000) and came from the "bestTune" parameter in the model, this resulted in A=1 and Kappa=1, the final value was higher at 23.72 so it stopped earlier but not by much. Another try was made with decay=0.0001, maxit=50, size=4 and this was still 100%. It is unknown at this point what else to do to check validation and requires more work to verify the results. The fitted values and residuals are plotted. the fitted are normal 0 and 1. While the residuals are centered around 0, not sure what this means and further time is needed to understand. 
+
+```{r}
+######################Neural Net
+set.seed(3456)
+train_sample <- sample(8124, 5687) #70/30 split
+mr_train <- mr2[train_sample, ]
+mr_test <- mr2[-train_sample, ]
+```
+
+```{r}
+table(mr2$type) #full proportions
+prop.table((table(mr_train$type))) #sample proportions
+```
+
+```{r}
+#predict type against everything else
+type_model <- nnet(type ~., data = mr_train, size = 10, decay=0.0001, maxit=500)
+```
+
+This ran for 3-4 minutes and this is copied over from the script with results.
+the last run shows the best model with an accuracy of 0.999 and kappa of 0.9999, a size of 5 and decay of 0.1. The resampling is showing accuracy of 1 and kappa of 1 for all the folds except for 25 where they dropped to A= 0.998 and P=0.996.
+
+```{r}
+cvCtrl <- trainControl(method="repeatedcv", number=10, repeats=3)
+```
+
+```{r}
+library(doParallel)
+cl <- makePSOCKcluster(6)
+registerDoParallel(cl)
+```
+
+```{r trainModel, message=FALSE, warning=FALSE, cashe=TRUE}
+modit = capture.output(train(type ~., data = mr_train, 
+              method="nnet", 
+              preProcess="scale", 
+              trControl=cvCtrl, 
+              maxit=100,
+              trace=FALSE)
+)
+
+stopCluster(cl)
+```
+
+```{r}
+plot(table(type_model$fitted.values))
+plot(table(type_model$residuals))
+```
+
+```{r}
+###
+#sort most influencial variables
+topModels <- varImp(type_model)
+topModels$Variables <- row.names(topModels)
+topModels <- topModels[order(-topModels$Overall),]
+```
+
+```{r}
+#sort level of top 10 variables in the model
+head(topModels, 10)
+#####
+```
+
+```{r}
+preds1 <- predict(type_model, newdata = mr_test, type="class")
+table(preds1, mr_test$type)
+head(preds1, 10)
+
+postResample(preds1, mr_test$type) #accuracy and kappa
+totalError <- c()
+#split data by 10 portions
+cv <- 10
+cvDivider <- floor(nrow(mr_train) / (cv+1))
+cvDivider #number of rows
+nrow(mr_train) #roughly 10x the row
+```
+
+```{r}
+# loop data on 10 different sections of the data increase by a 10th each run, put in best tune parameters 
+capture.output(
+  for (cv in seq(1:cv)) {
+  #assign chunk to data set
+  dataTestIndex <- c((cv * cvDivider):(cv * cvDivider + cvDivider))
+  dataTest <- mr_train[dataTestIndex, ]
+  #everything else to train
+  dataTrain <- mr_train[-dataTestIndex, ]
+
+  type_model <- nnet(type~., data = mr_train, size = 5, decay=0.1, maxit=500)
+  
+  pred <- predict(type_model, dataTest)
+  
+  #classification error
+  err <- ce(as.numeric(dataTest$type), as.numeric(pred))
+  totalError <- c(totalError, err)
+  }
+)
+```
+
+```{r}
+totalError
+mean(totalError)
+```
+
+```{r}
+# run code with 50 iterations
+capture.output(
+  for (cv in seq(1:cv)) {
+  #assign chunk to data set
+  dataTestIndex <- c((cv * cvDivider):(cv * cvDivider + cvDivider))
+  dataTest <- mr_train[dataTestIndex, ]
+  #everything else to train
+  dataTrain <- mr_train[-dataTestIndex, ]
+  
+  type_model <- nnet(type~., data = mr_train, size = 4, decay=0.0001, maxit=50)
+
+  pred <- predict(type_model, dataTest)
+  
+  #classification error
+  err <- ce(as.numeric(dataTest$type), as.numeric(pred))
+  totalError <- c(totalError, err)
+  }
+)
+```
+
+```{r}
+totalError
+mean(totalError) #compare to error previously
+```
+
+### SUPPORT VECTOR MACHINE (SVM)
+
+This next section is going to use the same data and same training and test sets used above for the ANN. The first svm model using the "vanilladot" kernel produces a similar result to the ANN. The training error is 0, meaning this is 100% accurate. The second kernel is the rbfdot and produces error of 0.000352.For the rbfdot the table is almost exactly the same for the ANN but with 1 false negative slipping its way in to the model. 1276 TP/ 1160 TN. Where the ANN had 1277 TP and 1161 TN. The third kernel is the polydot and it too produces an error of 0]. At this point we don't know why as it is expected to have different outcomes for each kernel and this is not the case. Are there some errors somewhere not being detected or is this in fact a valid out come. We will run a 10 fold cross validation to to see what is going on with the model. The CART output shows the correct 5687 samples with 94 predictors and the tow classes (e) and (p). The 10-fold cross validation was run 5 times and the cp0.044 model had the highest accuracy of 0.957 and kappa of 0.91. These seem very reasonable and less than a perfect 1. Of interest for comparison is the varImp which gives 9 with an overall and the remaining with 0. We see Odor-neutral at the top with ring-type-pendant, odor-foul, and two stalk-surface variables and stalk-root-club showing value for this model. The good thing is there is some similarity between ANN and SVM with o.n, o.f, ssar.k, gz.n, and sp.c.r all were important in the model for both ANN and SVM. At this point maybe it could help to reduce the variables down to the top 10 combined from both models and rerun on those to see if there is a difference or run on a different set of data that the model hasn't seen to predict if it is in fact highly accurate. 
+
+```{r LoadLibSVM, message=FALSE, warning=FALSE}
+#SVM
+library(e1071)
+library(kernlab)
+```
+
+```{r}
+set.seed(6789)
+mr_classifier <- ksvm(type ~., data = mr_train, kernel = "vanilladot")
+mr_classifier
+mr_predictions <- predict(mr_classifier, mr_test)
+head(mr_predictions)
+table(mr_predictions, mr_test$type)
+agreement <- mr_predictions == mr_test$type
+table(agreement)
+prop.table(table(agreement))
+```
+
+```{r}
+#rbfdot kernal
+mr_classifier_rbfdot <- ksvm(type ~., data = mr_train, kernel = "rbfdot")
+mr_classifier_rbfdot
+mr_predictions__rbfdot <- predict(mr_classifier_rbfdot, mr_test)
+head(mr_predictions__rbfdot)
+table(mr_predictions__rbfdot, mr_test$type)
+agreement_rbfdot <- mr_predictions__rbfdot == mr_test$type
+table(agreement_rbfdot)
+prop.table(table(agreement_rbfdot))
+```
+
+```{r}
+# polydot kernal
+mr_classifier_poly <- ksvm(type ~., data = mr_train, kernel = "polydot")
+mr_classifier_poly
+mr_predictions_poly <- predict(mr_classifier_poly, mr_test)
+head(mr_predictions_poly)
+table(mr_predictions_poly, mr_test$type)
+agreement_poly <- mr_predictions_poly == mr_test$type
+table(agreement_poly)
+prop.table(table(agreement_poly))
+```
+
+```{r}
+# SVM Cross Validate
+control <- trainControl(method="repeatedcv", number=10, repeats = 5)
+```
+
+```{r}
+set.seed(7495)
+
+cl <- makePSOCKcluster(6)
+registerDoParallel(cl)
+
+modelsvm <- train(type ~., 
+                  data = mr_train,
+                  method="rpart", 
+                  preProcess="scale", 
+                  trControl=control)
+stopCluster(cl)
+```
+
+```{R}
+modelsvm
+```
+
+```{r}
+importance <- varImp(modelsvm, scale = FALSE)
+```
+
+```{r}
+impM = data.frame(importance$importance)
+impM$Vars = row.names(impM)
+impM[order(-impM$Overall),][1:10,]
+```
+
+```{r}
+plot(varImp(modelsvm), top =10)
+```
+
+```{r}
+library(rpart)
+```
+
+```{r}
+model.rp <- rpart(type ~., data = mr_train)
+model.rp$variable.importance
+```

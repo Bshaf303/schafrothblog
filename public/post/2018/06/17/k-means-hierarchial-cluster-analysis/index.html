@@ -37,8 +37,8 @@
 
 
 
-<div id="k-means" class="section level4">
-<h4>K-Means</h4>
+<div id="k-means-analysis" class="section level3">
+<h3>K-Means Analysis</h3>
 <p>This project will use the Wholesale customer Data Set from: <a href="https://archive.ics.uci.edu/ml/datasets/Wholesale+customers" class="uri">https://archive.ics.uci.edu/ml/datasets/Wholesale+customers</a>. The data has 440 orbs and 8 variables. The data has the Channel and Region as integers but they are categorical in nature with 2 channels and 3 regions. We think this may need to be taken out of the analysis but will leave them in for now. A general observation about the variables there are outliers in the 6 major variables: fresh, milk, grocery, frozen, detergents_paper, delicassen. There are plot of each variable. In addition, to the outliers it is noted that the data is dense at the bottom of each of the variable graphs. “Fresh” seems to be less dense than the rest and “Delicassen” is the thickest density of points at the bottom. Initial thoughts are the clusters are going to be somewhere at the bottom of the graph.</p>
 <pre class="r"><code>library(stats)
 library(fpc)
@@ -520,8 +520,8 @@ km.out</code></pre>
 points(km.out$centers[,c(&quot;Fresh&quot;, &quot;Frozen&quot;)], pch=1, cex=3, col=&quot;red&quot;, lwd=2)</code></pre>
 <p><img src="/post/2018-04-17-k-means-hierarchial-cluster-analysis_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
 </div>
-<div id="hierarchial-cluster-analysis" class="section level4">
-<h4>Hierarchial Cluster Analysis</h4>
+<div id="hierarchial-cluster-analysis" class="section level3">
+<h3>Hierarchial Cluster Analysis</h3>
 <p>This exercise produces a mess of a dendrograph but the general shape of how it breaks down the data is somewhat legible by shapes only. Complete linkage seems the best. Single linkage is very hard to read.</p>
 <pre class="r"><code>set.seed(89)
 km &lt;- kmeans(df_z, 4, nstart = 20)
@@ -607,7 +607,6 @@ cs[c(&quot;within.cluster.ss&quot;, &quot;avg.silwidth&quot;)]</code></pre>
 ## within.cluster.ss 1833.538  2918.012  3159.398   
 ## avg.silwidth      0.3674071 0.6678067 0.8263512</code></pre>
 <p>This method is an alternate to the one above. Maybe better graphing and understanding of what is happening can be gained from this method. The first part determines the optimal number of clusters. We will also drop the Channel and Region variables for this section. This method is straight forward and clearly shows 9 proposed as 2 is the best number of clusters. The data spells it out and the bar chart clearly shows us 2 clusters is optimal with a 3 the next optimal.</p>
-</div>
 <div id="optional-alternative-method" class="section level4">
 <h4>Optional Alternative Method</h4>
 <pre class="r"><code>df_hc &lt;- df_z[3:8]
@@ -867,6 +866,7 @@ km_stats$within.cluster.ss</code></pre>
 ## 
 ## $vi
 ## NULL</code></pre>
+</div>
 </div>
 
 </main>

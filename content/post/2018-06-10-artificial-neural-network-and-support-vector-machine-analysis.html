@@ -1,0 +1,810 @@
+---
+title: Artificial Neural Network and Support Vector Machine Analysis
+author: Bryan
+date: '2018-06-10'
+slug: artificial-neural-network-and-support-vector-machine-analysis
+categories:
+  - Machine Learning
+  - R Programming
+tags:
+  - algorithms
+  - machine learning
+  - ann
+  - svm
+  - support vector machine
+  - artificial neural network
+---
+
+
+
+<div id="introduction" class="section level3">
+<h3>Introduction</h3>
+<p>The data set is the mushroom set retrieved from: <a href="http://archive.ics.uci.edu/ml/datasets/Mushroom" class="uri">http://archive.ics.uci.edu/ml/datasets/Mushroom</a>. It consists of 8124 orbs and 23 variables. The classification variable is the “type” either edible (e) or poisonous (p). The remaining 22 variables are the predictors and consist of multiple levels from 1 to 12 each. The data columns will need to be named and are coded in short for each. There are 2480 NA’s found and in one variable “sr” or stalk root. It is decided to use kNN imputation (k=10) to fill these values in with one of the five levels found in this variable.The imputation works for categorical data and thus chosen for this task. It is decided to create dummy variables into numeric values (1,0), but first the veil-type “vt” only has one level and will be removed, also the imputation creates a sr_imp variable and this is also removed. There will be 117 variables, to reduce collinearity the 2 level variables are reduced to 1 variable (fullRank=T). The dependent variable “type” then added back to the revised set as a factor or 2 levels (e,p).
+The first section will analyze the ANN using the nnet() from the nnet package. The second section will analyze the SVM using the ksvm() from the kernlab package.</p>
+<pre class="r"><code>library(VIM)
+library(caret)
+#ANN Libs
+library(nnet)
+library(RCurl)
+library(Metrics)</code></pre>
+<pre class="r"><code>agaricus.lepiota &lt;- read.csv(&quot;http://archive.ics.uci.edu/ml/machine-learning-databases/mushroom/agaricus-lepiota.data&quot;, header=FALSE, row.names=NULL, na.strings=&quot;?&quot;)</code></pre>
+<pre class="r"><code>mr &lt;- agaricus.lepiota
+#View(mr)
+str(mr)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    8124 obs. of  23 variables:
+##  $ V1 : Factor w/ 2 levels &quot;e&quot;,&quot;p&quot;: 2 1 1 2 1 1 1 1 2 1 ...
+##  $ V2 : Factor w/ 6 levels &quot;b&quot;,&quot;c&quot;,&quot;f&quot;,&quot;k&quot;,..: 6 6 1 6 6 6 1 1 6 1 ...
+##  $ V3 : Factor w/ 4 levels &quot;f&quot;,&quot;g&quot;,&quot;s&quot;,&quot;y&quot;: 3 3 3 4 3 4 3 4 4 3 ...
+##  $ V4 : Factor w/ 10 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;g&quot;,..: 5 10 9 9 4 10 9 9 9 10 ...
+##  $ V5 : Factor w/ 2 levels &quot;f&quot;,&quot;t&quot;: 2 2 2 2 1 2 2 2 2 2 ...
+##  $ V6 : Factor w/ 9 levels &quot;a&quot;,&quot;c&quot;,&quot;f&quot;,&quot;l&quot;,..: 7 1 4 7 6 1 1 4 7 1 ...
+##  $ V7 : Factor w/ 2 levels &quot;a&quot;,&quot;f&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ V8 : Factor w/ 2 levels &quot;c&quot;,&quot;w&quot;: 1 1 1 1 2 1 1 1 1 1 ...
+##  $ V9 : Factor w/ 2 levels &quot;b&quot;,&quot;n&quot;: 2 1 1 2 1 1 1 1 2 1 ...
+##  $ V10: Factor w/ 12 levels &quot;b&quot;,&quot;e&quot;,&quot;g&quot;,&quot;h&quot;,..: 5 5 6 6 5 6 3 6 8 3 ...
+##  $ V11: Factor w/ 2 levels &quot;e&quot;,&quot;t&quot;: 1 1 1 1 2 1 1 1 1 1 ...
+##  $ V12: Factor w/ 4 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;r&quot;: 3 2 2 3 3 2 2 2 3 2 ...
+##  $ V13: Factor w/ 4 levels &quot;f&quot;,&quot;k&quot;,&quot;s&quot;,&quot;y&quot;: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ V14: Factor w/ 4 levels &quot;f&quot;,&quot;k&quot;,&quot;s&quot;,&quot;y&quot;: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ V15: Factor w/ 9 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;g&quot;,..: 8 8 8 8 8 8 8 8 8 8 ...
+##  $ V16: Factor w/ 9 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;g&quot;,..: 8 8 8 8 8 8 8 8 8 8 ...
+##  $ V17: Factor w/ 1 level &quot;p&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ V18: Factor w/ 4 levels &quot;n&quot;,&quot;o&quot;,&quot;w&quot;,&quot;y&quot;: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ V19: Factor w/ 3 levels &quot;n&quot;,&quot;o&quot;,&quot;t&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ V20: Factor w/ 5 levels &quot;e&quot;,&quot;f&quot;,&quot;l&quot;,&quot;n&quot;,..: 5 5 5 5 1 5 5 5 5 5 ...
+##  $ V21: Factor w/ 9 levels &quot;b&quot;,&quot;h&quot;,&quot;k&quot;,&quot;n&quot;,..: 3 4 4 3 4 3 3 4 3 3 ...
+##  $ V22: Factor w/ 6 levels &quot;a&quot;,&quot;c&quot;,&quot;n&quot;,&quot;s&quot;,..: 4 3 3 4 1 3 3 4 5 4 ...
+##  $ V23: Factor w/ 7 levels &quot;d&quot;,&quot;g&quot;,&quot;l&quot;,&quot;m&quot;,..: 6 2 4 6 2 2 4 4 2 4 ...</code></pre>
+<pre class="r"><code>names(mr)[1:23] &lt;- c(&quot;type&quot;,&quot;csh&quot;, &quot;csf&quot;, &quot;cc&quot;, &quot;b&quot;, &quot;o&quot;, &quot;ga&quot;, &quot;gs&quot;, &quot;gz&quot;, &quot;gc&quot;, &quot;ss&quot;, &quot;sr&quot;, &quot;ssar&quot;, &quot;ssbr&quot;, &quot;scar&quot;, &quot;scbr&quot;, &quot;vt&quot;, &quot;vc&quot;, &quot;rn&quot;, &quot;rt&quot;,&quot;spc&quot;,&quot;p&quot;, &quot;h&quot;)
+
+str(mr)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    8124 obs. of  23 variables:
+##  $ type: Factor w/ 2 levels &quot;e&quot;,&quot;p&quot;: 2 1 1 2 1 1 1 1 2 1 ...
+##  $ csh : Factor w/ 6 levels &quot;b&quot;,&quot;c&quot;,&quot;f&quot;,&quot;k&quot;,..: 6 6 1 6 6 6 1 1 6 1 ...
+##  $ csf : Factor w/ 4 levels &quot;f&quot;,&quot;g&quot;,&quot;s&quot;,&quot;y&quot;: 3 3 3 4 3 4 3 4 4 3 ...
+##  $ cc  : Factor w/ 10 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;g&quot;,..: 5 10 9 9 4 10 9 9 9 10 ...
+##  $ b   : Factor w/ 2 levels &quot;f&quot;,&quot;t&quot;: 2 2 2 2 1 2 2 2 2 2 ...
+##  $ o   : Factor w/ 9 levels &quot;a&quot;,&quot;c&quot;,&quot;f&quot;,&quot;l&quot;,..: 7 1 4 7 6 1 1 4 7 1 ...
+##  $ ga  : Factor w/ 2 levels &quot;a&quot;,&quot;f&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ gs  : Factor w/ 2 levels &quot;c&quot;,&quot;w&quot;: 1 1 1 1 2 1 1 1 1 1 ...
+##  $ gz  : Factor w/ 2 levels &quot;b&quot;,&quot;n&quot;: 2 1 1 2 1 1 1 1 2 1 ...
+##  $ gc  : Factor w/ 12 levels &quot;b&quot;,&quot;e&quot;,&quot;g&quot;,&quot;h&quot;,..: 5 5 6 6 5 6 3 6 8 3 ...
+##  $ ss  : Factor w/ 2 levels &quot;e&quot;,&quot;t&quot;: 1 1 1 1 2 1 1 1 1 1 ...
+##  $ sr  : Factor w/ 4 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;r&quot;: 3 2 2 3 3 2 2 2 3 2 ...
+##  $ ssar: Factor w/ 4 levels &quot;f&quot;,&quot;k&quot;,&quot;s&quot;,&quot;y&quot;: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ ssbr: Factor w/ 4 levels &quot;f&quot;,&quot;k&quot;,&quot;s&quot;,&quot;y&quot;: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ scar: Factor w/ 9 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;g&quot;,..: 8 8 8 8 8 8 8 8 8 8 ...
+##  $ scbr: Factor w/ 9 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;g&quot;,..: 8 8 8 8 8 8 8 8 8 8 ...
+##  $ vt  : Factor w/ 1 level &quot;p&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ vc  : Factor w/ 4 levels &quot;n&quot;,&quot;o&quot;,&quot;w&quot;,&quot;y&quot;: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ rn  : Factor w/ 3 levels &quot;n&quot;,&quot;o&quot;,&quot;t&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ rt  : Factor w/ 5 levels &quot;e&quot;,&quot;f&quot;,&quot;l&quot;,&quot;n&quot;,..: 5 5 5 5 1 5 5 5 5 5 ...
+##  $ spc : Factor w/ 9 levels &quot;b&quot;,&quot;h&quot;,&quot;k&quot;,&quot;n&quot;,..: 3 4 4 3 4 3 3 4 3 3 ...
+##  $ p   : Factor w/ 6 levels &quot;a&quot;,&quot;c&quot;,&quot;n&quot;,&quot;s&quot;,..: 4 3 3 4 1 3 3 4 5 4 ...
+##  $ h   : Factor w/ 7 levels &quot;d&quot;,&quot;g&quot;,&quot;l&quot;,&quot;m&quot;,..: 6 2 4 6 2 2 4 4 2 4 ...</code></pre>
+<pre class="r"><code>summary(mr, maxsum = 12)</code></pre>
+<pre><code>##  type     csh      csf      cc       b        o        ga       gs      
+##  e:4208   b: 452   f:2320   b: 168   f:4748   a: 400   a: 210   c:6812  
+##  p:3916   c:   4   g:   4   c:  44   t:3376   c: 192   f:7914   w:1312  
+##           f:3152   s:2556   e:1500            f:2160                    
+##           k: 828   y:3244   g:1840            l: 400                    
+##           s:  32            n:2284            m:  36                    
+##           x:3656            p: 144            n:3528                    
+##                             r:  16            p: 256                    
+##                             u:  16            s: 576                    
+##                             w:1040            y: 576                    
+##                             y:1072                                      
+##                                                                         
+##                                                                         
+##  gz       gc       ss          sr       ssar     ssbr     scar     scbr    
+##  b:5612   b:1728   e:3516   b   :3776   f: 552   f: 600   b: 432   b: 432  
+##  n:2512   e:  96   t:4608   c   : 556   k:2372   k:2304   c:  36   c:  36  
+##           g: 752            e   :1120   s:5176   s:4936   e:  96   e:  96  
+##           h: 732            r   : 192   y:  24   y: 284   g: 576   g: 576  
+##           k: 408            NA&#39;s:2480                     n: 448   n: 512  
+##           n:1048                                          o: 192   o: 192  
+##           o:  64                                          p:1872   p:1872  
+##           p:1492                                          w:4464   w:4384  
+##           r:  24                                          y:   8   y:  24  
+##           u: 492                                                           
+##           w:1202                                                           
+##           y:  86                                                           
+##  vt       vc       rn       rt       spc      p        h       
+##  p:8124   n:  96   n:  36   e:2776   b:  48   a: 384   d:3148  
+##           o:  96   o:7488   f:  48   h:1632   c: 340   g:2148  
+##           w:7924   t: 600   l:1296   k:1872   n: 400   l: 832  
+##           y:   8            n:  36   n:1968   s:1248   m: 292  
+##                             p:3968   o:  48   v:4040   p:1144  
+##                                      r:  72   y:1712   u: 368  
+##                                      u:  48            w: 192  
+##                                      w:2388                    
+##                                      y:  48                    
+##                                                                
+##                                                                
+## </code></pre>
+<pre class="r"><code>summary(mr$sr)</code></pre>
+<pre><code>##    b    c    e    r NA&#39;s 
+## 3776  556 1120  192 2480</code></pre>
+<pre class="r"><code>#####################Prepare data
+set.seed(1234)
+sr_imp &lt;- kNN(mr, variable = &quot;sr&quot;, k=10, impNA=TRUE)
+str(sr_imp)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    8124 obs. of  24 variables:
+##  $ type  : Factor w/ 2 levels &quot;e&quot;,&quot;p&quot;: 2 1 1 2 1 1 1 1 2 1 ...
+##  $ csh   : Factor w/ 6 levels &quot;b&quot;,&quot;c&quot;,&quot;f&quot;,&quot;k&quot;,..: 6 6 1 6 6 6 1 1 6 1 ...
+##  $ csf   : Factor w/ 4 levels &quot;f&quot;,&quot;g&quot;,&quot;s&quot;,&quot;y&quot;: 3 3 3 4 3 4 3 4 4 3 ...
+##  $ cc    : Factor w/ 10 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;g&quot;,..: 5 10 9 9 4 10 9 9 9 10 ...
+##  $ b     : Factor w/ 2 levels &quot;f&quot;,&quot;t&quot;: 2 2 2 2 1 2 2 2 2 2 ...
+##  $ o     : Factor w/ 9 levels &quot;a&quot;,&quot;c&quot;,&quot;f&quot;,&quot;l&quot;,..: 7 1 4 7 6 1 1 4 7 1 ...
+##  $ ga    : Factor w/ 2 levels &quot;a&quot;,&quot;f&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ gs    : Factor w/ 2 levels &quot;c&quot;,&quot;w&quot;: 1 1 1 1 2 1 1 1 1 1 ...
+##  $ gz    : Factor w/ 2 levels &quot;b&quot;,&quot;n&quot;: 2 1 1 2 1 1 1 1 2 1 ...
+##  $ gc    : Factor w/ 12 levels &quot;b&quot;,&quot;e&quot;,&quot;g&quot;,&quot;h&quot;,..: 5 5 6 6 5 6 3 6 8 3 ...
+##  $ ss    : Factor w/ 2 levels &quot;e&quot;,&quot;t&quot;: 1 1 1 1 2 1 1 1 1 1 ...
+##  $ sr    : Factor w/ 4 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;r&quot;: 3 2 2 3 3 2 2 2 3 2 ...
+##  $ ssar  : Factor w/ 4 levels &quot;f&quot;,&quot;k&quot;,&quot;s&quot;,&quot;y&quot;: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ ssbr  : Factor w/ 4 levels &quot;f&quot;,&quot;k&quot;,&quot;s&quot;,&quot;y&quot;: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ scar  : Factor w/ 9 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;g&quot;,..: 8 8 8 8 8 8 8 8 8 8 ...
+##  $ scbr  : Factor w/ 9 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;g&quot;,..: 8 8 8 8 8 8 8 8 8 8 ...
+##  $ vt    : Factor w/ 1 level &quot;p&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ vc    : Factor w/ 4 levels &quot;n&quot;,&quot;o&quot;,&quot;w&quot;,&quot;y&quot;: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ rn    : Factor w/ 3 levels &quot;n&quot;,&quot;o&quot;,&quot;t&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ rt    : Factor w/ 5 levels &quot;e&quot;,&quot;f&quot;,&quot;l&quot;,&quot;n&quot;,..: 5 5 5 5 1 5 5 5 5 5 ...
+##  $ spc   : Factor w/ 9 levels &quot;b&quot;,&quot;h&quot;,&quot;k&quot;,&quot;n&quot;,..: 3 4 4 3 4 3 3 4 3 3 ...
+##  $ p     : Factor w/ 6 levels &quot;a&quot;,&quot;c&quot;,&quot;n&quot;,&quot;s&quot;,..: 4 3 3 4 1 3 3 4 5 4 ...
+##  $ h     : Factor w/ 7 levels &quot;d&quot;,&quot;g&quot;,&quot;l&quot;,&quot;m&quot;,..: 6 2 4 6 2 2 4 4 2 4 ...
+##  $ sr_imp: logi  FALSE FALSE FALSE FALSE FALSE FALSE ...</code></pre>
+<pre class="r"><code>mr1 &lt;- sr_imp[c(-17 ,-24)]
+str(mr1)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    8124 obs. of  22 variables:
+##  $ type: Factor w/ 2 levels &quot;e&quot;,&quot;p&quot;: 2 1 1 2 1 1 1 1 2 1 ...
+##  $ csh : Factor w/ 6 levels &quot;b&quot;,&quot;c&quot;,&quot;f&quot;,&quot;k&quot;,..: 6 6 1 6 6 6 1 1 6 1 ...
+##  $ csf : Factor w/ 4 levels &quot;f&quot;,&quot;g&quot;,&quot;s&quot;,&quot;y&quot;: 3 3 3 4 3 4 3 4 4 3 ...
+##  $ cc  : Factor w/ 10 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;g&quot;,..: 5 10 9 9 4 10 9 9 9 10 ...
+##  $ b   : Factor w/ 2 levels &quot;f&quot;,&quot;t&quot;: 2 2 2 2 1 2 2 2 2 2 ...
+##  $ o   : Factor w/ 9 levels &quot;a&quot;,&quot;c&quot;,&quot;f&quot;,&quot;l&quot;,..: 7 1 4 7 6 1 1 4 7 1 ...
+##  $ ga  : Factor w/ 2 levels &quot;a&quot;,&quot;f&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ gs  : Factor w/ 2 levels &quot;c&quot;,&quot;w&quot;: 1 1 1 1 2 1 1 1 1 1 ...
+##  $ gz  : Factor w/ 2 levels &quot;b&quot;,&quot;n&quot;: 2 1 1 2 1 1 1 1 2 1 ...
+##  $ gc  : Factor w/ 12 levels &quot;b&quot;,&quot;e&quot;,&quot;g&quot;,&quot;h&quot;,..: 5 5 6 6 5 6 3 6 8 3 ...
+##  $ ss  : Factor w/ 2 levels &quot;e&quot;,&quot;t&quot;: 1 1 1 1 2 1 1 1 1 1 ...
+##  $ sr  : Factor w/ 4 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;r&quot;: 3 2 2 3 3 2 2 2 3 2 ...
+##  $ ssar: Factor w/ 4 levels &quot;f&quot;,&quot;k&quot;,&quot;s&quot;,&quot;y&quot;: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ ssbr: Factor w/ 4 levels &quot;f&quot;,&quot;k&quot;,&quot;s&quot;,&quot;y&quot;: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ scar: Factor w/ 9 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;g&quot;,..: 8 8 8 8 8 8 8 8 8 8 ...
+##  $ scbr: Factor w/ 9 levels &quot;b&quot;,&quot;c&quot;,&quot;e&quot;,&quot;g&quot;,..: 8 8 8 8 8 8 8 8 8 8 ...
+##  $ vc  : Factor w/ 4 levels &quot;n&quot;,&quot;o&quot;,&quot;w&quot;,&quot;y&quot;: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ rn  : Factor w/ 3 levels &quot;n&quot;,&quot;o&quot;,&quot;t&quot;: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ rt  : Factor w/ 5 levels &quot;e&quot;,&quot;f&quot;,&quot;l&quot;,&quot;n&quot;,..: 5 5 5 5 1 5 5 5 5 5 ...
+##  $ spc : Factor w/ 9 levels &quot;b&quot;,&quot;h&quot;,&quot;k&quot;,&quot;n&quot;,..: 3 4 4 3 4 3 3 4 3 3 ...
+##  $ p   : Factor w/ 6 levels &quot;a&quot;,&quot;c&quot;,&quot;n&quot;,&quot;s&quot;,..: 4 3 3 4 1 3 3 4 5 4 ...
+##  $ h   : Factor w/ 7 levels &quot;d&quot;,&quot;g&quot;,&quot;l&quot;,&quot;m&quot;,..: 6 2 4 6 2 2 4 4 2 4 ...</code></pre>
+<pre class="r"><code>summary(mr1, maxsum = 12)</code></pre>
+<pre><code>##  type     csh      csf      cc       b        o        ga       gs      
+##  e:4208   b: 452   f:2320   b: 168   f:4748   a: 400   a: 210   c:6812  
+##  p:3916   c:   4   g:   4   c:  44   t:3376   c: 192   f:7914   w:1312  
+##           f:3152   s:2556   e:1500            f:2160                    
+##           k: 828   y:3244   g:1840            l: 400                    
+##           s:  32            n:2284            m:  36                    
+##           x:3656            p: 144            n:3528                    
+##                             r:  16            p: 256                    
+##                             u:  16            s: 576                    
+##                             w:1040            y: 576                    
+##                             y:1072                                      
+##                                                                         
+##                                                                         
+##  gz       gc       ss       sr       ssar     ssbr     scar     scbr    
+##  b:5612   b:1728   e:3516   b:5303   f: 552   f: 600   b: 432   b: 432  
+##  n:2512   e:  96   t:4608   c: 662   k:2372   k:2304   c:  36   c:  36  
+##           g: 752            e:1967   s:5176   s:4936   e:  96   e:  96  
+##           h: 732            r: 192   y:  24   y: 284   g: 576   g: 576  
+##           k: 408                                       n: 448   n: 512  
+##           n:1048                                       o: 192   o: 192  
+##           o:  64                                       p:1872   p:1872  
+##           p:1492                                       w:4464   w:4384  
+##           r:  24                                       y:   8   y:  24  
+##           u: 492                                                        
+##           w:1202                                                        
+##           y:  86                                                        
+##  vc       rn       rt       spc      p        h       
+##  n:  96   n:  36   e:2776   b:  48   a: 384   d:3148  
+##  o:  96   o:7488   f:  48   h:1632   c: 340   g:2148  
+##  w:7924   t: 600   l:1296   k:1872   n: 400   l: 832  
+##  y:   8            n:  36   n:1968   s:1248   m: 292  
+##                    p:3968   o:  48   v:4040   p:1144  
+##                             r:  72   y:1712   u: 368  
+##                             u:  48            w: 192  
+##                             w:2388                    
+##                             y:  48                    
+##                                                       
+##                                                       
+## </code></pre>
+<pre class="r"><code>#117 dummy variables
+dmy &lt;- dummyVars(&quot;~ .&quot;, data = mr1, fullRank = TRUE)
+#transform to data frame
+trsf &lt;- data.frame(predict(dmy, newdata = mr1))
+str(trsf[1:10]) #95 variables</code></pre>
+<pre><code>## &#39;data.frame&#39;:    8124 obs. of  10 variables:
+##  $ type.p: num  1 0 0 1 0 0 0 0 1 0 ...
+##  $ csh.c : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ csh.f : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ csh.k : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ csh.s : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ csh.x : num  1 1 0 1 1 1 0 0 1 0 ...
+##  $ csf.g : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ csf.s : num  1 1 1 0 1 0 1 0 0 1 ...
+##  $ csf.y : num  0 0 0 1 0 1 0 1 1 0 ...
+##  $ cc.c  : num  0 0 0 0 0 0 0 0 0 0 ...</code></pre>
+<pre class="r"><code>#remove type.p so we can put column back to original
+mr2 &lt;- trsf[-1]
+str(mr2[1:10])</code></pre>
+<pre><code>## &#39;data.frame&#39;:    8124 obs. of  10 variables:
+##  $ csh.c: num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ csh.f: num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ csh.k: num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ csh.s: num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ csh.x: num  1 1 0 1 1 1 0 0 1 0 ...
+##  $ csf.g: num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ csf.s: num  1 1 1 0 1 0 1 0 0 1 ...
+##  $ csf.y: num  0 0 0 1 0 1 0 1 1 0 ...
+##  $ cc.c : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ cc.e : num  0 0 0 0 0 0 0 0 0 0 ...</code></pre>
+<pre class="r"><code>mr2 &lt;- data.frame(mr$type, mr2)
+str(mr2[1:10])</code></pre>
+<pre><code>## &#39;data.frame&#39;:    8124 obs. of  10 variables:
+##  $ mr.type: Factor w/ 2 levels &quot;e&quot;,&quot;p&quot;: 2 1 1 2 1 1 1 1 2 1 ...
+##  $ csh.c  : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ csh.f  : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ csh.k  : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ csh.s  : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ csh.x  : num  1 1 0 1 1 1 0 0 1 0 ...
+##  $ csf.g  : num  0 0 0 0 0 0 0 0 0 0 ...
+##  $ csf.s  : num  1 1 1 0 1 0 1 0 0 1 ...
+##  $ csf.y  : num  0 0 0 1 0 1 0 1 1 0 ...
+##  $ cc.c   : num  0 0 0 0 0 0 0 0 0 0 ...</code></pre>
+<pre class="r"><code>names(mr2)[1] &lt;- (&quot;type&quot;)
+#cleaned set type is factor of e or p 
+str(mr2[1])</code></pre>
+<pre><code>## &#39;data.frame&#39;:    8124 obs. of  1 variable:
+##  $ type: Factor w/ 2 levels &quot;e&quot;,&quot;p&quot;: 2 1 1 2 1 1 1 1 2 1 ...</code></pre>
+<pre class="r"><code>#View(mr2)
+#####################################################################################</code></pre>
+</div>
+<div id="artificial-neural-network-ann" class="section level3">
+<h3>ARTIFICIAL NEURAL NETWORK (ANN)</h3>
+<p>In this section the data is split 70/30 with random sampling. We confirm the proportions are the same. 51% edible(e) and 48% poisonous (p). The nnet() model is created and tuned with a size of 10 hidden layers, a decay of 0.0001 and a maxit of 500 passes. The values were selected based on other examples found on the internet. The first pass runs 500 and stops at a final value of 0.057. This indicates a good result as it started from 3839. We do a query with varImp() to find the top variables of importance. The top four are sp.c.r, o.c, o.n, gz.n. (spore-print-color-green, odor-creosote, odor-none, gill-size-narrow). Of interest is the other odor categories are in the 5th and 7th of the top ten. odor-foul, and odor-pungent. It is worth mentioning that the spore-print-color-brown and black are also in the top ten. WE run the prediction on the test set and surprisingly come out with an accuracy of 1 and a kappa of 1 which are both the highest metric value. In the table there are no false positives or false negatives. Is this too good to be true or a valid outcome, we will run a cross validation 10 fold to check the results. We run 517 out of 5687 which is about 10% of the random data. The same parameters are used again (size=4, decay=0.0001, maxit=500). The final value is 0.060 (seems good) The result is 1 across ten and a mean of 1. There is confusion here as this should be below 1 but maybe it is valid. A second test is ran with the parameters of(size=5, decay=0.1, and maxit=5000) and came from the “bestTune” parameter in the model, this resulted in A=1 and Kappa=1, the final value was higher at 23.72 so it stopped earlier but not by much. Another try was made with decay=0.0001, maxit=50, size=4 and this was still 100%. It is unknown at this point what else to do to check validation and requires more work to verify the results. The fitted values and residuals are plotted. the fitted are normal 0 and 1. While the residuals are centered around 0, not sure what this means and further time is needed to understand.</p>
+<pre class="r"><code>######################Neural Net
+set.seed(3456)
+train_sample &lt;- sample(8124, 5687) #70/30 split
+mr_train &lt;- mr2[train_sample, ]
+mr_test &lt;- mr2[-train_sample, ]</code></pre>
+<pre class="r"><code>table(mr2$type) #full proportions</code></pre>
+<pre><code>## 
+##    e    p 
+## 4208 3916</code></pre>
+<pre class="r"><code>prop.table((table(mr_train$type))) #sample proportions</code></pre>
+<pre><code>## 
+##         e         p 
+## 0.5178477 0.4821523</code></pre>
+<pre class="r"><code>#predict type against everything else
+type_model &lt;- nnet(type ~., data = mr_train, size = 10, decay=0.0001, maxit=500)</code></pre>
+<pre><code>## # weights:  961
+## initial  value 5129.174670 
+## iter  10 value 265.027929
+## iter  20 value 3.076938
+## iter  30 value 0.371356
+## iter  40 value 0.352718
+## iter  50 value 0.328299
+## iter  60 value 0.309906
+## iter  70 value 0.296339
+## iter  80 value 0.282190
+## iter  90 value 0.271781
+## iter 100 value 0.254872
+## iter 110 value 0.237647
+## iter 120 value 0.228582
+## iter 130 value 0.219006
+## iter 140 value 0.208590
+## iter 150 value 0.204293
+## iter 160 value 0.197833
+## iter 170 value 0.185819
+## iter 180 value 0.173900
+## iter 190 value 0.168410
+## iter 200 value 0.155254
+## iter 210 value 0.143915
+## iter 220 value 0.132080
+## iter 230 value 0.127208
+## iter 240 value 0.119249
+## iter 250 value 0.115105
+## iter 260 value 0.109852
+## iter 270 value 0.103697
+## iter 280 value 0.099213
+## iter 290 value 0.092630
+## iter 300 value 0.089279
+## iter 310 value 0.086634
+## iter 320 value 0.083561
+## iter 330 value 0.080222
+## iter 340 value 0.076699
+## iter 350 value 0.073725
+## iter 360 value 0.072143
+## iter 370 value 0.070958
+## iter 380 value 0.069430
+## iter 390 value 0.068156
+## iter 400 value 0.066799
+## iter 410 value 0.065787
+## iter 420 value 0.064691
+## iter 430 value 0.063503
+## iter 440 value 0.062599
+## iter 450 value 0.061279
+## iter 460 value 0.060377
+## iter 470 value 0.059538
+## iter 480 value 0.058777
+## iter 490 value 0.058114
+## iter 500 value 0.057584
+## final  value 0.057584 
+## stopped after 500 iterations</code></pre>
+<p>This ran for 3-4 minutes and this is copied over from the script with results.
+the last run shows the best model with an accuracy of 0.999 and kappa of 0.9999, a size of 5 and decay of 0.1. The resampling is showing accuracy of 1 and kappa of 1 for all the folds except for 25 where they dropped to A= 0.998 and P=0.996.</p>
+<pre class="r"><code>cvCtrl &lt;- trainControl(method=&quot;repeatedcv&quot;, number=10, repeats=3)</code></pre>
+<pre class="r"><code>library(doParallel)</code></pre>
+<pre><code>## Loading required package: foreach</code></pre>
+<pre><code>## Loading required package: iterators</code></pre>
+<pre><code>## Loading required package: parallel</code></pre>
+<pre class="r"><code>cl &lt;- makePSOCKcluster(6)
+registerDoParallel(cl)</code></pre>
+<pre class="r"><code>modit = capture.output(train(type ~., data = mr_train, 
+              method=&quot;nnet&quot;, 
+              preProcess=&quot;scale&quot;, 
+              trControl=cvCtrl, 
+              maxit=100,
+              trace=FALSE)
+)
+
+stopCluster(cl)</code></pre>
+<pre class="r"><code>plot(table(type_model$fitted.values))</code></pre>
+<p><img src="/post/2018-06-10-artificial-neural-network-and-support-vector-machine-analysis_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>plot(table(type_model$residuals))</code></pre>
+<p><img src="/post/2018-06-10-artificial-neural-network-and-support-vector-machine-analysis_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<pre class="r"><code>###
+#sort most influencial variables
+topModels &lt;- varImp(type_model)
+topModels$Variables &lt;- row.names(topModels)
+topModels &lt;- topModels[order(-topModels$Overall),]</code></pre>
+<pre class="r"><code>#sort level of top 10 variables in the model
+head(topModels, 10)</code></pre>
+<pre><code>##        Overall Variables
+## spc.r 4.860176     spc.r
+## o.c   4.213244       o.c
+## o.p   3.243726       o.p
+## o.n   3.211917       o.n
+## gz.n  3.109038      gz.n
+## o.f   2.906371       o.f
+## spc.n 2.373167     spc.n
+## gs.w  2.350670      gs.w
+## h.w   2.211128       h.w
+## spc.u 2.162081     spc.u</code></pre>
+<pre class="r"><code>#####</code></pre>
+<pre class="r"><code>preds1 &lt;- predict(type_model, newdata = mr_test, type=&quot;class&quot;)
+table(preds1, mr_test$type)</code></pre>
+<pre><code>##       
+## preds1    e    p
+##      e 1263    0
+##      p    0 1174</code></pre>
+<pre class="r"><code>head(preds1, 10)</code></pre>
+<pre><code>##  [1] &quot;p&quot; &quot;e&quot; &quot;e&quot; &quot;p&quot; &quot;e&quot; &quot;p&quot; &quot;p&quot; &quot;e&quot; &quot;e&quot; &quot;e&quot;</code></pre>
+<pre class="r"><code>postResample(preds1, mr_test$type) #accuracy and kappa</code></pre>
+<pre><code>## Accuracy    Kappa 
+##        1        1</code></pre>
+<pre class="r"><code>totalError &lt;- c()
+#split data by 10 portions
+cv &lt;- 10
+cvDivider &lt;- floor(nrow(mr_train) / (cv+1))
+cvDivider #number of rows</code></pre>
+<pre><code>## [1] 517</code></pre>
+<pre class="r"><code>nrow(mr_train) #roughly 10x the row</code></pre>
+<pre><code>## [1] 5687</code></pre>
+<pre class="r"><code># loop data on 10 different sections of the data increase by a 10th each run, put in best tune parameters 
+capture.output(
+  for (cv in seq(1:cv)) {
+  #assign chunk to data set
+  dataTestIndex &lt;- c((cv * cvDivider):(cv * cvDivider + cvDivider))
+  dataTest &lt;- mr_train[dataTestIndex, ]
+  #everything else to train
+  dataTrain &lt;- mr_train[-dataTestIndex, ]
+
+  type_model &lt;- nnet(type~., data = mr_train, size = 5, decay=0.1, maxit=500)
+  
+  pred &lt;- predict(type_model, dataTest)
+  
+  #classification error
+  err &lt;- ce(as.numeric(dataTest$type), as.numeric(pred))
+  totalError &lt;- c(totalError, err)
+  }
+)</code></pre>
+<pre><code>##   [1] &quot;# weights:  481&quot;             &quot;initial  value 4131.038209 &quot;
+##   [3] &quot;iter  10 value 455.101632&quot;   &quot;iter  20 value 214.076274&quot;  
+##   [5] &quot;iter  30 value 117.864798&quot;   &quot;iter  40 value 70.556964&quot;   
+##   [7] &quot;iter  50 value 42.605632&quot;    &quot;iter  60 value 31.430671&quot;   
+##   [9] &quot;iter  70 value 26.466643&quot;    &quot;iter  80 value 25.158454&quot;   
+##  [11] &quot;iter  90 value 24.501575&quot;    &quot;iter 100 value 24.213052&quot;   
+##  [13] &quot;iter 110 value 24.127779&quot;    &quot;iter 120 value 24.021257&quot;   
+##  [15] &quot;iter 130 value 23.970028&quot;    &quot;iter 140 value 23.939620&quot;   
+##  [17] &quot;iter 150 value 23.907873&quot;    &quot;iter 160 value 23.890786&quot;   
+##  [19] &quot;iter 170 value 23.882737&quot;    &quot;iter 180 value 23.870609&quot;   
+##  [21] &quot;iter 190 value 23.858447&quot;    &quot;iter 200 value 23.847741&quot;   
+##  [23] &quot;iter 210 value 23.833776&quot;    &quot;iter 220 value 23.830237&quot;   
+##  [25] &quot;iter 230 value 23.829832&quot;    &quot;iter 240 value 23.829748&quot;   
+##  [27] &quot;iter 250 value 23.829601&quot;    &quot;iter 260 value 23.829033&quot;   
+##  [29] &quot;iter 270 value 23.828754&quot;    &quot;iter 280 value 23.828671&quot;   
+##  [31] &quot;iter 290 value 23.828635&quot;    &quot;final  value 23.828632 &quot;    
+##  [33] &quot;converged&quot;                   &quot;# weights:  481&quot;            
+##  [35] &quot;initial  value 3903.043295 &quot; &quot;iter  10 value 516.137283&quot;  
+##  [37] &quot;iter  20 value 281.185677&quot;   &quot;iter  30 value 130.188377&quot;  
+##  [39] &quot;iter  40 value 64.177186&quot;    &quot;iter  50 value 38.173988&quot;   
+##  [41] &quot;iter  60 value 31.025100&quot;    &quot;iter  70 value 27.980851&quot;   
+##  [43] &quot;iter  80 value 26.268903&quot;    &quot;iter  90 value 25.322536&quot;   
+##  [45] &quot;iter 100 value 24.785172&quot;    &quot;iter 110 value 24.384057&quot;   
+##  [47] &quot;iter 120 value 24.280135&quot;    &quot;iter 130 value 24.179441&quot;   
+##  [49] &quot;iter 140 value 24.062253&quot;    &quot;iter 150 value 23.926230&quot;   
+##  [51] &quot;iter 160 value 23.889262&quot;    &quot;iter 170 value 23.878509&quot;   
+##  [53] &quot;iter 180 value 23.874436&quot;    &quot;iter 190 value 23.870764&quot;   
+##  [55] &quot;iter 200 value 23.866497&quot;    &quot;iter 210 value 23.862410&quot;   
+##  [57] &quot;iter 220 value 23.860302&quot;    &quot;iter 230 value 23.853558&quot;   
+##  [59] &quot;iter 240 value 23.836053&quot;    &quot;iter 250 value 23.830244&quot;   
+##  [61] &quot;iter 260 value 23.828885&quot;    &quot;iter 270 value 23.828658&quot;   
+##  [63] &quot;iter 280 value 23.828641&quot;    &quot;iter 290 value 23.828635&quot;   
+##  [65] &quot;final  value 23.828632 &quot;     &quot;converged&quot;                  
+##  [67] &quot;# weights:  481&quot;             &quot;initial  value 4463.836252 &quot;
+##  [69] &quot;iter  10 value 305.131771&quot;   &quot;iter  20 value 85.451644&quot;   
+##  [71] &quot;iter  30 value 52.717735&quot;    &quot;iter  40 value 40.201806&quot;   
+##  [73] &quot;iter  50 value 34.720639&quot;    &quot;iter  60 value 33.113350&quot;   
+##  [75] &quot;iter  70 value 30.495137&quot;    &quot;iter  80 value 27.741541&quot;   
+##  [77] &quot;iter  90 value 26.456015&quot;    &quot;iter 100 value 25.899196&quot;   
+##  [79] &quot;iter 110 value 25.724112&quot;    &quot;iter 120 value 25.582297&quot;   
+##  [81] &quot;iter 130 value 25.512619&quot;    &quot;iter 140 value 25.220500&quot;   
+##  [83] &quot;iter 150 value 24.859076&quot;    &quot;iter 160 value 24.393029&quot;   
+##  [85] &quot;iter 170 value 24.078532&quot;    &quot;iter 180 value 24.025912&quot;   
+##  [87] &quot;iter 190 value 24.001804&quot;    &quot;iter 200 value 23.972064&quot;   
+##  [89] &quot;iter 210 value 23.907833&quot;    &quot;iter 220 value 23.881270&quot;   
+##  [91] &quot;iter 230 value 23.852015&quot;    &quot;iter 240 value 23.830189&quot;   
+##  [93] &quot;iter 250 value 23.828632&quot;    &quot;iter 250 value 23.828632&quot;   
+##  [95] &quot;iter 250 value 23.828632&quot;    &quot;final  value 23.828632 &quot;    
+##  [97] &quot;converged&quot;                   &quot;# weights:  481&quot;            
+##  [99] &quot;initial  value 3922.557831 &quot; &quot;iter  10 value 198.221549&quot;  
+## [101] &quot;iter  20 value 54.769153&quot;    &quot;iter  30 value 31.934519&quot;   
+## [103] &quot;iter  40 value 27.472269&quot;    &quot;iter  50 value 25.915732&quot;   
+## [105] &quot;iter  60 value 25.049463&quot;    &quot;iter  70 value 24.456231&quot;   
+## [107] &quot;iter  80 value 23.992637&quot;    &quot;iter  90 value 23.903161&quot;   
+## [109] &quot;iter 100 value 23.882183&quot;    &quot;iter 110 value 23.863807&quot;   
+## [111] &quot;iter 120 value 23.857866&quot;    &quot;iter 130 value 23.852526&quot;   
+## [113] &quot;iter 140 value 23.851162&quot;    &quot;iter 150 value 23.850689&quot;   
+## [115] &quot;iter 160 value 23.849050&quot;    &quot;iter 170 value 23.846435&quot;   
+## [117] &quot;iter 180 value 23.845368&quot;    &quot;iter 190 value 23.845244&quot;   
+## [119] &quot;final  value 23.845145 &quot;     &quot;converged&quot;                  
+## [121] &quot;# weights:  481&quot;             &quot;initial  value 4108.098129 &quot;
+## [123] &quot;iter  10 value 77.935245&quot;    &quot;iter  20 value 35.428331&quot;   
+## [125] &quot;iter  30 value 30.075878&quot;    &quot;iter  40 value 27.549116&quot;   
+## [127] &quot;iter  50 value 26.587039&quot;    &quot;iter  60 value 25.595512&quot;   
+## [129] &quot;iter  70 value 24.886336&quot;    &quot;iter  80 value 24.211819&quot;   
+## [131] &quot;iter  90 value 24.115509&quot;    &quot;iter 100 value 24.052371&quot;   
+## [133] &quot;iter 110 value 23.966428&quot;    &quot;iter 120 value 23.945243&quot;   
+## [135] &quot;iter 130 value 23.904446&quot;    &quot;iter 140 value 23.896764&quot;   
+## [137] &quot;iter 150 value 23.876036&quot;    &quot;iter 160 value 23.860088&quot;   
+## [139] &quot;iter 170 value 23.843901&quot;    &quot;iter 180 value 23.835529&quot;   
+## [141] &quot;iter 190 value 23.830551&quot;    &quot;final  value 23.828632 &quot;    
+## [143] &quot;converged&quot;                   &quot;# weights:  481&quot;            
+## [145] &quot;initial  value 4133.554002 &quot; &quot;iter  10 value 428.491443&quot;  
+## [147] &quot;iter  20 value 202.828516&quot;   &quot;iter  30 value 68.434375&quot;   
+## [149] &quot;iter  40 value 49.453764&quot;    &quot;iter  50 value 42.202017&quot;   
+## [151] &quot;iter  60 value 39.013840&quot;    &quot;iter  70 value 34.744057&quot;   
+## [153] &quot;iter  80 value 31.933707&quot;    &quot;iter  90 value 29.732941&quot;   
+## [155] &quot;iter 100 value 28.384519&quot;    &quot;iter 110 value 27.048713&quot;   
+## [157] &quot;iter 120 value 26.412491&quot;    &quot;iter 130 value 26.142390&quot;   
+## [159] &quot;iter 140 value 25.808631&quot;    &quot;iter 150 value 25.485091&quot;   
+## [161] &quot;iter 160 value 25.415397&quot;    &quot;iter 170 value 25.312302&quot;   
+## [163] &quot;iter 180 value 25.234511&quot;    &quot;iter 190 value 24.986085&quot;   
+## [165] &quot;iter 200 value 24.403117&quot;    &quot;iter 210 value 24.090090&quot;   
+## [167] &quot;iter 220 value 23.914432&quot;    &quot;iter 230 value 23.851080&quot;   
+## [169] &quot;iter 240 value 23.843012&quot;    &quot;iter 250 value 23.838547&quot;   
+## [171] &quot;iter 260 value 23.833956&quot;    &quot;iter 270 value 23.831865&quot;   
+## [173] &quot;iter 280 value 23.828783&quot;    &quot;iter 290 value 23.828708&quot;   
+## [175] &quot;iter 300 value 23.828660&quot;    &quot;iter 310 value 23.828633&quot;   
+## [177] &quot;final  value 23.828632 &quot;     &quot;converged&quot;                  
+## [179] &quot;# weights:  481&quot;             &quot;initial  value 4166.413738 &quot;
+## [181] &quot;iter  10 value 576.127011&quot;   &quot;iter  20 value 202.529239&quot;  
+## [183] &quot;iter  30 value 61.682299&quot;    &quot;iter  40 value 33.779033&quot;   
+## [185] &quot;iter  50 value 27.813710&quot;    &quot;iter  60 value 26.142641&quot;   
+## [187] &quot;iter  70 value 24.935432&quot;    &quot;iter  80 value 24.730898&quot;   
+## [189] &quot;iter  90 value 24.668778&quot;    &quot;iter 100 value 24.594535&quot;   
+## [191] &quot;iter 110 value 24.553234&quot;    &quot;iter 120 value 24.549415&quot;   
+## [193] &quot;iter 130 value 24.547717&quot;    &quot;iter 140 value 24.547243&quot;   
+## [195] &quot;final  value 24.547226 &quot;     &quot;converged&quot;                  
+## [197] &quot;# weights:  481&quot;             &quot;initial  value 4465.179580 &quot;
+## [199] &quot;iter  10 value 456.875594&quot;   &quot;iter  20 value 213.634932&quot;  
+## [201] &quot;iter  30 value 150.275506&quot;   &quot;iter  40 value 92.840494&quot;   
+## [203] &quot;iter  50 value 38.199064&quot;    &quot;iter  60 value 29.177637&quot;   
+## [205] &quot;iter  70 value 27.175464&quot;    &quot;iter  80 value 25.607727&quot;   
+## [207] &quot;iter  90 value 25.084173&quot;    &quot;iter 100 value 24.742807&quot;   
+## [209] &quot;iter 110 value 24.619621&quot;    &quot;iter 120 value 24.521725&quot;   
+## [211] &quot;iter 130 value 24.433243&quot;    &quot;iter 140 value 24.158239&quot;   
+## [213] &quot;iter 150 value 24.026866&quot;    &quot;iter 160 value 23.990799&quot;   
+## [215] &quot;iter 170 value 23.979853&quot;    &quot;iter 180 value 23.960466&quot;   
+## [217] &quot;iter 190 value 23.932998&quot;    &quot;iter 200 value 23.892964&quot;   
+## [219] &quot;iter 210 value 23.859856&quot;    &quot;iter 220 value 23.846410&quot;   
+## [221] &quot;iter 230 value 23.836721&quot;    &quot;iter 240 value 23.831773&quot;   
+## [223] &quot;iter 250 value 23.830133&quot;    &quot;iter 260 value 23.829567&quot;   
+## [225] &quot;iter 270 value 23.829192&quot;    &quot;iter 280 value 23.829040&quot;   
+## [227] &quot;iter 290 value 23.828738&quot;    &quot;iter 300 value 23.828635&quot;   
+## [229] &quot;final  value 23.828634 &quot;     &quot;converged&quot;                  
+## [231] &quot;# weights:  481&quot;             &quot;initial  value 4371.291868 &quot;
+## [233] &quot;iter  10 value 780.885653&quot;   &quot;iter  20 value 587.825721&quot;  
+## [235] &quot;iter  30 value 363.720253&quot;   &quot;iter  40 value 139.595418&quot;  
+## [237] &quot;iter  50 value 58.480965&quot;    &quot;iter  60 value 38.726359&quot;   
+## [239] &quot;iter  70 value 30.458288&quot;    &quot;iter  80 value 26.274315&quot;   
+## [241] &quot;iter  90 value 24.739274&quot;    &quot;iter 100 value 24.222307&quot;   
+## [243] &quot;iter 110 value 24.045235&quot;    &quot;iter 120 value 23.971757&quot;   
+## [245] &quot;iter 130 value 23.920575&quot;    &quot;iter 140 value 23.879082&quot;   
+## [247] &quot;iter 150 value 23.867271&quot;    &quot;iter 160 value 23.857194&quot;   
+## [249] &quot;iter 170 value 23.852346&quot;    &quot;iter 180 value 23.850086&quot;   
+## [251] &quot;iter 190 value 23.848909&quot;    &quot;iter 200 value 23.848579&quot;   
+## [253] &quot;iter 210 value 23.848370&quot;    &quot;iter 220 value 23.848232&quot;   
+## [255] &quot;iter 230 value 23.848019&quot;    &quot;iter 240 value 23.847315&quot;   
+## [257] &quot;iter 250 value 23.845781&quot;    &quot;iter 260 value 23.845296&quot;   
+## [259] &quot;iter 270 value 23.845176&quot;    &quot;iter 280 value 23.845153&quot;   
+## [261] &quot;iter 290 value 23.845146&quot;    &quot;final  value 23.845146 &quot;    
+## [263] &quot;converged&quot;                   &quot;# weights:  481&quot;            
+## [265] &quot;initial  value 3976.505403 &quot; &quot;iter  10 value 479.875071&quot;  
+## [267] &quot;iter  20 value 399.158322&quot;   &quot;iter  30 value 246.440189&quot;  
+## [269] &quot;iter  40 value 131.962324&quot;   &quot;iter  50 value 63.162088&quot;   
+## [271] &quot;iter  60 value 41.803408&quot;    &quot;iter  70 value 31.054774&quot;   
+## [273] &quot;iter  80 value 26.723853&quot;    &quot;iter  90 value 24.936619&quot;   
+## [275] &quot;iter 100 value 24.013096&quot;    &quot;iter 110 value 23.924894&quot;   
+## [277] &quot;iter 120 value 23.873463&quot;    &quot;iter 130 value 23.850006&quot;   
+## [279] &quot;iter 140 value 23.841252&quot;    &quot;iter 150 value 23.838300&quot;   
+## [281] &quot;iter 160 value 23.837006&quot;    &quot;iter 170 value 23.835772&quot;   
+## [283] &quot;iter 180 value 23.834722&quot;    &quot;iter 190 value 23.833913&quot;   
+## [285] &quot;iter 200 value 23.832358&quot;    &quot;iter 210 value 23.830529&quot;   
+## [287] &quot;iter 220 value 23.829161&quot;    &quot;iter 230 value 23.829024&quot;   
+## [289] &quot;iter 240 value 23.828997&quot;    &quot;iter 250 value 23.828963&quot;   
+## [291] &quot;iter 260 value 23.828898&quot;    &quot;iter 270 value 23.828748&quot;   
+## [293] &quot;iter 280 value 23.828684&quot;    &quot;iter 290 value 23.828650&quot;   
+## [295] &quot;iter 300 value 23.828636&quot;    &quot;final  value 23.828633 &quot;    
+## [297] &quot;converged&quot;</code></pre>
+<pre class="r"><code>totalError</code></pre>
+<pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1</code></pre>
+<pre class="r"><code>mean(totalError)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code># run code with 50 iterations
+capture.output(
+  for (cv in seq(1:cv)) {
+  #assign chunk to data set
+  dataTestIndex &lt;- c((cv * cvDivider):(cv * cvDivider + cvDivider))
+  dataTest &lt;- mr_train[dataTestIndex, ]
+  #everything else to train
+  dataTrain &lt;- mr_train[-dataTestIndex, ]
+  
+  type_model &lt;- nnet(type~., data = mr_train, size = 4, decay=0.0001, maxit=50)
+
+  pred &lt;- predict(type_model, dataTest)
+  
+  #classification error
+  err &lt;- ce(as.numeric(dataTest$type), as.numeric(pred))
+  totalError &lt;- c(totalError, err)
+  }
+)</code></pre>
+<pre><code>##  [1] &quot;# weights:  385&quot;             &quot;initial  value 3992.215378 &quot;
+##  [3] &quot;iter  10 value 225.688621&quot;   &quot;iter  20 value 14.815525&quot;   
+##  [5] &quot;iter  30 value 0.631761&quot;     &quot;iter  40 value 0.229973&quot;    
+##  [7] &quot;iter  50 value 0.221208&quot;     &quot;final  value 0.221208 &quot;     
+##  [9] &quot;stopped after 50 iterations&quot; &quot;# weights:  385&quot;            
+## [11] &quot;initial  value 3919.352988 &quot; &quot;iter  10 value 230.359279&quot;  
+## [13] &quot;iter  20 value 13.853211&quot;    &quot;iter  30 value 0.319568&quot;    
+## [15] &quot;iter  40 value 0.232561&quot;     &quot;iter  50 value 0.221478&quot;    
+## [17] &quot;final  value 0.221478 &quot;      &quot;stopped after 50 iterations&quot;
+## [19] &quot;# weights:  385&quot;             &quot;initial  value 3800.270363 &quot;
+## [21] &quot;iter  10 value 985.054588&quot;   &quot;iter  20 value 22.792292&quot;   
+## [23] &quot;iter  30 value 1.071623&quot;     &quot;iter  40 value 0.992320&quot;    
+## [25] &quot;iter  50 value 0.913452&quot;     &quot;final  value 0.913452 &quot;     
+## [27] &quot;stopped after 50 iterations&quot; &quot;# weights:  385&quot;            
+## [29] &quot;initial  value 4287.392108 &quot; &quot;iter  10 value 343.656550&quot;  
+## [31] &quot;iter  20 value 26.949759&quot;    &quot;iter  30 value 1.446327&quot;    
+## [33] &quot;iter  40 value 0.804258&quot;     &quot;iter  50 value 0.680953&quot;    
+## [35] &quot;final  value 0.680953 &quot;      &quot;stopped after 50 iterations&quot;
+## [37] &quot;# weights:  385&quot;             &quot;initial  value 4384.903759 &quot;
+## [39] &quot;iter  10 value 532.228491&quot;   &quot;iter  20 value 37.648244&quot;   
+## [41] &quot;iter  30 value 37.373940&quot;    &quot;iter  40 value 37.314777&quot;   
+## [43] &quot;iter  50 value 37.276753&quot;    &quot;final  value 37.276753 &quot;    
+## [45] &quot;stopped after 50 iterations&quot; &quot;# weights:  385&quot;            
+## [47] &quot;initial  value 3798.281114 &quot; &quot;iter  10 value 634.725052&quot;  
+## [49] &quot;iter  20 value 277.357662&quot;   &quot;iter  30 value 274.777653&quot;  
+## [51] &quot;iter  40 value 274.727454&quot;   &quot;iter  50 value 274.713995&quot;  
+## [53] &quot;final  value 274.713995 &quot;    &quot;stopped after 50 iterations&quot;
+## [55] &quot;# weights:  385&quot;             &quot;initial  value 3891.212678 &quot;
+## [57] &quot;iter  10 value 470.883388&quot;   &quot;iter  20 value 14.524364&quot;   
+## [59] &quot;iter  30 value 0.373357&quot;     &quot;iter  40 value 0.328683&quot;    
+## [61] &quot;iter  50 value 0.305251&quot;     &quot;final  value 0.305251 &quot;     
+## [63] &quot;stopped after 50 iterations&quot; &quot;# weights:  385&quot;            
+## [65] &quot;initial  value 4576.628512 &quot; &quot;iter  10 value 839.380735&quot;  
+## [67] &quot;iter  20 value 186.731047&quot;   &quot;iter  30 value 17.636580&quot;   
+## [69] &quot;iter  40 value 1.326494&quot;     &quot;iter  50 value 1.093621&quot;    
+## [71] &quot;final  value 1.093621 &quot;      &quot;stopped after 50 iterations&quot;
+## [73] &quot;# weights:  385&quot;             &quot;initial  value 3973.229118 &quot;
+## [75] &quot;iter  10 value 299.981309&quot;   &quot;iter  20 value 119.312181&quot;  
+## [77] &quot;iter  30 value 9.965782&quot;     &quot;iter  40 value 0.337041&quot;    
+## [79] &quot;iter  50 value 0.271618&quot;     &quot;final  value 0.271618 &quot;     
+## [81] &quot;stopped after 50 iterations&quot; &quot;# weights:  385&quot;            
+## [83] &quot;initial  value 4325.988622 &quot; &quot;iter  10 value 393.708448&quot;  
+## [85] &quot;iter  20 value 10.199643&quot;    &quot;iter  30 value 0.148243&quot;    
+## [87] &quot;iter  40 value 0.123917&quot;     &quot;iter  50 value 0.113179&quot;    
+## [89] &quot;final  value 0.113179 &quot;      &quot;stopped after 50 iterations&quot;</code></pre>
+<pre class="r"><code>totalError</code></pre>
+<pre><code>##  [1] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1</code></pre>
+<pre class="r"><code>mean(totalError) #compare to error previously</code></pre>
+<pre><code>## [1] 1</code></pre>
+</div>
+<div id="support-vector-machine-svm" class="section level3">
+<h3>SUPPORT VECTOR MACHINE (SVM)</h3>
+<p>This next section is going to use the same data and same training and test sets used above for the ANN. The first svm model using the “vanilladot” kernel produces a similar result to the ANN. The training error is 0, meaning this is 100% accurate. The second kernel is the rbfdot and produces error of 0.000352.For the rbfdot the table is almost exactly the same for the ANN but with 1 false negative slipping its way in to the model. 1276 TP/ 1160 TN. Where the ANN had 1277 TP and 1161 TN. The third kernel is the polydot and it too produces an error of 0]. At this point we don’t know why as it is expected to have different outcomes for each kernel and this is not the case. Are there some errors somewhere not being detected or is this in fact a valid out come. We will run a 10 fold cross validation to to see what is going on with the model. The CART output shows the correct 5687 samples with 94 predictors and the tow classes (e) and (p). The 10-fold cross validation was run 5 times and the cp0.044 model had the highest accuracy of 0.957 and kappa of 0.91. These seem very reasonable and less than a perfect 1. Of interest for comparison is the varImp which gives 9 with an overall and the remaining with 0. We see Odor-neutral at the top with ring-type-pendant, odor-foul, and two stalk-surface variables and stalk-root-club showing value for this model. The good thing is there is some similarity between ANN and SVM with o.n, o.f, ssar.k, gz.n, and sp.c.r all were important in the model for both ANN and SVM. At this point maybe it could help to reduce the variables down to the top 10 combined from both models and rerun on those to see if there is a difference or run on a different set of data that the model hasn’t seen to predict if it is in fact highly accurate.</p>
+<pre class="r"><code>#SVM
+library(e1071)
+library(kernlab)</code></pre>
+<pre class="r"><code>set.seed(6789)
+mr_classifier &lt;- ksvm(type ~., data = mr_train, kernel = &quot;vanilladot&quot;)</code></pre>
+<pre><code>##  Setting default kernel parameters</code></pre>
+<pre class="r"><code>mr_classifier</code></pre>
+<pre><code>## Support Vector Machine object of class &quot;ksvm&quot; 
+## 
+## SV type: C-svc  (classification) 
+##  parameter : cost C = 1 
+## 
+## Linear (vanilla) kernel function. 
+## 
+## Number of Support Vectors : 161 
+## 
+## Objective Function Value : -0.4639 
+## Training error : 0</code></pre>
+<pre class="r"><code>mr_predictions &lt;- predict(mr_classifier, mr_test)
+head(mr_predictions)</code></pre>
+<pre><code>## [1] p e e p e p
+## Levels: e p</code></pre>
+<pre class="r"><code>table(mr_predictions, mr_test$type)</code></pre>
+<pre><code>##               
+## mr_predictions    e    p
+##              e 1263    0
+##              p    0 1174</code></pre>
+<pre class="r"><code>agreement &lt;- mr_predictions == mr_test$type
+table(agreement)</code></pre>
+<pre><code>## agreement
+## TRUE 
+## 2437</code></pre>
+<pre class="r"><code>prop.table(table(agreement))</code></pre>
+<pre><code>## agreement
+## TRUE 
+##    1</code></pre>
+<pre class="r"><code>#rbfdot kernal
+mr_classifier_rbfdot &lt;- ksvm(type ~., data = mr_train, kernel = &quot;rbfdot&quot;)
+mr_classifier_rbfdot</code></pre>
+<pre><code>## Support Vector Machine object of class &quot;ksvm&quot; 
+## 
+## SV type: C-svc  (classification) 
+##  parameter : cost C = 1 
+## 
+## Gaussian Radial Basis kernel function. 
+##  Hyperparameter : sigma =  0.00850323450395857 
+## 
+## Number of Support Vectors : 880 
+## 
+## Objective Function Value : -46.1997 
+## Training error : 0.000176</code></pre>
+<pre class="r"><code>mr_predictions__rbfdot &lt;- predict(mr_classifier_rbfdot, mr_test)
+head(mr_predictions__rbfdot)</code></pre>
+<pre><code>## [1] p e e p e p
+## Levels: e p</code></pre>
+<pre class="r"><code>table(mr_predictions__rbfdot, mr_test$type)</code></pre>
+<pre><code>##                       
+## mr_predictions__rbfdot    e    p
+##                      e 1263    3
+##                      p    0 1171</code></pre>
+<pre class="r"><code>agreement_rbfdot &lt;- mr_predictions__rbfdot == mr_test$type
+table(agreement_rbfdot)</code></pre>
+<pre><code>## agreement_rbfdot
+## FALSE  TRUE 
+##     3  2434</code></pre>
+<pre class="r"><code>prop.table(table(agreement_rbfdot))</code></pre>
+<pre><code>## agreement_rbfdot
+##       FALSE        TRUE 
+## 0.001231022 0.998768978</code></pre>
+<pre class="r"><code># polydot kernal
+mr_classifier_poly &lt;- ksvm(type ~., data = mr_train, kernel = &quot;polydot&quot;)</code></pre>
+<pre><code>##  Setting default kernel parameters</code></pre>
+<pre class="r"><code>mr_classifier_poly</code></pre>
+<pre><code>## Support Vector Machine object of class &quot;ksvm&quot; 
+## 
+## SV type: C-svc  (classification) 
+##  parameter : cost C = 1 
+## 
+## Polynomial kernel function. 
+##  Hyperparameters : degree =  1  scale =  1  offset =  1 
+## 
+## Number of Support Vectors : 202 
+## 
+## Objective Function Value : -0.4639 
+## Training error : 0</code></pre>
+<pre class="r"><code>mr_predictions_poly &lt;- predict(mr_classifier_poly, mr_test)
+head(mr_predictions_poly)</code></pre>
+<pre><code>## [1] p e e p e p
+## Levels: e p</code></pre>
+<pre class="r"><code>table(mr_predictions_poly, mr_test$type)</code></pre>
+<pre><code>##                    
+## mr_predictions_poly    e    p
+##                   e 1263    0
+##                   p    0 1174</code></pre>
+<pre class="r"><code>agreement_poly &lt;- mr_predictions_poly == mr_test$type
+table(agreement_poly)</code></pre>
+<pre><code>## agreement_poly
+## TRUE 
+## 2437</code></pre>
+<pre class="r"><code>prop.table(table(agreement_poly))</code></pre>
+<pre><code>## agreement_poly
+## TRUE 
+##    1</code></pre>
+<pre class="r"><code># SVM Cross Validate
+control &lt;- trainControl(method=&quot;repeatedcv&quot;, number=10, repeats = 5)</code></pre>
+<pre class="r"><code>set.seed(7495)
+
+cl &lt;- makePSOCKcluster(6)
+registerDoParallel(cl)
+
+modelsvm &lt;- train(type ~., 
+                  data = mr_train,
+                  method=&quot;rpart&quot;, 
+                  preProcess=&quot;scale&quot;, 
+                  trControl=control)
+stopCluster(cl)</code></pre>
+<pre class="r"><code>modelsvm</code></pre>
+<pre><code>## CART 
+## 
+## 5687 samples
+##   94 predictor
+##    2 classes: &#39;e&#39;, &#39;p&#39; 
+## 
+## Pre-processing: scaled (94) 
+## Resampling: Cross-Validated (10 fold, repeated 5 times) 
+## Summary of sample sizes: 5118, 5118, 5118, 5118, 5119, 5119, ... 
+## Resampling results across tuning parameters:
+## 
+##   cp          Accuracy   Kappa    
+##   0.05069292  0.9542847  0.9085469
+##   0.12472648  0.9105378  0.8217678
+##   0.76002918  0.6950380  0.3729620
+## 
+## Accuracy was used to select the optimal model using the largest value.
+## The final value used for the model was cp = 0.05069292.</code></pre>
+<pre class="r"><code>importance &lt;- varImp(modelsvm, scale = FALSE)</code></pre>
+<pre class="r"><code>impM = data.frame(importance$importance)
+impM$Vars = row.names(impM)
+impM[order(-impM$Overall),][1:10,]</code></pre>
+<pre><code>##          Overall   Vars
+## o.n    1736.2559    o.n
+## rt.p   1221.7021   rt.p
+## o.f    1096.6735    o.f
+## ssar.k  958.4037 ssar.k
+## ssbr.k  908.2624 ssbr.k
+## sr.c    511.6481   sr.c
+## b.t     484.0714    b.t
+## o.l     431.1686    o.l
+## h.m     252.5091    h.m
+## csh.c     0.0000  csh.c</code></pre>
+<pre class="r"><code>plot(varImp(modelsvm), top =10)</code></pre>
+<p><img src="/post/2018-06-10-artificial-neural-network-and-support-vector-machine-analysis_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<pre class="r"><code>library(rpart)</code></pre>
+<pre class="r"><code>model.rp &lt;- rpart(type ~., data = mr_train)
+model.rp$variable.importance</code></pre>
+<pre><code>##        o.n       gs.w       sr.c        o.f       gz.n     ssar.k       rt.p 
+## 1736.25595  513.92930  511.64807  499.62666  464.09134  425.00248  415.76329 
+##        h.m       sr.r     ssbr.y        p.n        o.l      spc.r        b.t 
+##  280.04675  250.05114  250.05114  228.27376  179.99964   95.67448   73.98649 
+##        o.c       ss.t       gc.k      spc.k      csh.f      csh.x        o.m 
+##   73.98649   73.98649   65.59591   39.52703   35.47297   35.47297   31.48604 
+##       gc.r      spc.u 
+##   24.87537   17.48186</code></pre>
+</div>
