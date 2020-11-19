@@ -20,5 +20,14 @@
       <description>IntroductionThis article will present a machine learning problem and the concept behind solving the problem. The project will go into detail about the early exploratory steps and build a machine learning model that can be used in production to categorize data. This project is to categorize seven Rocky Mountain tree types found in the forests. In this project, we will use old legacy data from the 1990s and use modern machine learning methods to categorize the data.</description>
     </item>
     
+    <item>
+      <title>Random Forest and Decision Tree Analysis</title>
+      <link>/post/2018/06/01/random-forest-and-decision-tree-analysis/</link>
+      <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/06/01/random-forest-and-decision-tree-analysis/</guid>
+      <description>Decision Tree and Random ForestThis analysis will utilize the data set from https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv and the purpose is to find the differences between the decision tree method and the random forest method for predicting wine quality from the 11 variables that indicate each wine’s chemical readings. The 12th variable is the quality rating given to these 1599 wines and is used as the predictor in the models. The quality has ratings from 3 to 8.</description>
+    </item>
+    
   </channel>
 </rss>

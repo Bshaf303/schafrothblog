@@ -423,6 +423,16 @@
   </url>
   
   <url>
+    <loc>/tags/decision-tree/</loc>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/06/01/random-forest-and-decision-tree-analysis/</loc>
+    <lastmod>2018-06-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/alogrithms/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
   </url>

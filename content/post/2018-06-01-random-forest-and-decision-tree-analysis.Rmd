@@ -1,0 +1,213 @@
+---
+title: Random Forest and Decision Tree Analysis
+author: Bryan
+date: '2018-06-01'
+slug: random-forest-and-decision-tree-analysis
+categories:
+  - Machine Learning
+  - R Programming
+tags:
+  - algorithms
+  - Random Forest
+  - machine learning
+  - decision tree
+---
+
+### Decision Tree and Random Forest
+
+This analysis will utilize the data set from https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv and the purpose is to find the differences between the decision tree method and the random forest method for predicting wine quality from the 11 variables that indicate each wine's chemical readings. The 12th variable is the quality rating given to these 1599 wines and is used as the predictor in the models. The quality has ratings from 3 to 8. To make the ratings work in the models there will be three groups "Fair" = (3-4), "Satisfactory" = (5-6), and "Excellent" = (7-8). 
+
+```{r loadLibs, message=FALSE, warning=FALSE}
+# Load All Libraries
+library(C50)
+library(gmodels)
+library(randomForest)
+library(rpart)
+library(rpart.plot)
+library(caret)
+
+```
+
+
+```{r loadData}
+#Load Data set
+winequality.red <- read.csv("https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv", row.names=NULL, sep=";")
+vino1 <- winequality.red
+```
+
+Glancing over the summary table we can see the quality is 3 to 8. The density is interesting because it is approximately 1. Maybe this is an important measure or maybe not, we will leave it in for now. The total.sulfur.dioxide is also interesting because it the max=289 while the mean=46.47 indicates some outlier values, but again lets keep the data to gather for now. 
+
+```{r}
+summary(vino1)
+```
+
+Here the quality variable is grouped into categories because we can see in the barplot that there is a three way split in the quality ratings. Fair, Satisfactory, and Excellent will be used as the dependent variable. From the graph we can see the Satisfactory quality is about 82% of the data, Excellent is approximately 14% of the data and Fair is 0.4% of the data. In this example we have a good amount of data to indicate a normal quality wine in the middle. The Excellent wines are a metric that may be something we aim for if producing high quality wines. While the fair wines don't have much data and possibly a good measure of what not to do when making a wine. 
+
+
+```{r}
+barplot(table(vino1$quality))
+#group quality variable into 3
+vino1$quality[vino1$quality >= 7] <- "Excellent"
+vino1$quality[vino1$quality >= 5 & vino1$quality <=6] <- "Satisfactory"
+vino1$quality[vino1$quality <= 4] <- "Fair"
+#change quality to factor
+vino1$quality <- as.factor(vino1$quality)
+#view data set
+str(vino1$quality)
+table(vino1$quality)
+barplot(table(vino1$quality))
+```
+
+### Part 1 - Decision Tree with C5.0 package
+
+The first section is going to use the C5.0 package to model a decision tree. The data is split 70%/30% train/test for this project. The data is randomly sampled into training and test objects. In the training set we can see 83% Satisfactory, 13% Excellent, and 0.4% fair which are close to representing the data split mentioned earlier. The C5.0 model shows 1119 samples and the 11 predictors with a tree size of 54. The output is a bit lengthy and toward the end we can see the error at 5.8% which doesn't seem too bad, but we will try to improve on later. The accuracy would be (106+21+927)/1119= 94% over the training data. The attributes usage is interesting and shows the top two attributes alcohol (100%) and volatile.acidity(96.25%). Then a sharp drop to sulfates at 34.5%. As mentioned earlier the density was about 1 and here we see its last for attributes at 2.32%. The attribute usage chart could possibly be used to limit variables in future decision trees by dropping the bottom four under 10%. For now we will proceed through the exercise with all the attributes to see what happens. 
+
+```{r}
+###############Decision Tree in C5.0
+set.seed(1234)
+train_sample <- sample(1599, 1119) #70/30 data split
+str(train_sample) #check sample
+vino_train <- vino1[train_sample, ] #training set
+vino_test <- vino1[-train_sample, ] #testing set
+prop.table((table(vino_train$quality))) #Check split
+```
+
+```{r}
+#library(C50)
+set.seed(765)
+vino_model <- C5.0(vino_train[-12], vino_train$quality) #training set less quality variable
+```
+
+```{r}
+vino_model #check model
+```
+
+This shows the predictive model and the cross table produces a summary. The model accuracy is 83% (40+1+359)/(480). The false positive of 34 and the false negative of 19 show there could be a fuzzy area between Excellent and Satisfactory. There is also a discrepancy between Fair and Satisfactory. With satisfactory being a large grouping there is room for error but it would be nice to have more accuracy on the higher end wines in the Excellent category. 
+
+```{r}
+vino_pred <- predict(vino_model, vino_test) #run prediction
+#library(gmodels)
+#Table outcome
+CrossTable(vino_test$quality, vino_pred, prop.chisq = FALSE, prop.c = FALSE, 
+           prop.r = FALSE, dnn = c('actual quality', 'predicted quality'))
+confusionMatrix(vino_test$quality, vino_pred, dnn = c('actual quality', 'predicted quality'))
+```
+
+The next part of the C5.0 model is to try to improve the accuracy by increasing the number of trials to 10, which is the base point for most boosted models. The output is rather long. The Attribute usage is now showing 100% usage of alcohol, sulphates (from the first model) and includes density, total.sulfur.dioxide, and volatile.acidity. The remaining are in the 90% range with pH down to 86.6%. Thus with 10 trials more chances for the attributes to be utilized.The model classified 99% or a 0.71% error rate on the training data which is a big improvement from the 5.8% error we had earlier with one pass over the data. The accuracy only climbed up to 86% with 10 trials. A small gain but worth noting and looking further into possibly increasing the trials with more time for analysis. Not sure what to do to increase accuracy, the error rate over the training data is really low with the boost. 
+
+```{r}
+vino_boost <- C5.0(vino_train[-12], vino_train$quality, trials = 10) #try to improve
+vino_boost
+```
+
+```{r}
+vino_boost$boostResults # long summary
+```
+
+```{r}
+set.seed(354)
+vino_boost_pred <- predict(vino_boost, vino_test) #run prediction on improved model
+```
+
+```{r}
+confusionMatrix(vino_test$quality, vino_boost_pred, dnn = c('actual', 'predicted'))
+```
+
+This section attempts to add penalties to the model errors in the false positive and false negative values. Its didn't work out that well and reduced the accuracy down to 82.9%. The errors where slightly increased in the false positives and decreased in the false negatives.Maybe the penalty values need to be changed a bit for this to work. Further analysis is needed in this error correction section.  
+
+```{r}
+matrix_dimensions <- list(c("Excellent", "Fair", "Satisfactory"), c("Excellent", "Fair", "Satisfactory"))
+names(matrix_dimensions) <- c("predicted", "actual")
+matrix_dimensions
+##### doesnt seem to make a difference
+error_cost <- matrix(c(0,1,4,1,0,4,4,1,0), nrow = 3, dimnames = matrix_dimensions)
+error_cost
+vino_cost <- C5.0(vino_train[-12], vino_train$quality, costs = error_cost)
+vino_cost_pred <- predict(vino_cost, vino_test)
+CrossTable(vino_test$quality, vino_cost_pred, prop.chisq = FALSE, prop.c = FALSE, 
+           prop.r = FALSE, dnn = c('actual quality', 'predicted quality'))
+confusionMatrix(vino_test$quality, vino_cost_pred, dnn = c('actual quality', 'predicted quality'))
+```
+
+### Part 2 - Decision Tree
+
+```{r}
+#Decision Tree in rpart
+#library(rpart)
+set.seed(8765)
+#split data into 70/30
+ind <- sample(1599, 1119) #70/30 data split
+vinoDT_train <- vino1[ind, ] #training set
+vinoDT_test <- vino1[-ind, ] #testing set
+#run rpart
+vinoDT <- rpart(quality ~ ., method = "class", data = vino1, control = rpart.control(minsplit=10))
+plotcp(vinoDT)
+```
+
+The graph above shows the plot of the cost complexity parameters and indicates where pruning off of the splits that are not worthwhile. Any split that does not improve the fit by the cp will be pruned off. The graph shows where the size of the tree is higher at 14 the relative classification error rate is lower on the training set. This graph doesn't show the optimal level before the error grows again. The table in the summary also shows these figures and describes the best place to cut off the tree. The graph shows a convenient line at approx 8 for optimal cut off. 
+
+```{r}
+((vinoDT$cptable))
+```
+
+```{r}
+attributes(vinoDT)
+```
+
+```{r}
+summary(vinoDT$frame ) #too long
+```
+
+```{r}
+#library(rpart.plot)
+rpart.plot(vinoDT, main="Wine Decision Tree") #plot tree
+
+optimal <- which.min(vinoDT$cptable[,"xerror"])
+cp <- vinoDT$quality[optimal, "CP"]
+#Tree Pruning 
+vinoDT_prune <- prune(vinoDT, cp=vinoDT$cptable[which.min(vinoDT$cptable[,"xerror"]),"CP"])
+```
+
+```{r}
+plotcp(vinoDT_prune)
+rpart.plot(vinoDT_prune, main="Wine Decision Tree") #plot tree
+```
+
+Here the accuracy of the model prediction is up to 88%. This method brought down the error rate in the false positive and false negative areas 34 down to 24 and 19 down to 11. A good result even above the C5.0 boosted output. This model optimized the error rate by cutting off the tree in the 8 area. 
+
+```{r}
+vinoDT_pred <- predict(vinoDT_prune, newdata = vinoDT_test, type = "class")
+confusionMatrix(vinoDT_test$quality, vinoDT_pred, dnn = c('actual quality', 'predicted quality'))
+plot(vinoDT_pred ~ quality, data=vinoDT_test, xlab="Actual", ylab = "Predicted")
+```
+
+### Random Forest
+
+```{r}
+#Random Forest 
+#library(randomForest)
+#Split data 70/30
+set.seed(9876)
+ind <- sample(1599, 1119) #70/30 data split
+trainData <- vino1[ind, ] #training set
+testData <- vino1[-ind, ] #testing set
+rf <- randomForest(quality ~., data = trainData, ntree=100, proximity=TRUE)
+table(predict(rf), trainData$quality)
+((rf)) #print 
+attributes(rf)
+plot(rf)
+```
+The random forest shows alcohol at 50.67 and volatile.acidity at 39.99 under the MeanDecrease which is similar to the decision tree is highest ranking. Some of the other variables are also similar we see pH not at the lowest at 24.68 but fee.sulfur.dioxide is lowest at 21.55 in this model. The preceding graph demonstrates the same numbers from the table. 
+
+```{r}
+importance(rf)
+varImpPlot(rf)
+vinoPred <- predict(rf, newdata = testData, type = "class")
+table(vinoPred, testData$quality)
+```
+
+This model shows an accuracy of 87% which is an increase from other models used. 
+
+```{r}
+confusionMatrix(testData$quality, vinoPred,dnn = c('actual', 'predicted'))
+```
