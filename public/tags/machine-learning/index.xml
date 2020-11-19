@@ -30,6 +30,15 @@
     </item>
     
     <item>
+      <title>K-Means - Hierarchial Cluster Analysis</title>
+      <link>/post/2018/06/17/k-means-hierarchial-cluster-analysis/</link>
+      <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/06/17/k-means-hierarchial-cluster-analysis/</guid>
+      <description>K-MeansThis project will use the Wholesale customer Data Set from: https://archive.ics.uci.edu/ml/datasets/Wholesale+customers. The data has 440 orbs and 8 variables. The data has the Channel and Region as integers but they are categorical in nature with 2 channels and 3 regions. We think this may need to be taken out of the analysis but will leave them in for now. A general observation about the variables there are outliers in the 6 major variables: fresh, milk, grocery, frozen, detergents_paper, delicassen.</description>
+    </item>
+    
+    <item>
       <title>K-Nearest Neighbor (KNN) - Heart Disease Dataset</title>
       <link>/post/2018/05/20/k-nearest-neighbor-knn-heart-disease-dataset/</link>
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>

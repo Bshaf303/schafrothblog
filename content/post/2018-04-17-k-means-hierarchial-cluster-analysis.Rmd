@@ -1,0 +1,328 @@
+---
+title: K-Means - Hierarchial Cluster Analysis
+author: Bryan
+date: '2018-06-17'
+slug: k-means-hierarchial-cluster-analysis
+categories:
+  - Machine Learning
+  - R Programming
+tags:
+  - algorithms
+  - machine learning
+  - k-means
+  - hierarchial clustering
+  - hca
+---
+
+### K-Means Analysis
+
+This project will use the Wholesale customer Data Set from: https://archive.ics.uci.edu/ml/datasets/Wholesale+customers. The data has 440 orbs and 8 variables. The data has the Channel and Region as integers but they are categorical in nature with 2 channels and 3 regions. We think this may need to be taken out of the analysis but will leave them in for now. A general observation about the variables there are outliers in the 6 major variables: fresh, milk, grocery, frozen, detergents_paper, delicassen. There are plot of each variable. In addition, to the outliers it is noted that the data is dense at the bottom of each of the variable graphs. "Fresh" seems to be less dense than the rest and "Delicassen" is the thickest density of points at the bottom. Initial thoughts are the clusters are going to be somewhere at the bottom of the graph.   
+
+```{r loadlibraries, message=FALSE, warning=FALSE}
+library(stats)
+library(fpc)
+library(factoextra)
+library(cluster)
+library(fpc)
+library(NbClust)
+library(ggplot2)
+```
+
+
+```{r loaddata, message=FALSE, warning=FALSE, cache=TRUE}
+Wholesale_customers_data = read.csv("https://archive.ics.uci.edu/ml/machine-learning-databases/00292/Wholesale%20customers%20data.csv", row.names=NULL)
+
+df <- Wholesale_customers_data
+```
+
+```{r}
+ls(df)
+str(df)
+summary(df)
+plot(df$Fresh)
+plot(df$Milk)
+plot(df$Grocery)
+plot(df$Frozen)
+plot(df$Detergents_Paper)
+plot(df$Delicassen)
+table(df$Channel)
+table(df$Region)
+```
+
+```{r}
+groc <- df
+```
+
+The data needs to be normalize or scaled since we have values of 1 to 112,151. It was assumed early on that the normalization function could be used, however, all of the different tutorials used the scale function which would give some values below 0 up to 16.45. This is not known why it is important to have negative values. Normalize would place everything in 0 to 1. Perhaps this would be too dense of the points?
+
+```{r}
+# normalize <- function(x) {return ((x - min(x)) / (max(x) - min(x)))}
+#df_z <- as.data.frame(lapply(df[c("Fresh", "Milk","Grocery","Frozen", "Detergents_Paper", "Delicassen")], normalize))
+df_z <- as.data.frame(lapply(groc, scale))
+summary(df_z)
+```
+
+```{r}
+plot(df_z$Channel, df_z$Fresh, main="Channel and Fresh")
+plot(df_z$Region, df_z$Fresh, main="Region and Fresh")
+plot(df_z$Fresh, df_z$Grocery, main="Fresh and Grocery")
+plot(df_z$Frozen, df_z$Grocery, main="Frozen and Grocery")
+plot(df_z$Fresh, df_z$Delicassen, main="Fresh and Delicassen")
+```
+
+The K-Means is started here with a base of 2 clusters. and produces a 26.2% between sum of squares and total sum of squares ratio. We then look at the objects in the model and plot. In the first plot the two cluster points are close in the bottom right corner "X", as speculated. Then to compare 5, 8 clusters are presented. The 5 cluster give a ratio of 56.2% and the 8 cluster gives a ratio of 69.7% which during testing was as high as 71%. Thus the within-cluster sum of squares of 26.2% is the lowest and better cluster. 
+
+
+```{r}
+set.seed(5678)
+km.out <- kmeans(df_z, 2, nstart = 20)
+km.out
+```
+
+```{r}
+plot(df_z$Fresh, col=(km.out$cluster+3), main="K-means clustering results with K=2", xlab="", ylab="", pch=1.25, cex=1)
+points(km.out$centers[,c("Fresh", "Frozen")], pch=1, cex=3, col="red", lwd=2)
+```
+
+```{r}
+set.seed(5679)
+km.out <- kmeans(df_z, 5, nstart = 20)
+km.out
+```
+
+```{r}
+plot(df_z$Fresh, col=(km.out$cluster+1), main="K-means clustering results with K=5", xlab="", ylab="", pch=1.25, cex=1)
+points(km.out$centers[,c("Fresh", "Frozen")], pch=1, cex=3, col="red", lwd=2)
+```
+
+```{r}
+set.seed(5671)
+km.out <- kmeans(df_z, 8, nstart = 20)
+km.out
+```
+
+```{r}
+set.seed(4567)
+km.out <- kmeans(df_z, 8, nstart = 50)
+km.out
+```
+
+Here we wanted to see what would happen if the "Channel" and "Region" are dropped and just the remaining 6 variables are used. And 2 clusters dropped the WCSS down to 26% even with cluster centers still in bottom left corner. The other clusters; k=6 has a 65.1% ratio sum of squares, and the k=8 increased WCSS to 71.7%. Thus 2 clusters maybe the best option. However, everything is compressed down in the bottom left corner, this seems hard to see what is going on visually in a scatter plot. Maybe not the best data set to use for an introductory exercise. We will use one more method to determine the optimal cluster number below. 
+
+```{r}
+groc <- df[3:8]
+df_t <- as.data.frame(lapply(groc, scale))
+```
+
+```{r}
+set.seed(4568)
+km.out1 <- kmeans(df_t, 2, nstart = 20)
+km.out1
+```
+
+```{r}
+plot(df_z$Fresh, col=(km.out1$cluster+3), main="K-means clustering results with K=2", xlab="", ylab="", pch=1.25, cex=1)
+points(km.out1$centers[,c("Fresh", "Frozen")], pch=1, cex=3, col="red", lwd=2)
+```
+
+```{r}
+set.seed(4569)
+km.out1
+```
+
+```{r}
+plot(df_z$Fresh, col=(km.out1$cluster+2), main="K-means clustering results with K=6", xlab="", ylab="", pch=1, cex=1)
+```
+
+```{r}
+set.seed(4562)
+km.out1 <- kmeans(df_t, 6, nstart = 20)
+km.out1
+```
+
+```{r}
+set.seed(4561)
+km.out1 <- kmeans(df_t, 8, nstart = 20)
+km.out1
+```
+
+```{r}
+plot(df$Fresh, df$Frozen, col=(km.out1$cluster+2), main="K-means clustering results with K=6", xlab="", ylab="", pch=19, cex=1)
+```
+
+```{r}
+plot(df[c("Fresh", "Milk")], col=km.out1$cluster)
+points(km.out1$centers[,c("Fresh", "Milk")], pch=1, cex=3, col="red", lwd=2)
+```
+
+```{r}
+plot(df[c("Fresh", "Frozen")], col=km.out1$cluster)
+points(km.out1$centers[,c("Fresh", "Frozen")], pch=1, cex=3, col="red", lwd=2)
+```
+
+Here we run the full scaled data and check 2 to 10 clusters for the best option. The graph is clear with a steady decline down from 2. the WCSS decreases. The elbow of the silhouette width plot is interesting because it drops after 2 clusters but bounces back up to 4 before dropping again. This unknown why it does this but we are still in the 2 cluster option. But this test is telling us 4 clusters is the optimal value. If it says 4 then we will run the k=4 and produce a WCSS 47.8% which doesn't seem better that 2 clusters at 26% WCSS. The center of the points show 3 in the bottom left which is expected and one up in the top left which is completely unexpected and confusing. Something doesn't seem right here and it is unknown what that is.  
+
+```{r}
+nk <- 2:10
+set.seed(22)
+WSS <- sapply(nk, function(k) {kmeans(df_z, centers = k)$tot.withinss})
+WSS
+```
+
+```{r}
+plot(nk, WSS, type="l", xlab="number of k", ylab="within sum of squares")
+```
+
+```{r}
+SW <- sapply(nk, function(k) {cluster.stats(dist(df_z), kmeans(df_z,centers=k)$cluster)$avg.silwidth})
+SW
+```
+
+```{r}
+plot(nk, SW, type="l", xlab="number ofclusters", ylab="average silhouette width")
+```
+
+```{r}
+nk[which.max(SW)]
+km.out <- kmeans(df_z, 4, nstart = 20)
+km.out
+```
+
+```{r}
+plot(df_z$Fresh, col=(km.out$cluster+2), main="K-means clustering results with K=4", xlab="", ylab="", pch=19, cex=0.7)
+points(km.out$centers[,c("Fresh", "Frozen")], pch=1, cex=3, col="red", lwd=2)
+```
+
+### Hierarchial Cluster Analysis
+
+This exercise produces a mess of a dendrograph but the general shape of how it breaks down the data is somewhat legible by shapes only. Complete linkage seems the best. Single linkage is very hard to read. 
+
+```{r}
+set.seed(89)
+km <- kmeans(df_z, 4, nstart = 20)
+hc.complete <- hclust(dist(df_z), method= "complete")
+hc.average <-  hclust(dist(df_z), method= "average")
+hc.single <- hclust(dist(df_z), method= "single")
+#Bad display par(mfrow =c(1,3))
+```
+
+```{R}
+plot(hc.complete, main="Complete Linkage", xlab ="", sub ="", cex =0.05)
+```
+```{r}
+plot(hc.average, main="Average Linkage", xlab ="", sub ="", cex =0.05)
+```
+```{r}
+plot(hc.single, main="Single Linkage", xlab ="", sub ="", cex =0.01)
+```
+
+```{r cutTree, echo=FALSE}
+cutree(hc.complete, 2)
+cutree(hc.average, 2)
+cutree(hc.single, 2)
+cutree(hc.single, 4)
+```
+```{r}
+xsc <- scale(df_z)
+```
+
+```{r}
+plot(hclust(dist(xsc), method= "complete"), main= "Hierarchical Clustering with Scaled Features", cex =0.01)
+```
+
+This graph uses complete linkage and produces a legible dendogram. The WCSS is 1846 and average silwidth of 0.34. 
+Comparatively, the single to complete give 2918 and 3159 WCSS and ASW 0.66 and 0.82. Is this good? More descriptive direction is needed on this output. I guess its good?
+
+```{r}
+x <- matrix(rnorm (30*3), ncol =3)
+dd <- as.dist(1-cor(t(x)))
+plot(hclust(dd, method= "complete"), main= "Complete Linkage with Correlation - Based Distance", xlab="", sub="")
+hc_complete <- cutree(hc.complete, 2)
+hc_single <- cutree(hc.single, 4)
+#library fpc
+cs <- cluster.stats(dist(df_z), km$cluster)
+cs[c("within.cluster.ss", "avg.silwidth")]
+sapply(list(kmeans=km$cluster, hc_single=hc_single, hc_complete=hc_complete), function(c) cluster.stats(dist(df_z), c)[c("within.cluster.ss", "avg.silwidth")])
+```
+
+This method is an alternate to the one above. Maybe better graphing and understanding of what is happening can be gained from this method. The first part determines the optimal number of clusters. We will also drop the Channel and Region variables for this section. This method is straight forward and clearly shows 9 proposed as 2 is the best number of clusters. The data spells it out and the bar chart clearly shows us 2 clusters is optimal with a 3 the next optimal. 
+
+#### Optional Alternative Method
+
+```{r}
+df_hc <- df_z[3:8]
+str(df_hc)
+nb <- NbClust(df_hc, distance="euclidean", min.nc = 2, max.nc = 10, method = "complete", index = "all")
+fviz_nbclust(nb) + theme_minimal()
+km.res <- eclust(df_hc, "kmeans", k = 2, nstart=25, graph = FALSE)
+km.res$cluster
+```
+
+The cluster plot is now more legible in this graphic. k=2 and the center of cluster 1 is a red dot and the center of cluster 2 is the blue triangle.
+
+```{r}
+fviz_cluster(km.res, geom="point", ellipse.type="norm")
+pam.res <- eclust(df_hc, "pam", k=2, graph=FALSE)
+pam.res$cluster
+```
+
+```{r}
+fviz_cluster(pam.res, geom="point", ellipse.type="norm")
+res.hc <- eclust(df_hc, "hclust", k=2, method="complete", graph=FALSE)
+head(res.hc$cluster, 10)
+```
+
+This dendogram is better than before with some color added. However the cluster 1 is stuffed in the left corner. 
+
+```{r}
+fviz_dend(res.hc, rect=TRUE, show_labels=FALSE)
+```
+
+```{r}
+sil <- silhouette(km.res$cluster, dist(df_hc))
+head(sil[,1:3], 10)
+```
+
+
+```{r}
+fviz_silhouette(sil)
+```
+
+```{r}
+si.sum <- summary(sil)
+si.sum$clus.avg.widths
+si.sum$avg.width
+si.sum$clus.sizes
+```
+
+```{r}
+fviz_silhouette(km.res)
+```
+
+```{r}
+silinfo <- km.res$silinfo
+```
+
+```{r}
+names(silinfo)
+```
+
+```{R}
+head(silinfo$widths)
+```
+
+```{r}
+silinfo$clus.avg.widths
+silinfo$avg.width
+km.res$size
+dd <- dist(df_hc, method = "euclidean")
+km_stats <- cluster.stats(dd, km.res$cluster)
+km_stats$within.cluster.ss
+km_stats$clus.avg.silwidths
+```
+
+The Dunn statistic is 0.0189 and Dunn2 1.07. 
+
+```{r}
+km_stats
+```

@@ -1,0 +1,12 @@
+base
+methods
+datasets
+utils
+grDevices
+graphics
+stats
+fpc
+ggplot2
+factoextra
+cluster
+NbClust

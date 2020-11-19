@@ -378,6 +378,26 @@
   </url>
   
   <url>
+    <loc>/tags/hca/</loc>
+    <lastmod>2018-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/hierarchial-clustering/</loc>
+    <lastmod>2018-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/k-means/</loc>
+    <lastmod>2018-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/06/17/k-means-hierarchial-cluster-analysis/</loc>
+    <lastmod>2018-06-17T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/alogrithms/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
   </url>
