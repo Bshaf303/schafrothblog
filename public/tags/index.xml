@@ -230,9 +230,45 @@
     <item>
       <title>Data Exploration</title>
       <link>/tags/data-exploration/</link>
-      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/data-exploration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>data wrangling</title>
+      <link>/tags/data-wrangling/</link>
+      <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/data-wrangling/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hca</title>
+      <link>/tags/hca/</link>
+      <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/hca/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>hierarchial clustering</title>
+      <link>/tags/hierarchial-clustering/</link>
+      <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/hierarchial-clustering/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R techniques</title>
+      <link>/tags/r-techniques/</link>
+      <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/r-techniques/</guid>
       <description></description>
     </item>
     
@@ -255,29 +291,11 @@
     </item>
     
     <item>
-      <title>R techniques</title>
-      <link>/tags/r-techniques/</link>
-      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/r-techniques/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>boxplots</title>
       <link>/tags/boxplots/</link>
       <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/boxplots/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>data wrangling</title>
-      <link>/tags/data-wrangling/</link>
-      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/data-wrangling/</guid>
       <description></description>
     </item>
     
@@ -350,24 +368,6 @@
       <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/reinforcement-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>hca</title>
-      <link>/tags/hca/</link>
-      <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/hca/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>hierarchial clustering</title>
-      <link>/tags/hierarchial-clustering/</link>
-      <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/hierarchial-clustering/</guid>
       <description></description>
     </item>
     

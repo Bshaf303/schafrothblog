@@ -6,10 +6,19 @@
     <description>Recent content in R techniques on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 04 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/r-techniques/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Hierarchical Clustering (HCA)</title>
+      <link>/post/2018/08/04/hierarchical-clustering-hca/</link>
+      <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/08/04/hierarchical-clustering-hca/</guid>
+      <description>Hierarchical ClusteringThe hierarchical agglomerative clustering starts with each observation as a cluster and pairs two at a time until all clusters are merged into one single cluster. The number of clusters is not known or specified in advance. The distance between all pairs of points in the data is recorded. There is a dendrogram (upside down tree structure) that is the output of the grouping of clusters. It represents and shows how many clusters were found in the data.</description>
+    </item>
     
     <item>
       <title>R Analysis - Plotting Graphics</title>

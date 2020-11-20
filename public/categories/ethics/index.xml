@@ -65,5 +65,14 @@
       <description>The Association for Computing Machinery (ACM) has a code of ethics and professional conduct guidelines (ACM, 2018). The &amp;ldquo;code&amp;rdquo; is for people that work in computing and a guide to consider when decision making. Section 2.9 outlines the need to design systems that are very secure and recognizing that breaches of computer systems can be malevolent to many people and organizations (ACM, 2018). The ACM states not to roll out systems without thorough testing of security exploits (2018).</description>
     </item>
     
+    <item>
+      <title>Hierarchical Clustering (HCA)</title>
+      <link>/post/2018/08/04/hierarchical-clustering-hca/</link>
+      <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/08/04/hierarchical-clustering-hca/</guid>
+      <description>Hierarchical ClusteringThe hierarchical agglomerative clustering starts with each observation as a cluster and pairs two at a time until all clusters are merged into one single cluster. The number of clusters is not known or specified in advance. The distance between all pairs of points in the data is recorded. There is a dendrogram (upside down tree structure) that is the output of the grouping of clusters. It represents and shows how many clusters were found in the data.</description>
+    </item>
+    
   </channel>
 </rss>
