@@ -273,8 +273,43 @@
   </url>
   
   <url>
+    <loc>/tags/boxplots/</loc>
+    <lastmod>2018-07-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/data-analysis/</loc>
+    <lastmod>2018-07-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/07/22/data-analysis-exploratory-graphics/</loc>
+    <lastmod>2018-07-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/data-exploration/</loc>
-    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
+    <lastmod>2018-07-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/data-preprocessing/</loc>
+    <lastmod>2018-07-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/data-wrangling/</loc>
+    <lastmod>2018-07-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/exploratory-data-analysis/</loc>
+    <lastmod>2018-07-22T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r-programming/</loc>
+    <lastmod>2018-07-22T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -288,33 +323,13 @@
   </url>
   
   <url>
-    <loc>/tags/data-wrangling/</loc>
-    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/eda-in-data-science/</loc>
-    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/exploratory-data-analysis/</loc>
     <lastmod>2018-07-14T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</loc>
     <lastmod>2018-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/r-programming/</loc>
-    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/data-analysis/</loc>
-    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -504,16 +519,6 @@
   
   <url>
     <loc>/tags/alluvial-plots/</loc>
-    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/boxplots/</loc>
-    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-preprocessing/</loc>
     <lastmod>2018-05-13T00:00:00+00:00</lastmod>
   </url>
   

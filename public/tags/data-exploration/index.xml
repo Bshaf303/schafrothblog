@@ -6,10 +6,20 @@
     <description>Recent content in Data Exploration on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 14 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 22 Jul 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/data-exploration/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Data Analysis - Exploratory Graphics</title>
+      <link>/post/2018/07/22/data-analysis-exploratory-graphics/</link>
+      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/07/22/data-analysis-exploratory-graphics/</guid>
+      <description>Exploratory Graphics in RThe focus of this analysis is on the ways to graph data set variables. The first section uses the EPA data set retrieved from: https://github.com/jtleek/modules/blob/master/04_ExploratoryAnalysis/exploratoryGraphs/data/avgpm25.csv the data was imported into a csv file and then used for this first section. Code notes for explaination.
+The first part uses the RStudio base functionality to plot graphics then we use maps, lattice, and ggplot2 to compare and contrast.</description>
+    </item>
     
     <item>
       <title>Exploratory Data Analysis - EPA Ozone Data</title>
