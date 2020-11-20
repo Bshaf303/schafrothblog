@@ -1,0 +1,477 @@
+---
+title: K-Means Clustering Analysis
+author: Bryan
+date: '2018-08-12'
+slug: k-means-clustering-analysis
+categories:
+  - Data Analysis
+  - Exploratory Data Analysis
+  - Machine Learning
+  - R Programming
+tags:
+  - algorithms
+  - Data Exploration
+  - EDA in Data Science
+  - k-means
+---
+
+### K-Means Clustering
+
+The first section uses the iris data set and k-means clustering starting with 3 cluster centers and an `nstart` of 15. The results are displayed below in the fit object. There are 3 clusters sized 50, 62, and 38. The within sum of squares by cluster is 88.4% and the smaller number (15.15, 39.82, & 23.87) indicates how closely related objects are in the clusters. The first cluster has the most related objects and the second cluster has the lesser of related objects mostly taken from the third cluster. 
+
+```{r loadLibs, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(factoextra)
+library(cluster)
+library(fpc)
+library(GGally)
+library(data.table)
+```
+
+
+```{r}
+set.seed(22)
+str(iris)#view data
+iris1 <- select(iris, -Species)#remove non-numeric factor variable
+fit <- kmeans(iris1, 3, nstart=15)#start with 3 centers and 15 random sets chosen
+fit #view data
+fit$withinss #view within sum of squares
+fit$betweenss #view between cluster sum of squares
+```
+
+```{r}
+barplot(t(fit$centers), beside=TRUE, xlab="Cluster", ylab="Value") #inspect the center of each cluster with barplot method.
+plot(iris1, fit$centers)# plot out centers matrix
+plot(iris1, col=fit$cluster, pch=19, cex=0.75)# same plot but colored for clarity
+```
+
+Here I scale the iris data and run the kmeans again with 3 centers and 15 random set. The plot shows each cluster circle, square, triangle -color coded, and the center of the cluster with a larger symbol. The ellipse helps to define the boundaries of the cluster. 
+
+```{r}
+iris.scaled <- scale(iris1)#scale numeric data
+km.res <- eclust(iris.scaled, "kmeans", k=3, nstart=15, graph=FALSE)#run k-means again on scaled data
+fviz_cluster(km.res, geom="point", ellipse.type="norm", main="k-means cluster")# a very nice plot from this package
+
+clusplot(iris.scaled, fit$cluster, color=TRUE, shade=TRUE)#another package and way to view the same data cluster, no centers shown 
+mds <- cmdscale(dist(iris.scaled), k=3)#more of the same but different method. 
+```
+
+```{r}
+plot(mds, col=fit$cluster, pch=19, cex=0.75)
+```
+
+The silhouette shows how closely related the point are in the cluster. The value closer to 1 is the better cluster and cluster 1 is at 0.79 (best) and cluster two id 0.21 (worst). 
+
+```{r}
+cs <- cluster.stats(dist(iris.scaled), fit$cluster)#cluster fitting
+fits <- silhouette(fit$cluster, dist(iris1))#how well do the clusters fit
+```
+
+```{r}
+summary(fits)#quick summary to show silhouette values.
+plot(fits) #graph the silhouette
+```
+
+This graph shows the optimal number of clusters. A sharp decline after 2 clusters indicates 2 may be the better choice for number of clusters. 
+
+```{r}
+nk <- 2:15 #show 2 to 15 clusters          
+set.seed(22)
+WSS <- sapply(nk, function(k) {kmeans(iris1, centers=k)$tot.withinss})
+WSS       
+```
+
+```{r}
+plot(nk, WSS, type="l", xlab="Number of k", ylab="within sum of squares", lwd=2, col="red")# graphing the optimal number of clusters. 
+```
+
+```{R}
+SW <- sapply(nk, function(k) {
+  cluster.stats(dist(iris1), kmeans(iris1, centers=k)$cluster)$avg.silwidth})
+SW
+```
+
+```{r}
+plot(nk, SW, type="l", xlab="Number of Clusters", ylab="average silhoutte width", lwd=2, col="firebrick3")#confirm above 
+```
+
+To confirm the graph above, the max amount of clusters shall be 2 for the best results. 
+
+```{r}
+nk[which.max(SW)]# what is the optimal number of clusters?
+fit2 <- kmeans(iris1, 2)#2 clusters is optimal
+fit2#show data of 2 clusters. cluster 1 at 28 is best
+```
+
+```{r}
+plot(iris1, col=fit2$cluster, pch=19, cex=0.75)# plotting the 2 clusters in color. 
+```
+
+#### Biopsy Data - KMeans Clustering
+
+This section looks at the biopsy data set and we look for the optimal number of clusters like we did above on the iris data set. 
+
+```{r}
+biopsy <- read.csv("http://wilkelab.org/classes/SDS348/data_sets/biopsy.csv")#read in biopsy data
+```
+
+```{r}
+str(biopsy)#view data
+biopsy1 <- select(biopsy, -outcome) # clear up take out factor variable
+biopsy1 <- scale(biopsy1)#scale data to fit
+```
+
+```{r}
+set.seed(89)
+fit2 <- kmeans(biopsy1, 3, nstart=15)#start with a guess 3 centers 15 random 
+fit2# view kmeans biopsy results. 
+```
+
+```{r}
+barplot(t(fit2$centers), beside=TRUE, xlab="Cluster", ylab="Value")#barplot the centers.
+plot(biopsy1, col=fit2$cluster, pch=17, cex=1)#scatter plot the clusters. 
+```
+
+```{r}
+clusplot(biopsy1, fit2$cluster, color=TRUE, col.p="black",shade=TRUE, labels=4 ,main = "Cluster Plot for Biopsy Data")#cluster plot from earlier
+```
+
+```{r}
+mds <- cmdscale(dist(biopsy1), k=3)
+```
+
+```{r}
+plot(mds, col=fit2$cluster, pch=17, cex=0.75)#another way to view cluster plot. 
+```
+
+```{r}
+cs <- cluster.stats
+fits2 <- silhouette(fit2$cluster, dist(biopsy1))
+```
+
+```{r}
+summary(fits2)#important summary showing silhouette values. 
+```
+
+Here we look at the optimal number of clusters for the biopsy data set. The graph is similar to the iris data set with a shape decline after 2 clusters. We can confirm that 2 cluster is the optimal for the biopsy data below. 
+
+````{r}
+nk <- 2:15           
+set.seed(22)
+WSS <- sapply(nk, function(k) {kmeans(biopsy1, centers=k)$tot.withinss})
+WSS 
+```
+
+```{r}
+plot(nk, WSS, type="l", xlab="Number of k", ylab="within sum of squares", lwd=2, col="slateblue3")
+```
+
+```{r}
+SW <- sapply(nk, function(k) {
+  cluster.stats(dist(biopsy1), kmeans(biopsy1, centers=k)$cluster)$avg.silwidth})
+SW
+```
+
+```{r}
+plot(nk, SW, type="l", xlab="Number of CLusters", ylab="average silhoutte width", lwd=2, col="springgreen3")#plot out 
+```
+
+Optimal number of clusters is 2 with k-means and the biopsy data set. 
+
+```{r}
+
+nk[which.max(SW)]
+```
+
+This section show all the work performed doing the exercises for week 6. Most is a repeat of what is done above with a slightly different way of looking at the data graphically. 
+
+```{r}
+theme_set(theme_bw(base_size=12))
+
+iris %>% select(-Species) %>%
+  kmeans(centers=3) ->
+  km
+km
+km$centers
+km$cluster
+iris_clustered <- data.frame(iris, cluster=factor(km$cluster))
+```
+
+```{r}
+ggplot(iris_clustered, 
+       aes(x=Petal.Width, 
+           y=Sepal.Width, 
+           color=cluster, 
+           shape=Species)) + 
+  geom_point()
+```
+
+```{r}
+iris %>% select(-Species) %>% kmeans(centers=3) -> km
+iris_clustered <- data.frame(iris, cluster=factor(km$cluster))
+```
+
+```{r}
+ggplot(iris_clustered, 
+       aes(x=Petal.Width, 
+           y=Sepal.Width, 
+           color=cluster, 
+           shape=Species)) + 
+  geom_point()
+```
+
+```{r}
+iris %>% select(-Species) %>% kmeans(centers=3, nstart=10) -> km
+iris_clustered <- data.frame(iris, cluster=factor(km$cluster))
+```
+
+```{r}
+ggplot(iris_clustered, 
+       aes(x=Petal.Width, 
+           y=Sepal.Width, 
+           color=cluster, 
+           shape=Species)) + 
+  geom_point()
+```
+
+```{r}
+
+iris_numeric <- select(iris, -Species)
+wss <- (nrow(iris_numeric)-1)*sum(apply(iris_numeric, 2, var))
+        for (i in 2:15) wss[i] <- sum(kmeans(iris_numeric,
+                                             nstart=10,
+                                             centers=i)$withinss)
+wss_data <- data.frame(centers=1:15, wss)
+```
+
+```{r}
+ggplot(wss_data, 
+       aes(x=centers, y=wss)) +
+  geom_point() + 
+  geom_line() + 
+  xlab("Number of Clusters") + 
+  ylab("Within groups sum of squares")
+```
+
+#### Biopsy Data Clustering
+
+```{r}
+head(biopsy) 
+
+biopsy %>% 
+  select(-outcome) %>% 
+  scale()  %>% 
+  prcomp() -> pca
+biopsy %>% 
+  select(-outcome) %>% 
+  kmeans(centers=2, nstart=10) -> km   
+
+
+cluster_data <- data.frame(pca$x, cluster=factor(km$cluster), outcome=biopsy$outcome)
+```
+
+```{r}
+ggplot(cluster_data, 
+       aes(x=PC1, y=PC2, 
+           color=cluster, 
+           shape=outcome)) + 
+  geom_point()
+```
+
+```{r}
+biopsy %>% 
+  select(-outcome) %>% 
+  kmeans(centers=3, nstart=10) -> km 
+
+cluster_data <- data.frame(pca$x, cluster=factor(km$cluster), outcome=biopsy$outcome)
+```
+
+```{r}
+ggplot(cluster_data, 
+       aes(x=PC1, y=PC2, 
+           color=cluster, 
+           shape=outcome)) + 
+  geom_point()
+```
+
+```{r}
+biopsy %>% 
+  select(-outcome) %>% 
+  kmeans(centers=4, nstart=10) -> km 
+
+cluster_data <- data.frame(pca$x, cluster=factor(km$cluster), outcome=biopsy$outcome)
+```
+
+```{r}
+ggplot(cluster_data, 
+       aes(x=PC1, y=PC2,
+           color=cluster, 
+           shape=outcome)) + 
+  geom_point()
+```
+
+```{r}
+biopsy_numeric <- select(biopsy, -outcome)
+wss <- (nrow(biopsy_numeric)-1)*sum(apply(biopsy_numeric, 2, var))
+  for (i in 2:15) wss[i] <- sum(kmeans(biopsy_numeric,
+                                       nstart=10,
+                                       centers=i)$withinss)
+wss_data <- data.frame(centers=1:15, wss)
+```
+
+
+```{r}
+ggplot(wss_data, 
+       aes(x=centers, y=wss)) + 
+  geom_point() + 
+  geom_line() + 
+  xlab("Number of Clusters") + 
+  ylab("Within groupssum of squares")  
+
+iris %>% 
+  select(-Species) %>% 
+  kmeans(centers=3, nstart=10) -> km
+
+iris_clustered <- data.frame(iris, cluster=factor(km$cluster))
+```
+
+#### Iris Data Clustering
+
+```{r}
+ggplot(iris_clustered, aes(x=Petal.Width, y=Sepal.Width, color=cluster, shape=Species)) +geom_point()
+```
+
+```{r}
+centroids <- data.frame(km$centers)
+centroids
+centroids <- data.frame(centroids, cluster=factor(1:3))
+```
+
+```{r}
+ggplot(iris_clustered, 
+       aes(x=Petal.Width, 
+           y=Sepal.Width, 
+           color=cluster)) + 
+  geom_point(aes(shape=Species)) +
+  geom_point(data=centroids, 
+             aes(fill=cluster), 
+             shape=21, 
+             color="black", 
+             size=4, 
+             stroke=1)
+```
+
+```{r}
+data_iris <- data.table(iris)
+```
+
+```{r ggpairsummary, message=FALSE, warning=FALSE}
+ggpairs(data_iris, columns=1:5, mapping=aes(colour=Species))
+```
+
+```{r}
+set.seed(123)
+not_norm_clusters <- kmeans(data_iris[,1:4, with=F], 3)
+data_iris$cluster <- as.factor(not_norm_clusters$cluster)
+```
+
+```{r message=FALSE, warning=FALSE}
+ggpairs(data_iris, columns=1:5, mapping=aes(colour=cluster))
+```
+
+```{r}
+norm_cluster <- kmeans(scale(data_iris[,1:4, with=F], scale=T), 3)
+data_iris$cluster <- as.factor(norm_cluster$cluster)
+```
+
+```{r message=FALSE, warning=FALSE}
+ggpairs(data_iris, clolumns=1:5, mapping=aes(colour=cluster))
+```
+```{r message=FALSE, warning=FALSE}
+set.seed(456)
+performance <- c()
+for (i in rep(1:100, times=30)) {
+  clust <- kmeans(data_iris[,1:4, with=F],i)
+  performance <- c(performance, 1-clust$tot.withinss/clust$totss)
+}
+
+perf_df <- data.frame(metrics=performance, number_of_center=rep(1:100, times=30))
+```
+
+```{r}
+ggplot(perf_df, 
+       aes(x=number_of_center, y=metrics)) + 
+  geom_point(alpha=0.2) + 
+  geom_vline(xintercept=3, 
+             color='red')
+```
+
+```{r}
+head(iris)
+```
+
+```{r}
+ggplot(iris, 
+       aes(Petal.Length, 
+           Petal.Width, 
+           color=Species)) + 
+  geom_point()
+```
+
+```{r}
+set.seed(20)
+irisCluster <- kmeans(iris[,3:4], 3, nstart=20)
+irisCluster
+```
+
+```{r}
+table(irisCluster$cluster, iris$Species)
+```
+
+```{R}
+irisCluster$cluster <- as.factor(irisCluster$cluster)
+```
+
+```{r}
+ggplot(iris, 
+       aes(Petal.Length, 
+           Petal.Width, 
+           color=irisCluster$cluster)) +
+  geom_point()
+```
+
+```{r}
+set.seed(1234)
+x <- rnorm(12, mean=rep(1:3, each=4), sd=0.2)
+y <- rnorm(12, mean=rep(c(1, 2, 1), each=4), sd=0.2)
+```
+
+```{r}
+plot(x, y, col="blue", pch=19, cex=2)
+text(x + 0.05, y + 0.05, labels=as.character(1:12))
+```
+
+```{r}
+dataFrame <- data.frame(x, y)
+kmeansObj <- kmeans(dataFrame, centers=3)
+names(kmeansObj)
+```
+
+```{r warning=FALSE, message=FALSE}
+kmeansObj$cluster
+par(mar=rep(0.2, 4))
+plot(x,y, col=kmeansObj$cluster, pch=19, cex=2)
+points(kmeansObj$centers, col=1:3, pch=3, cex=3, lwd=3)
+```
+
+```{r}
+set.seed(1234)
+dataMatrix <- as.matrix(dataFrame)[sample(1:12), ]
+kmeansObj <- kmeans(dataMatrix, centers = 3)
+```
+
+```{r}
+par(mfrow = c(1, 2))
+image(t(dataMatrix)[, nrow(dataMatrix):1], yaxt = "n", main = "Original Data")
+image(t(dataMatrix)[, order(kmeansObj$cluster)], yaxt = "n", main = "Clustered Data")
+```

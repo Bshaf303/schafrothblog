@@ -273,12 +273,62 @@
   </url>
   
   <url>
+    <loc>/tags/algorithms/</loc>
+    <lastmod>2018-08-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/data-analysis/</loc>
+    <lastmod>2018-08-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/data-exploration/</loc>
+    <lastmod>2018-08-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/eda-in-data-science/</loc>
+    <lastmod>2018-08-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/exploratory-data-analysis/</loc>
+    <lastmod>2018-08-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/k-means/</loc>
+    <lastmod>2018-08-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/08/12/k-means-clustering-analysis/</loc>
+    <lastmod>2018-08-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/machine-learning/</loc>
+    <lastmod>2018-08-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r-programming/</loc>
+    <lastmod>2018-08-12T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/2018/08/06/application-of-k-means-a-brief-case-study/</loc>
     <lastmod>2018-08-06T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/big-data/</loc>
+    <lastmod>2018-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/gis/</loc>
     <lastmod>2018-08-06T00:00:00+00:00</lastmod>
   </url>
   
@@ -293,17 +343,7 @@
   </url>
   
   <url>
-    <loc>/tags/k-means/</loc>
-    <lastmod>2018-08-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/categories/literature-review/</loc>
-    <lastmod>2018-08-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/machine-learning/</loc>
     <lastmod>2018-08-06T00:00:00+00:00</lastmod>
   </url>
   
@@ -313,22 +353,7 @@
   </url>
   
   <url>
-    <loc>/categories/data-analysis/</loc>
-    <lastmod>2018-08-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-exploration/</loc>
-    <lastmod>2018-08-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/data-wrangling/</loc>
-    <lastmod>2018-08-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/exploratory-data-analysis/</loc>
     <lastmod>2018-08-04T00:00:00+00:00</lastmod>
   </url>
   
@@ -348,22 +373,12 @@
   </url>
   
   <url>
-    <loc>/categories/r-programming/</loc>
-    <lastmod>2018-08-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/r-techniques/</loc>
     <lastmod>2018-08-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
     <loc>/tags/data-preprocessing/</loc>
-    <lastmod>2018-07-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/eda-in-data-science/</loc>
     <lastmod>2018-07-29T00:00:00+00:00</lastmod>
   </url>
   
@@ -430,11 +445,6 @@
   <url>
     <loc>/post/2018/07/02/simple-data-exploration-with-base-r-functions/</loc>
     <lastmod>2018-07-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/algorithms/</loc>
-    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
   </url>
   
   <url>

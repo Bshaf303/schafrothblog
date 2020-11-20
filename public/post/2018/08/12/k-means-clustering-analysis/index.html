@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>K-Means Clustering Analysis | Bryan Schafroth Portfolio</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/post/">Posts</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">K-Means Clustering Analysis</span></h1>
+<h2 class="author">Bryan</h2>
+<h2 class="date">2018/08/12</h2>
+</div>
+
+<main>
+
+
+
+<div id="k-means-clustering" class="section level3">
+<h3>K-Means Clustering</h3>
+<p>The first section uses the iris data set and k-means clustering starting with 3 cluster centers and an <code>nstart</code> of 15. The results are displayed below in the fit object. There are 3 clusters sized 50, 62, and 38. The within sum of squares by cluster is 88.4% and the smaller number (15.15, 39.82, &amp; 23.87) indicates how closely related objects are in the clusters. The first cluster has the most related objects and the second cluster has the lesser of related objects mostly taken from the third cluster.</p>
+<pre class="r"><code>library(tidyverse)
+library(factoextra)
+library(cluster)
+library(fpc)
+library(GGally)
+library(data.table)</code></pre>
+<pre class="r"><code>set.seed(22)
+str(iris)#view data</code></pre>
+<pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<pre class="r"><code>iris1 &lt;- select(iris, -Species)#remove non-numeric factor variable
+fit &lt;- kmeans(iris1, 3, nstart=15)#start with 3 centers and 15 random sets chosen
+fit #view data</code></pre>
+<pre><code>## K-means clustering with 3 clusters of sizes 38, 50, 62
+## 
+## Cluster means:
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 1     6.850000    3.073684     5.742105    2.071053
+## 2     5.006000    3.428000     1.462000    0.246000
+## 3     5.901613    2.748387     4.393548    1.433871
+## 
+## Clustering vector:
+##   [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+##  [38] 2 2 2 2 2 2 2 2 2 2 2 2 2 3 3 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+##  [75] 3 3 3 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3 1 1 1 1 3 1 1 1 1
+## [112] 1 1 3 3 1 1 1 1 3 1 3 1 3 1 1 3 3 1 1 1 1 1 3 1 1 1 1 3 1 1 1 3 1 1 1 3 1
+## [149] 1 3
+## 
+## Within cluster sum of squares by cluster:
+## [1] 23.87947 15.15100 39.82097
+##  (between_SS / total_SS =  88.4 %)
+## 
+## Available components:
+## 
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
+## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
+<pre class="r"><code>fit$withinss #view within sum of squares</code></pre>
+<pre><code>## [1] 23.87947 15.15100 39.82097</code></pre>
+<pre class="r"><code>fit$betweenss #view between cluster sum of squares</code></pre>
+<pre><code>## [1] 602.5192</code></pre>
+<pre class="r"><code>barplot(t(fit$centers), beside=TRUE, xlab=&quot;Cluster&quot;, ylab=&quot;Value&quot;) #inspect the center of each cluster with barplot method.</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>plot(iris1, fit$centers)# plot out centers matrix</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<pre class="r"><code>plot(iris1, col=fit$cluster, pch=19, cex=0.75)# same plot but colored for clarity</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
+<p>Here I scale the iris data and run the kmeans again with 3 centers and 15 random set. The plot shows each cluster circle, square, triangle -color coded, and the center of the cluster with a larger symbol. The ellipse helps to define the boundaries of the cluster.</p>
+<pre class="r"><code>iris.scaled &lt;- scale(iris1)#scale numeric data
+km.res &lt;- eclust(iris.scaled, &quot;kmeans&quot;, k=3, nstart=15, graph=FALSE)#run k-means again on scaled data
+fviz_cluster(km.res, geom=&quot;point&quot;, ellipse.type=&quot;norm&quot;, main=&quot;k-means cluster&quot;)# a very nice plot from this package</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>clusplot(iris.scaled, fit$cluster, color=TRUE, shade=TRUE)#another package and way to view the same data cluster, no centers shown </code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<pre class="r"><code>mds &lt;- cmdscale(dist(iris.scaled), k=3)#more of the same but different method. </code></pre>
+<pre class="r"><code>plot(mds, col=fit$cluster, pch=19, cex=0.75)</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>The silhouette shows how closely related the point are in the cluster. The value closer to 1 is the better cluster and cluster 1 is at 0.79 (best) and cluster two id 0.21 (worst).</p>
+<pre class="r"><code>cs &lt;- cluster.stats(dist(iris.scaled), fit$cluster)#cluster fitting
+fits &lt;- silhouette(fit$cluster, dist(iris1))#how well do the clusters fit</code></pre>
+<pre class="r"><code>summary(fits)#quick summary to show silhouette values.</code></pre>
+<pre><code>## Silhouette of 150 units in 3 clusters from silhouette.default(x = fit$cluster, dist = dist(iris1)) :
+##  Cluster sizes and average silhouette widths:
+##        38        50        62 
+## 0.4511051 0.7981405 0.4173199 
+## Individual silhouette widths:
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## 0.02636 0.39115 0.56231 0.55282 0.77552 0.85391</code></pre>
+<pre class="r"><code>plot(fits) #graph the silhouette</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>This graph shows the optimal number of clusters. A sharp decline after 2 clusters indicates 2 may be the better choice for number of clusters.</p>
+<pre class="r"><code>nk &lt;- 2:15 #show 2 to 15 clusters          
+set.seed(22)
+WSS &lt;- sapply(nk, function(k) {kmeans(iris1, centers=k)$tot.withinss})
+WSS       </code></pre>
+<pre><code>##  [1] 152.34795  78.85144  57.26562  50.13655  47.65657  37.59074  36.26302
+##  [8]  28.81355  26.08442  24.98467  25.05792  25.65793  21.66389  20.76329</code></pre>
+<pre class="r"><code>plot(nk, WSS, type=&quot;l&quot;, xlab=&quot;Number of k&quot;, ylab=&quot;within sum of squares&quot;, lwd=2, col=&quot;red&quot;)# graphing the optimal number of clusters. </code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>SW &lt;- sapply(nk, function(k) {
+  cluster.stats(dist(iris1), kmeans(iris1, centers=k)$cluster)$avg.silwidth})
+SW</code></pre>
+<pre><code>##  [1] 0.6810462 0.5528190 0.4104276 0.3727767 0.3664804 0.3588294 0.3266471
+##  [8] 0.3227828 0.3177546 0.3049373 0.3193459 0.2968904 0.2492297 0.2618958</code></pre>
+<pre class="r"><code>plot(nk, SW, type=&quot;l&quot;, xlab=&quot;Number of Clusters&quot;, ylab=&quot;average silhoutte width&quot;, lwd=2, col=&quot;firebrick3&quot;)#confirm above </code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>To confirm the graph above, the max amount of clusters shall be 2 for the best results.</p>
+<pre class="r"><code>nk[which.max(SW)]# what is the optimal number of clusters?</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>fit2 &lt;- kmeans(iris1, 2)#2 clusters is optimal
+fit2#show data of 2 clusters. cluster 1 at 28 is best</code></pre>
+<pre><code>## K-means clustering with 2 clusters of sizes 97, 53
+## 
+## Cluster means:
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 1     6.301031    2.886598     4.958763    1.695876
+## 2     5.005660    3.369811     1.560377    0.290566
+## 
+## Clustering vector:
+##   [1] 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+##  [38] 2 2 2 2 2 2 2 2 2 2 2 2 2 1 1 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [75] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1
+## [112] 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+## [149] 1 1
+## 
+## Within cluster sum of squares by cluster:
+## [1] 123.79588  28.55208
+##  (between_SS / total_SS =  77.6 %)
+## 
+## Available components:
+## 
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
+## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
+<pre class="r"><code>plot(iris1, col=fit2$cluster, pch=19, cex=0.75)# plotting the 2 clusters in color. </code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div id="biopsy-data---kmeans-clustering" class="section level4">
+<h4>Biopsy Data - KMeans Clustering</h4>
+<p>This section looks at the biopsy data set and we look for the optimal number of clusters like we did above on the iris data set.</p>
+<pre class="r"><code>biopsy &lt;- read.csv(&quot;http://wilkelab.org/classes/SDS348/data_sets/biopsy.csv&quot;)#read in biopsy data</code></pre>
+<pre class="r"><code>str(biopsy)#view data</code></pre>
+<pre><code>## &#39;data.frame&#39;:    683 obs. of  10 variables:
+##  $ clump_thickness     : int  5 5 3 6 4 8 1 2 2 4 ...
+##  $ uniform_cell_size   : int  1 4 1 8 1 10 1 1 1 2 ...
+##  $ uniform_cell_shape  : int  1 4 1 8 1 10 1 2 1 1 ...
+##  $ marg_adhesion       : int  1 5 1 1 3 8 1 1 1 1 ...
+##  $ epithelial_cell_size: int  2 7 2 3 2 7 2 2 2 2 ...
+##  $ bare_nuclei         : int  1 10 2 4 1 10 10 1 1 1 ...
+##  $ bland_chromatin     : int  3 3 3 3 3 9 3 3 1 2 ...
+##  $ normal_nucleoli     : int  1 2 1 7 1 7 1 1 1 1 ...
+##  $ mitoses             : int  1 1 1 1 1 1 1 1 5 1 ...
+##  $ outcome             : Factor w/ 2 levels &quot;benign&quot;,&quot;malignant&quot;: 1 1 1 1 1 2 1 1 1 1 ...</code></pre>
+<pre class="r"><code>biopsy1 &lt;- select(biopsy, -outcome) # clear up take out factor variable
+biopsy1 &lt;- scale(biopsy1)#scale data to fit</code></pre>
+<pre class="r"><code>set.seed(89)
+fit2 &lt;- kmeans(biopsy1, 3, nstart=15)#start with a guess 3 centers 15 random 
+fit2# view kmeans biopsy results. </code></pre>
+<pre><code>## K-means clustering with 3 clusters of sizes 205, 34, 444
+## 
+## Cluster means:
+##   clump_thickness uniform_cell_size uniform_cell_shape marg_adhesion
+## 1       0.9361869         1.0520888          1.0509572     0.8749764
+## 2       1.1570335         1.7451687          1.7584806     1.5686056
+## 3      -0.5208501        -0.6194007         -0.6198977    -0.5241053
+##   epithelial_cell_size bare_nuclei bland_chromatin normal_nucleoli     mitoses
+## 1            0.8557137   1.1370229       0.9991392       0.9167723  0.03192493
+## 2            1.8526866   1.1500556       1.3791236       1.5649814  3.75975251
+## 3           -0.5369654  -0.6130441      -0.5669228      -0.5431255 -0.30264909
+## 
+## Clustering vector:
+##   [1] 3 1 3 1 3 1 3 3 3 3 3 3 3 3 1 1 3 3 1 3 1 1 3 3 3 3 3 3 3 3 3 1 3 3 3 1 3
+##  [38] 1 1 1 1 1 1 3 1 3 3 1 1 3 1 2 1 1 1 1 1 3 1 3 1 1 3 2 3 1 2 3 3 2 3 1 1 3
+##  [75] 3 3 3 3 3 3 3 3 2 2 1 1 3 3 3 3 3 3 3 3 3 3 2 1 1 3 3 1 2 3 1 1 3 1 3 1 1
+## [112] 1 3 3 3 2 3 3 3 3 1 1 1 3 1 3 1 3 3 3 1 3 3 3 3 3 3 3 3 1 3 3 1 3 3 2 3 1
+## [149] 1 3 3 1 3 3 2 1 3 3 3 3 1 2 3 3 3 3 3 2 1 1 3 1 3 1 3 3 3 1 1 3 1 2 1 3 1
+## [186] 1 3 3 3 3 1 3 3 3 1 1 3 3 3 2 1 3 3 3 2 1 3 2 1 1 3 3 1 3 3 1 3 1 1 3 1 1
+## [223] 3 1 1 1 1 1 3 2 1 2 1 3 3 3 3 3 3 1 1 3 3 1 1 1 1 1 3 3 3 1 1 2 1 1 1 3 1
+## [260] 1 2 3 1 3 1 3 3 3 3 3 2 3 3 1 1 1 1 2 3 1 1 3 3 1 1 1 3 1 1 3 2 3 1 1 3 3
+## [297] 1 3 3 3 1 3 3 1 1 3 1 1 3 1 3 3 1 3 1 1 1 3 3 1 1 3 1 3 3 1 1 3 3 3 1 3 3
+## [334] 3 1 1 3 3 1 1 3 3 3 2 1 1 2 1 3 3 3 3 2 1 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3 3
+## [371] 3 3 1 3 3 3 3 1 3 3 3 3 3 3 3 3 2 3 3 3 3 3 3 3 3 3 3 1 3 1 3 1 3 3 3 3 1
+## [408] 3 3 3 1 3 1 3 3 3 3 3 3 1 1 1 3 3 3 1 3 3 3 3 3 3 3 3 1 3 3 3 1 3 3 1 1 3
+## [445] 3 3 3 3 3 3 1 1 1 3 3 3 3 3 3 3 3 3 3 3 1 3 3 2 1 3 3 3 2 1 3 3 1 3 1 3 3
+## [482] 3 3 3 3 3 3 3 3 3 3 2 3 3 3 3 3 3 3 1 1 3 3 3 1 3 3 1 1 3 3 3 3 3 3 1 3 3
+## [519] 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3 3 1 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 1 3 3 1 1
+## [556] 1 1 3 3 1 3 3 3 3 3 3 1 1 3 3 3 1 3 1 3 1 1 1 3 1 3 3 3 3 3 3 3 3 1 1 1 3
+## [593] 3 1 3 1 1 2 3 3 3 3 3 3 3 3 3 3 3 3 1 3 3 3 3 3 3 1 3 3 1 3 3 3 3 3 3 3 3
+## [630] 3 3 3 2 3 3 3 3 3 3 3 3 1 1 3 3 3 3 3 3 3 3 3 1 1 1 3 3 3 3 3 3 3 3 3 2 1
+## [667] 3 3 3 3 3 3 3 3 3 1 3 3 3 3 1 1 1
+## 
+## Within cluster sum of squares by cluster:
+## [1] 1485.9547  266.8739  482.2359
+##  (between_SS / total_SS =  63.6 %)
+## 
+## Available components:
+## 
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
+## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
+<pre class="r"><code>barplot(t(fit2$centers), beside=TRUE, xlab=&quot;Cluster&quot;, ylab=&quot;Value&quot;)#barplot the centers.</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<pre class="r"><code>plot(biopsy1, col=fit2$cluster, pch=17, cex=1)#scatter plot the clusters. </code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-16-2.png" width="672" /></p>
+<pre class="r"><code>clusplot(biopsy1, fit2$cluster, color=TRUE, col.p=&quot;black&quot;,shade=TRUE, labels=4 ,main = &quot;Cluster Plot for Biopsy Data&quot;)#cluster plot from earlier</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<pre class="r"><code>mds &lt;- cmdscale(dist(biopsy1), k=3)</code></pre>
+<pre class="r"><code>plot(mds, col=fit2$cluster, pch=17, cex=0.75)#another way to view cluster plot. </code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<pre class="r"><code>cs &lt;- cluster.stats
+fits2 &lt;- silhouette(fit2$cluster, dist(biopsy1))</code></pre>
+<pre class="r"><code>summary(fits2)#important summary showing silhouette values. </code></pre>
+<pre><code>## Silhouette of 683 units in 3 clusters from silhouette.default(x = fit2$cluster, dist = dist(biopsy1)) :
+##  Cluster sizes and average silhouette widths:
+##       205        34       444 
+## 0.1933782 0.2837312 0.7470335 
+## Individual silhouette widths:
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+## -0.2024  0.2853  0.7332  0.5578  0.7930  0.8289</code></pre>
+<p>Here we look at the optimal number of clusters for the biopsy data set. The graph is similar to the iris data set with a shape decline after 2 clusters. We can confirm that 2 cluster is the optimal for the biopsy data below.</p>
+<pre class="r"><code>nk &lt;- 2:15           
+set.seed(22)
+WSS &lt;- sapply(nk, function(k) {kmeans(biopsy1, centers=k)$tot.withinss})
+WSS </code></pre>
+<pre><code>##  [1] 2724.155 2573.039 1942.554 1827.404 1722.914 1630.802 1659.516 1541.870
+##  [9] 1433.658 1408.762 1382.666 1337.406 1326.605 1251.217</code></pre>
+<pre class="r"><code>plot(nk, WSS, type=&quot;l&quot;, xlab=&quot;Number of k&quot;, ylab=&quot;within sum of squares&quot;, lwd=2, col=&quot;slateblue3&quot;)</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<pre class="r"><code>SW &lt;- sapply(nk, function(k) {
+  cluster.stats(dist(biopsy1), kmeans(biopsy1, centers=k)$cluster)$avg.silwidth})
+SW</code></pre>
+<pre><code>##  [1] 0.5732451 0.2623748 0.2357959 0.2442259 0.4878855 0.1829936 0.1854109
+##  [8] 0.2009834 0.1804915 0.1687851 0.1866895 0.2029021 0.2329044 0.1769594</code></pre>
+<pre class="r"><code>plot(nk, SW, type=&quot;l&quot;, xlab=&quot;Number of CLusters&quot;, ylab=&quot;average silhoutte width&quot;, lwd=2, col=&quot;springgreen3&quot;)#plot out </code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<p>Optimal number of clusters is 2 with k-means and the biopsy data set.</p>
+<pre class="r"><code>nk[which.max(SW)]</code></pre>
+<pre><code>## [1] 2</code></pre>
+<p>This section show all the work performed doing the exercises for week 6. Most is a repeat of what is done above with a slightly different way of looking at the data graphically.</p>
+<pre class="r"><code>theme_set(theme_bw(base_size=12))
+
+iris %&gt;% select(-Species) %&gt;%
+  kmeans(centers=3) -&gt;
+  km
+km</code></pre>
+<pre><code>## K-means clustering with 3 clusters of sizes 38, 62, 50
+## 
+## Cluster means:
+##   Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 1     6.850000    3.073684     5.742105    2.071053
+## 2     5.901613    2.748387     4.393548    1.433871
+## 3     5.006000    3.428000     1.462000    0.246000
+## 
+## Clustering vector:
+##   [1] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+##  [38] 3 3 3 3 3 3 3 3 3 3 3 3 3 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+##  [75] 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 1 1 1 1 2 1 1 1 1
+## [112] 1 1 2 2 1 1 1 1 2 1 2 1 2 1 1 2 2 1 1 1 1 1 2 1 1 1 1 2 1 1 1 2 1 1 1 2 1
+## [149] 1 2
+## 
+## Within cluster sum of squares by cluster:
+## [1] 23.87947 39.82097 15.15100
+##  (between_SS / total_SS =  88.4 %)
+## 
+## Available components:
+## 
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
+## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
+<pre class="r"><code>km$centers</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 1     6.850000    3.073684     5.742105    2.071053
+## 2     5.901613    2.748387     4.393548    1.433871
+## 3     5.006000    3.428000     1.462000    0.246000</code></pre>
+<pre class="r"><code>km$cluster</code></pre>
+<pre><code>##   [1] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+##  [38] 3 3 3 3 3 3 3 3 3 3 3 3 3 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2
+##  [75] 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 2 1 2 1 1 1 1 2 1 1 1 1
+## [112] 1 1 2 2 1 1 1 1 2 1 2 1 2 1 1 2 2 1 1 1 1 1 2 1 1 1 1 2 1 1 1 2 1 1 1 2 1
+## [149] 1 2</code></pre>
+<pre class="r"><code>iris_clustered &lt;- data.frame(iris, cluster=factor(km$cluster))</code></pre>
+<pre class="r"><code>ggplot(iris_clustered, 
+       aes(x=Petal.Width, 
+           y=Sepal.Width, 
+           color=cluster, 
+           shape=Species)) + 
+  geom_point()</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<pre class="r"><code>iris %&gt;% select(-Species) %&gt;% kmeans(centers=3) -&gt; km
+iris_clustered &lt;- data.frame(iris, cluster=factor(km$cluster))</code></pre>
+<pre class="r"><code>ggplot(iris_clustered, 
+       aes(x=Petal.Width, 
+           y=Sepal.Width, 
+           color=cluster, 
+           shape=Species)) + 
+  geom_point()</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<pre class="r"><code>iris %&gt;% select(-Species) %&gt;% kmeans(centers=3, nstart=10) -&gt; km
+iris_clustered &lt;- data.frame(iris, cluster=factor(km$cluster))</code></pre>
+<pre class="r"><code>ggplot(iris_clustered, 
+       aes(x=Petal.Width, 
+           y=Sepal.Width, 
+           color=cluster, 
+           shape=Species)) + 
+  geom_point()</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<pre class="r"><code>iris_numeric &lt;- select(iris, -Species)
+wss &lt;- (nrow(iris_numeric)-1)*sum(apply(iris_numeric, 2, var))
+        for (i in 2:15) wss[i] &lt;- sum(kmeans(iris_numeric,
+                                             nstart=10,
+                                             centers=i)$withinss)
+wss_data &lt;- data.frame(centers=1:15, wss)</code></pre>
+<pre class="r"><code>ggplot(wss_data, 
+       aes(x=centers, y=wss)) +
+  geom_point() + 
+  geom_line() + 
+  xlab(&quot;Number of Clusters&quot;) + 
+  ylab(&quot;Within groups sum of squares&quot;)</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-34-1.png" width="672" /></p>
+</div>
+<div id="biopsy-data-clustering" class="section level4">
+<h4>Biopsy Data Clustering</h4>
+<pre class="r"><code>head(biopsy) </code></pre>
+<pre><code>##   clump_thickness uniform_cell_size uniform_cell_shape marg_adhesion
+## 1               5                 1                  1             1
+## 2               5                 4                  4             5
+## 3               3                 1                  1             1
+## 4               6                 8                  8             1
+## 5               4                 1                  1             3
+## 6               8                10                 10             8
+##   epithelial_cell_size bare_nuclei bland_chromatin normal_nucleoli mitoses
+## 1                    2           1               3               1       1
+## 2                    7          10               3               2       1
+## 3                    2           2               3               1       1
+## 4                    3           4               3               7       1
+## 5                    2           1               3               1       1
+## 6                    7          10               9               7       1
+##     outcome
+## 1    benign
+## 2    benign
+## 3    benign
+## 4    benign
+## 5    benign
+## 6 malignant</code></pre>
+<pre class="r"><code>biopsy %&gt;% 
+  select(-outcome) %&gt;% 
+  scale()  %&gt;% 
+  prcomp() -&gt; pca
+biopsy %&gt;% 
+  select(-outcome) %&gt;% 
+  kmeans(centers=2, nstart=10) -&gt; km   
+
+
+cluster_data &lt;- data.frame(pca$x, cluster=factor(km$cluster), outcome=biopsy$outcome)</code></pre>
+<pre class="r"><code>ggplot(cluster_data, 
+       aes(x=PC1, y=PC2, 
+           color=cluster, 
+           shape=outcome)) + 
+  geom_point()</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<pre class="r"><code>biopsy %&gt;% 
+  select(-outcome) %&gt;% 
+  kmeans(centers=3, nstart=10) -&gt; km 
+
+cluster_data &lt;- data.frame(pca$x, cluster=factor(km$cluster), outcome=biopsy$outcome)</code></pre>
+<pre class="r"><code>ggplot(cluster_data, 
+       aes(x=PC1, y=PC2, 
+           color=cluster, 
+           shape=outcome)) + 
+  geom_point()</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
+<pre class="r"><code>biopsy %&gt;% 
+  select(-outcome) %&gt;% 
+  kmeans(centers=4, nstart=10) -&gt; km 
+
+cluster_data &lt;- data.frame(pca$x, cluster=factor(km$cluster), outcome=biopsy$outcome)</code></pre>
+<pre class="r"><code>ggplot(cluster_data, 
+       aes(x=PC1, y=PC2,
+           color=cluster, 
+           shape=outcome)) + 
+  geom_point()</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-40-1.png" width="672" /></p>
+<pre class="r"><code>biopsy_numeric &lt;- select(biopsy, -outcome)
+wss &lt;- (nrow(biopsy_numeric)-1)*sum(apply(biopsy_numeric, 2, var))
+  for (i in 2:15) wss[i] &lt;- sum(kmeans(biopsy_numeric,
+                                       nstart=10,
+                                       centers=i)$withinss)
+wss_data &lt;- data.frame(centers=1:15, wss)</code></pre>
+<pre class="r"><code>ggplot(wss_data, 
+       aes(x=centers, y=wss)) + 
+  geom_point() + 
+  geom_line() + 
+  xlab(&quot;Number of Clusters&quot;) + 
+  ylab(&quot;Within groupssum of squares&quot;)  </code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<pre class="r"><code>iris %&gt;% 
+  select(-Species) %&gt;% 
+  kmeans(centers=3, nstart=10) -&gt; km
+
+iris_clustered &lt;- data.frame(iris, cluster=factor(km$cluster))</code></pre>
+</div>
+<div id="iris-data-clustering" class="section level4">
+<h4>Iris Data Clustering</h4>
+<pre class="r"><code>ggplot(iris_clustered, aes(x=Petal.Width, y=Sepal.Width, color=cluster, shape=Species)) +geom_point()</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<pre class="r"><code>centroids &lt;- data.frame(km$centers)
+centroids</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width
+## 1     6.850000    3.073684     5.742105    2.071053
+## 2     5.006000    3.428000     1.462000    0.246000
+## 3     5.901613    2.748387     4.393548    1.433871</code></pre>
+<pre class="r"><code>centroids &lt;- data.frame(centroids, cluster=factor(1:3))</code></pre>
+<pre class="r"><code>ggplot(iris_clustered, 
+       aes(x=Petal.Width, 
+           y=Sepal.Width, 
+           color=cluster)) + 
+  geom_point(aes(shape=Species)) +
+  geom_point(data=centroids, 
+             aes(fill=cluster), 
+             shape=21, 
+             color=&quot;black&quot;, 
+             size=4, 
+             stroke=1)</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+<pre class="r"><code>data_iris &lt;- data.table(iris)</code></pre>
+<pre class="r"><code>ggpairs(data_iris, columns=1:5, mapping=aes(colour=Species))</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/ggpairsummary-1.png" width="672" /></p>
+<pre class="r"><code>set.seed(123)
+not_norm_clusters &lt;- kmeans(data_iris[,1:4, with=F], 3)
+data_iris$cluster &lt;- as.factor(not_norm_clusters$cluster)</code></pre>
+<pre class="r"><code>ggpairs(data_iris, columns=1:5, mapping=aes(colour=cluster))</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<pre class="r"><code>norm_cluster &lt;- kmeans(scale(data_iris[,1:4, with=F], scale=T), 3)
+data_iris$cluster &lt;- as.factor(norm_cluster$cluster)</code></pre>
+<pre class="r"><code>ggpairs(data_iris, clolumns=1:5, mapping=aes(colour=cluster))</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<pre class="r"><code>set.seed(456)
+performance &lt;- c()
+for (i in rep(1:100, times=30)) {
+  clust &lt;- kmeans(data_iris[,1:4, with=F],i)
+  performance &lt;- c(performance, 1-clust$tot.withinss/clust$totss)
+}
+
+perf_df &lt;- data.frame(metrics=performance, number_of_center=rep(1:100, times=30))</code></pre>
+<pre class="r"><code>ggplot(perf_df, 
+       aes(x=number_of_center, y=metrics)) + 
+  geom_point(alpha=0.2) + 
+  geom_vline(xintercept=3, 
+             color=&#39;red&#39;)</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-52-1.png" width="672" /></p>
+<pre class="r"><code>head(iris)</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<pre class="r"><code>ggplot(iris, 
+       aes(Petal.Length, 
+           Petal.Width, 
+           color=Species)) + 
+  geom_point()</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<pre class="r"><code>set.seed(20)
+irisCluster &lt;- kmeans(iris[,3:4], 3, nstart=20)
+irisCluster</code></pre>
+<pre><code>## K-means clustering with 3 clusters of sizes 52, 48, 50
+## 
+## Cluster means:
+##   Petal.Length Petal.Width
+## 1     4.269231    1.342308
+## 2     5.595833    2.037500
+## 3     1.462000    0.246000
+## 
+## Clustering vector:
+##   [1] 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3 3
+##  [38] 3 3 3 3 3 3 3 3 3 3 3 3 3 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1
+##  [75] 1 1 1 2 1 1 1 1 1 2 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 1 2 2 2 2 2 2 1 2 2 2 2
+## [112] 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2 2 2 1 2 2 2 2 2 2 2 2 2
+## [149] 2 2
+## 
+## Within cluster sum of squares by cluster:
+## [1] 13.05769 16.29167  2.02200
+##  (between_SS / total_SS =  94.3 %)
+## 
+## Available components:
+## 
+## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
+## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
+<pre class="r"><code>table(irisCluster$cluster, iris$Species)</code></pre>
+<pre><code>##    
+##     setosa versicolor virginica
+##   1      0         48         4
+##   2      0          2        46
+##   3     50          0         0</code></pre>
+<pre class="r"><code>irisCluster$cluster &lt;- as.factor(irisCluster$cluster)</code></pre>
+<pre class="r"><code>ggplot(iris, 
+       aes(Petal.Length, 
+           Petal.Width, 
+           color=irisCluster$cluster)) +
+  geom_point()</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<pre class="r"><code>set.seed(1234)
+x &lt;- rnorm(12, mean=rep(1:3, each=4), sd=0.2)
+y &lt;- rnorm(12, mean=rep(c(1, 2, 1), each=4), sd=0.2)</code></pre>
+<pre class="r"><code>plot(x, y, col=&quot;blue&quot;, pch=19, cex=2)
+text(x + 0.05, y + 0.05, labels=as.character(1:12))</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<pre class="r"><code>dataFrame &lt;- data.frame(x, y)
+kmeansObj &lt;- kmeans(dataFrame, centers=3)
+names(kmeansObj)</code></pre>
+<pre><code>## [1] &quot;cluster&quot;      &quot;centers&quot;      &quot;totss&quot;        &quot;withinss&quot;     &quot;tot.withinss&quot;
+## [6] &quot;betweenss&quot;    &quot;size&quot;         &quot;iter&quot;         &quot;ifault&quot;</code></pre>
+<pre class="r"><code>kmeansObj$cluster</code></pre>
+<pre><code>##  [1] 3 1 1 3 2 2 2 2 2 2 2 2</code></pre>
+<pre class="r"><code>par(mar=rep(0.2, 4))
+plot(x,y, col=kmeansObj$cluster, pch=19, cex=2)
+points(kmeansObj$centers, col=1:3, pch=3, cex=3, lwd=3)</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<pre class="r"><code>set.seed(1234)
+dataMatrix &lt;- as.matrix(dataFrame)[sample(1:12), ]
+kmeansObj &lt;- kmeans(dataMatrix, centers = 3)</code></pre>
+<pre class="r"><code>par(mfrow = c(1, 2))
+image(t(dataMatrix)[, nrow(dataMatrix):1], yaxt = &quot;n&quot;, main = &quot;Original Data&quot;)
+image(t(dataMatrix)[, order(kmeansObj$cluster)], yaxt = &quot;n&quot;, main = &quot;Clustered Data&quot;)</code></pre>
+<p><img src="/post/2018-08-12-k-means-clustering-analysis_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+</div>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-38508489-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  
+  <hr/>
+  © <a href="https://www.bryanschafroth.com">Bryan Schafroth</a> 2020 | <a href="https://www.linkedin.com/in/bryanschafroth">LinkedIn</a>
+  
+  </footer>
+  </body>
+</html>
+

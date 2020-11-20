@@ -6,10 +6,19 @@
     <description>Recent content in EDA in Data Science on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 12 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/eda-in-data-science/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>K-Means Clustering Analysis</title>
+      <link>/post/2018/08/12/k-means-clustering-analysis/</link>
+      <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/08/12/k-means-clustering-analysis/</guid>
+      <description>K-Means ClusteringThe first section uses the iris data set and k-means clustering starting with 3 cluster centers and an nstart of 15. The results are displayed below in the fit object. There are 3 clusters sized 50, 62, and 38. The within sum of squares by cluster is 88.4% and the smaller number (15.15, 39.82, &amp;amp; 23.87) indicates how closely related objects are in the clusters. The first cluster has the most related objects and the second cluster has the lesser of related objects mostly taken from the third cluster.</description>
+    </item>
     
     <item>
       <title>R Analysis - Plotting Graphics</title>

@@ -228,6 +228,42 @@
     </item>
     
     <item>
+      <title>algorithms</title>
+      <link>/tags/algorithms/</link>
+      <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/algorithms/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Exploration</title>
+      <link>/tags/data-exploration/</link>
+      <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/data-exploration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EDA in Data Science</title>
+      <link>/tags/eda-in-data-science/</link>
+      <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/eda-in-data-science/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>k-means</title>
+      <link>/tags/k-means/</link>
+      <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/k-means/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>big data</title>
       <link>/tags/big-data/</link>
       <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
@@ -237,20 +273,11 @@
     </item>
     
     <item>
-      <title>k-means</title>
-      <link>/tags/k-means/</link>
+      <title>GIS</title>
+      <link>/tags/gis/</link>
       <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
       
-      <guid>/tags/k-means/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Data Exploration</title>
-      <link>/tags/data-exploration/</link>
-      <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/data-exploration/</guid>
+      <guid>/tags/gis/</guid>
       <description></description>
     </item>
     
@@ -296,15 +323,6 @@
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/data-preprocessing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>EDA in Data Science</title>
-      <link>/tags/eda-in-data-science/</link>
-      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/eda-in-data-science/</guid>
       <description></description>
     </item>
     
@@ -368,15 +386,6 @@
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/tidyverse/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>algorithms</title>
-      <link>/tags/algorithms/</link>
-      <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/algorithms/</guid>
       <description></description>
     </item>
     
