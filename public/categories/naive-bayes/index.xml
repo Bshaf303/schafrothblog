@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Naive Bayes on Bryan Schafroth Portfolio</title>
+    <link>/categories/naive-bayes/</link>
+    <description>Recent content in Naive Bayes on Bryan Schafroth Portfolio</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 27 May 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/naive-bayes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Naive Bayes SMS Message Classifier</title>
+      <link>/post/2018/05/27/naive-bayes-sms-message-classifier/</link>
+      <pubDate>Sun, 27 May 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/05/27/naive-bayes-sms-message-classifier/</guid>
+      <description>Naive Bayes SMS Message ClassifierThis analysis demonstrates the naive bayes classifier in determining the spam or ham status of 4837 SMS messages. The data set is retrieved from: http://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection. The data needs explicit cleaning to prepare it to run through a naive bayes classifier. A training and test set is created to train and validate the predictive ability ofy the model. There are summary plots of the words found in abundance in the data.</description>
+    </item>
+    
+  </channel>
+</rss>

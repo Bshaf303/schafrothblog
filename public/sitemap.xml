@@ -434,7 +434,22 @@
   
   <url>
     <loc>/categories/alogrithms/</loc>
-    <lastmod>2018-05-20T00:00:00+00:00</lastmod>
+    <lastmod>2018-05-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/classification/</loc>
+    <lastmod>2018-05-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/naive-bayes/</loc>
+    <lastmod>2018-05-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/05/27/naive-bayes-sms-message-classifier/</loc>
+    <lastmod>2018-05-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -444,11 +459,6 @@
   
   <url>
     <loc>/tags/caret-library/</loc>
-    <lastmod>2018-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/classification/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
   </url>
   

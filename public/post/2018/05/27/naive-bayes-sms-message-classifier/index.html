@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Naive Bayes SMS Message Classifier | Bryan Schafroth Portfolio</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/fonts.css" />
+    
+  </head>
+
+  <body>
+    <nav>
+    <ul class="menu">
+      
+      <li><a href="/">Home</a></li>
+      
+      <li><a href="/about/">About</a></li>
+      
+      <li><a href="/post/">Posts</a></li>
+      
+      <li><a href="/categories/">Categories</a></li>
+      
+      <li><a href="/tags/">Tags</a></li>
+      
+    </ul>
+    <hr/>
+    </nav>
+
+<div class="article-meta">
+<h1><span class="title">Naive Bayes SMS Message Classifier</span></h1>
+<h2 class="author">Bryan</h2>
+<h2 class="date">2018/05/27</h2>
+</div>
+
+<main>
+
+
+
+<div id="naive-bayes-sms-message-classifier" class="section level3">
+<h3>Naive Bayes SMS Message Classifier</h3>
+<p>This analysis demonstrates the naive bayes classifier in determining the spam or ham status of 4837 SMS messages. The data set is retrieved from: <a href="http://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection" class="uri">http://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection</a>. The data needs explicit cleaning to prepare it to run through a naive bayes classifier. A training and test set is created to train and validate the predictive ability ofy the model. There are summary plots of the words found in abundance in the data. The summary will show the model’s predictive accuracy and the simplicity of running the data. Crossfold validation method is used and the Accuracy and Kappa are the metrics to judge performance.</p>
+<div id="load-libraries" class="section level4">
+<h4>Load Libraries</h4>
+<pre class="r"><code>library(tidyverse)
+library(e1071)
+library(tm)
+library(SnowballC)
+library(wordcloud)
+library(gmodels)
+library(caret)</code></pre>
+</div>
+<div id="download-the-dataset" class="section level4">
+<h4>Download the Dataset</h4>
+<pre class="r"><code># place data into frame
+url = &quot;https://archive.ics.uci.edu/ml/machine-learning-databases/00228/smsspamcollection.zip&quot; 
+# create temp file for the zip file
+zip_file = tempfile(fileext = &quot;.zip&quot;) 
+# unzip data into temp location
+download.file(url, zip_file, method = &#39;libcurl&#39;, mode = &quot;wb&quot;) 
+# read data into a tibble and specify data type for each variable, see EPA data source
+
+SMSSpamCollection = read_delim(zip_file, delim = &quot;\t&quot;, col_names = c(&quot;type&quot;, &quot;text&quot;), col_types = &quot;ff&quot;) 
+# remove spaces in variables and replace with underscore
+#names(SMSSpamCollection) = gsub(&quot;\\s&quot;, &quot;_&quot;, names(SMSSpamCollection)) 
+unlink(zip_file)</code></pre>
+<pre class="r"><code>msg &lt;- SMSSpamCollection #save to data frame</code></pre>
+<pre class="r"><code>glimpse(msg) #check data</code></pre>
+<pre><code>## Rows: 4,837
+## Columns: 2
+## $ type &lt;fct&gt; ham, ham, spam, ham, ham, spam, ham, ham, spam, spam, ham, spa...
+## $ text &lt;fct&gt; &quot;Go until jurong point, crazy.. Available only in bugis n grea...</code></pre>
+<pre class="r"><code>table(msg$type) # 13.2% spam 86.8% ham</code></pre>
+<pre><code>## 
+##  ham spam 
+## 4199  638</code></pre>
+<p>The first part of this analysis uses a dataset size of 3184 and runs through to prediction and accuracy measurement of the model. It was unknown that the data set is 4837 observations. That section will follow last. Thus this will be treated as an exercise in smaller verses larger data sets and how the two compare in accuracy. It is assumed the data is random and the model should work.</p>
+<pre class="r"><code>msg_corpus &lt;- VCorpus(VectorSource(msg$text)) #create source object and sent to frame</code></pre>
+<pre class="r"><code>print(msg_corpus) #check to see if documents are now stored</code></pre>
+<pre><code>## &lt;&lt;VCorpus&gt;&gt;
+## Metadata:  corpus specific: 0, document level (indexed): 0
+## Content:  documents: 4837</code></pre>
+<pre class="r"><code>inspect(msg_corpus[1:2]) #check summary of first two messages. </code></pre>
+<pre><code>## &lt;&lt;VCorpus&gt;&gt;
+## Metadata:  corpus specific: 0, document level (indexed): 0
+## Content:  documents: 2
+## 
+## [[1]]
+## &lt;&lt;PlainTextDocument&gt;&gt;
+## Metadata:  7
+## Content:  chars: 111
+## 
+## [[2]]
+## &lt;&lt;PlainTextDocument&gt;&gt;
+## Metadata:  7
+## Content:  chars: 29</code></pre>
+<pre class="r"><code>as.character(msg_corpus[[1]]) #view actual  first message</code></pre>
+<pre><code>## [1] &quot;Go until jurong point, crazy.. Available only in bugis n great world la e buffet... Cine there got amore wat...&quot;</code></pre>
+<pre class="r"><code>lapply(msg_corpus[1:2], as.character) #view fisrt two messages</code></pre>
+<pre><code>## $`1`
+## [1] &quot;Go until jurong point, crazy.. Available only in bugis n great world la e buffet... Cine there got amore wat...&quot;
+## 
+## $`2`
+## [1] &quot;Ok lar... Joking wif u oni...&quot;</code></pre>
+<pre class="r"><code>msg_clean &lt;- tm_map(msg_corpus, content_transformer(tolower))#transform to all lowercase letters
+as.character(msg_clean[[1]]) # check that it worked on first line</code></pre>
+<pre><code>## [1] &quot;go until jurong point, crazy.. available only in bugis n great world la e buffet... cine there got amore wat...&quot;</code></pre>
+<pre class="r"><code>msg_clean &lt;- tm_map(msg_clean, removeNumbers) #removes numbers from data
+msg_clean &lt;- tm_map(msg_clean, removeWords, stopwords()) #removes filler words
+msg_clean &lt;- tm_map(msg_clean, removePunctuation) #removes punctuation but ... can merge unwanted strings error
+#This function creates error in DocumentTermMatrix step
+#replacePunctuation &lt;- function(x) {
+#  gsub(&quot;[[:punct:]]+&quot;,&quot; &quot;, x)
+#}
+#msg_clean &lt;- tm_map(msg_clean, replacePunctuation) #Error
+#msg_clean &lt;- tm_map(msg_clean, PlainTextDocument) #showing alternate may work without error
+as.character(msg_clean[[1]]) # check that punctuation is removed. </code></pre>
+<pre><code>## [1] &quot;go  jurong point crazy available   bugis n great world la e buffet cine  got amore wat&quot;</code></pre>
+<pre class="r"><code>as.character(msg_clean[[14]]) #check line 14 before stemming</code></pre>
+<pre><code>## [1] &quot;  searching   right words  thank    breather  promise  wont take  help  granted  will fulfil  promise    wonderful   blessing   times&quot;</code></pre>
+<pre class="r"><code>msg_clean &lt;- tm_map(msg_clean, stemDocument) #remove suffix from words
+as.character(msg_clean[[14]]) #confirm line 14 for removed suffix&#39;s</code></pre>
+<pre><code>## [1] &quot;search right word thank breather promis wont take help grant will fulfil promis wonder bless time&quot;</code></pre>
+<pre class="r"><code>msg_clean &lt;- tm_map(msg_clean, stripWhitespace) #removes extra white spaces between words
+as.character(msg_clean[[14]]) #confirm even spacing now</code></pre>
+<pre><code>## [1] &quot;search right word thank breather promis wont take help grant will fulfil promis wonder bless time&quot;</code></pre>
+<pre class="r"><code>msg_dtm &lt;- DocumentTermMatrix(msg_clean) #had errors needed to change removePunctuation function above</code></pre>
+<pre class="r"><code>msg_dtm #check</code></pre>
+<pre><code>## &lt;&lt;DocumentTermMatrix (documents: 4837, terms: 6605)&gt;&gt;
+## Non-/sparse entries: 40119/31908266
+## Sparsity           : 100%
+## Maximal term length: 40
+## Weighting          : term frequency (tf)</code></pre>
+<pre class="r"><code>dtm &lt;- TermDocumentMatrix(msg_clean)
+m &lt;- as.matrix(dtm)
+v &lt;- sort(rowSums(m), decreasing=TRUE)
+d &lt;- data.frame(word =names(v), freq=v)</code></pre>
+<p>Displaying the top 15 words and the frequency they are occurring in the data. The words call, now, get, free all seem like good spam words. The graphic is a word cloud and also demonstrated the 10 most dominant words. The list is more precise in this aspect of identifying top words.</p>
+<pre class="r"><code>head(d,15)</code></pre>
+<pre><code>##      word freq
+## call call  658
+## ham   ham  629
+## now   now  483
+## get   get  451
+## can   can  405
+## will will  391
+## just just  369
+## come come  301
+## free free  278
+## ltgt ltgt  276
+## know know  272
+## day   day  260
+## like like  259
+## love love  255
+## want want  245</code></pre>
+<pre class="r"><code>set.seed(1234)
+wordcloud(words = d$word, freq = d$freq, min.freq = 10,
+          max.words=175, random.order=FALSE, rot.per=0.35, 
+          colors=brewer.pal(8, &quot;Dark2&quot;))</code></pre>
+<p><img src="/post/2018-05-27-naive-bayes-sms-message-classifier_files/figure-html/wdcloud1-1.png" width="672" /></p>
+<p>In the bar plot we get more of the same and another way to see the data. We can probably ignore the “ham” word and focus on the remaining words.</p>
+<pre class="r"><code>barplot(d[1:15,]$freq, las = 2, names.arg = d[1:15,]$word,
+        col =&quot;cornflowerblue&quot;, main =&quot;15 Most Frequent Words&quot;,
+        ylab = &quot;Frequency&quot;)</code></pre>
+<p><img src="/post/2018-05-27-naive-bayes-sms-message-classifier_files/figure-html/barplot1-1.png" width="672" /></p>
+<p>This word cloud doesn’t do much but show the dominant “ham” word. I doubt most will have the time to read through the text in this graphic.</p>
+<pre class="r"><code>ham &lt;- subset(msg, type==&quot;ham&quot;)</code></pre>
+<pre class="r"><code>wordcloud(ham$text, min.freq = 50, colors=brewer.pal(8, &quot;Dark2&quot;))</code></pre>
+<p><img src="/post/2018-05-27-naive-bayes-sms-message-classifier_files/figure-html/wordcloud2-1.png" width="672" /></p>
+<p>This graphic is more clear and again just displays what we already know from the simple table presented first. “call” “now” “free” sure standout as marketing terms.</p>
+<pre class="r"><code>spam &lt;- subset(msg, type==&quot;spam&quot;)</code></pre>
+<pre class="r"><code>wordcloud(spam$text, min.freq = 15, colors=brewer.pal(8, &quot;Set1&quot;))</code></pre>
+<p><img src="/post/2018-05-27-naive-bayes-sms-message-classifier_files/figure-html/wd3-1.png" width="672" /></p>
+</div>
+</div>
+<div id="data-split---training-and-test-sets" class="section level3">
+<h3>Data Split - Training and Test Sets</h3>
+<pre class="r"><code>msg_dtm_train &lt;- msg_dtm[1:3385, ] #training set created
+msg_dtm_test &lt;- msg_dtm[3386:4837, ] #test set created
+
+msg_train_labels &lt;- msg[1:3385, ]$type #Create labels for table later
+msg_test_labels &lt;- msg[3386:4837, ]$type #create labels for table later</code></pre>
+<p>This is a check up on the proportions of train to test data and seems reasonable at 86% and 14%</p>
+<pre class="r"><code>#close to the first table 13% spam 87% ham.
+prop.table(table(msg_train_labels)) #confirm labels are proportioned to train sets</code></pre>
+<pre><code>## msg_train_labels
+##       ham      spam 
+## 0.8691285 0.1308715</code></pre>
+<pre class="r"><code>#staying in close precentiles 87% and 13%
+prop.table(table(msg_test_labels)) #confirm labels are proportioned to test sets</code></pre>
+<pre><code>## msg_test_labels
+##       ham      spam 
+## 0.8657025 0.1342975</code></pre>
+<p>Back to the overall text map. We still find top 10 near middle of graphic. At this point we get it and need to move on to the predictive model.</p>
+<pre class="r"><code>wordcloud(msg_clean, min.freq = 32, random.order = FALSE, colors=brewer.pal(8, &quot;Set2&quot;))#display 1% of the repetative words</code></pre>
+<p><img src="/post/2018-05-27-naive-bayes-sms-message-classifier_files/figure-html/wdc-1.png" width="672" /></p>
+<pre class="r"><code>#wordcloud(msg_clean, min.freq = 32, random.order = FALSE, max.words = 5)
+#wordcloud(msg$t, min.freq = 32, random.order = FALSE, max.words = 5)</code></pre>
+<pre class="r"><code>msg_freq_words &lt;- findFreqTerms(msg_dtm_train, 5) #get words that show at least 5 times, into frame
+str(msg_freq_words) #check frame</code></pre>
+<pre><code>##  chr [1:1086] &quot;abiola&quot; &quot;abl&quot; &quot;abt&quot; &quot;accept&quot; &quot;access&quot; &quot;account&quot; &quot;across&quot; ...</code></pre>
+<pre class="r"><code>msg_dtm_freq_train &lt;- msg_dtm_train[ , msg_freq_words] #filter the DTM for the training set
+msg_dtm_freq_test &lt;- msg_dtm_test[ , msg_freq_words] #filter the DTM for the test set</code></pre>
+<pre class="r"><code>#change numeric 0,1 to character values for classifer to work
+convert_counts &lt;- function(x) {
+  x &lt;- ifelse(x &gt; 0, &quot;yes&quot;, &quot;no&quot;)
+}</code></pre>
+<pre class="r"><code>msg_train &lt;- apply(msg_dtm_freq_train, MARGIN = 2, convert_counts) #convert train set 0,1 to chars
+msg_test &lt;- apply(msg_dtm_freq_test, MARGIN = 2, convert_counts) #convert test set 0,1 to yes, no</code></pre>
+<pre class="r"><code>msg_classifier &lt;- naiveBayes(msg_train, msg_train_labels) #build the training model</code></pre>
+<pre class="r"><code># 3385 total
+msg_classifier$apriori</code></pre>
+<pre><code>## msg_train_labels
+##  ham spam 
+## 2942  443</code></pre>
+<pre class="r"><code>glimpse(msg_test)</code></pre>
+<pre><code>##  chr [1:1452, 1:1086] &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;no&quot; ...
+##  - attr(*, &quot;dimnames&quot;)=List of 2
+##   ..$ Docs : chr [1:1452] &quot;3386&quot; &quot;3387&quot; &quot;3388&quot; &quot;3389&quot; ...
+##   ..$ Terms: chr [1:1086] &quot;abiola&quot; &quot;abl&quot; &quot;abt&quot; &quot;accept&quot; ...</code></pre>
+<pre class="r"><code>glimpse(msg_train)</code></pre>
+<pre><code>##  chr [1:3385, 1:1086] &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;no&quot; &quot;no&quot; ...
+##  - attr(*, &quot;dimnames&quot;)=List of 2
+##   ..$ Docs : chr [1:3385] &quot;1&quot; &quot;2&quot; &quot;3&quot; &quot;4&quot; ...
+##   ..$ Terms: chr [1:1086] &quot;abiola&quot; &quot;abl&quot; &quot;abt&quot; &quot;accept&quot; ...</code></pre>
+<pre class="r"><code>glimpse(msg_train_labels)</code></pre>
+<pre><code>##  Factor w/ 2 levels &quot;ham&quot;,&quot;spam&quot;: 1 1 2 1 1 2 1 1 2 2 ...</code></pre>
+<pre class="r"><code>set.seed(98)
+msg_test_pred &lt;- predict(msg_classifier, msg_test) #test the classifer on new data</code></pre>
+<p>Here is the predictive analysis. The table shows a total of 28 (2 + 26) were incorrectly classified and that is 2.9%. 2 out of 820 messages were misidentified as spam, while 26 of 135 messages were incorrectly labeled as ham. For a first try at Naive Bayes classification these results seem good granted the data is smaller than the 5574 intended size. The accuracy of the model is 97% with a kappa of 0.87. 26 incorrectly identified is still a little high but 2 is not bad.</p>
+<pre class="r"><code>#Create table to compare perdictions to true values
+CrossTable(msg_test_pred, msg_test_labels, 
+           prop.chisq = FALSE, prop.t = FALSE, 
+           dnn = c(&#39;predicted&#39;, &#39;actual&#39;))</code></pre>
+<pre><code>## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## |           N / Row Total |
+## |           N / Col Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  1452 
+## 
+##  
+##              | actual 
+##    predicted |       ham |      spam | Row Total | 
+## -------------|-----------|-----------|-----------|
+##          ham |      1251 |        25 |      1276 | 
+##              |     0.980 |     0.020 |     0.879 | 
+##              |     0.995 |     0.128 |           | 
+## -------------|-----------|-----------|-----------|
+##         spam |         6 |       170 |       176 | 
+##              |     0.034 |     0.966 |     0.121 | 
+##              |     0.005 |     0.872 |           | 
+## -------------|-----------|-----------|-----------|
+## Column Total |      1257 |       195 |      1452 | 
+##              |     0.866 |     0.134 |           | 
+## -------------|-----------|-----------|-----------|
+## 
+## </code></pre>
+<pre class="r"><code>confusionMatrix(msg_test_pred, msg_test_labels, positive = &#39;spam&#39;)</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  ham spam
+##       ham  1251   25
+##       spam    6  170
+##                                           
+##                Accuracy : 0.9787          
+##                  95% CI : (0.9698, 0.9854)
+##     No Information Rate : 0.8657          
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+##                                           
+##                   Kappa : 0.9042          
+##                                           
+##  Mcnemar&#39;s Test P-Value : 0.001225        
+##                                           
+##             Sensitivity : 0.8718          
+##             Specificity : 0.9952          
+##          Pos Pred Value : 0.9659          
+##          Neg Pred Value : 0.9804          
+##              Prevalence : 0.1343          
+##          Detection Rate : 0.1171          
+##    Detection Prevalence : 0.1212          
+##       Balanced Accuracy : 0.9335          
+##                                           
+##        &#39;Positive&#39; Class : spam            
+## </code></pre>
+<p>Here we add laplace 1 to the model to see if we can improve accuracy. Instead we increase our incorrectly classified variables by 4 and 1 (6 and 27) and our accuracy and kappa drops 96.5% and 0.84. Still pretty high but not perfect.</p>
+<pre class="r"><code>msg_classifier2 &lt;- naiveBayes(msg_train, msg_train_labels, laplace = 1) #adjust laplace to 1
+msg_test_pred2 &lt;- predict(msg_classifier2, msg_test)</code></pre>
+<pre class="r"><code>CrossTable(msg_test_pred2, msg_test_labels, 
+           prop.chisq = FALSE, prop.t = FALSE, prop.r = FALSE,
+           dnn = c(&#39;predicted&#39;, &#39;actual&#39;))</code></pre>
+<pre><code>## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## |           N / Col Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  1452 
+## 
+##  
+##              | actual 
+##    predicted |       ham |      spam | Row Total | 
+## -------------|-----------|-----------|-----------|
+##          ham |      1251 |        31 |      1282 | 
+##              |     0.995 |     0.159 |           | 
+## -------------|-----------|-----------|-----------|
+##         spam |         6 |       164 |       170 | 
+##              |     0.005 |     0.841 |           | 
+## -------------|-----------|-----------|-----------|
+## Column Total |      1257 |       195 |      1452 | 
+##              |     0.866 |     0.134 |           | 
+## -------------|-----------|-----------|-----------|
+## 
+## </code></pre>
+<pre class="r"><code>confusionMatrix(msg_test_pred2, msg_test_labels, positive = &#39;spam&#39;)</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  ham spam
+##       ham  1251   31
+##       spam    6  164
+##                                         
+##                Accuracy : 0.9745        
+##                  95% CI : (0.965, 0.982)
+##     No Information Rate : 0.8657        
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16     
+##                                         
+##                   Kappa : 0.8841        
+##                                         
+##  Mcnemar&#39;s Test P-Value : 7.961e-05     
+##                                         
+##             Sensitivity : 0.8410        
+##             Specificity : 0.9952        
+##          Pos Pred Value : 0.9647        
+##          Neg Pred Value : 0.9758        
+##              Prevalence : 0.1343        
+##          Detection Rate : 0.1129        
+##    Detection Prevalence : 0.1171        
+##       Balanced Accuracy : 0.9181        
+##                                         
+##        &#39;Positive&#39; Class : spam          
+## </code></pre>
+<pre class="r"><code>#the laplace=1 estimator predicitve model did not improve performance because we can see (6+27)=33 incorrectly classified 
+#messages increases slightly from the 26 earlier. </code></pre>
+</div>
+<div id="section-2---replay" class="section level3">
+<h3>Section 2 - Replay</h3>
+<p>Here we will redo the previous steps with more data, or correctly, the 5574 points in the data set that did not import the first time. We will focus on the differences and look for any improvements over less data (3184 verses 5574).</p>
+<pre class="r"><code>#Start all over again
+spam_raw &lt;- SMSSpamCollection
+names(spam_raw) &lt;- c(&quot;type&quot;, &quot;text&quot;) #label V1 and V2.</code></pre>
+<pre><code>## tibble [4,837 x 2] (S3: spec_tbl_df/tbl_df/tbl/data.frame)
+##  $ type: Factor w/ 2 levels &quot;ham&quot;,&quot;spam&quot;: 1 1 2 1 1 2 1 1 2 2 ...
+##  $ text: Factor w/ 4522 levels &quot;Go until jurong point, crazy.. Available only in bugis n great world la e buffet... Cine there got amore wat...&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
+##  - attr(*, &quot;problems&quot;)= tibble [39 x 5] (S3: tbl_df/tbl/data.frame)
+##   ..$ row     : int [1:39] 283 283 454 454 454 454 454 454 454 476 ...
+##   ..$ col     : chr [1:39] &quot;text&quot; &quot;text&quot; &quot;text&quot; &quot;text&quot; ...
+##   ..$ expected: chr [1:39] &quot;delimiter or quote&quot; &quot;delimiter or quote&quot; &quot;delimiter or quote&quot; &quot;delimiter or quote&quot; ...
+##   ..$ actual  : chr [1:39] &quot; &quot; &quot;H&quot; &quot; &quot; &quot;Y&quot; ...
+##   ..$ file    : chr [1:39] &quot;&#39;C:\\Users\\Zeus\\AppData\\Local\\Temp\\RtmpOqCqTb\\fileca8340c50a2.zip&#39;&quot; &quot;&#39;C:\\Users\\Zeus\\AppData\\Local\\Temp\\RtmpOqCqTb\\fileca8340c50a2.zip&#39;&quot; &quot;&#39;C:\\Users\\Zeus\\AppData\\Local\\Temp\\RtmpOqCqTb\\fileca8340c50a2.zip&#39;&quot; &quot;&#39;C:\\Users\\Zeus\\AppData\\Local\\Temp\\RtmpOqCqTb\\fileca8340c50a2.zip&#39;&quot; ...
+##  - attr(*, &quot;spec&quot;)=
+##   .. cols(
+##   ..   type = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE),
+##   ..   text = col_factor(levels = NULL, ordered = FALSE, include_na = FALSE)
+##   .. )</code></pre>
+<pre class="r"><code>glimpse(msg2$type)</code></pre>
+<pre><code>##  Factor w/ 2 levels &quot;ham&quot;,&quot;spam&quot;: 1 1 2 1 1 2 1 1 2 2 ...</code></pre>
+<pre class="r"><code>msg_corpus2 &lt;- VCorpus(VectorSource(msg2$text)) #create source object and sent to frame
+msg_clean2 &lt;- tm_map(msg_corpus2, content_transformer(tolower))#transform to all lowercase letters
+msg_clean2 &lt;- tm_map(msg_clean2, removeNumbers) #removes numbers from data
+msg_clean2 &lt;- tm_map(msg_clean2, removeWords, stopwords()) #removes filler words
+msg_clean2 &lt;- tm_map(msg_clean2, removePunctuation) #removes punctuation but ... can merge unwanted strings
+msg_clean2 &lt;- tm_map(msg_clean2, stemDocument) #remove suffix from words
+msg_clean2 &lt;- tm_map(msg_clean2, stripWhitespace) #removes extra white spaces between words
+msg_dtm2 &lt;- DocumentTermMatrix(msg_clean2) 
+dtm2 &lt;- TermDocumentMatrix(msg_clean2)#top 10 words
+m2 &lt;- as.matrix(dtm2)
+v2 &lt;- sort(rowSums(m2), decreasing=TRUE)
+d2 &lt;- data.frame(word =names(v2), freq=v2)</code></pre>
+<p>We can see “ham” and “spam” are out and “call”, “now”, “get”..“free” are still in the top words grouping.</p>
+<pre class="r"><code>head(d2,10)</code></pre>
+<pre><code>##      word freq
+## call call  658
+## ham   ham  629
+## now   now  483
+## get   get  451
+## can   can  405
+## will will  391
+## just just  369
+## come come  301
+## free free  278
+## ltgt ltgt  276</code></pre>
+<p>This graphic is working much better and the color coding is working to group similar frequent terms.</p>
+<pre class="r"><code>set.seed(4567)
+wordcloud(words = d2$word, freq = d2$freq, min.freq = 1,
+          max.words=200, random.order=FALSE, rot.per=0.35, 
+          colors=brewer.pal(8, &quot;Dark2&quot;))</code></pre>
+<p><img src="/post/2018-05-27-naive-bayes-sms-message-classifier_files/figure-html/wdx-1.png" width="672" />
+Oddly, “ham”/“spam” are back in the bar plot. But it is better than before because we can see the other words that dominate spam messaging.</p>
+<pre class="r"><code>barplot(d2[1:10,]$freq, las = 2, names.arg = d[1:10,]$word,
+        col =&quot;brown3&quot;, main =&quot;Most frequent words&quot;,
+        ylab = &quot;Word frequencies&quot;)</code></pre>
+<p><img src="/post/2018-05-27-naive-bayes-sms-message-classifier_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p>This graphic is producing some problems. The frequency was increased to 55 or 1% of the data size. And reduced the warning messages down to two from 10 prior before publishing these results. Interesting many messages have “sorry” in them or “need”….</p>
+<pre class="r"><code>ham2 &lt;- subset(msg2, type==&quot;ham&quot;)
+wordcloud(ham2$text, min.freq = 55, colors=brewer.pal(8, &quot;Dark2&quot;))</code></pre>
+<p><img src="/post/2018-05-27-naive-bayes-sms-message-classifier_files/figure-html/wordcloud-1.png" width="672" /></p>
+<p>This graphic is better and definitely shows some of the spammy type words: get, mobile, prize, call, reply, stop, etc. Also increased the frequency to 55 from the first attempt at this.</p>
+<pre class="r"><code>spam2 &lt;- subset(msg, type==&quot;spam&quot;)
+wordcloud(spam2$text, min.freq = 15, colors=brewer.pal(8, &quot;Dark2&quot;))</code></pre>
+<p><img src="/post/2018-05-27-naive-bayes-sms-message-classifier_files/figure-html/wordC2-1.png" width="672" /></p>
+<pre class="r"><code>msg_dtm_train2 &lt;- msg_dtm2[1:3385, ] #training set created
+msg_dtm_test2 &lt;- msg_dtm2[3386:4837, ] #test set created</code></pre>
+<pre class="r"><code>msg_train_labels2 &lt;- msg2[1:3385, ]$type #Create labels for table later
+msg_test_labels2 &lt;- msg2[3386:4837, ]$type #create labels for table later</code></pre>
+<p>The proportions are the same as before because we used a calculator to figure a 70/30 split.</p>
+<pre class="r"><code>prop.table(table(msg_train_labels2)) #confirm labels are proportioned to train sets</code></pre>
+<pre><code>## msg_train_labels2
+##       ham      spam 
+## 0.8691285 0.1308715</code></pre>
+<pre class="r"><code>prop.table(table(msg_test_labels2)) #confirm labels are proportioned to test sets</code></pre>
+<pre><code>## msg_test_labels2
+##       ham      spam 
+## 0.8657025 0.1342975</code></pre>
+<pre class="r"><code>#wordcloud(msg_clean2, min.freq = 32, random.order = FALSE)#display 1% of the repetative words
+#wordcloud(msg_clean2, min.freq = 32, random.order = FALSE, max.words = 5)</code></pre>
+<pre class="r"><code>msg_freq_words2 &lt;- findFreqTerms(msg_dtm_train2, 5) #get words that show at least 5 times, into frame
+msg_dtm_freq_train2 &lt;- msg_dtm_train2[ , msg_freq_words2] #filter the DTM for the training set
+msg_dtm_freq_test2 &lt;- msg_dtm_test2[ , msg_freq_words2] #filter the DTM for the test set</code></pre>
+<pre class="r"><code>#change numeric 0,1 to character values for classifer to work
+convert_counts2 &lt;- function(x) {
+  x &lt;- ifelse(x &gt; 0, &quot;yes&quot;, &quot;no&quot;)
+}</code></pre>
+<pre class="r"><code>msg_train2 &lt;- apply(msg_dtm_freq_train2, MARGIN = 2, convert_counts2) #convert train set 0,1 to chars
+msg_test2 &lt;- apply(msg_dtm_freq_test2, MARGIN = 2, convert_counts2) #convert test set 0,1 to yes, no
+msg_classifier2 &lt;- naiveBayes(msg_train2, msg_train_labels2, laplace = 1) #build the training model and place in frame
+msg_test_pred3 &lt;- predict(msg_classifier2, msg_test2) #test the classifer on new data
+#Create table to compare perdictions to true values</code></pre>
+<p>This time we show the laplace 1 first and show how it increases the incorrectly identified units of 5 + 33 to 38 higher than our first model of 2+26= 28. However, the accuracy climbs to 97.7% and a bigger kappa or 0.898. Improvements on accuracy and kappa but slightly more incorrectly labeled terms.</p>
+<pre class="r"><code>CrossTable(msg_test_pred3, msg_test_labels2, 
+           prop.chisq = FALSE, prop.t = FALSE, 
+           dnn = c(&#39;predicted&#39;, &#39;actual&#39;))</code></pre>
+<pre><code>## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## |           N / Row Total |
+## |           N / Col Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  1452 
+## 
+##  
+##              | actual 
+##    predicted |       ham |      spam | Row Total | 
+## -------------|-----------|-----------|-----------|
+##          ham |      1251 |        31 |      1282 | 
+##              |     0.976 |     0.024 |     0.883 | 
+##              |     0.995 |     0.159 |           | 
+## -------------|-----------|-----------|-----------|
+##         spam |         6 |       164 |       170 | 
+##              |     0.035 |     0.965 |     0.117 | 
+##              |     0.005 |     0.841 |           | 
+## -------------|-----------|-----------|-----------|
+## Column Total |      1257 |       195 |      1452 | 
+##              |     0.866 |     0.134 |           | 
+## -------------|-----------|-----------|-----------|
+## 
+## </code></pre>
+<pre class="r"><code>confusionMatrix(msg_test_pred3, msg_test_labels2, positive = &#39;spam&#39;)</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  ham spam
+##       ham  1251   31
+##       spam    6  164
+##                                         
+##                Accuracy : 0.9745        
+##                  95% CI : (0.965, 0.982)
+##     No Information Rate : 0.8657        
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16     
+##                                         
+##                   Kappa : 0.8841        
+##                                         
+##  Mcnemar&#39;s Test P-Value : 7.961e-05     
+##                                         
+##             Sensitivity : 0.8410        
+##             Specificity : 0.9952        
+##          Pos Pred Value : 0.9647        
+##          Neg Pred Value : 0.9758        
+##              Prevalence : 0.1343        
+##          Detection Rate : 0.1129        
+##    Detection Prevalence : 0.1171        
+##       Balanced Accuracy : 0.9181        
+##                                         
+##        &#39;Positive&#39; Class : spam          
+## </code></pre>
+<pre class="r"><code># more accurate 98%, Kappa at 0.92</code></pre>
+<pre class="r"><code>msg_classifier4 &lt;- naiveBayes(msg_train2, msg_train_labels2) #build the training model and place in frame
+msg_test_pred4 &lt;- predict(msg_classifier4, msg_test2) #test the classifer on new data</code></pre>
+<p>When the laplace 1 is dropped the model also drops the number of incorrectly labeled variables to 6+25= 31. This is still higher than the first model 2+26=28. But with it comes a higher accuracy of 98% and a higher kappa of 0.92! We show the highest accuracy and kappa of 4 trials using the larger data set (5574) however, the incorrectly labeled variables from the smaller data set produced lower mislabeling of 28 verse 31 in this model. So we can see a slight increase of one aspect and decrease in another. More model tuning should take place to refine this prediction to see where the error rate can be reduced.</p>
+<pre class="r"><code>CrossTable(msg_test_pred4, msg_test_labels2, 
+           prop.chisq = FALSE, prop.t = FALSE, 
+           dnn = c(&#39;predicted&#39;, &#39;actual&#39;))</code></pre>
+<pre><code>## 
+##  
+##    Cell Contents
+## |-------------------------|
+## |                       N |
+## |           N / Row Total |
+## |           N / Col Total |
+## |-------------------------|
+## 
+##  
+## Total Observations in Table:  1452 
+## 
+##  
+##              | actual 
+##    predicted |       ham |      spam | Row Total | 
+## -------------|-----------|-----------|-----------|
+##          ham |      1251 |        25 |      1276 | 
+##              |     0.980 |     0.020 |     0.879 | 
+##              |     0.995 |     0.128 |           | 
+## -------------|-----------|-----------|-----------|
+##         spam |         6 |       170 |       176 | 
+##              |     0.034 |     0.966 |     0.121 | 
+##              |     0.005 |     0.872 |           | 
+## -------------|-----------|-----------|-----------|
+## Column Total |      1257 |       195 |      1452 | 
+##              |     0.866 |     0.134 |           | 
+## -------------|-----------|-----------|-----------|
+## 
+## </code></pre>
+<pre class="r"><code>confusionMatrix(msg_test_pred4, msg_test_labels2, positive = &#39;spam&#39;)</code></pre>
+<pre><code>## Confusion Matrix and Statistics
+## 
+##           Reference
+## Prediction  ham spam
+##       ham  1251   25
+##       spam    6  170
+##                                           
+##                Accuracy : 0.9787          
+##                  95% CI : (0.9698, 0.9854)
+##     No Information Rate : 0.8657          
+##     P-Value [Acc &gt; NIR] : &lt; 2.2e-16       
+##                                           
+##                   Kappa : 0.9042          
+##                                           
+##  Mcnemar&#39;s Test P-Value : 0.001225        
+##                                           
+##             Sensitivity : 0.8718          
+##             Specificity : 0.9952          
+##          Pos Pred Value : 0.9659          
+##          Neg Pred Value : 0.9804          
+##              Prevalence : 0.1343          
+##          Detection Rate : 0.1171          
+##    Detection Prevalence : 0.1212          
+##       Balanced Accuracy : 0.9335          
+##                                           
+##        &#39;Positive&#39; Class : spam            
+## </code></pre>
+</div>
+
+</main>
+
+  <footer>
+  <script src="//yihui.name/js/math-code.js"></script>
+<script async src="//mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+<script async src="//yihui.name/js/center-img.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-38508489-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+  
+  <hr/>
+  © <a href="https://www.bryanschafroth.com">Bryan Schafroth</a> 2020 | <a href="https://www.linkedin.com/in/bryanschafroth">LinkedIn</a>
+  
+  </footer>
+  </body>
+</html>
+
