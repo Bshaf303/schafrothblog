@@ -273,12 +273,47 @@
   </url>
   
   <url>
-    <loc>/tags/boxplots/</loc>
-    <lastmod>2018-07-22T00:00:00+00:00</lastmod>
+    <loc>/categories/data-analysis/</loc>
+    <lastmod>2018-07-29T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/data-analysis/</loc>
+    <loc>/tags/data-exploration/</loc>
+    <lastmod>2018-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/data-preprocessing/</loc>
+    <lastmod>2018-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/eda-in-data-science/</loc>
+    <lastmod>2018-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/exploratory-data-analysis/</loc>
+    <lastmod>2018-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/07/29/r-analysis-plotting-graphics/</loc>
+    <lastmod>2018-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r-programming/</loc>
+    <lastmod>2018-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r-techniques/</loc>
+    <lastmod>2018-07-29T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/boxplots/</loc>
     <lastmod>2018-07-22T00:00:00+00:00</lastmod>
   </url>
   
@@ -288,27 +323,7 @@
   </url>
   
   <url>
-    <loc>/tags/data-exploration/</loc>
-    <lastmod>2018-07-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-preprocessing/</loc>
-    <lastmod>2018-07-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/data-wrangling/</loc>
-    <lastmod>2018-07-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/exploratory-data-analysis/</loc>
-    <lastmod>2018-07-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/r-programming/</loc>
     <lastmod>2018-07-22T00:00:00+00:00</lastmod>
   </url>
   
@@ -319,11 +334,6 @@
   
   <url>
     <loc>/tags/data-transformation/</loc>
-    <lastmod>2018-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/eda-in-data-science/</loc>
     <lastmod>2018-07-14T00:00:00+00:00</lastmod>
   </url>
   
@@ -355,11 +365,6 @@
   <url>
     <loc>/tags/tidyverse/</loc>
     <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/r-techniques/</loc>
-    <lastmod>2018-07-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>

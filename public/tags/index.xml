@@ -228,18 +228,9 @@
     </item>
     
     <item>
-      <title>boxplots</title>
-      <link>/tags/boxplots/</link>
-      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/boxplots/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Data Exploration</title>
       <link>/tags/data-exploration/</link>
-      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/data-exploration/</guid>
       <description></description>
@@ -248,9 +239,36 @@
     <item>
       <title>data preprocessing</title>
       <link>/tags/data-preprocessing/</link>
-      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/data-preprocessing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>EDA in Data Science</title>
+      <link>/tags/eda-in-data-science/</link>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/eda-in-data-science/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R techniques</title>
+      <link>/tags/r-techniques/</link>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/r-techniques/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>boxplots</title>
+      <link>/tags/boxplots/</link>
+      <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/boxplots/</guid>
       <description></description>
     </item>
     
@@ -278,15 +296,6 @@
       <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/data-transformation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>EDA in Data Science</title>
-      <link>/tags/eda-in-data-science/</link>
-      <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/eda-in-data-science/</guid>
       <description></description>
     </item>
     
@@ -323,15 +332,6 @@
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/tidyverse/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R techniques</title>
-      <link>/tags/r-techniques/</link>
-      <pubDate>Wed, 04 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/r-techniques/</guid>
       <description></description>
     </item>
     

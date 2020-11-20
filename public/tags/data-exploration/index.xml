@@ -6,10 +6,21 @@
     <description>Recent content in Data Exploration on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 22 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 29 Jul 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/data-exploration/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>R Analysis - Plotting Graphics</title>
+      <link>/post/2018/07/29/r-analysis-plotting-graphics/</link>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/07/29/r-analysis-plotting-graphics/</guid>
+      <description>R Graphics for Exploring DataThe R package used is the “datasets” package that contains all of the data sets used for these examples. The analysis demonstrate the base plotting abilities of RStudio.
+This section uses the iris data set. The first plot is a summary of the base plotting capabilities.
+library(datasets)str(iris)## &amp;#39;data.frame&amp;#39;: 150 obs. of 5 variables:## $ Sepal.Length: num 5.1 4.9 4.7 4.6 5 5.</description>
+    </item>
     
     <item>
       <title>Data Analysis - Exploratory Graphics</title>

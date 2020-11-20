@@ -1,0 +1,212 @@
+---
+title: R Analysis - Plotting Graphics
+author: Bryan
+date: '2018-07-29'
+slug: r-analysis-plotting-graphics
+categories:
+  - Data Analysis
+  - Exploratory Data Analysis
+  - R Programming
+tags:
+  - Data Exploration
+  - data preprocessing
+  - EDA in Data Science
+  - R techniques
+---
+
+
+
+<div id="r-graphics-for-exploring-data" class="section level3">
+<h3>R Graphics for Exploring Data</h3>
+<p>The R package used is the “datasets” package that contains all of the data sets used for these examples. The analysis demonstrate the base plotting abilities of RStudio.</p>
+<p>This section uses the iris data set. The first plot is a summary of the base plotting capabilities.</p>
+<pre class="r"><code>library(datasets)
+str(iris)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    150 obs. of  5 variables:
+##  $ Sepal.Length: num  5.1 4.9 4.7 4.6 5 5.4 4.6 5 4.4 4.9 ...
+##  $ Sepal.Width : num  3.5 3 3.2 3.1 3.6 3.9 3.4 3.4 2.9 3.1 ...
+##  $ Petal.Length: num  1.4 1.4 1.3 1.5 1.4 1.7 1.4 1.5 1.4 1.5 ...
+##  $ Petal.Width : num  0.2 0.2 0.2 0.2 0.2 0.4 0.3 0.2 0.2 0.1 ...
+##  $ Species     : Factor w/ 3 levels &quot;setosa&quot;,&quot;versicolor&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<pre class="r"><code>attach(iris)</code></pre>
+<p>The plot() function has several parameters. pch= is the symbol used in the graph (20,16,19 are filled circles), cex= is the the symbol size (1) is default, lty= is line type shown in later plots, and lwd= is the line width also shown in other plots. The col= is the plotted color, here it defaults to the first three colors in the color palette. The main= is the title of the plot, the xlab/ylab are the labels for the xy axis. The legend() function creates the legend for the graph and the placement is the xy coordinates of the top left corner of the box. The name of the points are entered and the colors are assigned. Again this is incorrect to show magenta, cyan, yellow. The next plot will correct those.</p>
+<pre class="r"><code>plot(Sepal.Length, Petal.Length, type=&quot;p&quot;, pch=19, col=Species, cex=1, main=&quot;Petal Length vs Sepal Length&quot;, xlab=&quot;Sepal Length in mm&quot;, ylab=&quot;Petal Length in mm&quot;)
+legend(x=4.5, y=7, legend=c(&quot;Setosa&quot;,&quot;Versicolor&quot;,&quot;Virginica&quot;), col=c(&quot;black&quot;, &quot;red&quot;,&quot;green&quot;), pch=16)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>Fixed the legend color to match the scatter points and moved to lower right corner.</p>
+<pre class="r"><code>plot(Sepal.Length, Petal.Length, type=&quot;p&quot;, pch=19, col=Species, cex=1, main=&quot;Petal Length vs Sepal Length&quot;, xlab=&quot;Sepal Length (in mm)&quot;, ylab=&quot;Petal Length (in mm)&quot;)
+legend(x=6.75, y=3.25, legend=c(&quot;Setosa&quot;,&quot;Versicolor&quot;,&quot;Virginica&quot;), col=c(1:3), pch=19, cex=1.5)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>The box plot functions shown below are a nice way to also look at variables side by side. Same labeling scheme as the plot() function. New is cex.lab= makes the axis labels larger by 1.5 times, cex.axis= enlarged the xy increment text by 1.5 times, and the cex.main= enlarges the main title by 2 times. The last box plots has the title shifted over to the y-axis and removes the x-axis label.</p>
+<pre class="r"><code>boxplot(Sepal.Length~Species)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>boxplot(Sepal.Length~Species, ylab=&quot;Sepal Length&quot;, xlab=&quot;Species&quot;, main=&quot;Sepal Length vs Species&quot;, cex.lab=1.5)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<pre class="r"><code>boxplot(Sepal.Length~Species, ylab=&quot;Sepal Length&quot;, xlab=&quot;Species&quot;, main=&quot;Sepal Length vs Species&quot;, cex.lab=1.5, cex.axis=1.5, cex.main=2)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
+<pre class="r"><code>boxplot(Sepal.Length~Species, ylab=&quot;Sepal Length vz Species&quot;, cex.lab=1.5, cex.axis=1.5, cex.main=2)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-3-4.png" width="672" /></p>
+<p>The faithful data set briefly shown in a scatter plot. The with() function is to evaluate an expression in an environment constructed from the data. plot(faithful) would do the graph in this case, however when there are more elements there could be naming conflicts. We use the with() function later in the Base Plotting.</p>
+<pre class="r"><code>data(faithful)
+head(faithful)</code></pre>
+<pre><code>##   eruptions waiting
+## 1     3.600      79
+## 2     1.800      54
+## 3     3.333      74
+## 4     2.283      62
+## 5     4.533      85
+## 6     2.883      55</code></pre>
+<pre class="r"><code>with(faithful, plot(eruptions, waiting))
+title(main=&quot;Old Faithful Geyser Data&quot;)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>data(&quot;cars&quot;)
+dim(cars)</code></pre>
+<pre><code>## [1] 50  2</code></pre>
+<pre class="r"><code>cars$speed</code></pre>
+<pre><code>##  [1]  4  4  7  7  8  9 10 10 10 11 11 12 12 12 12 13 13 13 13 14 14 14 14 15 15
+## [26] 15 16 16 17 17 17 18 18 18 18 19 19 19 20 20 20 20 20 22 23 24 24 24 24 25</code></pre>
+<pre class="r"><code>plot(cars$speed, cars$dist)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<pre class="r"><code>plot(cars$speed, cars$dist, pch=19, col=4, main=&quot;Stopping Distance verses Speed&quot;, xlab=&quot;Speed&quot;, ylab=&quot;Stopping Distance&quot;)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-4-3.png" width="672" /></p>
+<p>The color scheme here adds color to incrementally every 10 units to distinguish into groups by different colors. It uses the default color palette to assign the color to each group starting at 1=black to 5=cyan.</p>
+<pre class="r"><code>plot(cars$speed, cars$dist, pch=19, col=rep(1:5,each=10), main=&quot;Stopping Distance verses Speed&quot;, xlab=&quot;Speed&quot;, ylab=&quot;Stopping Distance&quot;)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Table the data and then plot. Gives another way to look at the speeds represented in the cars data set.</p>
+<pre class="r"><code>speed.tab &lt;- table(cars$speed)
+plot(speed.tab)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>barplot(speed.tab)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<pre class="r"><code>hist(cars$speed)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-6-3.png" width="672" /></p>
+<pre class="r"><code>hist(cars$speed, main=&quot;Histogram of Car Speeds&quot;, xlab=&quot;Speed&quot;, ylab=&quot;Frequency&quot;, breaks=10)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-6-4.png" width="672" /></p>
+<pre class="r"><code>hist(cars$speed, main=&quot;Histogram of Car Speeds&quot;, xlab=&quot;Speed&quot;, ylab=&quot;Frequency&quot;, breaks=10, col=&quot;wheat&quot;)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-6-5.png" width="672" /></p>
+<pre class="r"><code>hist(cars$speed, main=&quot;Histogram of Car Speeds&quot;, xlab=&quot;Speed&quot;, ylab=&quot;Frequency&quot;, breaks=10, col=&quot;wheat&quot;, ylim=c(0,12))</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-6-6.png" width="672" /></p>
+<p>This shows the line graphing mentioned at the beginning. type=“l” sets the plot as a line graph. type=“o” is over plotted among others available to customize. The lty= can be set to a dashed line. The col= adds color to the line, red in this case and thickening of the line with lwd=3.</p>
+<pre class="r"><code>plot(cars$speed, cars$dist, type=&quot;l&quot;)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>plot(cars$speed, cars$dist, type=&quot;o&quot;)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-7-2.png" width="672" /></p>
+<pre class="r"><code>plot(cars$speed, cars$dist, type=&quot;l&quot;, lty=&quot;dashed&quot;)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-7-3.png" width="672" /></p>
+<pre class="r"><code>plot(cars$speed, cars$dist, type=&quot;l&quot;, col=2)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-7-4.png" width="672" /></p>
+<pre class="r"><code>plot(cars$speed, cars$dist, type=&quot;l&quot;, col=2, lwd=3)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-7-5.png" width="672" /></p>
+<pre class="r"><code>plot(cars$speed, cars$dist, type=&quot;l&quot;, col=2, lwd=3, xlab=&quot;Car Speed&quot;, ylab= &quot;Stopping Distance&quot;, main=&quot;Data on Stopping Distance of Cars&quot;)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-7-6.png" width="672" /></p>
+<pre class="r"><code>plot.new() #reset to new plot frame
+plot(cars$speed, cars$dist, type=&quot;l&quot;, col=2, lwd=3, xlab=&quot;Car Speed&quot;, ylab= &quot;Stopping Distance&quot;, main=&quot;Data on Stopping Distance of Cars&quot;)
+fit1 &lt;- lm(dist~speed, data = cars) #linear regression model
+summary(fit1)</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = dist ~ speed, data = cars)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -29.069  -9.525  -2.272   9.215  43.201 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -17.5791     6.7584  -2.601   0.0123 *  
+## speed         3.9324     0.4155   9.464 1.49e-12 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 15.38 on 48 degrees of freedom
+## Multiple R-squared:  0.6511, Adjusted R-squared:  0.6438 
+## F-statistic: 89.57 on 1 and 48 DF,  p-value: 1.49e-12</code></pre>
+<pre class="r"><code>abline(fit1, lty=&quot;dashed&quot;) #plotting the linear regression line 
+text(x=10, y=100, labels=&quot;Average Distance = \n3.9324 Meters per Mile of Speed&quot;) #\n (new line, and label the graph</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-7-7.png" width="672" /></p>
+<pre class="r"><code>data(iris)
+head(iris)</code></pre>
+<pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1          5.1         3.5          1.4         0.2  setosa
+## 2          4.9         3.0          1.4         0.2  setosa
+## 3          4.7         3.2          1.3         0.2  setosa
+## 4          4.6         3.1          1.5         0.2  setosa
+## 5          5.0         3.6          1.4         0.2  setosa
+## 6          5.4         3.9          1.7         0.4  setosa</code></pre>
+<pre class="r"><code>pairs(iris) #scatterplot matrices to compare variables to each other.</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-7-8.png" width="672" /></p>
+<pre class="r"><code>pairs(iris, col=iris$Species) #adds the default color scheme to each Species like before.</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-7-9.png" width="672" /></p>
+<pre class="r"><code>plot(iris$Sepal.Length, iris$Petal.Length, col=iris$Species) #same plot as the beginning but with different pch=</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-7-10.png" width="672" /></p>
+<pre class="r"><code>plot(iris$Sepal.Length, iris$Petal.Length, col=iris$Species, pch=15) #different pch=</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-7-11.png" width="672" /></p>
+<pre class="r"><code>plot(iris$Sepal.Length, iris$Petal.Length, col=iris$Species, pch=16)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-7-12.png" width="672" /></p>
+<p>Example graphic that was refined and cleaned up at the beginning of this exercise above.</p>
+<pre class="r"><code>plot(iris$Sepal.Length, iris$Petal.Length, col=iris$Species, pch=16,cex=1)
+levels(iris$Species)</code></pre>
+<pre><code>## [1] &quot;setosa&quot;     &quot;versicolor&quot; &quot;virginica&quot;</code></pre>
+<pre class="r"><code>legend(x=4.5, y=7, legend=levels(iris$Species), col=c(1:3), pch=16)
+legend(x=4.5, y=7, legend=c(&quot;Setosa&quot;,&quot;Versicolor&quot;,&quot;Virginica&quot;), col = (1:3), pch=16)</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="base-plotting-in-r" class="section level3">
+<h3>Base Plotting in R</h3>
+<pre class="r"><code>str(airquality) #view data structure</code></pre>
+<pre><code>## &#39;data.frame&#39;:    153 obs. of  6 variables:
+##  $ Ozone  : int  41 36 12 18 NA 28 23 19 8 NA ...
+##  $ Solar.R: int  190 118 149 313 NA NA 299 99 19 194 ...
+##  $ Wind   : num  7.4 8 12.6 11.5 14.3 14.9 8.6 13.8 20.1 8.6 ...
+##  $ Temp   : int  67 72 74 62 56 66 65 59 61 69 ...
+##  $ Month  : int  5 5 5 5 5 5 5 5 5 5 ...
+##  $ Day    : int  1 2 3 4 5 6 7 8 9 10 ...</code></pre>
+<pre class="r"><code>hist(airquality$Ozone) #histogram plot</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>airquality &lt;- transform(airquality, Month = factor(Month)) #make data object and transform month to factor
+boxplot(Ozone ~ Month, airquality, xlab = &quot;Month&quot;, ylab = &quot;Ozone (ppb)&quot;) #plot by month</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<pre class="r"><code>par(&quot;lty&quot;) #linetype solid</code></pre>
+<pre><code>## [1] &quot;solid&quot;</code></pre>
+<pre class="r"><code>par(&quot;col&quot;) #color black</code></pre>
+<pre><code>## [1] &quot;black&quot;</code></pre>
+<pre class="r"><code>par(&quot;pch&quot;) #symbol 1 (circle)</code></pre>
+<pre><code>## [1] 1</code></pre>
+<pre class="r"><code>par(&quot;bg&quot;) #background color white</code></pre>
+<pre><code>## [1] &quot;white&quot;</code></pre>
+<pre class="r"><code>par(&quot;mar&quot;) #margins around plot</code></pre>
+<pre><code>## [1] 5.1 4.1 4.1 2.1</code></pre>
+<pre class="r"><code>par(&quot;mfrow&quot;) #graphical parameter number or rows matrix is 1</code></pre>
+<pre><code>## [1] 1 1</code></pre>
+<pre class="r"><code>with(airquality, plot(Wind, Ozone)) #plot ozone to wind
+title(main = &quot;Ozone and Wind in New York City&quot;) #label graph title</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-9-3.png" width="672" /></p>
+<pre class="r"><code>with(airquality, plot(Wind, Ozone, main = &quot;Ozone and Wind in New York&quot;))
+with(subset(airquality, Month ==5), points(Wind, Ozone, col=&quot;blue&quot;)) #add color to show May points</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-9-4.png" width="672" /></p>
+<pre class="r"><code>with(airquality, plot(Wind, Ozone, main =&quot;Ozone and Wind in New York City&quot;, type=&quot;n&quot;)) #setup again
+with(subset(airquality, Month ==5), points(Wind, Ozone, col = &quot;blue&quot;))
+with(subset(airquality, Month != 5), points(Wind, Ozone, col = &quot;red&quot;)) #this time add red to months not May
+legend(&quot;topright&quot;, pch = 1, col = c(&quot;blue&quot;, &quot;red&quot;), legend = c(&quot;May&quot;, &quot;Other Months&quot;)) #add legend and color appropriately.</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-9-5.png" width="672" /></p>
+<pre class="r"><code>with(airquality, plot(Wind, Ozone, main= &quot;Ozone and Wind in New York City&quot;, pch =20)) # and regression line
+model &lt;- lm(Ozone ~ Wind, airquality) #linear model
+abline(model, lwd =2) #line weight of 2</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-9-6.png" width="672" /></p>
+<pre class="r"><code>plot.new()
+par(mfrow = c(1,2)) #set graphic parameter 1 row 2 columns
+with(airquality, {
+        plot(Wind, Ozone, main = &quot;Ozone and Wind&quot;)
+        plot(Solar.R, Ozone, main = &quot;Ozone and Solar Radiation&quot;)
+}) #makes 2 side by side plots of wind to ozone and solar radiation to ozone</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-9-7.png" width="672" /></p>
+<p>3 side by side plots.</p>
+<pre class="r"><code>par(mfrow = c(1,3), mar = c(4,4,2,1), oma = c(0,0,2,0)) #set parameters 1 row 3 columns
+with(airquality, {
+        plot(Wind, Ozone, main = &quot;Ozone and Wind&quot;)
+        plot(Solar.R, Ozone, main = &quot;Ozone and Solar Radiation&quot;)
+        plot(Temp, Ozone, main = &quot;Ozone and Temperature&quot;)
+        mtext(&quot;Ozone and Weather in New York City&quot;, outer = TRUE)
+})</code></pre>
+<p><img src="/post/2018-07-29-r-analysis-plotting-graphics_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
