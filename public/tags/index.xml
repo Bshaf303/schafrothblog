@@ -228,6 +228,24 @@
     </item>
     
     <item>
+      <title>big data</title>
+      <link>/tags/big-data/</link>
+      <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/big-data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>k-means</title>
+      <link>/tags/k-means/</link>
+      <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/k-means/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Data Exploration</title>
       <link>/tags/data-exploration/</link>
       <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
@@ -368,15 +386,6 @@
       <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/reinforcement-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>k-means</title>
-      <link>/tags/k-means/</link>
-      <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/k-means/</guid>
       <description></description>
     </item>
     
@@ -539,15 +548,6 @@
       <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/spearmans-correlation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>big data</title>
-      <link>/tags/big-data/</link>
-      <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/big-data/</guid>
       <description></description>
     </item>
     

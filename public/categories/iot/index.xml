@@ -6,10 +6,19 @@
     <description>Recent content in IOT on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 20 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 06 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/categories/iot/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Application of K-Means - A Brief Case Study</title>
+      <link>/post/2018/08/06/application-of-k-means-a-brief-case-study/</link>
+      <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/08/06/application-of-k-means-a-brief-case-study/</guid>
+      <description>K-Means Case StudyThis article is an example of practical use for k-means clustering from a case study conducted in a Chinese city. The project comes from the IoT smart city concept and looks at real-time traffic network data and uses the k-means algorithm to analyze real data. The emerging intelligent transportation techniques are helping the urban environment run smoother though very complex. The authors take a small segment and look at supply chain logistics such as for manufacturing (raw materials), utilities (coal), banking (banknotes), and the cost related to the processing and transportation between the center and the supplier points.</description>
+    </item>
     
     <item>
       <title>Real-Time Data and Smart Cities</title>

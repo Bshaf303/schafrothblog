@@ -17,9 +17,7 @@
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/2018/07/29/r-analysis-plotting-graphics/</guid>
-      <description>R Graphics for Exploring DataThe R package used is the “datasets” package that contains all of the data sets used for these examples. The analysis demonstrate the base plotting abilities of RStudio.
-This section uses the iris data set. The first plot is a summary of the base plotting capabilities.
-library(datasets)str(iris)## &amp;#39;data.frame&amp;#39;: 150 obs. of 5 variables:## $ Sepal.Length: num 5.1 4.9 4.7 4.6 5 5.</description>
+      <description>R Graphics for Exploring DataThe graphics device prints the graphics to screen or into a file type read by other apps. The screen device is on our computers. For windows its windows(), mac its quartz() and Linux its x11(). I am assuming this is built into the R functions plot(), xyplot(), and qplot() when we use them to plot. The other “devices” are the file types that are created by the device.</description>
     </item>
     
     <item>

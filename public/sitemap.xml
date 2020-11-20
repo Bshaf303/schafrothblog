@@ -273,6 +273,46 @@
   </url>
   
   <url>
+    <loc>/post/2018/08/06/application-of-k-means-a-brief-case-study/</loc>
+    <lastmod>2018-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/big-data/</loc>
+    <lastmod>2018-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/intelligent-systems/</loc>
+    <lastmod>2018-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/iot/</loc>
+    <lastmod>2018-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/k-means/</loc>
+    <lastmod>2018-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/literature-review/</loc>
+    <lastmod>2018-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/machine-learning/</loc>
+    <lastmod>2018-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/smart-cities/</loc>
+    <lastmod>2018-08-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/data-analysis/</loc>
     <lastmod>2018-08-04T00:00:00+00:00</lastmod>
   </url>
@@ -398,11 +438,6 @@
   </url>
   
   <url>
-    <loc>/categories/machine-learning/</loc>
-    <lastmod>2018-07-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/reinforcement-learning/</loc>
     <lastmod>2018-07-01T00:00:00+00:00</lastmod>
   </url>
@@ -410,11 +445,6 @@
   <url>
     <loc>/post/2018/07/01/reinforcement-learing-problem/</loc>
     <lastmod>2018-07-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/k-means/</loc>
-    <lastmod>2018-06-17T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -553,17 +583,7 @@
   </url>
   
   <url>
-    <loc>/tags/big-data/</loc>
-    <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/edge-computing/</loc>
-    <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/intelligent-systems/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
   </url>
   
@@ -578,17 +598,7 @@
   </url>
   
   <url>
-    <loc>/categories/iot/</loc>
-    <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/lda/</loc>
-    <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/literature-review/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
   </url>
   
@@ -604,11 +614,6 @@
   
   <url>
     <loc>/tags/sensor-data/</loc>
-    <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/smart-cities/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
   </url>
   
