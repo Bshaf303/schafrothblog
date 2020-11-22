@@ -77,7 +77,7 @@
     <item>
       <title>Data Analysis</title>
       <link>/categories/data-analysis/</link>
-      <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>/categories/data-analysis/</guid>
       <description></description>
@@ -86,9 +86,18 @@
     <item>
       <title>Exploratory Data Analysis</title>
       <link>/categories/exploratory-data-analysis/</link>
-      <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>/categories/exploratory-data-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R Programming</title>
+      <link>/categories/r-programming/</link>
+      <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/categories/r-programming/</guid>
       <description></description>
     </item>
     
@@ -98,15 +107,6 @@
       <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>/categories/machine-learning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R Programming</title>
-      <link>/categories/r-programming/</link>
-      <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/categories/r-programming/</guid>
       <description></description>
     </item>
     

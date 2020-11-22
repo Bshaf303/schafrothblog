@@ -273,27 +273,62 @@
   </url>
   
   <url>
+    <loc>/categories/data-analysis/</loc>
+    <lastmod>2018-08-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/data-exploration/</loc>
+    <lastmod>2018-08-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/data-preprocessing/</loc>
+    <lastmod>2018-08-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</loc>
+    <lastmod>2018-08-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/exploratory-data-analysis/</loc>
+    <lastmod>2018-08-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/ggplot2/</loc>
+    <lastmod>2018-08-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/r-programming/</loc>
+    <lastmod>2018-08-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r-techniques/</loc>
+    <lastmod>2018-08-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/r-tidyverse/</loc>
+    <lastmod>2018-08-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/tidyverse/</loc>
+    <lastmod>2018-08-19T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/algorithms/</loc>
     <lastmod>2018-08-12T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/categories/data-analysis/</loc>
-    <lastmod>2018-08-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-exploration/</loc>
-    <lastmod>2018-08-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/eda-in-data-science/</loc>
-    <lastmod>2018-08-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/exploratory-data-analysis/</loc>
     <lastmod>2018-08-12T00:00:00+00:00</lastmod>
   </url>
   
@@ -309,11 +344,6 @@
   
   <url>
     <loc>/categories/machine-learning/</loc>
-    <lastmod>2018-08-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/r-programming/</loc>
     <lastmod>2018-08-12T00:00:00+00:00</lastmod>
   </url>
   
@@ -373,16 +403,6 @@
   </url>
   
   <url>
-    <loc>/tags/r-techniques/</loc>
-    <lastmod>2018-08-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-preprocessing/</loc>
-    <lastmod>2018-07-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/post/2018/07/29/r-analysis-plotting-graphics/</loc>
     <lastmod>2018-07-29T00:00:00+00:00</lastmod>
   </url>
@@ -429,11 +449,6 @@
   
   <url>
     <loc>/tags/statistical-analysis/</loc>
-    <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/tidyverse/</loc>
     <lastmod>2018-07-07T00:00:00+00:00</lastmod>
   </url>
   
@@ -574,16 +589,6 @@
   
   <url>
     <loc>/post/2018/05/13/data-preprocessing-diamonds-dataset/</loc>
-    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/ggplot2/</loc>
-    <lastmod>2018-05-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/r-tidyverse/</loc>
     <lastmod>2018-05-13T00:00:00+00:00</lastmod>
   </url>
   

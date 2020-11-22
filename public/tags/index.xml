@@ -228,20 +228,65 @@
     </item>
     
     <item>
+      <title>Data Exploration</title>
+      <link>/tags/data-exploration/</link>
+      <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/data-exploration/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>data preprocessing</title>
+      <link>/tags/data-preprocessing/</link>
+      <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/data-preprocessing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ggplot2</title>
+      <link>/tags/ggplot2/</link>
+      <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/ggplot2/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R techniques</title>
+      <link>/tags/r-techniques/</link>
+      <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/r-techniques/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>R Tidyverse</title>
+      <link>/tags/r-tidyverse/</link>
+      <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/r-tidyverse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tidyverse</title>
+      <link>/tags/tidyverse/</link>
+      <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/tidyverse/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>algorithms</title>
       <link>/tags/algorithms/</link>
       <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/algorithms/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Data Exploration</title>
-      <link>/tags/data-exploration/</link>
-      <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/data-exploration/</guid>
       <description></description>
     </item>
     
@@ -309,24 +354,6 @@
     </item>
     
     <item>
-      <title>R techniques</title>
-      <link>/tags/r-techniques/</link>
-      <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/r-techniques/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>data preprocessing</title>
-      <link>/tags/data-preprocessing/</link>
-      <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/data-preprocessing/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>boxplots</title>
       <link>/tags/boxplots/</link>
       <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
@@ -377,15 +404,6 @@
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/statistical-analysis/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tidyverse</title>
-      <link>/tags/tidyverse/</link>
-      <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/tidyverse/</guid>
       <description></description>
     </item>
     
@@ -530,24 +548,6 @@
       <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
       
       <guid>/tags/alluvial-plots/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ggplot2</title>
-      <link>/tags/ggplot2/</link>
-      <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/ggplot2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>R Tidyverse</title>
-      <link>/tags/r-tidyverse/</link>
-      <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/r-tidyverse/</guid>
       <description></description>
     </item>
     

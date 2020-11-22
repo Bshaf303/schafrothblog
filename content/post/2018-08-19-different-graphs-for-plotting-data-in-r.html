@@ -1,0 +1,275 @@
+---
+title: Different Graphs for Plotting Data in R
+author: 'Bryan '
+date: '2018-08-19'
+slug: different-graphs-for-plotting-data-in-r
+categories:
+  - Data Analysis
+  - Exploratory Data Analysis
+  - R Programming
+tags:
+  - data preprocessing
+  - ggplot2
+  - tidyverse
+  - Data Exploration
+  - R techniques
+  - R Tidyverse
+---
+
+
+
+<div id="r-graph-plotting-system" class="section level3">
+<h3>R Graph Plotting System</h3>
+<p>This brief analysis demonstrates the quick ways to look at data by plotting the data points using R and <code>ggplot2</code>. There are four small datasets used in displaying the individual data characteristics. The point is fast and simplistic plot to reveal the represented data.</p>
+<div id="load-the-libraries" class="section level4">
+<h4>Load the Libraries</h4>
+<pre class="r"><code>library(datasets)
+library(tidyverse)</code></pre>
+</div>
+<div id="air-quality-plot" class="section level4">
+<h4>Air Quality Plot</h4>
+<pre class="r"><code>with(airquality, {
+        plot(Temp, Ozone, pch=19, col=&quot;grey&quot;, main = &quot;Base R - Ozone and Temperature&quot;)
+        lines(loess.smooth(Temp, Ozone), col=&quot;blue&quot;, lwd=2)
+})</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<pre class="r"><code>ggplot(airquality, aes(Temp, Ozone)) +
+  geom_point(color=&quot;red&quot;)+
+  geom_smooth(method=&quot;loess&quot;, se=FALSE) + 
+  ggtitle(&quot;ggplot2 - Ozone and Temperature&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+</div>
+<div id="cars-dataset-summary" class="section level4">
+<h4>Cars Dataset Summary</h4>
+<pre class="r"><code>str(mpg)</code></pre>
+<pre><code>## tibble [234 x 11] (S3: tbl_df/tbl/data.frame)
+##  $ manufacturer: chr [1:234] &quot;audi&quot; &quot;audi&quot; &quot;audi&quot; &quot;audi&quot; ...
+##  $ model       : chr [1:234] &quot;a4&quot; &quot;a4&quot; &quot;a4&quot; &quot;a4&quot; ...
+##  $ displ       : num [1:234] 1.8 1.8 2 2 2.8 2.8 3.1 1.8 1.8 2 ...
+##  $ year        : int [1:234] 1999 1999 2008 2008 1999 1999 2008 1999 1999 2008 ...
+##  $ cyl         : int [1:234] 4 4 4 4 6 6 6 4 4 4 ...
+##  $ trans       : chr [1:234] &quot;auto(l5)&quot; &quot;manual(m5)&quot; &quot;manual(m6)&quot; &quot;auto(av)&quot; ...
+##  $ drv         : chr [1:234] &quot;f&quot; &quot;f&quot; &quot;f&quot; &quot;f&quot; ...
+##  $ cty         : int [1:234] 18 21 20 21 16 18 18 18 16 20 ...
+##  $ hwy         : int [1:234] 29 29 31 30 26 26 27 26 25 28 ...
+##  $ fl          : chr [1:234] &quot;p&quot; &quot;p&quot; &quot;p&quot; &quot;p&quot; ...
+##  $ class       : chr [1:234] &quot;compact&quot; &quot;compact&quot; &quot;compact&quot; &quot;compact&quot; ...</code></pre>
+<pre class="r"><code>qplot(displ, hwy, data=mpg, color= hwy, main=&quot;Highway MPG and Engine Displacement&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<pre class="r"><code>qplot(displ, hwy, data=mpg, color=drv, main=&quot;MPG, Displacement, and Drive&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>The plot below shows the two scatter plots from above, however this one adds a trend line to the plot. The previous plot shows a slight resemblance of the data moving from the upper left to lower right, this is not always the case with scatter plots. The line helps us to see patterns in a scatter plot environment and the relationship between variables and trends. The smoothing method is typically “loess” or locally weighted scatterplot smoothing. The grey area shows the alpha of +5%/-5% (or 95% confidence interval) for this regression line. The smooth adds a trend line that now clearly shows lower displacement engines have better highway miles per gallon. The 4.5 to 5.5 liter engines have the lowest group of highway mpg. Where the grey area is wider, this shows the data is sparse and an area to question why those data points are creating a wider interval.</p>
+<pre class="r"><code>qplot(displ, hwy, data=mpg, 
+      geom=c(&quot;point&quot;, &quot;smooth&quot;),
+      main = &quot;HWY and Displacement Loess Curve&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/qplot-1.png" width="672" /></p>
+<pre class="r"><code>qplot(hwy, data=mpg, fill=drv, binwidth=1.5, main=&quot;Barplot of HWY and Drive&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>The plot shows the boxplots of the three <code>Drive</code> classes side by side: four-wheel drive, front-drive, rear-drive and the highway are miles per gallon (mpg).</p>
+<pre class="r"><code>qplot(drv, hwy, data=mpg, geom=&quot;boxplot&quot;, fill=drv, main = &quot;Boxplot of Highway and Drive&quot;, outlier.color=&quot;red&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>qplot(hwy, data=mpg, facets=drv~., binwidth=2, fill=drv, main=&quot;Facet Plot - Individual Distribution of the Drive Class&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<pre class="r"><code>qplot(displ, hwy, data=mpg, facets=.~ drv, color=drv, main=&quot;Scatterplot of Individual Records&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>This next plot has three facets of scatterplot’s with the trend line and confidence interval as shading. Going from the boxplots to this further helps to understand the data. The engine displacement is now added to the three categories of vehicle drive train. Now we can easily compare the three engine displacements and how highway miles per gallon is related to the engine displacement. The four-wheel drive data looks clear and shows the lower displacement vehicles have better highway mpg. The front-wheel drive vehicles also show a similar trend and here we can see the outliers from the boxplot, the highest displacement engine in this category has a very wide confidence interval and could be something to look at further. The rear-wheel drive vehicles has an irregular looking line and the displacement is in the higher values, the highway miles per gallon in this category range from 15 to 25. Also a wide confidence interval due to the variation and lower number of data points available.</p>
+<pre class="r"><code>qplot(displ, hwy, data=mpg, facets= .~ drv, fill=drv, main = &quot;Facet Scatterplot with LM Line and Confidence Interval Shading&quot;) + 
+  geom_smooth()</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/plot1-1.png" width="672" /></p>
+</div>
+<div id="mouse-allergen-and-asthma-cohort-study-maacs-dataset" class="section level4">
+<h4>Mouse Allergen and Asthma Cohort Study (MAACS) Dataset</h4>
+<pre class="r"><code>url = &quot;https://raw.githubusercontent.com/lejarx/MAACS-dataset/master/maacs.rda&quot;
+destfile = tempfile(fileext = &quot;.rda&quot;) 
+download.file(url, destfile, method = &#39;libcurl&#39;, mode = &quot;wb&quot;, quiet=TRUE) 
+load(destfile)
+unlink(destfile)</code></pre>
+<p>Summary of new dataset.</p>
+<pre class="r"><code>summary(maacs)</code></pre>
+<pre><code>##        id             eno           duBedMusM              pm25        
+##  Min.   :  1.0   Min.   :  5.00   Min.   :     0.01   Min.   :  0.235  
+##  1st Qu.:188.2   1st Qu.: 17.00   1st Qu.:   308.00   1st Qu.: 12.688  
+##  Median :375.5   Median : 31.50   Median :  1151.00   Median : 20.520  
+##  Mean   :375.5   Mean   : 44.03   Mean   :  4426.72   Mean   : 28.088  
+##  3rd Qu.:562.8   3rd Qu.: 62.00   3rd Qu.:  3881.00   3rd Qu.: 34.284  
+##  Max.   :750.0   Max.   :276.00   Max.   :124919.00   Max.   :300.281  
+##                  NA&#39;s   :108      NA&#39;s   :205         NA&#39;s   :134      
+##  mopos    
+##  no :355  
+##  yes:395  
+##           
+##           
+##           
+##           
+## </code></pre>
+<pre class="r"><code>qplot(log(eno), 
+      data=maacs,
+      main = &quot;log transform eno variable.&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/qp1-1.png" width="672" /></p>
+<pre class="r"><code>qplot(log(eno), 
+      data=maacs, 
+      fill=mopos,
+      main = &quot;log transform eno and and mopos variable&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/qp1-2.png" width="672" /></p>
+<pre class="r"><code>qplot(log(eno), 
+      data=maacs, 
+      geom=&quot;density&quot;,
+      col=&quot;red&quot;,
+      main = &quot;Density Curve&quot;
+      )</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/qp2-1.png" width="672" /></p>
+<pre class="r"><code>qplot(log(eno), 
+      data=maacs, 
+      geom=&quot;density&quot;, 
+      color=mopos,
+      fill=mopos, 
+      alpha=.7, main=&quot;Density Plot&quot;
+      )</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/qp2-2.png" width="672" /></p>
+<pre class="r"><code>qplot(log(pm25), 
+      log(eno), 
+      data=maacs, 
+      geom=c(&quot;point&quot;, &quot;smooth&quot;), 
+      main=&quot;Scatterplot with Smoothing and Confidence Interval Shading&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/qp3-1.png" width="672" /></p>
+<pre class="r"><code>qplot(log(pm25), 
+      log(eno), 
+      data=maacs, 
+      shape=mopos, 
+      color=mopos, 
+      main=&quot;Scatterplot&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/qp3-2.png" width="672" /></p>
+<pre class="r"><code>qplot(log(pm25), 
+      log(eno), 
+      data=maacs,  
+      shape=mopos, 
+      color=mopos,
+      main=&quot;Scatterplot with Linear Estimate&quot;) + 
+  geom_smooth(method=&quot;lm&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/qp3-3.png" width="672" /></p>
+<pre class="r"><code>bmi &lt;- read_csv(&quot;https://raw.githubusercontent.com/rdpeng/artofdatascience/master/manuscript/data/bmi_pm25_no2_sim.csv&quot;, col_types = &quot;nnfi&quot;)</code></pre>
+<pre class="r"><code>summary(bmi)</code></pre>
+<pre><code>##     logpm25         logno2_new               bmicat    NocturnalSympt 
+##  Min.   :0.5323   Min.   :0.3419   normal weight:293   Min.   :0.000  
+##  1st Qu.:1.1380   1st Qu.:1.1383   overweight   :224   1st Qu.:0.000  
+##  Median :1.3377   Median :1.3379                       Median :1.000  
+##  Mean   :1.3448   Mean   :1.3420                       Mean   :1.348  
+##  3rd Qu.:1.5330   3rd Qu.:1.5257                       3rd Qu.:2.000  
+##  Max.   :2.2314   Max.   :2.1695                       Max.   :6.000</code></pre>
+<pre class="r"><code>head(bmi)</code></pre>
+<pre><code>## # A tibble: 6 x 4
+##   logpm25 logno2_new bmicat        NocturnalSympt
+##     &lt;dbl&gt;      &lt;dbl&gt; &lt;fct&gt;                  &lt;int&gt;
+## 1   1.25       1.18  normal weight              1
+## 2   1.12       1.55  overweight                 0
+## 3   1.93       1.43  normal weight              0
+## 4   1.37       1.77  overweight                 2
+## 5   0.775      0.765 normal weight              0
+## 6   1.49       1.11  normal weight              0</code></pre>
+</div>
+<div id="nocturnal-symptoms-and-log-pm25-with-smoothing-line" class="section level4">
+<h4>Nocturnal Symptoms and Log pm25 with Smoothing Line</h4>
+<pre class="r"><code>g &lt;- ggplot(bmi, 
+            aes(logpm25, NocturnalSympt))</code></pre>
+</div>
+<div id="nocturnal-symptoms-and-log-pm25-with-linear-regression-line" class="section level4">
+<h4>Nocturnal Symptoms and Log pm25 with Linear Regression Line</h4>
+<pre class="r"><code>g + 
+  geom_point() + 
+  geom_smooth()</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/maacsplot-1.png" width="672" /></p>
+</div>
+<div id="normal-weight-and-overweight-facet-plot-with-lm-line" class="section level4">
+<h4>Normal Weight and Overweight Facet Plot with Lm line</h4>
+<pre class="r"><code>g + 
+  geom_point() + 
+  geom_smooth(method = &quot;lm&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+<div id="nocturnal-symptoms-and-log-pm25-scatterplot" class="section level4">
+<h4>Nocturnal Symptoms and Log pm25 Scatterplot</h4>
+<pre class="r"><code>g + 
+  geom_point() + 
+  geom_smooth(method = &quot;lm&quot;) +
+  facet_grid(. ~ bmicat)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+</div>
+<div id="normal-weight-and-overweight-scattterplot" class="section level4">
+<h4>Normal Weight and Overweight Scattterplot</h4>
+<pre class="r"><code>g + 
+  geom_point(color=&quot;steelblue&quot;, 
+             size=4, 
+             alpha=1/2)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/maacsplot3-1.png" width="672" /></p>
+<pre class="r"><code>g + 
+  geom_point(aes(color=bmicat), 
+             size=4, 
+             alpha=1/2)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/maacsplot3-2.png" width="672" /></p>
+<pre class="r"><code>g + 
+  geom_point(aes(color= bmicat)) +
+  labs(title=&quot;bmi&quot;) + 
+  labs(x = expression(&quot;log&quot; * PM[2.5]), 
+       y= &quot;Nocturnal Symptons&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/maacsplot3-3.png" width="672" /></p>
+<pre class="r"><code>g + 
+  geom_point(aes(color=bmicat), 
+             size=2, 
+             alpha=1/2) +
+  geom_smooth(size=4, 
+              linetype=3, 
+              method=&quot;lm&quot;, 
+              se=FALSE)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/maacsplot3-4.png" width="672" /></p>
+<pre class="r"><code>g + 
+  geom_point(aes(color=bmicat)) +
+  theme_bw(base_family=&quot;Times&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/maacsplot3-5.png" width="672" /></p>
+<pre class="r"><code>cutpoints &lt;- quantile(bmi$logno2_new, 
+                      seq(0,1, 
+                          length=4), 
+                      na.rm=TRUE)
+
+bmi$no2tert &lt;- cut(bmi$logno2_new, 
+                      cutpoints)
+levels(bmi$no2tert)</code></pre>
+<pre><code>## [1] &quot;(0.342,1.23]&quot; &quot;(1.23,1.47]&quot;  &quot;(1.47,2.17]&quot;</code></pre>
+<p>The plot below for grid.Call are the plots that show seven panels (one NA) and the relationship between PM2.5 and nocturnal symptoms by the BMI and NO2 levels. The NO2 measurement was made into categorical data with three levels thus three columns (4th is NA) and two rows normal BMI and Overweight BMI. Measurements from the MAACS data set. The normal BMI in the first grid has a regression line about level, as the NO2 increases the nocturnal symptoms are high at first and then decline over the population. The overweight group is a much different contrast. The regression line starts low and increases over the increase in PM2.5 to about the same level of nocturnal symptoms for the three categories of NO2. Interesting is the middle category that starts a bit higher than the first and third graph for overweight population. Either way the overweight group is clearly effected by increases in NO2 and PM2.5 exposure compared to the normal BMI group.</p>
+<pre class="r"><code>g &lt;- ggplot(bmi, 
+            aes(logpm25, 
+            NocturnalSympt))
+
+g + 
+  geom_point(alpha=1/3) +
+  facet_wrap(bmicat ~ no2tert, 
+             nrow=2, 
+             ncol=4) +
+  geom_smooth(method=&quot;lm&quot;, 
+              se=FALSE, 
+              col=&quot;red&quot;) +
+  theme_bw(base_family= &quot;Avenir&quot;, 
+           base_size=10) +
+  labs(x = expression(&quot;log&quot; * PM[2.5])) +
+  labs(y = &quot;Nocturnal Sympt&quot;) +
+  labs(title = &quot;BMI Facet Plot&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/maacsplot4-1.png" width="672" /></p>
+</div>
+</div>
+<div id="part-4---scatterplot-and-line-added" class="section level3">
+<h3>Part 4 - Scatterplot and Line Added</h3>
+<pre class="r"><code>testdata &lt;- data.frame(x=1:100, y=rnorm(100))
+
+testdata[50,2] &lt;- 50 # add an outlier</code></pre>
+<pre class="r"><code>ggplot(testdata, aes(testdata$x, 
+     testdata$y), 
+     ylim=c(-2,2)) +
+  geom_point(col=&quot;blue&quot;)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/testplot2-1.png" width="672" /></p>
+<pre class="r"><code>g &lt;- ggplot(testdata, aes(x=x, y=y))</code></pre>
+<pre class="r"><code>g + 
+  geom_line(lwd=1, col=&quot;red&quot;) +
+  geom_point(col=&quot;blue&quot;, alpha=0.5)</code></pre>
+<p><img src="/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+</div>

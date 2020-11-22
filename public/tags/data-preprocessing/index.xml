@@ -6,10 +6,20 @@
     <description>Recent content in data preprocessing on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 29 Jul 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 19 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/data-preprocessing/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Different Graphs for Plotting Data in R</title>
+      <link>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</link>
+      <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</guid>
+      <description>R Graph Plotting SystemThis brief analysis demonstrates the quick ways to look at data by plotting the data points using R and ggplot2. There are four small datasets used in displaying the individual data characteristics. The point is fast and simplistic plot to reveal the represented data.
+Load the Librarieslibrary(datasets)library(tidyverse)Air Quality Plotwith(airquality, {plot(Temp, Ozone, pch=19, col=&amp;quot;grey&amp;quot;, main = &amp;quot;Base R - Ozone and Temperature&amp;quot;)lines(loess.</description>
+    </item>
     
     <item>
       <title>R Analysis - Plotting Graphics</title>
