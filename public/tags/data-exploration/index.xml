@@ -6,10 +6,21 @@
     <description>Recent content in Data Exploration on Bryan Schafroth Portfolio</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Aug 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 26 Aug 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/data-exploration/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Case Study - Mobile Photo Analysis</title>
+      <link>/post/2018/08/26/case-study-mobile-photo-analysis/</link>
+      <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/2018/08/26/case-study-mobile-photo-analysis/</guid>
+      <description>Case StudyCan a mobile phone application identify a species of a plant by photo analysis?
+This analysis is hypothetical and analyzes the feasibility of developing a mobile application for mobile phones (that photograph and store pictures) and identify flower pictures stored in memory. This exercise is a small part of a project and will only focus on the exploratory elements of a sample dataset called iris.
+For a successful application, the algorithm shall correctly identify a flower species from a photo on the user’s phone using an image recognition model.</description>
+    </item>
     
     <item>
       <title>Different Graphs for Plotting Data in R</title>
