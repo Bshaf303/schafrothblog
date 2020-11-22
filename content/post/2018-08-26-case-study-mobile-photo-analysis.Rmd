@@ -1,0 +1,196 @@
+---
+title: Case Study - Mobile Photo Analysis
+author: 'Bryan '
+date: '2018-08-26'
+slug: case-study-mobile-photo-analysis
+categories:
+  - Data Analysis
+  - Exploratory Data Analysis
+  - R Programming
+tags:
+  - tidyverse
+  - Data Exploration
+---
+
+### Case Study
+
+Can a mobile phone application identify a species of a plant by photo analysis?
+
+This analysis is hypothetical and analyzes the feasibility of developing a mobile application for mobile phones (that photograph and store pictures) and identify flower pictures stored in memory. This exercise is a small part of a project and will only focus on the exploratory elements of a sample dataset called `iris`. 
+
+For a successful application, the algorithm shall correctly identify a flower species from a photo on the user’s phone using an image recognition model. Success depends on measuring two flower parts (petal and sepal). There shall be two measurements (length and width) of each flower part. This problem is a classification example, and I will use accuracy of 90% with a 10% error rate. To get these success metrics, we will need to run a larger number of data to compare and calculate the correctly identified ratio to incorrectly identified classified flower species.
+
+This example is a smaller development of the application and takes the measurements made by other imaging technologies in the application, and the accuracy of measurements is determined elsewhere. To explore and test the viability of a phone application that can identify a flower species from a stored photo, we have available a data set of three species of iris flowers with the prerecorded manual measurements mentioned above (length and width of the flower petal and sepal). I'm not expecting that I can answer the experimental design question with only three species of iris data. This experiment will be a start for more research. Here the data needs to be confirmed usable by checking for errors and anomalies in the provided data.
+
+#### Load Libraries
+
+```{r loadLibs, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+```
+
+The data set is read into a data frame in RStudio. And we look at the data. The first issue that we see is there are more than three levels to the class variable. There is also missing data. This data is not ready to be used and will need some cleaning, however we will continue to look at the data and it will be obvious were the data need to be cleaned. 
+
+```{r loadData}
+iris <- read_csv("https://archive.ics.uci.edu/ml/machine-learning-databases/iris/iris.data", col_types = "nnnnf", col_names = c("sepal_length_cm", "sepal_width_cm", "petal_length_cm", "petal_width_cm", "class"))
+```
+
+```{r}
+glimpse(iris)
+```
+
+```{r}
+summary(iris)
+```
+
+In the box plot below we see the two extra levels and we can see some cases of outliers. 
+
+```{r}
+boxplot(sepal_length_cm ~ class, 
+        data=iris, 
+        ylab="Sepal Length", 
+        xlab="Class", 
+        main="Sepal Length vs Class", 
+        cex.lab=1.5, 
+        col="green4")
+```
+
+```{r}
+boxplot(sepal_width_cm ~ class, 
+        data=iris, 
+        ylab="Sepal Width", 
+        xlab="Class", 
+        main="Sepal Width vs Class", 
+        col="red")
+```
+
+```{r}
+boxplot(petal_length_cm ~ class, 
+        data=iris, 
+        ylab="Petal Length", 
+        xlab="Class", 
+        main="Sepal Length vs Class", 
+        col="orange")
+```
+
+```{r}
+boxplot(petal_width_cm ~ class, 
+        data=iris, 
+        ylab="Petal Width", 
+        xlab="Class", 
+        main="Sepal Width vs Class", 
+        col="cornflowerblue")
+```
+
+We identify those points that are mentioned above. The iris-versicolor variable contains the outliers. At the same time, the versicolor level falls within the iris-versicolor point group. This could indicate a possible mislabeling of the data. Also, we can see the iris-setosa point falling close to the iris-setosa cluster—another possible mislabeling.
+
+```{r}
+pairs(iris, 
+      col=iris$class, 
+      pch=19, 
+      cex=0.5)
+```
+
+We identify those points that are mentioned above. The iris-versicolor variable contains the outliers. The versicolor level falls within the iris-versicolor point group. This could indicate a possible mis-labeling. of the data. Also we can see the iris-setossa point falling close to the iris-setosa cluster. Another possible mis-labeling. 
+
+```{r}
+ggplot(iris, aes(x=sepal_length_cm, 
+                 y=sepal_width_cm, 
+                 color=class, 
+                 shape=class)) + 
+  geom_point()
+```
+
+```{r}
+ggplot(iris, aes(x=petal_length_cm, 
+                 y=petal_width_cm, 
+                 color=class, 
+                 shape=class)) + 
+  geom_point()
+```
+
+```{r}
+ggplot(iris, aes(x=petal_width_cm, 
+                 y=sepal_width_cm, 
+                 color=class, 
+                 shape=class)) + 
+  geom_point()
+```
+
+```{r}
+ggplot(iris, aes(x=sepal_length_cm, 
+                 y=petal_length_cm, 
+                 color=class, 
+                 shape=class)) + 
+  geom_point()
+```
+
+
+The plots thus far are sufficient for the exploratory analysis of the data set. The data needs to be cleaned up by fixing the NA’s and consolidating the class levels to three. And removing or imputing outliers; once that is accomplished, another interesting way to view the data is to make a scatter plot with a regression line that helps pull together the spread-out points to start to see a trend to the data variables. We may better know the sepal width and sepal length having a relationship or the sepal and petal variables having some ties, such as the plot of petal width versus petal length. The regression trends upward for four levels. The same can be said for the sepal width and petal length. Another plotting method is the histogram and shows the relationship between variables in color comparison. 
+
+To conclude, this data set needs to be cleaned up first, and then we can rerun the graphs to gain a bit more useful information to apply to the application project. It would be recommended that we obtain more data from several more different varieties of flowers to start developing patterns between groups of flowers. This will further develop the flower recognition application and help narrow down rules to apply to the image recognition model.  
+
+```{r message=FALSE, warning=FALSE}
+qplot(sepal_length_cm, 
+      sepal_width_cm, 
+      data=iris, 
+      color=class) + 
+  geom_smooth(method="lm")
+```
+
+```{r message=FALSE, warning=FALSE}
+qplot(petal_length_cm, 
+      petal_width_cm, 
+      data=iris, 
+      color=class) + 
+  geom_smooth(method="lm")
+```
+
+```{r message=FALSE, warning=FALSE}
+qplot(sepal_length_cm, 
+      petal_width_cm, 
+      data=iris, 
+      color=class) + 
+  geom_smooth(method="lm")
+```
+
+```{r message=FALSE, warning=FALSE}
+qplot(petal_length_cm, 
+      sepal_width_cm, 
+      data=iris, 
+      color=class) + 
+  geom_smooth(method="lm")
+```
+
+```{r message=FALSE, warning=FALSE}
+qplot(sepal_length_cm, 
+      data=iris, 
+      fill=class, 
+      binwidth=0.1,
+      alpha= I(0.5))
+```
+
+```{r message=FALSE, warning=FALSE}
+qplot(sepal_width_cm, 
+      data=iris, 
+      fill=class, 
+      binwidth=0.1,
+      alpha= I(0.5))
+```
+
+```{r message=FALSE, warning=FALSE}
+qplot(petal_length_cm, 
+      data=iris, 
+      fill=class, 
+      binwidth=0.3,
+      alpha= I(0.5))
+```
+
+```{r}
+qplot(petal_width_cm, 
+      data=iris, 
+      fill=class, 
+      binwidth=0.2,
+      alpha= I(0.5))
+```
+
