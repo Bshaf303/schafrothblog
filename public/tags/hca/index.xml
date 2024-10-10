@@ -1,33 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>hca on Bryan Schafroth Portfolio</title>
-    <link>/tags/hca/</link>
-    <description>Recent content in hca on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Hca on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/hca/</link>
+    <description>Recent content in Hca on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 04 Aug 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/hca/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/hca/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Hierarchical Clustering (HCA)</title>
-      <link>/post/2018/08/04/hierarchical-clustering-hca/</link>
+      <link>http://localhost:4321/post/2018/08/04/hierarchical-clustering-hca/</link>
       <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/04/hierarchical-clustering-hca/</guid>
-      <description>Hierarchical ClusteringThe hierarchical agglomerative clustering starts with each observation as a cluster and pairs two at a time until all clusters are merged into one single cluster. The number of clusters is not known or specified in advance. The distance between all pairs of points in the data is recorded. There is a dendrogram (upside down tree structure) that is the output of the grouping of clusters. It represents and shows how many clusters were found in the data.</description>
+      <guid>http://localhost:4321/post/2018/08/04/hierarchical-clustering-hca/</guid>
+      <description>&lt;div id=&#34;hierarchical-clustering&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Hierarchical Clustering&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The hierarchical agglomerative clustering starts with each observation as a cluster and pairs two at a time until all clusters are merged into one single cluster. The number of clusters is not known or specified in advance. The distance between all pairs of points in the data is recorded. There is a dendrogram (upside down tree structure) that is the output of the grouping of clusters. It represents and shows how many clusters were found in the data. The hierarchical method starts at the bottom of the dendrogram and starts creating clusters. Then paired clusters that are similar are merged together. It continues until there is only one cluster. Bottom up pairing. There are four merging methods: averaging, complete, single, centroidal, and Ward’s method. Hierarchical clustering finds the nested groups of clusters and uses a distance measurement like Hamming, Manhattan, or Euclidean that is defined in the parameters of the R function. The default popular distance is the Euclidean and measures the dissimilarity between each pair of observations. The single linkage merging method looks at the shortest point in one cluster to the point in another cluster. The complete method looks at the longest point between a point in one cluster and a point in another cluster. The average linkage takes the average mean distance between each point in one cluster and each point in another cluster. It combines some of the benefits from both single and complete methods.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>K-Means - Hierarchial Cluster Analysis</title>
-      <link>/post/2018/06/17/k-means-hierarchial-cluster-analysis/</link>
+      <link>http://localhost:4321/post/2018/06/17/k-means-hierarchial-cluster-analysis/</link>
       <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/06/17/k-means-hierarchial-cluster-analysis/</guid>
-      <description>K-Means AnalysisThis project will use the Wholesale customer Data Set from: https://archive.ics.uci.edu/ml/datasets/Wholesale+customers. The data has 440 orbs and 8 variables. The data has the Channel and Region as integers but they are categorical in nature with 2 channels and 3 regions. We think this may need to be taken out of the analysis but will leave them in for now. A general observation about the variables there are outliers in the 6 major variables: fresh, milk, grocery, frozen, detergents_paper, delicassen.</description>
+      <guid>http://localhost:4321/post/2018/06/17/k-means-hierarchial-cluster-analysis/</guid>
+      <description>&lt;div id=&#34;k-means-analysis&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;K-Means Analysis&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This project will use the Wholesale customer Data Set from: &lt;a href=&#34;https://archive.ics.uci.edu/ml/datasets/Wholesale+customers&#34; class=&#34;uri&#34;&gt;https://archive.ics.uci.edu/ml/datasets/Wholesale+customers&lt;/a&gt;. The data has 440 orbs and 8 variables. The data has the Channel and Region as integers but they are categorical in nature with 2 channels and 3 regions. We think this may need to be taken out of the analysis but will leave them in for now. A general observation about the variables there are outliers in the 6 major variables: fresh, milk, grocery, frozen, detergents_paper, delicassen. There are plot of each variable. In addition, to the outliers it is noted that the data is dense at the bottom of each of the variable graphs. “Fresh” seems to be less dense than the rest and “Delicassen” is the thickest density of points at the bottom. Initial thoughts are the clusters are going to be somewhere at the bottom of the graph.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

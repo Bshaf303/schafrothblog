@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>kappa on Bryan Schafroth Portfolio</title>
-    <link>/tags/kappa/</link>
-    <description>Recent content in kappa on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Kappa on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/kappa/</link>
+    <description>Recent content in Kappa on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 21 Oct 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/kappa/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/kappa/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Classification Problem using Machine Learning</title>
-      <link>/post/2018/10/21/classification-problem-using-machine-learning-forest-cover-type/</link>
+      <link>http://localhost:4321/post/2018/10/21/classification-problem-using-machine-learning-forest-cover-type/</link>
       <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/10/21/classification-problem-using-machine-learning-forest-cover-type/</guid>
-      <description>IntroductionThis article will present a machine learning problem and the concept behind solving the problem. The project will go into detail about the early exploratory steps and build a machine learning model that can be used in production to categorize data. This project is to categorize seven Rocky Mountain tree types found in the forests. In this project, we will use old legacy data from the 1990s and use modern machine learning methods to categorize the data.</description>
+      <guid>http://localhost:4321/post/2018/10/21/classification-problem-using-machine-learning-forest-cover-type/</guid>
+      <description>&lt;div id=&#34;introduction&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Introduction&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;This article will present a machine learning problem and the concept behind solving the problem. The project will go into detail about the early exploratory steps and build a machine learning model that can be used in production to categorize data. This project is to categorize seven Rocky Mountain tree types found in the forests. In this project, we will use old legacy data from the 1990s and use modern machine learning methods to categorize the data. The owner of the data can migrate the newly categorized data over to their modern cloud database. In the late 1990s, data was collected for mapping by survey methods and done manually in the field. Though in the modern era, we can use high-resolution aerial imagery, GPS, and techniques in GIS systems to categorize cartographic data using the tools of computer vision and machine learning. However, for practical purposes, there are clients and owners of legacy data on old systems. Owners would like to migrate data from legacy systems into modern databases such as the cloud. The utilization of the data through modern computing is of use to the owners. One of the issues is how to categorize the vast amount of legacy data. Automating the categorization process with machine learning is the method proposed in this article.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ethical breach on Bryan Schafroth Portfolio</title>
-    <link>/tags/ethical-breach/</link>
-    <description>Recent content in ethical breach on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Ethical Breach on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/ethical-breach/</link>
+    <description>Recent content in Ethical Breach on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 28 Jan 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/ethical-breach/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/ethical-breach/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Employee Ethical Breach</title>
-      <link>/post/2019/01/28/employee-ethical-breach/</link>
+      <link>http://localhost:4321/post/2019/01/28/employee-ethical-breach/</link>
       <pubDate>Mon, 28 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/28/employee-ethical-breach/</guid>
-      <description>The article is from August of 2018 and found in the Healthcare IT News, among others. The ethics breach was by a Canadian pharmacist in Nova Scotia. The pharmacist caught accessing the health records of approximately 46 patients that the pharmacist knew (Minion, 2018). The ethics breach was spread over two years until the Canadian Privacy Commission discovered what was happening though standard audits. The article said this pharmacist had looked at the records of former classmates, her doctor, and a person whom she had a car accident with, her kid&amp;rsquo;s therapist, her coworkers, family members, and her kid&amp;rsquo;s girlfriend (Minion, 2018).</description>
+      <guid>http://localhost:4321/post/2019/01/28/employee-ethical-breach/</guid>
+      <description>&lt;p&gt;    The article is from August of 2018 and found in the Healthcare IT News, among others. The ethics breach was by a Canadian pharmacist in Nova Scotia. The pharmacist caught accessing the health records of approximately 46 patients that the pharmacist knew (Minion, 2018). The ethics breach was spread over two years until the Canadian Privacy Commission discovered what was happening though standard audits. The article said this pharmacist had looked at the records of former classmates, her doctor, and a person whom she had a car accident with, her kid&amp;rsquo;s therapist, her coworkers, family members, and her kid&amp;rsquo;s girlfriend (Minion, 2018). The pharmacist also shared some of this private information with her spouse and was overheard telling him their son could no longer date his girlfriend because of the information found in the medical records of the girlfriend AND parents of the girlfriend (Minion, 2018).&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

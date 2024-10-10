@@ -2,7 +2,7 @@ baseurl = "https://www.bryanscahfroth.com/"
 languageCode = "en-us"
 title = "Bryan Schafroth Portfolio"
 theme = "hugo-xmin"
-googleAnalytics = "UA-38508489-1"
+googleAnalytics = "G-JP56LN44WC"
 disqusShortname = ""
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"]
 footnotereturnlinkcontents = "↩"
@@ -35,4 +35,4 @@ footnotereturnlinkcontents = "↩"
 
 [params]
     description = "A Xmin Hugo Theme"
-    footer = "&copy; [Bryan Schafroth](https://www.bryanschafroth.com) 2020 | [LinkedIn](https://www.linkedin.com/in/bryanschafroth)"
+    footer = "&copy; [Bryan Schafroth](https://www.bryanschafroth.com) 2024"

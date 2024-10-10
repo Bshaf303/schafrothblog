@@ -1,34 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>ggplot2 on Bryan Schafroth Portfolio</title>
-    <link>/tags/ggplot2/</link>
-    <description>Recent content in ggplot2 on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Ggplot2 on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/ggplot2/</link>
+    <description>Recent content in Ggplot2 on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 19 Aug 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/ggplot2/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/ggplot2/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Different Graphs for Plotting Data in R</title>
-      <link>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</link>
+      <link>http://localhost:4321/post/2018/08/19/different-graphs-for-plotting-data-in-r/</link>
       <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</guid>
-      <description>R Graph Plotting SystemThis brief analysis demonstrates the quick ways to look at data by plotting the data points using R and ggplot2. There are four small datasets used in displaying the individual data characteristics. The point is fast and simplistic plot to reveal the represented data.
-Load the Librarieslibrary(datasets)library(tidyverse)Air Quality Plotwith(airquality, {plot(Temp, Ozone, pch=19, col=&amp;quot;grey&amp;quot;, main = &amp;quot;Base R - Ozone and Temperature&amp;quot;)lines(loess.</description>
+      <guid>http://localhost:4321/post/2018/08/19/different-graphs-for-plotting-data-in-r/</guid>
+      <description>&lt;div id=&#34;r-graph-plotting-system&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;R Graph Plotting System&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This brief analysis demonstrates the quick ways to look at data by plotting the data points using R and &lt;code&gt;ggplot2&lt;/code&gt;. There are four small datasets used in displaying the individual data characteristics. The point is fast and simplistic plot to reveal the represented data.&lt;/p&gt;&#xD;&#xA;&lt;div id=&#34;load-the-libraries&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Load the Libraries&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(datasets)&#xD;&#xA;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;air-quality-plot&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Air Quality Plot&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;with(airquality, {&#xD;&#xA;        plot(Temp, Ozone, pch=19, col=&amp;quot;grey&amp;quot;, main = &amp;quot;Base R - Ozone and Temperature&amp;quot;)&#xD;&#xA;        lines(loess.smooth(Temp, Ozone), col=&amp;quot;blue&amp;quot;, lwd=2)&#xD;&#xA;})&lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:4321/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Preprocessing - Diamonds Dataset</title>
-      <link>/post/2018/05/13/data-preprocessing-diamonds-dataset/</link>
+      <link>http://localhost:4321/post/2018/05/13/data-preprocessing-diamonds-dataset/</link>
       <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/05/13/data-preprocessing-diamonds-dataset/</guid>
-      <description>Data PreprocessingThe following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with one-hot encoding or dummy variables, scaling data, normalizing data.</description>
+      <guid>http://localhost:4321/post/2018/05/13/data-preprocessing-diamonds-dataset/</guid>
+      <description>&lt;div id=&#34;data-preprocessing&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Data Preprocessing&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;The following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with &lt;em&gt;one-hot encoding&lt;/em&gt; or dummy variables, scaling data, normalizing data. The majority of code is not the focus of this analysis but rest assured, and there are close to 700 lines written for the graphing presented in this article.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

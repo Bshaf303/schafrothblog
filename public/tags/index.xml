@@ -2,653 +2,508 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Bryan Schafroth Portfolio</title>
-    <link>/tags/</link>
+    <link>http://localhost:4321/tags/</link>
     <description>Recent content in Tags on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 09 Mar 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>data collection</title>
-      <link>/tags/data-collection/</link>
+      <title>Data Collection</title>
+      <link>http://localhost:4321/tags/data-collection/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/data-collection/</guid>
+      <guid>http://localhost:4321/tags/data-collection/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>privacy</title>
-      <link>/tags/privacy/</link>
+      <title>Privacy in Data</title>
+      <link>http://localhost:4321/tags/privacy-in-data/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/privacy/</guid>
+      <guid>http://localhost:4321/tags/privacy-in-data/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>privacy in data</title>
-      <link>/tags/privacy-in-data/</link>
+      <title>Social Justice</title>
+      <link>http://localhost:4321/tags/social-justice/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/privacy-in-data/</guid>
+      <guid>http://localhost:4321/tags/social-justice/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>social justice</title>
-      <link>/tags/social-justice/</link>
-      <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/social-justice/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>government data resources</title>
-      <link>/tags/government-data-resources/</link>
+      <title>Government Data Resources</title>
+      <link>http://localhost:4321/tags/government-data-resources/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/government-data-resources/</guid>
+      <guid>http://localhost:4321/tags/government-data-resources/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>sentiment Analysis</title>
-      <link>/tags/sentiment-analysis/</link>
+      <title>Sentiment Analysis</title>
+      <link>http://localhost:4321/tags/sentiment-analysis/</link>
       <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/sentiment-analysis/</guid>
+      <guid>http://localhost:4321/tags/sentiment-analysis/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Informed Consent</title>
-      <link>/tags/informed-consent/</link>
+      <link>http://localhost:4321/tags/informed-consent/</link>
       <pubDate>Wed, 13 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/informed-consent/</guid>
+      <guid>http://localhost:4321/tags/informed-consent/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>government social media data</title>
-      <link>/tags/government-social-media-data/</link>
+      <title>Government Social Media Data</title>
+      <link>http://localhost:4321/tags/government-social-media-data/</link>
       <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/government-social-media-data/</guid>
+      <guid>http://localhost:4321/tags/government-social-media-data/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>bias</title>
-      <link>/tags/bias/</link>
+      <title>Bias</title>
+      <link>http://localhost:4321/tags/bias/</link>
       <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/bias/</guid>
+      <guid>http://localhost:4321/tags/bias/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>ethical breach</title>
-      <link>/tags/ethical-breach/</link>
+      <title>Ethical Breach</title>
+      <link>http://localhost:4321/tags/ethical-breach/</link>
       <pubDate>Mon, 28 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/ethical-breach/</guid>
+      <guid>http://localhost:4321/tags/ethical-breach/</guid>
       <description></description>
     </item>
-    
+    <item>
+      <title>Privacy</title>
+      <link>http://localhost:4321/tags/privacy/</link>
+      <pubDate>Tue, 15 Jan 2019 00:00:00 +0000</pubDate>
+      <guid>http://localhost:4321/tags/privacy/</guid>
+      <description></description>
+    </item>
     <item>
       <title>AUC</title>
-      <link>/tags/auc/</link>
+      <link>http://localhost:4321/tags/auc/</link>
       <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/auc/</guid>
+      <guid>http://localhost:4321/tags/auc/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>convolutional neural networks</title>
-      <link>/tags/convolutional-neural-networks/</link>
+      <title>Convolutional Neural Networks</title>
+      <link>http://localhost:4321/tags/convolutional-neural-networks/</link>
       <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/convolutional-neural-networks/</guid>
+      <guid>http://localhost:4321/tags/convolutional-neural-networks/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>data augmentation</title>
-      <link>/tags/data-augmentation/</link>
+      <title>Data Augmentation</title>
+      <link>http://localhost:4321/tags/data-augmentation/</link>
       <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/data-augmentation/</guid>
+      <guid>http://localhost:4321/tags/data-augmentation/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>deep learning</title>
-      <link>/tags/deep-learning/</link>
+      <title>Deep Learning</title>
+      <link>http://localhost:4321/tags/deep-learning/</link>
       <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/deep-learning/</guid>
+      <guid>http://localhost:4321/tags/deep-learning/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>image classification</title>
-      <link>/tags/image-classification/</link>
+      <title>Image Classification</title>
+      <link>http://localhost:4321/tags/image-classification/</link>
       <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/image-classification/</guid>
+      <guid>http://localhost:4321/tags/image-classification/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Keras</title>
-      <link>/tags/keras/</link>
+      <link>http://localhost:4321/tags/keras/</link>
       <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/keras/</guid>
+      <guid>http://localhost:4321/tags/keras/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>ROC</title>
-      <link>/tags/roc/</link>
+      <link>http://localhost:4321/tags/roc/</link>
       <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/roc/</guid>
+      <guid>http://localhost:4321/tags/roc/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>10-fold cross validation</title>
-      <link>/tags/10-fold-cross-validation/</link>
+      <title>10-Fold Cross Validation</title>
+      <link>http://localhost:4321/tags/10-fold-cross-validation/</link>
       <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/10-fold-cross-validation/</guid>
+      <guid>http://localhost:4321/tags/10-fold-cross-validation/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>correlation plots</title>
-      <link>/tags/correlation-plots/</link>
+      <title>Correlation Plots</title>
+      <link>http://localhost:4321/tags/correlation-plots/</link>
       <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/correlation-plots/</guid>
+      <guid>http://localhost:4321/tags/correlation-plots/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>kappa</title>
-      <link>/tags/kappa/</link>
+      <title>Kappa</title>
+      <link>http://localhost:4321/tags/kappa/</link>
       <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/kappa/</guid>
+      <guid>http://localhost:4321/tags/kappa/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>machine learning</title>
-      <link>/tags/machine-learning/</link>
+      <title>Machine Learning</title>
+      <link>http://localhost:4321/tags/machine-learning/</link>
       <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/machine-learning/</guid>
+      <guid>http://localhost:4321/tags/machine-learning/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Partial Least Squares</title>
-      <link>/tags/partial-least-squares/</link>
+      <link>http://localhost:4321/tags/partial-least-squares/</link>
       <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/partial-least-squares/</guid>
+      <guid>http://localhost:4321/tags/partial-least-squares/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>principle component analysis</title>
-      <link>/tags/principle-component-analysis/</link>
+      <title>Principle Component Analysis</title>
+      <link>http://localhost:4321/tags/principle-component-analysis/</link>
       <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/principle-component-analysis/</guid>
+      <guid>http://localhost:4321/tags/principle-component-analysis/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Random Forest</title>
-      <link>/tags/random-forest/</link>
+      <link>http://localhost:4321/tags/random-forest/</link>
       <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/random-forest/</guid>
+      <guid>http://localhost:4321/tags/random-forest/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Data Exploration</title>
-      <link>/tags/data-exploration/</link>
+      <link>http://localhost:4321/tags/data-exploration/</link>
       <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/data-exploration/</guid>
+      <guid>http://localhost:4321/tags/data-exploration/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>tidyverse</title>
-      <link>/tags/tidyverse/</link>
+      <title>Tidyverse</title>
+      <link>http://localhost:4321/tags/tidyverse/</link>
       <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/tidyverse/</guid>
+      <guid>http://localhost:4321/tags/tidyverse/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>data preprocessing</title>
-      <link>/tags/data-preprocessing/</link>
+      <title>Data Preprocessing</title>
+      <link>http://localhost:4321/tags/data-preprocessing/</link>
       <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/data-preprocessing/</guid>
+      <guid>http://localhost:4321/tags/data-preprocessing/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>ggplot2</title>
-      <link>/tags/ggplot2/</link>
+      <title>Ggplot2</title>
+      <link>http://localhost:4321/tags/ggplot2/</link>
       <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/ggplot2/</guid>
+      <guid>http://localhost:4321/tags/ggplot2/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>R techniques</title>
-      <link>/tags/r-techniques/</link>
+      <title>R Techniques</title>
+      <link>http://localhost:4321/tags/r-techniques/</link>
       <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/r-techniques/</guid>
+      <guid>http://localhost:4321/tags/r-techniques/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>R Tidyverse</title>
-      <link>/tags/r-tidyverse/</link>
+      <link>http://localhost:4321/tags/r-tidyverse/</link>
       <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/r-tidyverse/</guid>
+      <guid>http://localhost:4321/tags/r-tidyverse/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>algorithms</title>
-      <link>/tags/algorithms/</link>
+      <title>Algorithms</title>
+      <link>http://localhost:4321/tags/algorithms/</link>
       <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/algorithms/</guid>
+      <guid>http://localhost:4321/tags/algorithms/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>EDA in Data Science</title>
-      <link>/tags/eda-in-data-science/</link>
+      <link>http://localhost:4321/tags/eda-in-data-science/</link>
       <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/eda-in-data-science/</guid>
+      <guid>http://localhost:4321/tags/eda-in-data-science/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>k-means</title>
-      <link>/tags/k-means/</link>
+      <title>K-Means</title>
+      <link>http://localhost:4321/tags/k-means/</link>
       <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/k-means/</guid>
+      <guid>http://localhost:4321/tags/k-means/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>big data</title>
-      <link>/tags/big-data/</link>
+      <title>Big Data</title>
+      <link>http://localhost:4321/tags/big-data/</link>
       <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/big-data/</guid>
+      <guid>http://localhost:4321/tags/big-data/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>GIS</title>
-      <link>/tags/gis/</link>
+      <link>http://localhost:4321/tags/gis/</link>
       <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/gis/</guid>
+      <guid>http://localhost:4321/tags/gis/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>data wrangling</title>
-      <link>/tags/data-wrangling/</link>
+      <title>Data Wrangling</title>
+      <link>http://localhost:4321/tags/data-wrangling/</link>
       <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/data-wrangling/</guid>
+      <guid>http://localhost:4321/tags/data-wrangling/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>hca</title>
-      <link>/tags/hca/</link>
+      <title>Hca</title>
+      <link>http://localhost:4321/tags/hca/</link>
       <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/hca/</guid>
+      <guid>http://localhost:4321/tags/hca/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>hierarchial clustering</title>
-      <link>/tags/hierarchial-clustering/</link>
+      <title>Hierarchial Clustering</title>
+      <link>http://localhost:4321/tags/hierarchial-clustering/</link>
       <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/hierarchial-clustering/</guid>
+      <guid>http://localhost:4321/tags/hierarchial-clustering/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>boxplots</title>
-      <link>/tags/boxplots/</link>
+      <title>Boxplots</title>
+      <link>http://localhost:4321/tags/boxplots/</link>
       <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/boxplots/</guid>
+      <guid>http://localhost:4321/tags/boxplots/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>data manipulation</title>
-      <link>/tags/data-manipulation/</link>
+      <title>Data Manipulation</title>
+      <link>http://localhost:4321/tags/data-manipulation/</link>
       <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/data-manipulation/</guid>
+      <guid>http://localhost:4321/tags/data-manipulation/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>data transformation</title>
-      <link>/tags/data-transformation/</link>
+      <title>Data Transformation</title>
+      <link>http://localhost:4321/tags/data-transformation/</link>
       <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/data-transformation/</guid>
+      <guid>http://localhost:4321/tags/data-transformation/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>dplyr package</title>
-      <link>/tags/dplyr-package/</link>
+      <title>Dplyr Package</title>
+      <link>http://localhost:4321/tags/dplyr-package/</link>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/dplyr-package/</guid>
+      <guid>http://localhost:4321/tags/dplyr-package/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>lubridate package</title>
-      <link>/tags/lubridate-package/</link>
+      <title>Lubridate Package</title>
+      <link>http://localhost:4321/tags/lubridate-package/</link>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/lubridate-package/</guid>
+      <guid>http://localhost:4321/tags/lubridate-package/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>statistical analysis</title>
-      <link>/tags/statistical-analysis/</link>
+      <title>Statistical Analysis</title>
+      <link>http://localhost:4321/tags/statistical-analysis/</link>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/statistical-analysis/</guid>
+      <guid>http://localhost:4321/tags/statistical-analysis/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>reinforcement learning</title>
-      <link>/tags/reinforcement-learning/</link>
+      <title>Reinforcement Learning</title>
+      <link>http://localhost:4321/tags/reinforcement-learning/</link>
       <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/reinforcement-learning/</guid>
+      <guid>http://localhost:4321/tags/reinforcement-learning/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>ann</title>
-      <link>/tags/ann/</link>
+      <title>Ann</title>
+      <link>http://localhost:4321/tags/ann/</link>
       <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/ann/</guid>
+      <guid>http://localhost:4321/tags/ann/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>artificial neural network</title>
-      <link>/tags/artificial-neural-network/</link>
+      <title>Artificial Neural Network</title>
+      <link>http://localhost:4321/tags/artificial-neural-network/</link>
       <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/artificial-neural-network/</guid>
+      <guid>http://localhost:4321/tags/artificial-neural-network/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>support vector machine</title>
-      <link>/tags/support-vector-machine/</link>
+      <title>Support Vector Machine</title>
+      <link>http://localhost:4321/tags/support-vector-machine/</link>
       <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/support-vector-machine/</guid>
+      <guid>http://localhost:4321/tags/support-vector-machine/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>svm</title>
-      <link>/tags/svm/</link>
+      <title>Svm</title>
+      <link>http://localhost:4321/tags/svm/</link>
       <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/svm/</guid>
+      <guid>http://localhost:4321/tags/svm/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>decision tree</title>
-      <link>/tags/decision-tree/</link>
+      <title>Decision Tree</title>
+      <link>http://localhost:4321/tags/decision-tree/</link>
       <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/decision-tree/</guid>
+      <guid>http://localhost:4321/tags/decision-tree/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>classification</title>
-      <link>/tags/classification/</link>
+      <title>Classification</title>
+      <link>http://localhost:4321/tags/classification/</link>
       <pubDate>Sun, 27 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/classification/</guid>
+      <guid>http://localhost:4321/tags/classification/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>AUC area under the curve</title>
-      <link>/tags/auc-area-under-the-curve/</link>
+      <title>AUC Area Under the Curve</title>
+      <link>http://localhost:4321/tags/auc-area-under-the-curve/</link>
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/auc-area-under-the-curve/</guid>
+      <guid>http://localhost:4321/tags/auc-area-under-the-curve/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>caret library</title>
-      <link>/tags/caret-library/</link>
+      <title>Caret Library</title>
+      <link>http://localhost:4321/tags/caret-library/</link>
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/caret-library/</guid>
+      <guid>http://localhost:4321/tags/caret-library/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>confusion matrix</title>
-      <link>/tags/confusion-matrix/</link>
+      <title>Confusion Matrix</title>
+      <link>http://localhost:4321/tags/confusion-matrix/</link>
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/confusion-matrix/</guid>
+      <guid>http://localhost:4321/tags/confusion-matrix/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>euclidian distance</title>
-      <link>/tags/euclidian-distance/</link>
+      <title>Euclidian Distance</title>
+      <link>http://localhost:4321/tags/euclidian-distance/</link>
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/euclidian-distance/</guid>
+      <guid>http://localhost:4321/tags/euclidian-distance/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>k-nearest neighbor</title>
-      <link>/tags/k-nearest-neighbor/</link>
+      <title>K-Nearest Neighbor</title>
+      <link>http://localhost:4321/tags/k-nearest-neighbor/</link>
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/k-nearest-neighbor/</guid>
+      <guid>http://localhost:4321/tags/k-nearest-neighbor/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>lazy learner</title>
-      <link>/tags/lazy-learner/</link>
+      <title>Lazy Learner</title>
+      <link>http://localhost:4321/tags/lazy-learner/</link>
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/lazy-learner/</guid>
+      <guid>http://localhost:4321/tags/lazy-learner/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>ROC receiver operating character curve</title>
-      <link>/tags/roc-receiver-operating-character-curve/</link>
+      <title>ROC Receiver Operating Character Curve</title>
+      <link>http://localhost:4321/tags/roc-receiver-operating-character-curve/</link>
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/roc-receiver-operating-character-curve/</guid>
+      <guid>http://localhost:4321/tags/roc-receiver-operating-character-curve/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>supervised learning</title>
-      <link>/tags/supervised-learning/</link>
+      <title>Supervised Learning</title>
+      <link>http://localhost:4321/tags/supervised-learning/</link>
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/supervised-learning/</guid>
+      <guid>http://localhost:4321/tags/supervised-learning/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Alluvial Plots</title>
-      <link>/tags/alluvial-plots/</link>
+      <link>http://localhost:4321/tags/alluvial-plots/</link>
       <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/alluvial-plots/</guid>
+      <guid>http://localhost:4321/tags/alluvial-plots/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Spearmans Correlation</title>
-      <link>/tags/spearmans-correlation/</link>
+      <link>http://localhost:4321/tags/spearmans-correlation/</link>
       <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/spearmans-correlation/</guid>
+      <guid>http://localhost:4321/tags/spearmans-correlation/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>edge computing</title>
-      <link>/tags/edge-computing/</link>
+      <title>Edge Computing</title>
+      <link>http://localhost:4321/tags/edge-computing/</link>
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/edge-computing/</guid>
+      <guid>http://localhost:4321/tags/edge-computing/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>Internet of Things</title>
-      <link>/tags/internet-of-things/</link>
+      <link>http://localhost:4321/tags/internet-of-things/</link>
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/internet-of-things/</guid>
+      <guid>http://localhost:4321/tags/internet-of-things/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>IOT</title>
-      <link>/tags/iot/</link>
+      <link>http://localhost:4321/tags/iot/</link>
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/iot/</guid>
+      <guid>http://localhost:4321/tags/iot/</guid>
       <description></description>
     </item>
-    
     <item>
       <title>LDA</title>
-      <link>/tags/lda/</link>
+      <link>http://localhost:4321/tags/lda/</link>
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/lda/</guid>
+      <guid>http://localhost:4321/tags/lda/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>research</title>
-      <link>/tags/research/</link>
+      <title>Research</title>
+      <link>http://localhost:4321/tags/research/</link>
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/research/</guid>
+      <guid>http://localhost:4321/tags/research/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>sensor data</title>
-      <link>/tags/sensor-data/</link>
+      <title>Sensor Data</title>
+      <link>http://localhost:4321/tags/sensor-data/</link>
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/sensor-data/</guid>
+      <guid>http://localhost:4321/tags/sensor-data/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>smart city</title>
-      <link>/tags/smart-city/</link>
+      <title>Smart City</title>
+      <link>http://localhost:4321/tags/smart-city/</link>
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/smart-city/</guid>
+      <guid>http://localhost:4321/tags/smart-city/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>statistical modelling</title>
-      <link>/tags/statistical-modelling/</link>
+      <title>Statistical Modelling</title>
+      <link>http://localhost:4321/tags/statistical-modelling/</link>
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/statistical-modelling/</guid>
+      <guid>http://localhost:4321/tags/statistical-modelling/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>streaming data</title>
-      <link>/tags/streaming-data/</link>
+      <title>Streaming Data</title>
+      <link>http://localhost:4321/tags/streaming-data/</link>
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/streaming-data/</guid>
+      <guid>http://localhost:4321/tags/streaming-data/</guid>
       <description></description>
     </item>
-    
     <item>
-      <title>experimental design</title>
-      <link>/tags/experimental-design/</link>
+      <title>Experimental Design</title>
+      <link>http://localhost:4321/tags/experimental-design/</link>
       <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/experimental-design/</guid>
+      <guid>http://localhost:4321/tags/experimental-design/</guid>
       <description></description>
     </item>
-    
   </channel>
 </rss>

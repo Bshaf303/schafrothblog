@@ -2,23 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Alluvial Plots on Bryan Schafroth Portfolio</title>
-    <link>/tags/alluvial-plots/</link>
+    <link>http://localhost:4321/tags/alluvial-plots/</link>
     <description>Recent content in Alluvial Plots on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 13 May 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/alluvial-plots/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/alluvial-plots/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Data Preprocessing - Diamonds Dataset</title>
-      <link>/post/2018/05/13/data-preprocessing-diamonds-dataset/</link>
+      <link>http://localhost:4321/post/2018/05/13/data-preprocessing-diamonds-dataset/</link>
       <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/05/13/data-preprocessing-diamonds-dataset/</guid>
-      <description>Data PreprocessingThe following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with one-hot encoding or dummy variables, scaling data, normalizing data.</description>
+      <guid>http://localhost:4321/post/2018/05/13/data-preprocessing-diamonds-dataset/</guid>
+      <description>&lt;div id=&#34;data-preprocessing&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Data Preprocessing&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;The following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with &lt;em&gt;one-hot encoding&lt;/em&gt; or dummy variables, scaling data, normalizing data. The majority of code is not the focus of this analysis but rest assured, and there are close to 700 lines written for the graphing presented in this article.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

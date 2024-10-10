@@ -2,77 +2,60 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Ethics on Bryan Schafroth Portfolio</title>
-    <link>/categories/ethics/</link>
+    <link>http://localhost:4321/categories/ethics/</link>
     <description>Recent content in Ethics on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 28 Jan 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/ethics/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/categories/ethics/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Employee Ethical Breach</title>
-      <link>/post/2019/01/28/employee-ethical-breach/</link>
+      <link>http://localhost:4321/post/2019/01/28/employee-ethical-breach/</link>
       <pubDate>Mon, 28 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/28/employee-ethical-breach/</guid>
-      <description>The article is from August of 2018 and found in the Healthcare IT News, among others. The ethics breach was by a Canadian pharmacist in Nova Scotia. The pharmacist caught accessing the health records of approximately 46 patients that the pharmacist knew (Minion, 2018). The ethics breach was spread over two years until the Canadian Privacy Commission discovered what was happening though standard audits. The article said this pharmacist had looked at the records of former classmates, her doctor, and a person whom she had a car accident with, her kid&amp;rsquo;s therapist, her coworkers, family members, and her kid&amp;rsquo;s girlfriend (Minion, 2018).</description>
+      <guid>http://localhost:4321/post/2019/01/28/employee-ethical-breach/</guid>
+      <description>&lt;p&gt;    The article is from August of 2018 and found in the Healthcare IT News, among others. The ethics breach was by a Canadian pharmacist in Nova Scotia. The pharmacist caught accessing the health records of approximately 46 patients that the pharmacist knew (Minion, 2018). The ethics breach was spread over two years until the Canadian Privacy Commission discovered what was happening though standard audits. The article said this pharmacist had looked at the records of former classmates, her doctor, and a person whom she had a car accident with, her kid&amp;rsquo;s therapist, her coworkers, family members, and her kid&amp;rsquo;s girlfriend (Minion, 2018). The pharmacist also shared some of this private information with her spouse and was overheard telling him their son could no longer date his girlfriend because of the information found in the medical records of the girlfriend AND parents of the girlfriend (Minion, 2018).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>A Case Study on Genome Privacy</title>
-      <link>/post/2019/01/27/a-case-study-on-genome-privacy/</link>
+      <link>http://localhost:4321/post/2019/01/27/a-case-study-on-genome-privacy/</link>
       <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/27/a-case-study-on-genome-privacy/</guid>
-      <description>The premise of this article is Walser-Kuntz, Deel, and Singer&amp;rsquo;s case study in genome privacy (2005). The authors of the case study state that biosciences have been able to isolate the single nucleotide polymorphism (SNP) as part of humans&amp;rsquo; DNA markers (Walser-Kuntz, Deel, &amp;amp; Singer, 2005). The SNPs have three uses, according to Walser-Kuntz, Deel, &amp;amp; Singer: genetic markers for disease, specialized applications in medicine, and mapping human evolution (p.</description>
+      <guid>http://localhost:4321/post/2019/01/27/a-case-study-on-genome-privacy/</guid>
+      <description>&lt;p&gt;    The premise of this article is Walser-Kuntz, Deel, and Singer&amp;rsquo;s case study in genome privacy (2005). The authors of the case study state that biosciences have been able to isolate the single nucleotide polymorphism (SNP) as part of humans&amp;rsquo; DNA markers (Walser-Kuntz, Deel, &amp;amp; Singer, 2005). The SNPs have three uses, according to Walser-Kuntz, Deel, &amp;amp; Singer: genetic markers for disease, specialized applications in medicine, and mapping human evolution (p. 3). Walser-Kuntz, Deel, &amp;amp; Singer (2005) indicate the ethical/privacy problems with having genetic data that reveal individual identities of people and families who have genetic diseases (p. 4). The issues cited are discrimination, stigmatization, loss of insurance, and loss of employment (p. 4). There are several lobbying groups listed in this study who want a voice in policy for or against genome privacy: health insurance companies, life insurance companies, breast cancer coalition, equal employment opportunity commission, academic and private scientist groups, and genetic counselors and physicians (Walser-Kuntz, Deel, &amp;amp; Singer, 2005, p.6). The case study written in 2005 had no firm legislation in place describing how to handle the use of DNA genetic data on individuals. Since then, the Genetic Information Nondiscrimination Act of 2008 (GINA) became effective November 21, 2009 (EEOC, n.d.). The U.S. Equal Employment Opportunity Commission EEOC is a branch of the federal government that enforces laws regarding employee and employer rights in the United States and protects employees from employer discrimination (EEOC, n.d.).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Case Study on Data Collection: Harvesting Personalities Online</title>
-      <link>/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</link>
+      <link>http://localhost:4321/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</link>
       <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</guid>
-      <description>Raicu wrote a case study for the Santa Clara University discussing the data analytics firm Cambridge Analytica who provided marketing services for various political campaigns (2016). The case study reveals Cambridge Analytica assumed the personality type of nearly all of the registered voters in the U.S. (Raicu, 2016). The study attempts to answer how Cambridge Analytica determined the personality type of 190 million people who were registered to vote across the U.</description>
+      <guid>http://localhost:4321/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</guid>
+      <description>&lt;p&gt;    Raicu wrote a case study for the Santa Clara University discussing the data analytics firm Cambridge Analytica who provided marketing services for various political campaigns (2016). The case study reveals Cambridge Analytica assumed the personality type of nearly all of the registered voters in the U.S. (Raicu, 2016). The study attempts to answer how Cambridge Analytica determined the personality type of 190 million people who were registered to vote across the U.S. (Raicu, 2016). Raicu learned Cambridge Analytica assessed voter personalities through online questionnaires (ads) and obtained approximately 15%+/- participation in the surveys, the remaining voter personalities through statistical methods based on people that had other similar information taken from different sources are estimated (2016). The basis for &amp;ldquo;similar information&amp;rdquo; is assumed to be from data brokers and claimed to have a large number of data points on U.S. citizens (Raicu, 2016). The politicians used Cambridge Analytica&amp;rsquo;s services to market ad campaigns to the American people during the elections. The remainder of this paper will look into more of the details of this case and answer some ethical questions.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Informed Consent and Data Science</title>
-      <link>/post/2019/01/23/informed-consent-and-data-science/</link>
+      <link>http://localhost:4321/post/2019/01/23/informed-consent-and-data-science/</link>
       <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/23/informed-consent-and-data-science/</guid>
-      <description>This retrospective study is from the Netherlands. See the published research article in the reference section below. The article review uses data from 2000 to 2016 and identifies 2,037 children that were previous patients at a university hospital (Draijer, Bosch, Wiegman, Sjouke, Benninga, &amp;amp; Koot, 2018, p.174). The kids screened for liver disease with the goal of this study to use a higher-performing algorithm that improves the accuracy in detecting the condition.</description>
+      <guid>http://localhost:4321/post/2019/01/23/informed-consent-and-data-science/</guid>
+      <description>&lt;p&gt;    This retrospective study is from the Netherlands. See the published research article in the reference section below. The article review uses data from 2000 to 2016 and identifies 2,037 children that were previous patients at a university hospital (Draijer, Bosch, Wiegman, Sjouke, Benninga, &amp;amp; Koot, 2018, p.174). The kids screened for liver disease with the goal of this study to use a higher-performing algorithm that improves the accuracy in detecting the condition. The Wolman disease is a lethal threat to children if left untreated, and early detection is critical. The algorithm did prove useful in helping to pre-determine which patients should have further screenings for the disease. The study indicated that the number of cases where kids had liver disease, and not diagnosed, was very low (Draijer et al., 2018, p.178). Draijer et al. (2018) suggested their algorithm use in prospective cases for early detection of liver disease in children (p.179).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Science and a Code of Ethics</title>
-      <link>/post/2019/01/20/data-science-and-a-code-of-ethics/</link>
+      <link>http://localhost:4321/post/2019/01/20/data-science-and-a-code-of-ethics/</link>
       <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/20/data-science-and-a-code-of-ethics/</guid>
-      <description>The Association for Computing Machinery (ACM) created the ACM Code of Ethics and Professional Conduct to direct computing professionals to act and promote ethical behavior in the profession (ACM, 2018). The ACM Code of Ethics and Professional Conduct is in four sections: General Ethical Principles, Professional Responsibilities, Professional Leadership Principles, and Compliance With the Code (ACM, 2018). This paper will discuss the seven General Ethical Principles and classify them into the three major areas of ethics, privacy, and social justice.</description>
+      <guid>http://localhost:4321/post/2019/01/20/data-science-and-a-code-of-ethics/</guid>
+      <description>&lt;p&gt;    The Association for Computing Machinery (ACM) created the ACM Code of Ethics and Professional Conduct to direct computing professionals to act and promote ethical behavior in the profession (ACM, 2018).  The ACM Code of Ethics and Professional Conduct is in four sections: General Ethical Principles, Professional Responsibilities, Professional Leadership Principles,  and Compliance With the Code (ACM, 2018). This paper will discuss the seven General Ethical Principles and classify them into the three major areas of ethics, privacy, and social justice.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Ethical Issues a Data Scientist Could Face</title>
-      <link>/post/2019/01/15/ethical-issues-a-data-scientist-could-face/</link>
+      <link>http://localhost:4321/post/2019/01/15/ethical-issues-a-data-scientist-could-face/</link>
       <pubDate>Tue, 15 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/15/ethical-issues-a-data-scientist-could-face/</guid>
-      <description>The Association for Computing Machinery (ACM) has a code of ethics and professional conduct guidelines (ACM, 2018). The &amp;ldquo;code&amp;rdquo; is for people that work in computing and a guide to consider when decision making. Section 2.9 outlines the need to design systems that are very secure and recognizing that breaches of computer systems can be malevolent to many people and organizations (ACM, 2018). The ACM states not to roll out systems without thorough testing of security exploits (2018).</description>
+      <guid>http://localhost:4321/post/2019/01/15/ethical-issues-a-data-scientist-could-face/</guid>
+      <description>&lt;p&gt;    The Association for Computing Machinery (ACM) has a code of ethics and professional conduct guidelines (ACM, 2018). The &amp;ldquo;code&amp;rdquo; is for people that work in computing and a guide to consider when decision making. Section 2.9 outlines the need to design systems that are very secure and recognizing that breaches of computer systems can be malevolent to many people and organizations (ACM, 2018). The ACM states not to roll out systems without thorough testing of security exploits (2018).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Hierarchical Clustering (HCA)</title>
-      <link>/post/2018/08/04/hierarchical-clustering-hca/</link>
+      <link>http://localhost:4321/post/2018/08/04/hierarchical-clustering-hca/</link>
       <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/04/hierarchical-clustering-hca/</guid>
-      <description>Hierarchical ClusteringThe hierarchical agglomerative clustering starts with each observation as a cluster and pairs two at a time until all clusters are merged into one single cluster. The number of clusters is not known or specified in advance. The distance between all pairs of points in the data is recorded. There is a dendrogram (upside down tree structure) that is the output of the grouping of clusters. It represents and shows how many clusters were found in the data.</description>
+      <guid>http://localhost:4321/post/2018/08/04/hierarchical-clustering-hca/</guid>
+      <description>&lt;div id=&#34;hierarchical-clustering&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Hierarchical Clustering&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The hierarchical agglomerative clustering starts with each observation as a cluster and pairs two at a time until all clusters are merged into one single cluster. The number of clusters is not known or specified in advance. The distance between all pairs of points in the data is recorded. There is a dendrogram (upside down tree structure) that is the output of the grouping of clusters. It represents and shows how many clusters were found in the data. The hierarchical method starts at the bottom of the dendrogram and starts creating clusters. Then paired clusters that are similar are merged together. It continues until there is only one cluster. Bottom up pairing. There are four merging methods: averaging, complete, single, centroidal, and Ward’s method. Hierarchical clustering finds the nested groups of clusters and uses a distance measurement like Hamming, Manhattan, or Euclidean that is defined in the parameters of the R function. The default popular distance is the Euclidean and measures the dissimilarity between each pair of observations. The single linkage merging method looks at the shortest point in one cluster to the point in another cluster. The complete method looks at the longest point between a point in one cluster and a point in another cluster. The average linkage takes the average mean distance between each point in one cluster and each point in another cluster. It combines some of the benefits from both single and complete methods.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

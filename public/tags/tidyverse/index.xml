@@ -1,45 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>tidyverse on Bryan Schafroth Portfolio</title>
-    <link>/tags/tidyverse/</link>
-    <description>Recent content in tidyverse on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Tidyverse on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/tidyverse/</link>
+    <description>Recent content in Tidyverse on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 26 Aug 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/tidyverse/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/tidyverse/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Case Study - Mobile Photo Analysis</title>
-      <link>/post/2018/08/26/case-study-mobile-photo-analysis/</link>
+      <link>http://localhost:4321/post/2018/08/26/case-study-mobile-photo-analysis/</link>
       <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/26/case-study-mobile-photo-analysis/</guid>
-      <description>Case StudyCan a mobile phone application identify a species of a plant by photo analysis?
-This analysis is hypothetical and analyzes the feasibility of developing a mobile application for mobile phones (that photograph and store pictures) and identify flower pictures stored in memory. This exercise is a small part of a project and will only focus on the exploratory elements of a sample dataset called iris.
-For a successful application, the algorithm shall correctly identify a flower species from a photo on the user’s phone using an image recognition model.</description>
+      <guid>http://localhost:4321/post/2018/08/26/case-study-mobile-photo-analysis/</guid>
+      <description>&lt;div id=&#34;case-study&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Case Study&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;Can a mobile phone application identify a species of a plant by photo analysis?&lt;/p&gt;&#xD;&#xA;&lt;p&gt;This analysis is hypothetical and analyzes the feasibility of developing a mobile application for mobile phones (that photograph and store pictures) and identify flower pictures stored in memory. This exercise is a small part of a project and will only focus on the exploratory elements of a sample dataset called &lt;code&gt;iris&lt;/code&gt;.&lt;/p&gt;&#xD;&#xA;&lt;p&gt;For a successful application, the algorithm shall correctly identify a flower species from a photo on the user’s phone using an image recognition model. Success depends on measuring two flower parts (petal and sepal). There shall be two measurements (length and width) of each flower part. This problem is a classification example, and I will use accuracy of 90% with a 10% error rate. To get these success metrics, we will need to run a larger number of data to compare and calculate the correctly identified ratio to incorrectly identified classified flower species.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Different Graphs for Plotting Data in R</title>
-      <link>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</link>
+      <link>http://localhost:4321/post/2018/08/19/different-graphs-for-plotting-data-in-r/</link>
       <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</guid>
-      <description>R Graph Plotting SystemThis brief analysis demonstrates the quick ways to look at data by plotting the data points using R and ggplot2. There are four small datasets used in displaying the individual data characteristics. The point is fast and simplistic plot to reveal the represented data.
-Load the Librarieslibrary(datasets)library(tidyverse)Air Quality Plotwith(airquality, {plot(Temp, Ozone, pch=19, col=&amp;quot;grey&amp;quot;, main = &amp;quot;Base R - Ozone and Temperature&amp;quot;)lines(loess.</description>
+      <guid>http://localhost:4321/post/2018/08/19/different-graphs-for-plotting-data-in-r/</guid>
+      <description>&lt;div id=&#34;r-graph-plotting-system&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;R Graph Plotting System&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This brief analysis demonstrates the quick ways to look at data by plotting the data points using R and &lt;code&gt;ggplot2&lt;/code&gt;. There are four small datasets used in displaying the individual data characteristics. The point is fast and simplistic plot to reveal the represented data.&lt;/p&gt;&#xD;&#xA;&lt;div id=&#34;load-the-libraries&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Load the Libraries&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(datasets)&#xD;&#xA;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;air-quality-plot&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Air Quality Plot&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;with(airquality, {&#xD;&#xA;        plot(Temp, Ozone, pch=19, col=&amp;quot;grey&amp;quot;, main = &amp;quot;Base R - Ozone and Temperature&amp;quot;)&#xD;&#xA;        lines(loess.smooth(Temp, Ozone), col=&amp;quot;blue&amp;quot;, lwd=2)&#xD;&#xA;})&lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:4321/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Exploration - The Chicago Dataset</title>
-      <link>/post/2018/07/07/data-exploration-the-chicago-dataset/</link>
+      <link>http://localhost:4321/post/2018/07/07/data-exploration-the-chicago-dataset/</link>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/07/data-exploration-the-chicago-dataset/</guid>
-      <description>IntroductionThis article is about using the tidyverse package in R to explore data. The Chicago dataset is the basis for this analysis. The data is air quality measurements taken over 19 years. The focus is on using the dplyr package to do the analysis. The dplyr package is part of the tidyverse in R and a suite of tools to analyze, transform, plot, and manipulate data. The base version of R does all of this; however, dplyr will work faster and cost fewer computing resources when used on big data.</description>
+      <guid>http://localhost:4321/post/2018/07/07/data-exploration-the-chicago-dataset/</guid>
+      <description>&lt;div id=&#34;introduction&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Introduction&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;This article is about using the tidyverse package in R to explore data. The Chicago dataset is the basis for this analysis. The data is air quality measurements taken over 19 years. The focus is on using the dplyr package to do the analysis. The dplyr package is part of the tidyverse in R and a suite of tools to analyze, transform, plot, and manipulate data. The base version of R does all of this; however, dplyr will work faster and cost fewer computing resources when used on big data. The functions used to explore the data are as follows:&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

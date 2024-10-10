@@ -2,23 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ROC on Bryan Schafroth Portfolio</title>
-    <link>/tags/roc/</link>
+    <link>http://localhost:4321/tags/roc/</link>
     <description>Recent content in ROC on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 16 Dec 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/roc/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/roc/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Image Classification - A Computer Vision Problem</title>
-      <link>/post/2018/12/16/image-classification-a-computer-vision-problem/</link>
+      <link>http://localhost:4321/post/2018/12/16/image-classification-a-computer-vision-problem/</link>
       <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/12/16/image-classification-a-computer-vision-problem/</guid>
-      <description>Seedling Image Classification - A Convolutional Neural Network Problem in RStudioTable of ContentsThe Project OriginsImage DataThe Data Science ProblemThe Software to Work the ProblemData ExplorationImage AugmentationBase ModelVGG16 Pretrained ModelTraining and Validation GraphsData Augment – Balance ClassesVGG16 Pretrained Model – Freeze/UnfreezeTraining and Validation GraphsPredictions and Evaluations –VGG16Multi-Class ROC/AUCImproving the model - Part 2Predictions and Evaluations –VGG16Multi-Class ROC/AUCSummaryReferencesFigure 1: Image of invasive weed species growing in a crop.</description>
+      <guid>http://localhost:4321/post/2018/12/16/image-classification-a-computer-vision-problem/</guid>
+      <description>&lt;div id=&#34;seedling-image-classification---a-convolutional-neural-network-problem-in-rstudio&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Seedling Image Classification - A Convolutional Neural Network Problem in RStudio&lt;/h4&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;table-of-contents&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Table of Contents&lt;/h4&gt;&#xD;&#xA;&lt;ol style=&#34;list-style-type: decimal&#34;&gt;&#xD;&#xA;&lt;li&gt;The Project Origins&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Image Data&lt;/li&gt;&#xD;&#xA;&lt;li&gt;The Data Science Problem&lt;/li&gt;&#xD;&#xA;&lt;li&gt;The Software to Work the Problem&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Data Exploration&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Image Augmentation&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Base Model&lt;/li&gt;&#xD;&#xA;&lt;li&gt;VGG16 Pretrained Model&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Training and Validation Graphs&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Data Augment – Balance Classes&lt;/li&gt;&#xD;&#xA;&lt;li&gt;VGG16 Pretrained Model – Freeze/Unfreeze&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Training and Validation Graphs&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Predictions and Evaluations –VGG16&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Multi-Class ROC/AUC&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Improving the model - Part 2&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Predictions and Evaluations –VGG16&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Multi-Class ROC/AUC&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Summary&lt;/li&gt;&#xD;&#xA;&lt;li&gt;References&lt;/li&gt;&#xD;&#xA;&lt;/ol&gt;&#xD;&#xA;&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:unnamed-chunk-1&#34;&gt;&lt;/span&gt;&#xD;&#xA;&lt;img src=&#34;http://localhost:4321/img/SIC_1.jpg&#34; alt=&#34;Image of invasive weed species growing in a crop. Image Source: https://vision.eng.au.dk/roboweedmaps/&#34;  /&gt;&#xD;&#xA;&lt;p class=&#34;caption&#34;&gt;&#xD;&#xA;Figure 1: Image of invasive weed species growing in a crop. Image Source: &lt;a href=&#34;https://vision.eng.au.dk/roboweedmaps/&#34; class=&#34;uri&#34;&gt;https://vision.eng.au.dk/roboweedmaps/&lt;/a&gt;&#xD;&#xA;&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

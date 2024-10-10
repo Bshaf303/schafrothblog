@@ -1,34 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>boxplots on Bryan Schafroth Portfolio</title>
-    <link>/tags/boxplots/</link>
-    <description>Recent content in boxplots on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Boxplots on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/boxplots/</link>
+    <description>Recent content in Boxplots on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 22 Jul 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/boxplots/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/boxplots/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Data Analysis - Exploratory Graphics</title>
-      <link>/post/2018/07/22/data-analysis-exploratory-graphics/</link>
+      <link>http://localhost:4321/post/2018/07/22/data-analysis-exploratory-graphics/</link>
       <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/22/data-analysis-exploratory-graphics/</guid>
-      <description>Exploratory Graphics in RThe focus of this analysis is on the ways to graph data set variables. The first section uses the EPA data set retrieved from: https://github.com/jtleek/modules/blob/master/04_ExploratoryAnalysis/exploratoryGraphs/data/avgpm25.csv the data was imported into a csv file and then used for this first section. Code notes for explaination.
-The first part uses the RStudio base functionality to plot graphics then we use maps, lattice, and ggplot2 to compare and contrast.</description>
+      <guid>http://localhost:4321/post/2018/07/22/data-analysis-exploratory-graphics/</guid>
+      <description>&lt;div id=&#34;exploratory-graphics-in-r&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Exploratory Graphics in R&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The focus of this analysis is on the ways to graph data set variables. The first section uses the EPA data set retrieved from: &lt;a href=&#34;https://github.com/jtleek/modules/blob/master/04_ExploratoryAnalysis/exploratoryGraphs/data/avgpm25.csv&#34; class=&#34;uri&#34;&gt;https://github.com/jtleek/modules/blob/master/04_ExploratoryAnalysis/exploratoryGraphs/data/avgpm25.csv&lt;/a&gt; the data was imported into a csv file and then used for this first section. Code notes for explaination.&lt;/p&gt;&#xD;&#xA;&lt;p&gt;The first part uses the RStudio base functionality to plot graphics then we use maps, lattice, and ggplot2 to compare and contrast. ggplot2 and lattice produce nice graphics quickly, while maps has state maps with county delineations among other options.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Preprocessing - Diamonds Dataset</title>
-      <link>/post/2018/05/13/data-preprocessing-diamonds-dataset/</link>
+      <link>http://localhost:4321/post/2018/05/13/data-preprocessing-diamonds-dataset/</link>
       <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/05/13/data-preprocessing-diamonds-dataset/</guid>
-      <description>Data PreprocessingThe following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with one-hot encoding or dummy variables, scaling data, normalizing data.</description>
+      <guid>http://localhost:4321/post/2018/05/13/data-preprocessing-diamonds-dataset/</guid>
+      <description>&lt;div id=&#34;data-preprocessing&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Data Preprocessing&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;The following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with &lt;em&gt;one-hot encoding&lt;/em&gt; or dummy variables, scaling data, normalizing data. The majority of code is not the focus of this analysis but rest assured, and there are close to 700 lines written for the graphing presented in this article.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

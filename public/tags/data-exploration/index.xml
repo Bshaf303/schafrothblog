@@ -2,91 +2,67 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Data Exploration on Bryan Schafroth Portfolio</title>
-    <link>/tags/data-exploration/</link>
+    <link>http://localhost:4321/tags/data-exploration/</link>
     <description>Recent content in Data Exploration on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 26 Aug 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/data-exploration/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/data-exploration/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Case Study - Mobile Photo Analysis</title>
-      <link>/post/2018/08/26/case-study-mobile-photo-analysis/</link>
+      <link>http://localhost:4321/post/2018/08/26/case-study-mobile-photo-analysis/</link>
       <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/26/case-study-mobile-photo-analysis/</guid>
-      <description>Case StudyCan a mobile phone application identify a species of a plant by photo analysis?
-This analysis is hypothetical and analyzes the feasibility of developing a mobile application for mobile phones (that photograph and store pictures) and identify flower pictures stored in memory. This exercise is a small part of a project and will only focus on the exploratory elements of a sample dataset called iris.
-For a successful application, the algorithm shall correctly identify a flower species from a photo on the user’s phone using an image recognition model.</description>
+      <guid>http://localhost:4321/post/2018/08/26/case-study-mobile-photo-analysis/</guid>
+      <description>&lt;div id=&#34;case-study&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Case Study&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;Can a mobile phone application identify a species of a plant by photo analysis?&lt;/p&gt;&#xD;&#xA;&lt;p&gt;This analysis is hypothetical and analyzes the feasibility of developing a mobile application for mobile phones (that photograph and store pictures) and identify flower pictures stored in memory. This exercise is a small part of a project and will only focus on the exploratory elements of a sample dataset called &lt;code&gt;iris&lt;/code&gt;.&lt;/p&gt;&#xD;&#xA;&lt;p&gt;For a successful application, the algorithm shall correctly identify a flower species from a photo on the user’s phone using an image recognition model. Success depends on measuring two flower parts (petal and sepal). There shall be two measurements (length and width) of each flower part. This problem is a classification example, and I will use accuracy of 90% with a 10% error rate. To get these success metrics, we will need to run a larger number of data to compare and calculate the correctly identified ratio to incorrectly identified classified flower species.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Different Graphs for Plotting Data in R</title>
-      <link>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</link>
+      <link>http://localhost:4321/post/2018/08/19/different-graphs-for-plotting-data-in-r/</link>
       <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</guid>
-      <description>R Graph Plotting SystemThis brief analysis demonstrates the quick ways to look at data by plotting the data points using R and ggplot2. There are four small datasets used in displaying the individual data characteristics. The point is fast and simplistic plot to reveal the represented data.
-Load the Librarieslibrary(datasets)library(tidyverse)Air Quality Plotwith(airquality, {plot(Temp, Ozone, pch=19, col=&amp;quot;grey&amp;quot;, main = &amp;quot;Base R - Ozone and Temperature&amp;quot;)lines(loess.</description>
+      <guid>http://localhost:4321/post/2018/08/19/different-graphs-for-plotting-data-in-r/</guid>
+      <description>&lt;div id=&#34;r-graph-plotting-system&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;R Graph Plotting System&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This brief analysis demonstrates the quick ways to look at data by plotting the data points using R and &lt;code&gt;ggplot2&lt;/code&gt;. There are four small datasets used in displaying the individual data characteristics. The point is fast and simplistic plot to reveal the represented data.&lt;/p&gt;&#xD;&#xA;&lt;div id=&#34;load-the-libraries&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Load the Libraries&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(datasets)&#xD;&#xA;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;air-quality-plot&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Air Quality Plot&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;with(airquality, {&#xD;&#xA;        plot(Temp, Ozone, pch=19, col=&amp;quot;grey&amp;quot;, main = &amp;quot;Base R - Ozone and Temperature&amp;quot;)&#xD;&#xA;        lines(loess.smooth(Temp, Ozone), col=&amp;quot;blue&amp;quot;, lwd=2)&#xD;&#xA;})&lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:4321/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>K-Means Clustering Analysis</title>
-      <link>/post/2018/08/12/k-means-clustering-analysis/</link>
+      <link>http://localhost:4321/post/2018/08/12/k-means-clustering-analysis/</link>
       <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/12/k-means-clustering-analysis/</guid>
-      <description>K-Means ClusteringThe first section uses the iris data set and k-means clustering starting with 3 cluster centers and an nstart of 15. The results are displayed below in the fit object. There are 3 clusters sized 50, 62, and 38. The within sum of squares by cluster is 88.4% and the smaller number (15.15, 39.82, &amp;amp; 23.87) indicates how closely related objects are in the clusters. The first cluster has the most related objects and the second cluster has the lesser of related objects mostly taken from the third cluster.</description>
+      <guid>http://localhost:4321/post/2018/08/12/k-means-clustering-analysis/</guid>
+      <description>&lt;div id=&#34;k-means-clustering&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;K-Means Clustering&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The first section uses the iris data set and k-means clustering starting with 3 cluster centers and an &lt;code&gt;nstart&lt;/code&gt; of 15. The results are displayed below in the fit object. There are 3 clusters sized 50, 62, and 38. The within sum of squares by cluster is 88.4% and the smaller number (15.15, 39.82, &amp;amp; 23.87) indicates how closely related objects are in the clusters. The first cluster has the most related objects and the second cluster has the lesser of related objects mostly taken from the third cluster.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Hierarchical Clustering (HCA)</title>
-      <link>/post/2018/08/04/hierarchical-clustering-hca/</link>
+      <link>http://localhost:4321/post/2018/08/04/hierarchical-clustering-hca/</link>
       <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/04/hierarchical-clustering-hca/</guid>
-      <description>Hierarchical ClusteringThe hierarchical agglomerative clustering starts with each observation as a cluster and pairs two at a time until all clusters are merged into one single cluster. The number of clusters is not known or specified in advance. The distance between all pairs of points in the data is recorded. There is a dendrogram (upside down tree structure) that is the output of the grouping of clusters. It represents and shows how many clusters were found in the data.</description>
+      <guid>http://localhost:4321/post/2018/08/04/hierarchical-clustering-hca/</guid>
+      <description>&lt;div id=&#34;hierarchical-clustering&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Hierarchical Clustering&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The hierarchical agglomerative clustering starts with each observation as a cluster and pairs two at a time until all clusters are merged into one single cluster. The number of clusters is not known or specified in advance. The distance between all pairs of points in the data is recorded. There is a dendrogram (upside down tree structure) that is the output of the grouping of clusters. It represents and shows how many clusters were found in the data. The hierarchical method starts at the bottom of the dendrogram and starts creating clusters. Then paired clusters that are similar are merged together. It continues until there is only one cluster. Bottom up pairing. There are four merging methods: averaging, complete, single, centroidal, and Ward’s method. Hierarchical clustering finds the nested groups of clusters and uses a distance measurement like Hamming, Manhattan, or Euclidean that is defined in the parameters of the R function. The default popular distance is the Euclidean and measures the dissimilarity between each pair of observations. The single linkage merging method looks at the shortest point in one cluster to the point in another cluster. The complete method looks at the longest point between a point in one cluster and a point in another cluster. The average linkage takes the average mean distance between each point in one cluster and each point in another cluster. It combines some of the benefits from both single and complete methods.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>R Analysis - Plotting Graphics</title>
-      <link>/post/2018/07/29/r-analysis-plotting-graphics/</link>
+      <link>http://localhost:4321/post/2018/07/29/r-analysis-plotting-graphics/</link>
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/29/r-analysis-plotting-graphics/</guid>
-      <description>R Graphics for Exploring DataThe graphics device prints the graphics to screen or into a file type read by other apps. The screen device is on our computers. For windows its windows(), mac its quartz() and Linux its x11(). I am assuming this is built into the R functions plot(), xyplot(), and qplot() when we use them to plot. The other “devices” are the file types that are created by the device.</description>
+      <guid>http://localhost:4321/post/2018/07/29/r-analysis-plotting-graphics/</guid>
+      <description>&lt;div id=&#34;r-graphics-for-exploring-data&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;R Graphics for Exploring Data&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The graphics device prints the graphics to screen or into a file type read by other apps. The screen device is on our computers. For windows its &lt;code&gt;windows()&lt;/code&gt;, mac its &lt;code&gt;quartz()&lt;/code&gt; and Linux its &lt;code&gt;x11()&lt;/code&gt;. I am assuming this is built into the R functions &lt;code&gt;plot()&lt;/code&gt;, &lt;code&gt;xyplot()&lt;/code&gt;, and &lt;code&gt;qplot()&lt;/code&gt; when we use them to plot. The other “devices” are the file types that are created by the device. PDF, PNG, JPEG, SVG file types are ways to plot graphics and view and share the plot. It depends where the plot is sent. Searching in RStudio I type: &lt;code&gt;?Devices&lt;/code&gt;, and get a List of Graphical Devices found in the &lt;code&gt;{grDevices}&lt;/code&gt; package that came loaded with RStudio. The available devices are windows, pdf, postscript, xfig, bitmap, and pictex. The other devices that may produce a warning message are: cairo.pdf, svg, png, jpeg, bmp, tiff. Some of these I recognize when I export a graph and save as image. If you are on Mac I would guess the first one would be the &lt;code&gt;quartz()&lt;/code&gt; and you wouldn’t see “windows” nor “x11” I would also presumption that with the 10,000+ packages for R there are more graphic devices available. There are two formats for the file devices which are vector and bitmap graphics. Vectors are more for line type graphics with simple color palettes, while bit maps are more like a very dense scatter plots or pictures that can handle color gradients and mixed colors. The &lt;code&gt;par()&lt;/code&gt; function sets the graphics device parameter in R and allowed plots to show up side by side and one on top of the other. &lt;code&gt;par()&lt;/code&gt; format stays on and will continuously show successive plots together side by side. The &lt;code&gt;dev.off()&lt;/code&gt; function is key here to reset the screen device parameters.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Analysis - Exploratory Graphics</title>
-      <link>/post/2018/07/22/data-analysis-exploratory-graphics/</link>
+      <link>http://localhost:4321/post/2018/07/22/data-analysis-exploratory-graphics/</link>
       <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/22/data-analysis-exploratory-graphics/</guid>
-      <description>Exploratory Graphics in RThe focus of this analysis is on the ways to graph data set variables. The first section uses the EPA data set retrieved from: https://github.com/jtleek/modules/blob/master/04_ExploratoryAnalysis/exploratoryGraphs/data/avgpm25.csv the data was imported into a csv file and then used for this first section. Code notes for explaination.
-The first part uses the RStudio base functionality to plot graphics then we use maps, lattice, and ggplot2 to compare and contrast.</description>
+      <guid>http://localhost:4321/post/2018/07/22/data-analysis-exploratory-graphics/</guid>
+      <description>&lt;div id=&#34;exploratory-graphics-in-r&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Exploratory Graphics in R&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The focus of this analysis is on the ways to graph data set variables. The first section uses the EPA data set retrieved from: &lt;a href=&#34;https://github.com/jtleek/modules/blob/master/04_ExploratoryAnalysis/exploratoryGraphs/data/avgpm25.csv&#34; class=&#34;uri&#34;&gt;https://github.com/jtleek/modules/blob/master/04_ExploratoryAnalysis/exploratoryGraphs/data/avgpm25.csv&lt;/a&gt; the data was imported into a csv file and then used for this first section. Code notes for explaination.&lt;/p&gt;&#xD;&#xA;&lt;p&gt;The first part uses the RStudio base functionality to plot graphics then we use maps, lattice, and ggplot2 to compare and contrast. ggplot2 and lattice produce nice graphics quickly, while maps has state maps with county delineations among other options.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Exploratory Data Analysis - EPA Ozone Data</title>
-      <link>/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</link>
+      <link>http://localhost:4321/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</link>
       <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</guid>
-      <description>IntroductionThis exploratory data analysis will use the “hourly_44201_2014” data set obtained from the web site: https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw The data is “Criteria Gases” and labeled “Ozone (44201)” for this particular data set. The data is loaded into RStudio and shows 9,060,694 rows and 24 variables.
-There are 24 variables in this data set. Looking through the variables, we can see the first four are coded presumably by the EPA. The Latitude, Longitude, and Datum are geo-location data.</description>
+      <guid>http://localhost:4321/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</guid>
+      <description>&lt;div id=&#34;introduction&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Introduction&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;This exploratory data analysis will use the “hourly_44201_2014” data set obtained from the web site: &lt;a href=&#34;https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw&#34; class=&#34;uri&#34;&gt;https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw&lt;/a&gt; The data is “Criteria Gases” and labeled “Ozone (44201)” for this particular data set. The data is loaded into RStudio and shows 9,060,694 rows and 24 variables.&lt;/p&gt;&#xD;&#xA;&lt;p&gt;There are 24 variables in this data set. Looking through the variables, we can see the first four are coded presumably by the EPA. The Latitude, Longitude, and Datum are geo-location data. Datum NAD83 is the coordinate system for North American datum, while the WGS84 is a world coordinate system and tells that there are measurements taken presumably in another region or territory of the U.S. The “Date_Local” variable is clearly showing 365 unique dates, which cover the number of days in a year. The “Time_local” variable indicates 24 individual observations and covers each hour in a day. We see the variable measurements labeled as “Sample_Measurement” and then some more coded variables. The last variables are the “State_Name”, “County_Name”. The 53 individual names in the “State_Name” variable stand out, and this possibly coincides with the WGS84 coordinate system for U.S. States outside of the 48 States and are territories.&#xD;&#xA;In summary, we have essential geographic information, time/date information, and an Ozone measurement available in the data set. For this analysis, we can disregard the internal coding from the EPA.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Preprocessing - Diamonds Dataset</title>
-      <link>/post/2018/05/13/data-preprocessing-diamonds-dataset/</link>
+      <link>http://localhost:4321/post/2018/05/13/data-preprocessing-diamonds-dataset/</link>
       <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/05/13/data-preprocessing-diamonds-dataset/</guid>
-      <description>Data PreprocessingThe following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with one-hot encoding or dummy variables, scaling data, normalizing data.</description>
+      <guid>http://localhost:4321/post/2018/05/13/data-preprocessing-diamonds-dataset/</guid>
+      <description>&lt;div id=&#34;data-preprocessing&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Data Preprocessing&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;The following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with &lt;em&gt;one-hot encoding&lt;/em&gt; or dummy variables, scaling data, normalizing data. The majority of code is not the focus of this analysis but rest assured, and there are close to 700 lines written for the graphing presented in this article.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

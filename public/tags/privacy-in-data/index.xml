@@ -1,33 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>privacy in data on Bryan Schafroth Portfolio</title>
-    <link>/tags/privacy-in-data/</link>
-    <description>Recent content in privacy in data on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Privacy in Data on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/privacy-in-data/</link>
+    <description>Recent content in Privacy in Data on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 09 Mar 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/privacy-in-data/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/privacy-in-data/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Open Data – Annual Crime Dataset 2015</title>
-      <link>/post/2019/03/09/open-data-annual-crime-dataset-2015/</link>
+      <link>http://localhost:4321/post/2019/03/09/open-data-annual-crime-dataset-2015/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/03/09/open-data-annual-crime-dataset-2015/</guid>
-      <description>Data.gov has a “Local Government” (data.gov, 2019b) section among fourteen available topics to obtain data. In the “All Local Government section, as of this writing, there are 17,209 datasets (data.gov, 2019a). Filtering found in the “Organizations” or “Publishers” tab will isolate all the data available for Austin, Texas. Not all U.S. States, cities, and counties are in this resource, which does not indicate the data are not available. A direct way to find local data is to go to the city, state, or county websites.</description>
+      <guid>http://localhost:4321/post/2019/03/09/open-data-annual-crime-dataset-2015/</guid>
+      <description>&lt;p&gt;    Data.gov has a “Local Government” (data.gov, 2019b) section among fourteen available topics to obtain data. In the “All Local Government section, as of this writing, there are 17,209 datasets (data.gov, 2019a). Filtering found in the “Organizations” or “Publishers” tab will isolate all the data available for Austin, Texas. Not all U.S. States, cities, and counties are in this resource, which does not indicate the data are not available. A direct way to find local data is to go to the city, state, or county websites. Data.gov is still a practical place to start to view what topics are available and can help with idea generation.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>A Case Study on Genome Privacy</title>
-      <link>/post/2019/01/27/a-case-study-on-genome-privacy/</link>
+      <link>http://localhost:4321/post/2019/01/27/a-case-study-on-genome-privacy/</link>
       <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/27/a-case-study-on-genome-privacy/</guid>
-      <description>The premise of this article is Walser-Kuntz, Deel, and Singer&amp;rsquo;s case study in genome privacy (2005). The authors of the case study state that biosciences have been able to isolate the single nucleotide polymorphism (SNP) as part of humans&amp;rsquo; DNA markers (Walser-Kuntz, Deel, &amp;amp; Singer, 2005). The SNPs have three uses, according to Walser-Kuntz, Deel, &amp;amp; Singer: genetic markers for disease, specialized applications in medicine, and mapping human evolution (p.</description>
+      <guid>http://localhost:4321/post/2019/01/27/a-case-study-on-genome-privacy/</guid>
+      <description>&lt;p&gt;    The premise of this article is Walser-Kuntz, Deel, and Singer&amp;rsquo;s case study in genome privacy (2005). The authors of the case study state that biosciences have been able to isolate the single nucleotide polymorphism (SNP) as part of humans&amp;rsquo; DNA markers (Walser-Kuntz, Deel, &amp;amp; Singer, 2005). The SNPs have three uses, according to Walser-Kuntz, Deel, &amp;amp; Singer: genetic markers for disease, specialized applications in medicine, and mapping human evolution (p. 3). Walser-Kuntz, Deel, &amp;amp; Singer (2005) indicate the ethical/privacy problems with having genetic data that reveal individual identities of people and families who have genetic diseases (p. 4). The issues cited are discrimination, stigmatization, loss of insurance, and loss of employment (p. 4). There are several lobbying groups listed in this study who want a voice in policy for or against genome privacy: health insurance companies, life insurance companies, breast cancer coalition, equal employment opportunity commission, academic and private scientist groups, and genetic counselors and physicians (Walser-Kuntz, Deel, &amp;amp; Singer, 2005, p.6). The case study written in 2005 had no firm legislation in place describing how to handle the use of DNA genetic data on individuals. Since then, the Genetic Information Nondiscrimination Act of 2008 (GINA) became effective November 21, 2009 (EEOC, n.d.). The U.S. Equal Employment Opportunity Commission EEOC is a branch of the federal government that enforces laws regarding employee and employer rights in the United States and protects employees from employer discrimination (EEOC, n.d.).&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

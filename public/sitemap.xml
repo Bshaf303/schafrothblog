@@ -1,669 +1,403 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
-    <loc>/categories/</loc>
+    <loc>http://localhost:4321/categories/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-collection/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/data-collection/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
+  </url><url>
+    <loc>http://localhost:4321/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/03/09/open-data-annual-crime-dataset-2015/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/03/09/open-data-annual-crime-dataset-2015/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/privacy/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/privacy-in-data/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/privacy-in-data/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/public-data/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/public-data/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/social-justice/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/social-justice/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
-    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/government-data-resources/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/government-data-resources/</loc>
     <lastmod>2019-03-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/03/04/using-data-gov-and-applications-that-solve-problems/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/03/04/using-data-gov-and-applications-that-solve-problems/</loc>
     <lastmod>2019-03-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/corporate-responsibility/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/corporate-responsibility/</loc>
     <lastmod>2019-03-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/03/02/data-science-for-social-justice-bolivia-case-study/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/03/02/data-science-for-social-justice-bolivia-case-study/</loc>
     <lastmod>2019-03-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/02/25/social-justice-aided-with-data-science/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/02/25/social-justice-aided-with-data-science/</loc>
     <lastmod>2019-02-25T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/social-media/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/social-media/</loc>
     <lastmod>2019-02-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</loc>
     <lastmod>2019-02-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/sentiment-analysis/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/sentiment-analysis/</loc>
     <lastmod>2019-02-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/02/18/sentiment-analysis-and-social-media-use-policy/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/02/18/sentiment-analysis-and-social-media-use-policy/</loc>
     <lastmod>2019-02-18T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/02/16/government-data-planning-u-s-compared-to-australia/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/02/16/government-data-planning-u-s-compared-to-australia/</loc>
     <lastmod>2019-02-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</loc>
     <lastmod>2019-02-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/informed-consent/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/informed-consent/</loc>
     <lastmod>2019-02-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/government-social-media-data/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/government-social-media-data/</loc>
     <lastmod>2019-02-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/02/11/state-local-federal-data-sources/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/02/11/state-local-federal-data-sources/</loc>
     <lastmod>2019-02-11T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/02/07/government-regulations-slide-presentation/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/02/07/government-regulations-slide-presentation/</loc>
     <lastmod>2019-02-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/02/03/agorithm-bias-in-analysis/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/02/03/agorithm-bias-in-analysis/</loc>
     <lastmod>2019-02-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/bias/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/bias/</loc>
     <lastmod>2019-02-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/statistical-methods/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/statistical-methods/</loc>
     <lastmod>2019-02-03T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/01/28/employee-ethical-breach/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/01/28/employee-ethical-breach/</loc>
     <lastmod>2019-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/ethical-breach/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/ethical-breach/</loc>
     <lastmod>2019-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/ethics/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/ethics/</loc>
     <lastmod>2019-01-28T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/01/27/a-case-study-on-genome-privacy/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/01/27/a-case-study-on-genome-privacy/</loc>
     <lastmod>2019-01-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</loc>
     <lastmod>2019-01-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/01/23/informed-consent-and-data-science/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/01/23/informed-consent-and-data-science/</loc>
     <lastmod>2019-01-23T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/01/20/data-science-and-a-code-of-ethics/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/01/20/data-science-and-a-code-of-ethics/</loc>
     <lastmod>2019-01-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2019/01/15/ethical-issues-a-data-scientist-could-face/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2019/01/15/ethical-issues-a-data-scientist-could-face/</loc>
     <lastmod>2019-01-15T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/auc/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/privacy/</loc>
+    <lastmod>2019-01-15T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/tags/auc/</loc>
     <lastmod>2018-12-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/computer-vision/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/computer-vision/</loc>
     <lastmod>2018-12-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/convolutional-neural-networks/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/convolutional-neural-networks/</loc>
     <lastmod>2018-12-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-augmentation/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/data-augmentation/</loc>
     <lastmod>2018-12-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/deep-learning/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/deep-learning/</loc>
     <lastmod>2018-12-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/image-classification/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/image-classification/</loc>
     <lastmod>2018-12-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/12/16/image-classification-a-computer-vision-problem/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/12/16/image-classification-a-computer-vision-problem/</loc>
     <lastmod>2018-12-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/keras/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/keras/</loc>
     <lastmod>2018-12-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/roc/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/roc/</loc>
     <lastmod>2018-12-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/10-fold-cross-validation/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/10-fold-cross-validation/</loc>
     <lastmod>2018-10-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/10/21/classification-problem-using-machine-learning-forest-cover-type/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/10/21/classification-problem-using-machine-learning-forest-cover-type/</loc>
     <lastmod>2018-10-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/correlation-plots/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/correlation-plots/</loc>
     <lastmod>2018-10-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/kappa/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/kappa/</loc>
     <lastmod>2018-10-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/machine-learning/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/machine-learning/</loc>
     <lastmod>2018-10-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/partial-least-squares/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/partial-least-squares/</loc>
     <lastmod>2018-10-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/principle-component-analysis/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/principle-component-analysis/</loc>
     <lastmod>2018-10-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/projects/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/projects/</loc>
     <lastmod>2018-10-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/random-forest/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/random-forest/</loc>
     <lastmod>2018-10-21T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/08/26/case-study-mobile-photo-analysis/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/08/26/case-study-mobile-photo-analysis/</loc>
     <lastmod>2018-08-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/data-analysis/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/data-analysis/</loc>
     <lastmod>2018-08-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-exploration/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/data-exploration/</loc>
     <lastmod>2018-08-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/exploratory-data-analysis/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/exploratory-data-analysis/</loc>
     <lastmod>2018-08-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/r-programming/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/r-programming/</loc>
     <lastmod>2018-08-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/tidyverse/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/tidyverse/</loc>
     <lastmod>2018-08-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-preprocessing/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/data-preprocessing/</loc>
     <lastmod>2018-08-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/08/19/different-graphs-for-plotting-data-in-r/</loc>
     <lastmod>2018-08-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/ggplot2/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/ggplot2/</loc>
     <lastmod>2018-08-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/r-techniques/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/r-techniques/</loc>
     <lastmod>2018-08-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/r-tidyverse/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/r-tidyverse/</loc>
     <lastmod>2018-08-19T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/algorithms/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/algorithms/</loc>
     <lastmod>2018-08-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/eda-in-data-science/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/eda-in-data-science/</loc>
     <lastmod>2018-08-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/k-means/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/k-means/</loc>
     <lastmod>2018-08-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/08/12/k-means-clustering-analysis/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/08/12/k-means-clustering-analysis/</loc>
     <lastmod>2018-08-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/machine-learning/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/machine-learning/</loc>
     <lastmod>2018-08-12T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/08/06/application-of-k-means-a-brief-case-study/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/08/06/application-of-k-means-a-brief-case-study/</loc>
     <lastmod>2018-08-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/big-data/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/big-data/</loc>
     <lastmod>2018-08-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/gis/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/gis/</loc>
     <lastmod>2018-08-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/intelligent-systems/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/intelligent-systems/</loc>
     <lastmod>2018-08-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/iot/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/iot/</loc>
     <lastmod>2018-08-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/literature-review/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/literature-review/</loc>
     <lastmod>2018-08-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/smart-cities/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/smart-cities/</loc>
     <lastmod>2018-08-06T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-wrangling/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/data-wrangling/</loc>
     <lastmod>2018-08-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/hca/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/hca/</loc>
     <lastmod>2018-08-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/hierarchial-clustering/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/hierarchial-clustering/</loc>
     <lastmod>2018-08-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/08/04/hierarchical-clustering-hca/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/08/04/hierarchical-clustering-hca/</loc>
     <lastmod>2018-08-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/07/29/r-analysis-plotting-graphics/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/07/29/r-analysis-plotting-graphics/</loc>
     <lastmod>2018-07-29T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/boxplots/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/boxplots/</loc>
     <lastmod>2018-07-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/07/22/data-analysis-exploratory-graphics/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/07/22/data-analysis-exploratory-graphics/</loc>
     <lastmod>2018-07-22T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-manipulation/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/data-manipulation/</loc>
     <lastmod>2018-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/data-transformation/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/data-transformation/</loc>
     <lastmod>2018-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</loc>
     <lastmod>2018-07-14T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/07/07/data-exploration-the-chicago-dataset/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/07/07/data-exploration-the-chicago-dataset/</loc>
     <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/dplyr-package/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/dplyr-package/</loc>
     <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/lubridate-package/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/lubridate-package/</loc>
     <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/statistical-analysis/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/statistical-analysis/</loc>
     <lastmod>2018-07-07T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/07/04/using-the-dplyr-package-in-r-for-simple-data-analysis/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/07/04/using-the-dplyr-package-in-r-for-simple-data-analysis/</loc>
     <lastmod>2018-07-04T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/07/02/simple-data-exploration-with-base-r-functions/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/07/02/simple-data-exploration-with-base-r-functions/</loc>
     <lastmod>2018-07-02T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/reinforcement-learning/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/reinforcement-learning/</loc>
     <lastmod>2018-07-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/07/01/reinforcement-learing-problem/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/07/01/reinforcement-learing-problem/</loc>
     <lastmod>2018-07-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/06/17/k-means-hierarchial-cluster-analysis/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/06/17/k-means-hierarchial-cluster-analysis/</loc>
     <lastmod>2018-06-17T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/ann/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/ann/</loc>
     <lastmod>2018-06-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/artificial-neural-network/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/artificial-neural-network/</loc>
     <lastmod>2018-06-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</loc>
     <lastmod>2018-06-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/support-vector-machine/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/support-vector-machine/</loc>
     <lastmod>2018-06-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/svm/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/svm/</loc>
     <lastmod>2018-06-10T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/decision-tree/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/decision-tree/</loc>
     <lastmod>2018-06-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/06/01/random-forest-and-decision-tree-analysis/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/06/01/random-forest-and-decision-tree-analysis/</loc>
     <lastmod>2018-06-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/alogrithms/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/alogrithms/</loc>
     <lastmod>2018-05-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/classification/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/classification/</loc>
     <lastmod>2018-05-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/naive-bayes/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/naive-bayes/</loc>
     <lastmod>2018-05-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/05/27/naive-bayes-sms-message-classifier/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/05/27/naive-bayes-sms-message-classifier/</loc>
     <lastmod>2018-05-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/auc-area-under-the-curve/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/auc-area-under-the-curve/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/caret-library/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/caret-library/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/confusion-matrix/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/confusion-matrix/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/euclidian-distance/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/euclidian-distance/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/k-nearest-neighbor/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/k-nearest-neighbor/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/05/20/k-nearest-neighbor-knn-heart-disease-dataset/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/05/20/k-nearest-neighbor-knn-heart-disease-dataset/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/categories/knn/</loc>
+  </url><url>
+    <loc>http://localhost:4321/categories/knn/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/lazy-learner/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/lazy-learner/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/roc-receiver-operating-character-curve/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/roc-receiver-operating-character-curve/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/supervised-learning/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/supervised-learning/</loc>
     <lastmod>2018-05-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/alluvial-plots/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/alluvial-plots/</loc>
     <lastmod>2018-05-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/05/13/data-preprocessing-diamonds-dataset/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/05/13/data-preprocessing-diamonds-dataset/</loc>
     <lastmod>2018-05-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/spearmans-correlation/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/spearmans-correlation/</loc>
     <lastmod>2018-05-13T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/edge-computing/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/edge-computing/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/internet-of-things/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/internet-of-things/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/iot/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/iot/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/lda/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/lda/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2018/03/20/real-time-data-and-smart-cities/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2018/03/20/real-time-data-and-smart-cities/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/research/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/research/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/sensor-data/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/sensor-data/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/smart-city/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/smart-city/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/statistical-modelling/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/statistical-modelling/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/streaming-data/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/streaming-data/</loc>
     <lastmod>2018-03-20T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/2017/10/01/experimental-design/</loc>
+  </url><url>
+    <loc>http://localhost:4321/tags/experimental-design/</loc>
     <lastmod>2017-10-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/experimental-design/</loc>
+  </url><url>
+    <loc>http://localhost:4321/post/2017/10/01/experimental-design/</loc>
     <lastmod>2017-10-01T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:4321/about/</loc>
   </url>
-  
-  <url>
-    <loc>/about/</loc>
-  </url>
-  
 </urlset>

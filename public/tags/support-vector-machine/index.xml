@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>support vector machine on Bryan Schafroth Portfolio</title>
-    <link>/tags/support-vector-machine/</link>
-    <description>Recent content in support vector machine on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Support Vector Machine on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/support-vector-machine/</link>
+    <description>Recent content in Support Vector Machine on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 10 Jun 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/support-vector-machine/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/support-vector-machine/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Artificial Neural Network and Support Vector Machine Analysis</title>
-      <link>/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</link>
+      <link>http://localhost:4321/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</link>
       <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</guid>
-      <description>IntroductionThe data set is the mushroom set retrieved from: http://archive.ics.uci.edu/ml/datasets/Mushroom. It consists of 8124 orbs and 23 variables. The classification variable is the “type” either edible (e) or poisonous (p). The remaining 22 variables are the predictors and consist of multiple levels from 1 to 12 each. The data columns will need to be named and are coded in short for each. There are 2480 NA’s found and in one variable “sr” or stalk root.</description>
+      <guid>http://localhost:4321/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</guid>
+      <description>&lt;div id=&#34;introduction&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Introduction&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The data set is the mushroom set retrieved from: &lt;a href=&#34;http://archive.ics.uci.edu/ml/datasets/Mushroom&#34; class=&#34;uri&#34;&gt;http://archive.ics.uci.edu/ml/datasets/Mushroom&lt;/a&gt;. It consists of 8124 orbs and 23 variables. The classification variable is the “type” either edible (e) or poisonous (p). The remaining 22 variables are the predictors and consist of multiple levels from 1 to 12 each. The data columns will need to be named and are coded in short for each. There are 2480 NA’s found and in one variable “sr” or stalk root. It is decided to use kNN imputation (k=10) to fill these values in with one of the five levels found in this variable.The imputation works for categorical data and thus chosen for this task. It is decided to create dummy variables into numeric values (1,0), but first the veil-type “vt” only has one level and will be removed, also the imputation creates a sr_imp variable and this is also removed. There will be 117 variables, to reduce collinearity the 2 level variables are reduced to 1 variable (fullRank=T). The dependent variable “type” then added back to the revised set as a factor or 2 levels (e,p).&#xD;&#xA;The first section will analyze the ANN using the nnet() from the nnet package. The second section will analyze the SVM using the ksvm() from the kernlab package.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

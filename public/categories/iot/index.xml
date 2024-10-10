@@ -2,32 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>IOT on Bryan Schafroth Portfolio</title>
-    <link>/categories/iot/</link>
+    <link>http://localhost:4321/categories/iot/</link>
     <description>Recent content in IOT on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 06 Aug 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/iot/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/categories/iot/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Application of K-Means - A Brief Case Study</title>
-      <link>/post/2018/08/06/application-of-k-means-a-brief-case-study/</link>
+      <link>http://localhost:4321/post/2018/08/06/application-of-k-means-a-brief-case-study/</link>
       <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/06/application-of-k-means-a-brief-case-study/</guid>
-      <description>K-Means Case StudyThis article is an example of practical use for k-means clustering from a case study conducted in a Chinese city. The project comes from the IoT smart city concept and looks at real-time traffic network data and uses the k-means algorithm to analyze real data. The emerging intelligent transportation techniques are helping the urban environment run smoother though very complex. The authors take a small segment and look at supply chain logistics such as for manufacturing (raw materials), utilities (coal), banking (banknotes), and the cost related to the processing and transportation between the center and the supplier points.</description>
+      <guid>http://localhost:4321/post/2018/08/06/application-of-k-means-a-brief-case-study/</guid>
+      <description>&lt;div id=&#34;k-means-case-study&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;K-Means Case Study&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This article is an example of practical use for k-means clustering from a case study conducted in a Chinese city. The project comes from the IoT smart city concept and looks at real-time traffic network data and uses the k-means algorithm to analyze real data. The emerging intelligent transportation techniques are helping the urban environment run smoother though very complex. The authors take a small segment and look at supply chain logistics such as for manufacturing (raw materials), utilities (coal), banking (banknotes), and the cost related to the processing and transportation between the center and the supplier points. The study is a hotel supply chain with 618 hotel locations and 5-30 service suppliers. The algorithm uses real-time data to find the optimum transportation network that also has the lowest real cost. It takes a business center’s location, the cost to transport and makes a weighted index that defines the processing centers’ quality and locations to transport goods using the k-means algorithm.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Real-Time Data and Smart Cities</title>
-      <link>/post/2018/03/20/real-time-data-and-smart-cities/</link>
+      <link>http://localhost:4321/post/2018/03/20/real-time-data-and-smart-cities/</link>
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/03/20/real-time-data-and-smart-cities/</guid>
-      <description>Real-Time Data and Smart Cities  The Internet of Things (IoT) is a concept suggesting the number of devices connected to the Internet will continue to grow. The Internet has computers and mobile devices connected to it. The expectation is IoT will become more significant with the increasing use of sensors, actuators, and embedded devices. Currently, the Internet connects devices through wired and wireless technologies. Devices also can communicate over a network and then transfer the data to the Internet.</description>
+      <guid>http://localhost:4321/post/2018/03/20/real-time-data-and-smart-cities/</guid>
+      <description>&lt;h4 id=&#34;real-time-data-and-smart-cities&#34;&gt;&lt;strong&gt;Real-Time Data and Smart Cities&lt;/strong&gt;&lt;/h4&gt;&#xA;&lt;p&gt;    The Internet of Things (IoT) is a concept suggesting the number of devices connected to the Internet will continue to grow. The Internet has computers and mobile devices connected to it. The expectation is IoT will become more significant with the increasing use of sensors, actuators, and embedded devices. Currently, the Internet connects devices through wired and wireless technologies. Devices also can communicate over a network and then transfer the data to the Internet. According to Mahdavinejad et al. (2017), this technology is to make our activities and experiences easy and elevating.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

@@ -2,34 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Informed Consent on Bryan Schafroth Portfolio</title>
-    <link>/tags/informed-consent/</link>
+    <link>http://localhost:4321/tags/informed-consent/</link>
     <description>Recent content in Informed Consent on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 13 Feb 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/informed-consent/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/informed-consent/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Body-Worn Camera&#39;s &amp; Privacy in Law Enforcement</title>
-      <link>/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</link>
+      <link>http://localhost:4321/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</link>
       <pubDate>Wed, 13 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</guid>
-      <description>This presentation explores the Bureau of Justice Statistics and discusses privacy issues that are related to data obtained from Law Enforcement Agencies use of body-worn camera’s. Direct Link to slides:Body-Worn Cameras Slide Presentation
-Or hover mouse over slide and scroll through:
-</description>
+      <guid>http://localhost:4321/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</guid>
+      <description>&lt;p&gt;This presentation explores the Bureau of Justice Statistics and discusses privacy issues that are related to data obtained from Law Enforcement Agencies use of body-worn camera’s. Direct Link to slides:&#xD;&#xA;&lt;a href=&#34;https://www.bryanschafroth.com/slides/govregdata.html#1&#34;&gt;Body-Worn Cameras Slide Presentation&lt;/a&gt;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;Or hover mouse over slide and scroll through:&lt;/p&gt;&#xD;&#xA;&lt;iframe src=&#34;https://www.bryanschafroth.com/slides/bodycamlaw.html#1&#34; width=&#34;672&#34; height=&#34;400px&#34;&gt;&#xD;&#xA;&lt;/iframe&gt;</description>
     </item>
-    
     <item>
       <title>Informed Consent and Data Science</title>
-      <link>/post/2019/01/23/informed-consent-and-data-science/</link>
+      <link>http://localhost:4321/post/2019/01/23/informed-consent-and-data-science/</link>
       <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/23/informed-consent-and-data-science/</guid>
-      <description>This retrospective study is from the Netherlands. See the published research article in the reference section below. The article review uses data from 2000 to 2016 and identifies 2,037 children that were previous patients at a university hospital (Draijer, Bosch, Wiegman, Sjouke, Benninga, &amp;amp; Koot, 2018, p.174). The kids screened for liver disease with the goal of this study to use a higher-performing algorithm that improves the accuracy in detecting the condition.</description>
+      <guid>http://localhost:4321/post/2019/01/23/informed-consent-and-data-science/</guid>
+      <description>&lt;p&gt;    This retrospective study is from the Netherlands. See the published research article in the reference section below. The article review uses data from 2000 to 2016 and identifies 2,037 children that were previous patients at a university hospital (Draijer, Bosch, Wiegman, Sjouke, Benninga, &amp;amp; Koot, 2018, p.174). The kids screened for liver disease with the goal of this study to use a higher-performing algorithm that improves the accuracy in detecting the condition. The Wolman disease is a lethal threat to children if left untreated, and early detection is critical. The algorithm did prove useful in helping to pre-determine which patients should have further screenings for the disease. The study indicated that the number of cases where kids had liver disease, and not diagnosed, was very low (Draijer et al., 2018, p.178). Draijer et al. (2018) suggested their algorithm use in prospective cases for early detection of liver disease in children (p.179).&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

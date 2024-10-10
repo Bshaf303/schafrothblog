@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>decision tree on Bryan Schafroth Portfolio</title>
-    <link>/tags/decision-tree/</link>
-    <description>Recent content in decision tree on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Decision Tree on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/decision-tree/</link>
+    <description>Recent content in Decision Tree on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 01 Jun 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/decision-tree/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/decision-tree/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Random Forest and Decision Tree Analysis</title>
-      <link>/post/2018/06/01/random-forest-and-decision-tree-analysis/</link>
+      <link>http://localhost:4321/post/2018/06/01/random-forest-and-decision-tree-analysis/</link>
       <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/06/01/random-forest-and-decision-tree-analysis/</guid>
-      <description>Decision Tree and Random ForestThis analysis will utilize the data set from https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv and the purpose is to find the differences between the decision tree method and the random forest method for predicting wine quality from the 11 variables that indicate each wine’s chemical readings. The 12th variable is the quality rating given to these 1599 wines and is used as the predictor in the models. The quality has ratings from 3 to 8.</description>
+      <guid>http://localhost:4321/post/2018/06/01/random-forest-and-decision-tree-analysis/</guid>
+      <description>&lt;div id=&#34;decision-tree-and-random-forest&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Decision Tree and Random Forest&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This analysis will utilize the data set from &lt;a href=&#34;https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&#34; class=&#34;uri&#34;&gt;https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&lt;/a&gt; and the purpose is to find the differences between the decision tree method and the random forest method for predicting wine quality from the 11 variables that indicate each wine’s chemical readings. The 12th variable is the quality rating given to these 1599 wines and is used as the predictor in the models. The quality has ratings from 3 to 8. To make the ratings work in the models there will be three groups “Fair” = (3-4), “Satisfactory” = (5-6), and “Excellent” = (7-8).&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

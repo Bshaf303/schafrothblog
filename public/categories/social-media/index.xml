@@ -2,23 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Social Media on Bryan Schafroth Portfolio</title>
-    <link>/categories/social-media/</link>
+    <link>http://localhost:4321/categories/social-media/</link>
     <description>Recent content in Social Media on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Fri, 22 Feb 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/social-media/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/categories/social-media/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Social Media and Social Justice Fast Food Targeting</title>
-      <link>/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</link>
+      <link>http://localhost:4321/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</link>
       <pubDate>Fri, 22 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</guid>
-      <description>This article discusses a potential social justice project using social media data. Contained in the article is a description of the social justice issue and presented in a mind map. The paper discusses the purpose of the research and why the project is exploring a potential social justice problem in social media. The analysis then speculates the ethical and privacy issues relating to the project. A final summary and status of the social justice problem conclude this paper.</description>
+      <guid>http://localhost:4321/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</guid>
+      <description>&lt;p&gt;    This article discusses a potential social justice project using social media data. Contained in the article is a description of the social justice issue and presented in a mind map. The paper discusses the purpose of the research and why the project is exploring a potential social justice problem in social media. The analysis then speculates the ethical and privacy issues relating to the project. A final summary and status of the social justice problem conclude this paper.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

@@ -2,91 +2,67 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Public Data on Bryan Schafroth Portfolio</title>
-    <link>/categories/public-data/</link>
+    <link>http://localhost:4321/categories/public-data/</link>
     <description>Recent content in Public Data on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 09 Mar 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/public-data/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/categories/public-data/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Open Data – Annual Crime Dataset 2015</title>
-      <link>/post/2019/03/09/open-data-annual-crime-dataset-2015/</link>
+      <link>http://localhost:4321/post/2019/03/09/open-data-annual-crime-dataset-2015/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/03/09/open-data-annual-crime-dataset-2015/</guid>
-      <description>Data.gov has a “Local Government” (data.gov, 2019b) section among fourteen available topics to obtain data. In the “All Local Government section, as of this writing, there are 17,209 datasets (data.gov, 2019a). Filtering found in the “Organizations” or “Publishers” tab will isolate all the data available for Austin, Texas. Not all U.S. States, cities, and counties are in this resource, which does not indicate the data are not available. A direct way to find local data is to go to the city, state, or county websites.</description>
+      <guid>http://localhost:4321/post/2019/03/09/open-data-annual-crime-dataset-2015/</guid>
+      <description>&lt;p&gt;    Data.gov has a “Local Government” (data.gov, 2019b) section among fourteen available topics to obtain data. In the “All Local Government section, as of this writing, there are 17,209 datasets (data.gov, 2019a). Filtering found in the “Organizations” or “Publishers” tab will isolate all the data available for Austin, Texas. Not all U.S. States, cities, and counties are in this resource, which does not indicate the data are not available. A direct way to find local data is to go to the city, state, or county websites. Data.gov is still a practical place to start to view what topics are available and can help with idea generation.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Using Data.gov and Applications that Solve Problems</title>
-      <link>/post/2019/03/04/using-data-gov-and-applications-that-solve-problems/</link>
+      <link>http://localhost:4321/post/2019/03/04/using-data-gov-and-applications-that-solve-problems/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/03/04/using-data-gov-and-applications-that-solve-problems/</guid>
-      <description>On the data.gov application site, there are a handful of examples where the open data from data.gov can provide a service to consumers. There is a good sampling of applications voluntarily submitted to the site for the chance to be featured. Data.gov does not say they endorse the applications.
- One of the many applications is Redfin. I recently learned about Redfin on television, and it was a commercial for the company.</description>
+      <guid>http://localhost:4321/post/2019/03/04/using-data-gov-and-applications-that-solve-problems/</guid>
+      <description>&lt;p&gt;    On the data.gov application site, there are a handful of examples where the open data from data.gov can provide a service to consumers. There is a good sampling of applications voluntarily submitted to the site for the chance to be featured. Data.gov does not say they endorse the applications.&lt;/p&gt;&#xA;&lt;p&gt;    One of the many applications is Redfin. I recently learned about Redfin on television, and it was a commercial for the company. On the data.gov site, there is a good description of the application. Redfin uses the data from The Department of Housing and Urban Development, The Department of the Interior, and the U.S. Geological Survey(USGS) (Data.gov, 2019). The Department of the Interior includes the USGS and not sure why it is listed separately on data.gov. One of the links is dead for the Map of the U.S. (most likely the USGS), and the Homebuyer Activities Report link gives an old dataset from March of 2015 (Data.gov, 2015). Not sure what to think about this, data.gov doesn’t update the site? Looking into the Investor Relations on Redfin, they launched in 2006 (Redfin Investor Relations, 2019), and I guess they used open data in 2015?&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Social Justice Aided with Data Science</title>
-      <link>/post/2019/02/25/social-justice-aided-with-data-science/</link>
+      <link>http://localhost:4321/post/2019/02/25/social-justice-aided-with-data-science/</link>
       <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/25/social-justice-aided-with-data-science/</guid>
-      <description>The social justice issue that data science can aid with is life expectancy throughout the world. The social justice issue is a project that was brought to the world&amp;rsquo;s attention by Hans Rosling, and you can see his presentation on Youtube in the references. He compared the life expectancy to the Gross Domestic Product per capita (GPD) of the countries, and plotting the data found a strong correlation between GDP and the life span of the Country&amp;rsquo;s citizens.</description>
+      <guid>http://localhost:4321/post/2019/02/25/social-justice-aided-with-data-science/</guid>
+      <description>&lt;p&gt;    The social justice issue that data science can aid with is life expectancy throughout the world. The social justice issue is a project that was brought to the world&amp;rsquo;s attention by Hans Rosling, and you can see his presentation on Youtube in the references. He compared the life expectancy to the Gross Domestic Product per capita (GPD) of the countries, and plotting the data found a strong correlation between GDP and the life span of the Country&amp;rsquo;s citizens. The first discovery was the life span increases with GDP; however, there is a cluster of Countries in the middle of that range that vary drastically in life expectancy even though each Country has similar GDP. The conclusion was how the money had been used in that particular Country determined the populations&amp;rsquo; life span. A data scientist can replicate this research in a non-profit today, and programs can be created from the data to aid select countries through education and services.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Sentiment Analysis and Social Media Use Policy</title>
-      <link>/post/2019/02/18/sentiment-analysis-and-social-media-use-policy/</link>
+      <link>http://localhost:4321/post/2019/02/18/sentiment-analysis-and-social-media-use-policy/</link>
       <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/18/sentiment-analysis-and-social-media-use-policy/</guid>
-      <description>The data scientist should read all agreements and policies of the specific social media site before engaging in data mining for sentiment analysis. The agreements and policies are carefully written by social media companies to protect users, the social company, and the developers. On Twitter&amp;rsquo;s Developers Agreement under &amp;ldquo;VII. Other Important Terms&amp;rdquo; there is a guide on what information is available and how it should not be used (Twitter Developer, May 25, 2018).</description>
+      <guid>http://localhost:4321/post/2019/02/18/sentiment-analysis-and-social-media-use-policy/</guid>
+      <description>&lt;p&gt;    The data scientist should read all agreements and policies of the specific social media site before engaging in data mining for sentiment analysis. The agreements and policies are carefully written by social media companies to protect users, the social company, and the developers. On Twitter&amp;rsquo;s Developers Agreement under &amp;ldquo;VII. Other Important Terms&amp;rdquo; there is a guide on what information is available and how it should not be used (Twitter Developer, May 25, 2018). By acknowledging the agreement developers who have access to Twitter data cannot use the data to give public agencies the information for surveillance, investigating, or tracking users and their content (Twitter Developer, May 25, 2018, VII, section 1). A data scientist should be made aware of the use of the data analyzed. The agreement stresses that any collected data not be used for investigation, surveillance, analysis, or research that discriminates against individuals or groups and must adhere to the users&amp;rsquo; &amp;ldquo;reasonable expectation of privacy.&amp;rdquo;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Government Data Planning - U.S. Compared to Australia</title>
-      <link>/post/2019/02/16/government-data-planning-u-s-compared-to-australia/</link>
+      <link>http://localhost:4321/post/2019/02/16/government-data-planning-u-s-compared-to-australia/</link>
       <pubDate>Sat, 16 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/16/government-data-planning-u-s-compared-to-australia/</guid>
-      <description>New South Wales (NSW), Australia is one of six states, and each state has a government structure similar to the Commonwealth or Federal branch (Australian government, n.d.). NSW has web resources available that include information on all government services. The site is a one-stop place to find government services related to policy, digital services, and user tools (NSW Government, 2019a). A section of the NSW website, under the &amp;ldquo;policy,&amp;rdquo; is the Data and Information services discussed in this paper.</description>
+      <guid>http://localhost:4321/post/2019/02/16/government-data-planning-u-s-compared-to-australia/</guid>
+      <description>&lt;p&gt;    New South Wales (NSW), Australia is one of six states, and each state has a government structure similar to the Commonwealth or Federal branch (Australian government, n.d.). NSW has web resources available that include information on all government services. The site is a one-stop place to find government services related to policy, digital services, and user tools (NSW Government, 2019a). A section of the NSW website, under the &amp;ldquo;policy,&amp;rdquo; is the Data and Information services discussed in this paper. This article describes the NSW Data and Information plan and describes similar data and information systems in Colorado and the U.S. Government as a comparison.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Body-Worn Camera&#39;s &amp; Privacy in Law Enforcement</title>
-      <link>/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</link>
+      <link>http://localhost:4321/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</link>
       <pubDate>Wed, 13 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</guid>
-      <description>This presentation explores the Bureau of Justice Statistics and discusses privacy issues that are related to data obtained from Law Enforcement Agencies use of body-worn camera’s. Direct Link to slides:Body-Worn Cameras Slide Presentation
-Or hover mouse over slide and scroll through:
-</description>
+      <guid>http://localhost:4321/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</guid>
+      <description>&lt;p&gt;This presentation explores the Bureau of Justice Statistics and discusses privacy issues that are related to data obtained from Law Enforcement Agencies use of body-worn camera’s. Direct Link to slides:&#xD;&#xA;&lt;a href=&#34;https://www.bryanschafroth.com/slides/govregdata.html#1&#34;&gt;Body-Worn Cameras Slide Presentation&lt;/a&gt;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;Or hover mouse over slide and scroll through:&lt;/p&gt;&#xD;&#xA;&lt;iframe src=&#34;https://www.bryanschafroth.com/slides/bodycamlaw.html#1&#34; width=&#34;672&#34; height=&#34;400px&#34;&gt;&#xD;&#xA;&lt;/iframe&gt;</description>
     </item>
-    
     <item>
       <title>State, Local, Federal Data Social Media Sources</title>
-      <link>/post/2019/02/11/state-local-federal-data-sources/</link>
+      <link>http://localhost:4321/post/2019/02/11/state-local-federal-data-sources/</link>
       <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/11/state-local-federal-data-sources/</guid>
-      <description>The City and County of Denver have a social media policy, and the council does encourage social media usage; however, it must be in line with the local government&amp;rsquo;s mission (City and County of Denver, n.d.). The policy states the social media is not an official government communication and does not guarantee information accuracy and completeness (City and County of Denver, n.d). The social media provided on external sites is a public service; thus, mining data is acceptable.</description>
+      <guid>http://localhost:4321/post/2019/02/11/state-local-federal-data-sources/</guid>
+      <description>&lt;p&gt;    The City and County of Denver have a social media policy, and the council does encourage social media usage; however, it must be in line with the local government&amp;rsquo;s mission (City and County of Denver, n.d.). The policy states the social media is not an official government communication and does not guarantee information accuracy and completeness (City and County of Denver, n.d). The social media provided on external sites is a public service; thus, mining data is acceptable. There is no guarantee that social media posts are 100% accurate and complete; therefore, when using the data in research, be transparent about this source of data and its accuracy (or lack of). The City of Denver&amp;rsquo;s social media sites are subject to public record laws; thus, any information attached to the account is &amp;ldquo;subject to public disclosure under Citywide Colorado Open Records Fee Policy (CORA)&amp;rdquo; (City and County of Denver, n.d).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Government Regulations Slide Presentation</title>
-      <link>/post/2019/02/07/government-regulations-slide-presentation/</link>
+      <link>http://localhost:4321/post/2019/02/07/government-regulations-slide-presentation/</link>
       <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/07/government-regulations-slide-presentation/</guid>
-      <description>This article is a slide presentation discussing government regulations covering the legal aspects of privacy. It covers the industry regulated why it was created and other interesting information. A direct link to the slide presentation can be found here: Government Regulations Slide Presentation
-Or hover mouse over slide and scroll through:
-</description>
+      <guid>http://localhost:4321/post/2019/02/07/government-regulations-slide-presentation/</guid>
+      <description>&lt;p&gt;This article is a slide presentation discussing government regulations covering the legal aspects of privacy. It covers the industry regulated why it was created and other interesting information. A direct link to the slide presentation can be found here: &lt;a href=&#34;https://www.bryanschafroth.com/slides/govregdata.html#1&#34;&gt;Government Regulations Slide Presentation&lt;/a&gt;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;Or hover mouse over slide and scroll through:&lt;/p&gt;&#xD;&#xA;&lt;iframe src=&#34;https://www.bryanschafroth.com/slides/govregdata.html#1&#34; width=&#34;672&#34; height=&#34;400px&#34;&gt;&#xD;&#xA;&lt;/iframe&gt;</description>
     </item>
-    
   </channel>
 </rss>

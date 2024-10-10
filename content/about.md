@@ -3,7 +3,9 @@ author: Bryan
 title: About
 ---
 
-### Welcome to my portfolio
+### Welcome to my (old) portfolio
 
-This website is a place where I present some of the work I have done since 2017.
+A place for some past R projects in data science/data analytics.
+This website is also created in R Studio. 
+
 

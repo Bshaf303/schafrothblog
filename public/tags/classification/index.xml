@@ -1,33 +1,26 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>classification on Bryan Schafroth Portfolio</title>
-    <link>/tags/classification/</link>
-    <description>Recent content in classification on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Classification on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/classification/</link>
+    <description>Recent content in Classification on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 27 May 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/classification/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/classification/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Naive Bayes SMS Message Classifier</title>
-      <link>/post/2018/05/27/naive-bayes-sms-message-classifier/</link>
+      <link>http://localhost:4321/post/2018/05/27/naive-bayes-sms-message-classifier/</link>
       <pubDate>Sun, 27 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/05/27/naive-bayes-sms-message-classifier/</guid>
-      <description>Naive Bayes SMS Message ClassifierThis analysis demonstrates the naive bayes classifier in determining the spam or ham status of 4837 SMS messages. The data set is retrieved from: http://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection. The data needs explicit cleaning to prepare it to run through a naive bayes classifier. A training and test set is created to train and validate the predictive ability ofy the model. There are summary plots of the words found in abundance in the data.</description>
+      <guid>http://localhost:4321/post/2018/05/27/naive-bayes-sms-message-classifier/</guid>
+      <description>&lt;div id=&#34;naive-bayes-sms-message-classifier&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Naive Bayes SMS Message Classifier&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This analysis demonstrates the naive bayes classifier in determining the spam or ham status of 4837 SMS messages. The data set is retrieved from: &lt;a href=&#34;http://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection&#34; class=&#34;uri&#34;&gt;http://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection&lt;/a&gt;. The data needs explicit cleaning to prepare it to run through a naive bayes classifier. A training and test set is created to train and validate the predictive ability ofy the model. There are summary plots of the words found in abundance in the data. The summary will show the model’s predictive accuracy and the simplicity of running the data. Crossfold validation method is used and the Accuracy and Kappa are the metrics to judge performance.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>K-Nearest Neighbor (KNN) - Heart Disease Dataset</title>
-      <link>/post/2018/05/20/k-nearest-neighbor-knn-heart-disease-dataset/</link>
+      <link>http://localhost:4321/post/2018/05/20/k-nearest-neighbor-knn-heart-disease-dataset/</link>
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/05/20/k-nearest-neighbor-knn-heart-disease-dataset/</guid>
-      <description>Introduction to K-Nearest NeighborKNN is a supervised learning algorithm and uses a training sample from the dataset, which classifies groups into different classes. It is a classifier used to predict the level of an unknown point (observation) and does this by measuring the points nearest to the unknown point. It works well in measuring the differences between multiple classes that are complex and hard to detect. KNN is considered a simple classification and regression algorithm.</description>
+      <guid>http://localhost:4321/post/2018/05/20/k-nearest-neighbor-knn-heart-disease-dataset/</guid>
+      <description>&lt;div id=&#34;introduction-to-k-nearest-neighbor&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Introduction to K-Nearest Neighbor&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;KNN is a supervised learning algorithm and uses a training sample from the dataset, which classifies groups into different classes. It is a classifier used to predict the level of an unknown point (observation) and does this by measuring the points nearest to the unknown point. It works well in measuring the differences between multiple classes that are complex and hard to detect. KNN is considered a simple classification and regression algorithm. In classification, new data points are grouped into a given class, while in regression, a new data point is labeled based on the average value of k nearest neighbor. KNN is a “lazy learner” because it doesn’t learn more than the training data&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

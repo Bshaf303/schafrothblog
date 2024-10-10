@@ -1,53 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>data manipulation on Bryan Schafroth Portfolio</title>
-    <link>/tags/data-manipulation/</link>
-    <description>Recent content in data manipulation on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Data Manipulation on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/data-manipulation/</link>
+    <description>Recent content in Data Manipulation on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 14 Jul 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/data-manipulation/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/data-manipulation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Exploratory Data Analysis - EPA Ozone Data</title>
-      <link>/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</link>
+      <link>http://localhost:4321/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</link>
       <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</guid>
-      <description>IntroductionThis exploratory data analysis will use the “hourly_44201_2014” data set obtained from the web site: https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw The data is “Criteria Gases” and labeled “Ozone (44201)” for this particular data set. The data is loaded into RStudio and shows 9,060,694 rows and 24 variables.
-There are 24 variables in this data set. Looking through the variables, we can see the first four are coded presumably by the EPA. The Latitude, Longitude, and Datum are geo-location data.</description>
+      <guid>http://localhost:4321/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</guid>
+      <description>&lt;div id=&#34;introduction&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Introduction&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;This exploratory data analysis will use the “hourly_44201_2014” data set obtained from the web site: &lt;a href=&#34;https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw&#34; class=&#34;uri&#34;&gt;https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw&lt;/a&gt; The data is “Criteria Gases” and labeled “Ozone (44201)” for this particular data set. The data is loaded into RStudio and shows 9,060,694 rows and 24 variables.&lt;/p&gt;&#xD;&#xA;&lt;p&gt;There are 24 variables in this data set. Looking through the variables, we can see the first four are coded presumably by the EPA. The Latitude, Longitude, and Datum are geo-location data. Datum NAD83 is the coordinate system for North American datum, while the WGS84 is a world coordinate system and tells that there are measurements taken presumably in another region or territory of the U.S. The “Date_Local” variable is clearly showing 365 unique dates, which cover the number of days in a year. The “Time_local” variable indicates 24 individual observations and covers each hour in a day. We see the variable measurements labeled as “Sample_Measurement” and then some more coded variables. The last variables are the “State_Name”, “County_Name”. The 53 individual names in the “State_Name” variable stand out, and this possibly coincides with the WGS84 coordinate system for U.S. States outside of the 48 States and are territories.&#xD;&#xA;In summary, we have essential geographic information, time/date information, and an Ozone measurement available in the data set. For this analysis, we can disregard the internal coding from the EPA.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Exploration - The Chicago Dataset</title>
-      <link>/post/2018/07/07/data-exploration-the-chicago-dataset/</link>
+      <link>http://localhost:4321/post/2018/07/07/data-exploration-the-chicago-dataset/</link>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/07/data-exploration-the-chicago-dataset/</guid>
-      <description>IntroductionThis article is about using the tidyverse package in R to explore data. The Chicago dataset is the basis for this analysis. The data is air quality measurements taken over 19 years. The focus is on using the dplyr package to do the analysis. The dplyr package is part of the tidyverse in R and a suite of tools to analyze, transform, plot, and manipulate data. The base version of R does all of this; however, dplyr will work faster and cost fewer computing resources when used on big data.</description>
+      <guid>http://localhost:4321/post/2018/07/07/data-exploration-the-chicago-dataset/</guid>
+      <description>&lt;div id=&#34;introduction&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Introduction&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;This article is about using the tidyverse package in R to explore data. The Chicago dataset is the basis for this analysis. The data is air quality measurements taken over 19 years. The focus is on using the dplyr package to do the analysis. The dplyr package is part of the tidyverse in R and a suite of tools to analyze, transform, plot, and manipulate data. The base version of R does all of this; however, dplyr will work faster and cost fewer computing resources when used on big data. The functions used to explore the data are as follows:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Simple data exploration with base R functions</title>
-      <link>/post/2018/07/02/simple-data-exploration-with-base-r-functions/</link>
+      <link>http://localhost:4321/post/2018/07/02/simple-data-exploration-with-base-r-functions/</link>
       <pubDate>Mon, 02 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/02/simple-data-exploration-with-base-r-functions/</guid>
-      <description>Exploring the data with base R functionsThe purpose of this post is to show the basic fucntions in R to start a data analysis project. I look at the iris dataset that comes with Rstudio shown below.This briefly covers head(), str(), attributes(), summary(), dim(), names(), indexing [], table(), and plot() functions that come with base R. Simple to use.
-Load the iris datasetdata(&amp;quot;iris&amp;quot;) head()Look at the iris dataset with the head() function and lists the first five rows.</description>
+      <guid>http://localhost:4321/post/2018/07/02/simple-data-exploration-with-base-r-functions/</guid>
+      <description>&lt;div id=&#34;exploring-the-data-with-base-r-functions&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Exploring the data with base R functions&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;The purpose of this post is to show the basic fucntions in R to start a data analysis project. I look at the iris dataset that comes with Rstudio shown below.&#xD;&#xA;This briefly covers &lt;code&gt;head()&lt;/code&gt;, &lt;code&gt;str()&lt;/code&gt;, &lt;code&gt;attributes()&lt;/code&gt;, &lt;code&gt;summary()&lt;/code&gt;, &lt;code&gt;dim()&lt;/code&gt;, &lt;code&gt;names()&lt;/code&gt;, indexing [], &lt;code&gt;table()&lt;/code&gt;, and &lt;code&gt;plot()&lt;/code&gt; functions that come with base R. Simple to use.&lt;/p&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;load-the-iris-dataset&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Load the iris dataset&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data(&amp;quot;iris&amp;quot;) &lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;head&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;head()&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;Look at the iris dataset with the &lt;code&gt;head()&lt;/code&gt; function and lists the first five rows.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Preprocessing - Diamonds Dataset</title>
-      <link>/post/2018/05/13/data-preprocessing-diamonds-dataset/</link>
+      <link>http://localhost:4321/post/2018/05/13/data-preprocessing-diamonds-dataset/</link>
       <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/05/13/data-preprocessing-diamonds-dataset/</guid>
-      <description>Data PreprocessingThe following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with one-hot encoding or dummy variables, scaling data, normalizing data.</description>
+      <guid>http://localhost:4321/post/2018/05/13/data-preprocessing-diamonds-dataset/</guid>
+      <description>&lt;div id=&#34;data-preprocessing&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Data Preprocessing&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;The following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with &lt;em&gt;one-hot encoding&lt;/em&gt; or dummy variables, scaling data, normalizing data. The majority of code is not the focus of this analysis but rest assured, and there are close to 700 lines written for the graphing presented in this article.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

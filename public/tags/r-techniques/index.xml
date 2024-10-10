@@ -1,53 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>R techniques on Bryan Schafroth Portfolio</title>
-    <link>/tags/r-techniques/</link>
-    <description>Recent content in R techniques on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>R Techniques on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/r-techniques/</link>
+    <description>Recent content in R Techniques on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 19 Aug 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/r-techniques/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/r-techniques/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Different Graphs for Plotting Data in R</title>
-      <link>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</link>
+      <link>http://localhost:4321/post/2018/08/19/different-graphs-for-plotting-data-in-r/</link>
       <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</guid>
-      <description>R Graph Plotting SystemThis brief analysis demonstrates the quick ways to look at data by plotting the data points using R and ggplot2. There are four small datasets used in displaying the individual data characteristics. The point is fast and simplistic plot to reveal the represented data.
-Load the Librarieslibrary(datasets)library(tidyverse)Air Quality Plotwith(airquality, {plot(Temp, Ozone, pch=19, col=&amp;quot;grey&amp;quot;, main = &amp;quot;Base R - Ozone and Temperature&amp;quot;)lines(loess.</description>
+      <guid>http://localhost:4321/post/2018/08/19/different-graphs-for-plotting-data-in-r/</guid>
+      <description>&lt;div id=&#34;r-graph-plotting-system&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;R Graph Plotting System&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This brief analysis demonstrates the quick ways to look at data by plotting the data points using R and &lt;code&gt;ggplot2&lt;/code&gt;. There are four small datasets used in displaying the individual data characteristics. The point is fast and simplistic plot to reveal the represented data.&lt;/p&gt;&#xD;&#xA;&lt;div id=&#34;load-the-libraries&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Load the Libraries&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(datasets)&#xD;&#xA;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;air-quality-plot&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Air Quality Plot&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;with(airquality, {&#xD;&#xA;        plot(Temp, Ozone, pch=19, col=&amp;quot;grey&amp;quot;, main = &amp;quot;Base R - Ozone and Temperature&amp;quot;)&#xD;&#xA;        lines(loess.smooth(Temp, Ozone), col=&amp;quot;blue&amp;quot;, lwd=2)&#xD;&#xA;})&lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:4321/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Hierarchical Clustering (HCA)</title>
-      <link>/post/2018/08/04/hierarchical-clustering-hca/</link>
+      <link>http://localhost:4321/post/2018/08/04/hierarchical-clustering-hca/</link>
       <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/04/hierarchical-clustering-hca/</guid>
-      <description>Hierarchical ClusteringThe hierarchical agglomerative clustering starts with each observation as a cluster and pairs two at a time until all clusters are merged into one single cluster. The number of clusters is not known or specified in advance. The distance between all pairs of points in the data is recorded. There is a dendrogram (upside down tree structure) that is the output of the grouping of clusters. It represents and shows how many clusters were found in the data.</description>
+      <guid>http://localhost:4321/post/2018/08/04/hierarchical-clustering-hca/</guid>
+      <description>&lt;div id=&#34;hierarchical-clustering&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Hierarchical Clustering&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The hierarchical agglomerative clustering starts with each observation as a cluster and pairs two at a time until all clusters are merged into one single cluster. The number of clusters is not known or specified in advance. The distance between all pairs of points in the data is recorded. There is a dendrogram (upside down tree structure) that is the output of the grouping of clusters. It represents and shows how many clusters were found in the data. The hierarchical method starts at the bottom of the dendrogram and starts creating clusters. Then paired clusters that are similar are merged together. It continues until there is only one cluster. Bottom up pairing. There are four merging methods: averaging, complete, single, centroidal, and Ward’s method. Hierarchical clustering finds the nested groups of clusters and uses a distance measurement like Hamming, Manhattan, or Euclidean that is defined in the parameters of the R function. The default popular distance is the Euclidean and measures the dissimilarity between each pair of observations. The single linkage merging method looks at the shortest point in one cluster to the point in another cluster. The complete method looks at the longest point between a point in one cluster and a point in another cluster. The average linkage takes the average mean distance between each point in one cluster and each point in another cluster. It combines some of the benefits from both single and complete methods.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>R Analysis - Plotting Graphics</title>
-      <link>/post/2018/07/29/r-analysis-plotting-graphics/</link>
+      <link>http://localhost:4321/post/2018/07/29/r-analysis-plotting-graphics/</link>
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/29/r-analysis-plotting-graphics/</guid>
-      <description>R Graphics for Exploring DataThe graphics device prints the graphics to screen or into a file type read by other apps. The screen device is on our computers. For windows its windows(), mac its quartz() and Linux its x11(). I am assuming this is built into the R functions plot(), xyplot(), and qplot() when we use them to plot. The other “devices” are the file types that are created by the device.</description>
+      <guid>http://localhost:4321/post/2018/07/29/r-analysis-plotting-graphics/</guid>
+      <description>&lt;div id=&#34;r-graphics-for-exploring-data&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;R Graphics for Exploring Data&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The graphics device prints the graphics to screen or into a file type read by other apps. The screen device is on our computers. For windows its &lt;code&gt;windows()&lt;/code&gt;, mac its &lt;code&gt;quartz()&lt;/code&gt; and Linux its &lt;code&gt;x11()&lt;/code&gt;. I am assuming this is built into the R functions &lt;code&gt;plot()&lt;/code&gt;, &lt;code&gt;xyplot()&lt;/code&gt;, and &lt;code&gt;qplot()&lt;/code&gt; when we use them to plot. The other “devices” are the file types that are created by the device. PDF, PNG, JPEG, SVG file types are ways to plot graphics and view and share the plot. It depends where the plot is sent. Searching in RStudio I type: &lt;code&gt;?Devices&lt;/code&gt;, and get a List of Graphical Devices found in the &lt;code&gt;{grDevices}&lt;/code&gt; package that came loaded with RStudio. The available devices are windows, pdf, postscript, xfig, bitmap, and pictex. The other devices that may produce a warning message are: cairo.pdf, svg, png, jpeg, bmp, tiff. Some of these I recognize when I export a graph and save as image. If you are on Mac I would guess the first one would be the &lt;code&gt;quartz()&lt;/code&gt; and you wouldn’t see “windows” nor “x11” I would also presumption that with the 10,000+ packages for R there are more graphic devices available. There are two formats for the file devices which are vector and bitmap graphics. Vectors are more for line type graphics with simple color palettes, while bit maps are more like a very dense scatter plots or pictures that can handle color gradients and mixed colors. The &lt;code&gt;par()&lt;/code&gt; function sets the graphics device parameter in R and allowed plots to show up side by side and one on top of the other. &lt;code&gt;par()&lt;/code&gt; format stays on and will continuously show successive plots together side by side. The &lt;code&gt;dev.off()&lt;/code&gt; function is key here to reset the screen device parameters.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Using the dplyr Package in R for Simple Data Analysis</title>
-      <link>/post/2018/07/04/using-the-dplyr-package-in-r-for-simple-data-analysis/</link>
+      <link>http://localhost:4321/post/2018/07/04/using-the-dplyr-package-in-r-for-simple-data-analysis/</link>
       <pubDate>Wed, 04 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/04/using-the-dplyr-package-in-r-for-simple-data-analysis/</guid>
-      <description>This article will briefly describe the dplyr package in R and the simple functions to analyze data with R for data analytics. The dplyr package in R is used for data manipulation and transformation because, typically, the data is not in a usable form. The package is useful for exploratory data analysis and a method of statistical analysis using graphical techniques. Some of the benefits are:
-get insights from the data intuitivelyfind hidden trendsfind outliers and anomalous datatest assumptionshelp develop models that the data will fitThe dplyr package is used by many data scientists and analysts to manipulate data.</description>
+      <guid>http://localhost:4321/post/2018/07/04/using-the-dplyr-package-in-r-for-simple-data-analysis/</guid>
+      <description>&lt;p&gt;This article will briefly describe the dplyr package in R and the simple functions to analyze data with R for data analytics. The dplyr package in R is used for data manipulation and transformation because, typically, the data is not in a usable form. The package is useful for exploratory data analysis and a method of statistical analysis using graphical techniques. Some of the benefits are:&lt;/p&gt;&#xD;&#xA;&lt;ul&gt;&#xD;&#xA;&lt;li&gt;get insights from the data intuitively&lt;/li&gt;&#xD;&#xA;&lt;li&gt;find hidden trends&lt;/li&gt;&#xD;&#xA;&lt;li&gt;find outliers and anomalous data&lt;/li&gt;&#xD;&#xA;&lt;li&gt;test assumptions&lt;/li&gt;&#xD;&#xA;&lt;li&gt;help develop models that the data will fit&lt;/li&gt;&#xD;&#xA;&lt;/ul&gt;&#xD;&#xA;&lt;p&gt;The dplyr package is used by many data scientists and analysts to manipulate data. All the functions in dplyr have alternate methods in the base version of R and the other myriad of packages that do similar functions. However, R’s code base may be slower in processing time for the modern data problems. The dplyr documentation says dplyr is the grammar of data manipulation. The plyr package was the old version, and the “d” represented data frames and added functionality. I further learned that the “Tibble” package is also used in conjunction because it is a simplified data frame structure for subsetting and printing. The dplyr package provides fast performance with large data sets, easy to use function names, with different data frames, tables, database formats.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

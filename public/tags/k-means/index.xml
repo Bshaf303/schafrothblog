@@ -1,42 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>k-means on Bryan Schafroth Portfolio</title>
-    <link>/tags/k-means/</link>
-    <description>Recent content in k-means on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>K-Means on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/k-means/</link>
+    <description>Recent content in K-Means on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 12 Aug 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/k-means/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/k-means/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>K-Means Clustering Analysis</title>
-      <link>/post/2018/08/12/k-means-clustering-analysis/</link>
+      <link>http://localhost:4321/post/2018/08/12/k-means-clustering-analysis/</link>
       <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/12/k-means-clustering-analysis/</guid>
-      <description>K-Means ClusteringThe first section uses the iris data set and k-means clustering starting with 3 cluster centers and an nstart of 15. The results are displayed below in the fit object. There are 3 clusters sized 50, 62, and 38. The within sum of squares by cluster is 88.4% and the smaller number (15.15, 39.82, &amp;amp; 23.87) indicates how closely related objects are in the clusters. The first cluster has the most related objects and the second cluster has the lesser of related objects mostly taken from the third cluster.</description>
+      <guid>http://localhost:4321/post/2018/08/12/k-means-clustering-analysis/</guid>
+      <description>&lt;div id=&#34;k-means-clustering&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;K-Means Clustering&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The first section uses the iris data set and k-means clustering starting with 3 cluster centers and an &lt;code&gt;nstart&lt;/code&gt; of 15. The results are displayed below in the fit object. There are 3 clusters sized 50, 62, and 38. The within sum of squares by cluster is 88.4% and the smaller number (15.15, 39.82, &amp;amp; 23.87) indicates how closely related objects are in the clusters. The first cluster has the most related objects and the second cluster has the lesser of related objects mostly taken from the third cluster.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Application of K-Means - A Brief Case Study</title>
-      <link>/post/2018/08/06/application-of-k-means-a-brief-case-study/</link>
+      <link>http://localhost:4321/post/2018/08/06/application-of-k-means-a-brief-case-study/</link>
       <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/06/application-of-k-means-a-brief-case-study/</guid>
-      <description>K-Means Case StudyThis article is an example of practical use for k-means clustering from a case study conducted in a Chinese city. The project comes from the IoT smart city concept and looks at real-time traffic network data and uses the k-means algorithm to analyze real data. The emerging intelligent transportation techniques are helping the urban environment run smoother though very complex. The authors take a small segment and look at supply chain logistics such as for manufacturing (raw materials), utilities (coal), banking (banknotes), and the cost related to the processing and transportation between the center and the supplier points.</description>
+      <guid>http://localhost:4321/post/2018/08/06/application-of-k-means-a-brief-case-study/</guid>
+      <description>&lt;div id=&#34;k-means-case-study&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;K-Means Case Study&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This article is an example of practical use for k-means clustering from a case study conducted in a Chinese city. The project comes from the IoT smart city concept and looks at real-time traffic network data and uses the k-means algorithm to analyze real data. The emerging intelligent transportation techniques are helping the urban environment run smoother though very complex. The authors take a small segment and look at supply chain logistics such as for manufacturing (raw materials), utilities (coal), banking (banknotes), and the cost related to the processing and transportation between the center and the supplier points. The study is a hotel supply chain with 618 hotel locations and 5-30 service suppliers. The algorithm uses real-time data to find the optimum transportation network that also has the lowest real cost. It takes a business center’s location, the cost to transport and makes a weighted index that defines the processing centers’ quality and locations to transport goods using the k-means algorithm.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>K-Means - Hierarchial Cluster Analysis</title>
-      <link>/post/2018/06/17/k-means-hierarchial-cluster-analysis/</link>
+      <link>http://localhost:4321/post/2018/06/17/k-means-hierarchial-cluster-analysis/</link>
       <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/06/17/k-means-hierarchial-cluster-analysis/</guid>
-      <description>K-Means AnalysisThis project will use the Wholesale customer Data Set from: https://archive.ics.uci.edu/ml/datasets/Wholesale+customers. The data has 440 orbs and 8 variables. The data has the Channel and Region as integers but they are categorical in nature with 2 channels and 3 regions. We think this may need to be taken out of the analysis but will leave them in for now. A general observation about the variables there are outliers in the 6 major variables: fresh, milk, grocery, frozen, detergents_paper, delicassen.</description>
+      <guid>http://localhost:4321/post/2018/06/17/k-means-hierarchial-cluster-analysis/</guid>
+      <description>&lt;div id=&#34;k-means-analysis&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;K-Means Analysis&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This project will use the Wholesale customer Data Set from: &lt;a href=&#34;https://archive.ics.uci.edu/ml/datasets/Wholesale+customers&#34; class=&#34;uri&#34;&gt;https://archive.ics.uci.edu/ml/datasets/Wholesale+customers&lt;/a&gt;. The data has 440 orbs and 8 variables. The data has the Channel and Region as integers but they are categorical in nature with 2 channels and 3 regions. We think this may need to be taken out of the analysis but will leave them in for now. A general observation about the variables there are outliers in the 6 major variables: fresh, milk, grocery, frozen, detergents_paper, delicassen. There are plot of each variable. In addition, to the outliers it is noted that the data is dense at the bottom of each of the variable graphs. “Fresh” seems to be less dense than the rest and “Delicassen” is the thickest density of points at the bottom. Initial thoughts are the clusters are going to be somewhere at the bottom of the graph.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

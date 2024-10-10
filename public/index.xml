@@ -2,386 +2,291 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Home on Bryan Schafroth Portfolio</title>
-    <link>/</link>
+    <link>http://localhost:4321/</link>
     <description>Recent content in Home on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 09 Mar 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Open Data – Annual Crime Dataset 2015</title>
-      <link>/post/2019/03/09/open-data-annual-crime-dataset-2015/</link>
+      <link>http://localhost:4321/post/2019/03/09/open-data-annual-crime-dataset-2015/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/03/09/open-data-annual-crime-dataset-2015/</guid>
-      <description>Data.gov has a “Local Government” (data.gov, 2019b) section among fourteen available topics to obtain data. In the “All Local Government section, as of this writing, there are 17,209 datasets (data.gov, 2019a). Filtering found in the “Organizations” or “Publishers” tab will isolate all the data available for Austin, Texas. Not all U.S. States, cities, and counties are in this resource, which does not indicate the data are not available. A direct way to find local data is to go to the city, state, or county websites.</description>
+      <guid>http://localhost:4321/post/2019/03/09/open-data-annual-crime-dataset-2015/</guid>
+      <description>&lt;p&gt;    Data.gov has a “Local Government” (data.gov, 2019b) section among fourteen available topics to obtain data. In the “All Local Government section, as of this writing, there are 17,209 datasets (data.gov, 2019a). Filtering found in the “Organizations” or “Publishers” tab will isolate all the data available for Austin, Texas. Not all U.S. States, cities, and counties are in this resource, which does not indicate the data are not available. A direct way to find local data is to go to the city, state, or county websites. Data.gov is still a practical place to start to view what topics are available and can help with idea generation.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Using Data.gov and Applications that Solve Problems</title>
-      <link>/post/2019/03/04/using-data-gov-and-applications-that-solve-problems/</link>
+      <link>http://localhost:4321/post/2019/03/04/using-data-gov-and-applications-that-solve-problems/</link>
       <pubDate>Mon, 04 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/03/04/using-data-gov-and-applications-that-solve-problems/</guid>
-      <description>On the data.gov application site, there are a handful of examples where the open data from data.gov can provide a service to consumers. There is a good sampling of applications voluntarily submitted to the site for the chance to be featured. Data.gov does not say they endorse the applications.
- One of the many applications is Redfin. I recently learned about Redfin on television, and it was a commercial for the company.</description>
+      <guid>http://localhost:4321/post/2019/03/04/using-data-gov-and-applications-that-solve-problems/</guid>
+      <description>&lt;p&gt;    On the data.gov application site, there are a handful of examples where the open data from data.gov can provide a service to consumers. There is a good sampling of applications voluntarily submitted to the site for the chance to be featured. Data.gov does not say they endorse the applications.&lt;/p&gt;&#xA;&lt;p&gt;    One of the many applications is Redfin. I recently learned about Redfin on television, and it was a commercial for the company. On the data.gov site, there is a good description of the application. Redfin uses the data from The Department of Housing and Urban Development, The Department of the Interior, and the U.S. Geological Survey(USGS) (Data.gov, 2019). The Department of the Interior includes the USGS and not sure why it is listed separately on data.gov. One of the links is dead for the Map of the U.S. (most likely the USGS), and the Homebuyer Activities Report link gives an old dataset from March of 2015 (Data.gov, 2015). Not sure what to think about this, data.gov doesn’t update the site? Looking into the Investor Relations on Redfin, they launched in 2006 (Redfin Investor Relations, 2019), and I guess they used open data in 2015?&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Science for Social Justice - Bolivia Case Study</title>
-      <link>/post/2019/03/02/data-science-for-social-justice-bolivia-case-study/</link>
+      <link>http://localhost:4321/post/2019/03/02/data-science-for-social-justice-bolivia-case-study/</link>
       <pubDate>Sat, 02 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/03/02/data-science-for-social-justice-bolivia-case-study/</guid>
-      <description>Data science for social justice is a present-day concept that is gaining more recognition and popularity in the world. Solving current social problems using available open-source data and data science skillsets will help many world populations and is an ongoing challenge. The article reviews an old case study about Cochabamba, Bolivia’s problem with water infrastructure privatization, and what happened in the year 2000. While the data science profession, open data sources, and current technologies were not around in 2000, this article is a speculative assessment on how a data scientist from two sides may retrospectively go about the work today given the skills and technologies available.</description>
+      <guid>http://localhost:4321/post/2019/03/02/data-science-for-social-justice-bolivia-case-study/</guid>
+      <description>&lt;p&gt;    Data science for social justice is a present-day concept that is gaining more recognition and popularity in the world. Solving current social problems using available open-source data and data science skillsets will help many world populations and is an ongoing challenge. The article reviews an old case study about Cochabamba, Bolivia’s problem with water infrastructure privatization, and what happened in the year 2000. While the data science profession, open data sources, and current technologies were not around in 2000, this article is a speculative assessment on how a data scientist from two sides may retrospectively go about the work today given the skills and technologies available.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Social Justice Aided with Data Science</title>
-      <link>/post/2019/02/25/social-justice-aided-with-data-science/</link>
+      <link>http://localhost:4321/post/2019/02/25/social-justice-aided-with-data-science/</link>
       <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/25/social-justice-aided-with-data-science/</guid>
-      <description>The social justice issue that data science can aid with is life expectancy throughout the world. The social justice issue is a project that was brought to the world&amp;rsquo;s attention by Hans Rosling, and you can see his presentation on Youtube in the references. He compared the life expectancy to the Gross Domestic Product per capita (GPD) of the countries, and plotting the data found a strong correlation between GDP and the life span of the Country&amp;rsquo;s citizens.</description>
+      <guid>http://localhost:4321/post/2019/02/25/social-justice-aided-with-data-science/</guid>
+      <description>&lt;p&gt;    The social justice issue that data science can aid with is life expectancy throughout the world. The social justice issue is a project that was brought to the world&amp;rsquo;s attention by Hans Rosling, and you can see his presentation on Youtube in the references. He compared the life expectancy to the Gross Domestic Product per capita (GPD) of the countries, and plotting the data found a strong correlation between GDP and the life span of the Country&amp;rsquo;s citizens. The first discovery was the life span increases with GDP; however, there is a cluster of Countries in the middle of that range that vary drastically in life expectancy even though each Country has similar GDP. The conclusion was how the money had been used in that particular Country determined the populations&amp;rsquo; life span. A data scientist can replicate this research in a non-profit today, and programs can be created from the data to aid select countries through education and services.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Social Media and Social Justice Fast Food Targeting</title>
-      <link>/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</link>
+      <link>http://localhost:4321/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</link>
       <pubDate>Fri, 22 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</guid>
-      <description>This article discusses a potential social justice project using social media data. Contained in the article is a description of the social justice issue and presented in a mind map. The paper discusses the purpose of the research and why the project is exploring a potential social justice problem in social media. The analysis then speculates the ethical and privacy issues relating to the project. A final summary and status of the social justice problem conclude this paper.</description>
+      <guid>http://localhost:4321/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</guid>
+      <description>&lt;p&gt;    This article discusses a potential social justice project using social media data. Contained in the article is a description of the social justice issue and presented in a mind map. The paper discusses the purpose of the research and why the project is exploring a potential social justice problem in social media. The analysis then speculates the ethical and privacy issues relating to the project. A final summary and status of the social justice problem conclude this paper.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Sentiment Analysis and Social Media Use Policy</title>
-      <link>/post/2019/02/18/sentiment-analysis-and-social-media-use-policy/</link>
+      <link>http://localhost:4321/post/2019/02/18/sentiment-analysis-and-social-media-use-policy/</link>
       <pubDate>Mon, 18 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/18/sentiment-analysis-and-social-media-use-policy/</guid>
-      <description>The data scientist should read all agreements and policies of the specific social media site before engaging in data mining for sentiment analysis. The agreements and policies are carefully written by social media companies to protect users, the social company, and the developers. On Twitter&amp;rsquo;s Developers Agreement under &amp;ldquo;VII. Other Important Terms&amp;rdquo; there is a guide on what information is available and how it should not be used (Twitter Developer, May 25, 2018).</description>
+      <guid>http://localhost:4321/post/2019/02/18/sentiment-analysis-and-social-media-use-policy/</guid>
+      <description>&lt;p&gt;    The data scientist should read all agreements and policies of the specific social media site before engaging in data mining for sentiment analysis. The agreements and policies are carefully written by social media companies to protect users, the social company, and the developers. On Twitter&amp;rsquo;s Developers Agreement under &amp;ldquo;VII. Other Important Terms&amp;rdquo; there is a guide on what information is available and how it should not be used (Twitter Developer, May 25, 2018). By acknowledging the agreement developers who have access to Twitter data cannot use the data to give public agencies the information for surveillance, investigating, or tracking users and their content (Twitter Developer, May 25, 2018, VII, section 1). A data scientist should be made aware of the use of the data analyzed. The agreement stresses that any collected data not be used for investigation, surveillance, analysis, or research that discriminates against individuals or groups and must adhere to the users&amp;rsquo; &amp;ldquo;reasonable expectation of privacy.&amp;rdquo;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Government Data Planning - U.S. Compared to Australia</title>
-      <link>/post/2019/02/16/government-data-planning-u-s-compared-to-australia/</link>
+      <link>http://localhost:4321/post/2019/02/16/government-data-planning-u-s-compared-to-australia/</link>
       <pubDate>Sat, 16 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/16/government-data-planning-u-s-compared-to-australia/</guid>
-      <description>New South Wales (NSW), Australia is one of six states, and each state has a government structure similar to the Commonwealth or Federal branch (Australian government, n.d.). NSW has web resources available that include information on all government services. The site is a one-stop place to find government services related to policy, digital services, and user tools (NSW Government, 2019a). A section of the NSW website, under the &amp;ldquo;policy,&amp;rdquo; is the Data and Information services discussed in this paper.</description>
+      <guid>http://localhost:4321/post/2019/02/16/government-data-planning-u-s-compared-to-australia/</guid>
+      <description>&lt;p&gt;    New South Wales (NSW), Australia is one of six states, and each state has a government structure similar to the Commonwealth or Federal branch (Australian government, n.d.). NSW has web resources available that include information on all government services. The site is a one-stop place to find government services related to policy, digital services, and user tools (NSW Government, 2019a). A section of the NSW website, under the &amp;ldquo;policy,&amp;rdquo; is the Data and Information services discussed in this paper. This article describes the NSW Data and Information plan and describes similar data and information systems in Colorado and the U.S. Government as a comparison.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Body-Worn Camera&#39;s &amp; Privacy in Law Enforcement</title>
-      <link>/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</link>
+      <link>http://localhost:4321/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</link>
       <pubDate>Wed, 13 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</guid>
-      <description>This presentation explores the Bureau of Justice Statistics and discusses privacy issues that are related to data obtained from Law Enforcement Agencies use of body-worn camera’s. Direct Link to slides:Body-Worn Cameras Slide Presentation
-Or hover mouse over slide and scroll through:
-</description>
+      <guid>http://localhost:4321/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</guid>
+      <description>&lt;p&gt;This presentation explores the Bureau of Justice Statistics and discusses privacy issues that are related to data obtained from Law Enforcement Agencies use of body-worn camera’s. Direct Link to slides:&#xD;&#xA;&lt;a href=&#34;https://www.bryanschafroth.com/slides/govregdata.html#1&#34;&gt;Body-Worn Cameras Slide Presentation&lt;/a&gt;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;Or hover mouse over slide and scroll through:&lt;/p&gt;&#xD;&#xA;&lt;iframe src=&#34;https://www.bryanschafroth.com/slides/bodycamlaw.html#1&#34; width=&#34;672&#34; height=&#34;400px&#34;&gt;&#xD;&#xA;&lt;/iframe&gt;</description>
     </item>
-    
     <item>
       <title>State, Local, Federal Data Social Media Sources</title>
-      <link>/post/2019/02/11/state-local-federal-data-sources/</link>
+      <link>http://localhost:4321/post/2019/02/11/state-local-federal-data-sources/</link>
       <pubDate>Mon, 11 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/11/state-local-federal-data-sources/</guid>
-      <description>The City and County of Denver have a social media policy, and the council does encourage social media usage; however, it must be in line with the local government&amp;rsquo;s mission (City and County of Denver, n.d.). The policy states the social media is not an official government communication and does not guarantee information accuracy and completeness (City and County of Denver, n.d). The social media provided on external sites is a public service; thus, mining data is acceptable.</description>
+      <guid>http://localhost:4321/post/2019/02/11/state-local-federal-data-sources/</guid>
+      <description>&lt;p&gt;    The City and County of Denver have a social media policy, and the council does encourage social media usage; however, it must be in line with the local government&amp;rsquo;s mission (City and County of Denver, n.d.). The policy states the social media is not an official government communication and does not guarantee information accuracy and completeness (City and County of Denver, n.d). The social media provided on external sites is a public service; thus, mining data is acceptable. There is no guarantee that social media posts are 100% accurate and complete; therefore, when using the data in research, be transparent about this source of data and its accuracy (or lack of). The City of Denver&amp;rsquo;s social media sites are subject to public record laws; thus, any information attached to the account is &amp;ldquo;subject to public disclosure under Citywide Colorado Open Records Fee Policy (CORA)&amp;rdquo; (City and County of Denver, n.d).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Government Regulations Slide Presentation</title>
-      <link>/post/2019/02/07/government-regulations-slide-presentation/</link>
+      <link>http://localhost:4321/post/2019/02/07/government-regulations-slide-presentation/</link>
       <pubDate>Thu, 07 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/07/government-regulations-slide-presentation/</guid>
-      <description>This article is a slide presentation discussing government regulations covering the legal aspects of privacy. It covers the industry regulated why it was created and other interesting information. A direct link to the slide presentation can be found here: Government Regulations Slide Presentation
-Or hover mouse over slide and scroll through:
-</description>
+      <guid>http://localhost:4321/post/2019/02/07/government-regulations-slide-presentation/</guid>
+      <description>&lt;p&gt;This article is a slide presentation discussing government regulations covering the legal aspects of privacy. It covers the industry regulated why it was created and other interesting information. A direct link to the slide presentation can be found here: &lt;a href=&#34;https://www.bryanschafroth.com/slides/govregdata.html#1&#34;&gt;Government Regulations Slide Presentation&lt;/a&gt;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;Or hover mouse over slide and scroll through:&lt;/p&gt;&#xD;&#xA;&lt;iframe src=&#34;https://www.bryanschafroth.com/slides/govregdata.html#1&#34; width=&#34;672&#34; height=&#34;400px&#34;&gt;&#xD;&#xA;&lt;/iframe&gt;</description>
     </item>
-    
     <item>
       <title>Algorithm Bias in Analysis</title>
-      <link>/post/2019/02/03/agorithm-bias-in-analysis/</link>
+      <link>http://localhost:4321/post/2019/02/03/agorithm-bias-in-analysis/</link>
       <pubDate>Sun, 03 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/03/agorithm-bias-in-analysis/</guid>
-      <description>The term &amp;ldquo;bias&amp;rdquo; concerning an analysis of population data concerning machine learning and predictive analytic algorithms can result in bias, and that would be a bit more in-depth for this discussion. According to Bruce and Bruce (2017), the bias seen in statistical measurement or sampling errors is likely due to the process of measurement and sampling methods. Bias may be observable or invisible and detected by referencing or benchmarking values.</description>
+      <guid>http://localhost:4321/post/2019/02/03/agorithm-bias-in-analysis/</guid>
+      <description>&lt;p&gt;    The term &amp;ldquo;bias&amp;rdquo; concerning an analysis of population data concerning machine learning and predictive analytic algorithms can result in bias, and that would be a bit more in-depth for this discussion. According to Bruce and Bruce (2017), the bias seen in statistical measurement or sampling errors is likely due to the process of measurement and sampling methods. Bias may be observable or invisible and detected by referencing or benchmarking values. The authors say the algorithm has been misspecified or a critical variable(s) left out (p. 47). Delgado-Rodriquez &amp;amp; Llorca (2004) surmise bias as the &amp;ldquo;lack of internal validity&amp;rdquo; or an improper analysis of the relationship between one thing and the outcome in a data population in which the estimated or proposed statistic that does not equal the actual value. The Delgado-Rodriquez &amp;amp; Llorca also mention categorization of the biases by the stage of research the bias occurs. &amp;ldquo;The most important biases are those produced in the definition and selection of the study population&amp;rdquo; (p.635). The important take away is distinguishing biases from random error or lack of precision.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Employee Ethical Breach</title>
-      <link>/post/2019/01/28/employee-ethical-breach/</link>
+      <link>http://localhost:4321/post/2019/01/28/employee-ethical-breach/</link>
       <pubDate>Mon, 28 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/28/employee-ethical-breach/</guid>
-      <description>The article is from August of 2018 and found in the Healthcare IT News, among others. The ethics breach was by a Canadian pharmacist in Nova Scotia. The pharmacist caught accessing the health records of approximately 46 patients that the pharmacist knew (Minion, 2018). The ethics breach was spread over two years until the Canadian Privacy Commission discovered what was happening though standard audits. The article said this pharmacist had looked at the records of former classmates, her doctor, and a person whom she had a car accident with, her kid&amp;rsquo;s therapist, her coworkers, family members, and her kid&amp;rsquo;s girlfriend (Minion, 2018).</description>
+      <guid>http://localhost:4321/post/2019/01/28/employee-ethical-breach/</guid>
+      <description>&lt;p&gt;    The article is from August of 2018 and found in the Healthcare IT News, among others. The ethics breach was by a Canadian pharmacist in Nova Scotia. The pharmacist caught accessing the health records of approximately 46 patients that the pharmacist knew (Minion, 2018). The ethics breach was spread over two years until the Canadian Privacy Commission discovered what was happening though standard audits. The article said this pharmacist had looked at the records of former classmates, her doctor, and a person whom she had a car accident with, her kid&amp;rsquo;s therapist, her coworkers, family members, and her kid&amp;rsquo;s girlfriend (Minion, 2018). The pharmacist also shared some of this private information with her spouse and was overheard telling him their son could no longer date his girlfriend because of the information found in the medical records of the girlfriend AND parents of the girlfriend (Minion, 2018).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>A Case Study on Genome Privacy</title>
-      <link>/post/2019/01/27/a-case-study-on-genome-privacy/</link>
+      <link>http://localhost:4321/post/2019/01/27/a-case-study-on-genome-privacy/</link>
       <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/27/a-case-study-on-genome-privacy/</guid>
-      <description>The premise of this article is Walser-Kuntz, Deel, and Singer&amp;rsquo;s case study in genome privacy (2005). The authors of the case study state that biosciences have been able to isolate the single nucleotide polymorphism (SNP) as part of humans&amp;rsquo; DNA markers (Walser-Kuntz, Deel, &amp;amp; Singer, 2005). The SNPs have three uses, according to Walser-Kuntz, Deel, &amp;amp; Singer: genetic markers for disease, specialized applications in medicine, and mapping human evolution (p.</description>
+      <guid>http://localhost:4321/post/2019/01/27/a-case-study-on-genome-privacy/</guid>
+      <description>&lt;p&gt;    The premise of this article is Walser-Kuntz, Deel, and Singer&amp;rsquo;s case study in genome privacy (2005). The authors of the case study state that biosciences have been able to isolate the single nucleotide polymorphism (SNP) as part of humans&amp;rsquo; DNA markers (Walser-Kuntz, Deel, &amp;amp; Singer, 2005). The SNPs have three uses, according to Walser-Kuntz, Deel, &amp;amp; Singer: genetic markers for disease, specialized applications in medicine, and mapping human evolution (p. 3). Walser-Kuntz, Deel, &amp;amp; Singer (2005) indicate the ethical/privacy problems with having genetic data that reveal individual identities of people and families who have genetic diseases (p. 4). The issues cited are discrimination, stigmatization, loss of insurance, and loss of employment (p. 4). There are several lobbying groups listed in this study who want a voice in policy for or against genome privacy: health insurance companies, life insurance companies, breast cancer coalition, equal employment opportunity commission, academic and private scientist groups, and genetic counselors and physicians (Walser-Kuntz, Deel, &amp;amp; Singer, 2005, p.6). The case study written in 2005 had no firm legislation in place describing how to handle the use of DNA genetic data on individuals. Since then, the Genetic Information Nondiscrimination Act of 2008 (GINA) became effective November 21, 2009 (EEOC, n.d.). The U.S. Equal Employment Opportunity Commission EEOC is a branch of the federal government that enforces laws regarding employee and employer rights in the United States and protects employees from employer discrimination (EEOC, n.d.).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Case Study on Data Collection: Harvesting Personalities Online</title>
-      <link>/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</link>
+      <link>http://localhost:4321/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</link>
       <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</guid>
-      <description>Raicu wrote a case study for the Santa Clara University discussing the data analytics firm Cambridge Analytica who provided marketing services for various political campaigns (2016). The case study reveals Cambridge Analytica assumed the personality type of nearly all of the registered voters in the U.S. (Raicu, 2016). The study attempts to answer how Cambridge Analytica determined the personality type of 190 million people who were registered to vote across the U.</description>
+      <guid>http://localhost:4321/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</guid>
+      <description>&lt;p&gt;    Raicu wrote a case study for the Santa Clara University discussing the data analytics firm Cambridge Analytica who provided marketing services for various political campaigns (2016). The case study reveals Cambridge Analytica assumed the personality type of nearly all of the registered voters in the U.S. (Raicu, 2016). The study attempts to answer how Cambridge Analytica determined the personality type of 190 million people who were registered to vote across the U.S. (Raicu, 2016). Raicu learned Cambridge Analytica assessed voter personalities through online questionnaires (ads) and obtained approximately 15%+/- participation in the surveys, the remaining voter personalities through statistical methods based on people that had other similar information taken from different sources are estimated (2016). The basis for &amp;ldquo;similar information&amp;rdquo; is assumed to be from data brokers and claimed to have a large number of data points on U.S. citizens (Raicu, 2016). The politicians used Cambridge Analytica&amp;rsquo;s services to market ad campaigns to the American people during the elections. The remainder of this paper will look into more of the details of this case and answer some ethical questions.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Informed Consent and Data Science</title>
-      <link>/post/2019/01/23/informed-consent-and-data-science/</link>
+      <link>http://localhost:4321/post/2019/01/23/informed-consent-and-data-science/</link>
       <pubDate>Wed, 23 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/23/informed-consent-and-data-science/</guid>
-      <description>This retrospective study is from the Netherlands. See the published research article in the reference section below. The article review uses data from 2000 to 2016 and identifies 2,037 children that were previous patients at a university hospital (Draijer, Bosch, Wiegman, Sjouke, Benninga, &amp;amp; Koot, 2018, p.174). The kids screened for liver disease with the goal of this study to use a higher-performing algorithm that improves the accuracy in detecting the condition.</description>
+      <guid>http://localhost:4321/post/2019/01/23/informed-consent-and-data-science/</guid>
+      <description>&lt;p&gt;    This retrospective study is from the Netherlands. See the published research article in the reference section below. The article review uses data from 2000 to 2016 and identifies 2,037 children that were previous patients at a university hospital (Draijer, Bosch, Wiegman, Sjouke, Benninga, &amp;amp; Koot, 2018, p.174). The kids screened for liver disease with the goal of this study to use a higher-performing algorithm that improves the accuracy in detecting the condition. The Wolman disease is a lethal threat to children if left untreated, and early detection is critical. The algorithm did prove useful in helping to pre-determine which patients should have further screenings for the disease. The study indicated that the number of cases where kids had liver disease, and not diagnosed, was very low (Draijer et al., 2018, p.178). Draijer et al. (2018) suggested their algorithm use in prospective cases for early detection of liver disease in children (p.179).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Science and a Code of Ethics</title>
-      <link>/post/2019/01/20/data-science-and-a-code-of-ethics/</link>
+      <link>http://localhost:4321/post/2019/01/20/data-science-and-a-code-of-ethics/</link>
       <pubDate>Sun, 20 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/20/data-science-and-a-code-of-ethics/</guid>
-      <description>The Association for Computing Machinery (ACM) created the ACM Code of Ethics and Professional Conduct to direct computing professionals to act and promote ethical behavior in the profession (ACM, 2018). The ACM Code of Ethics and Professional Conduct is in four sections: General Ethical Principles, Professional Responsibilities, Professional Leadership Principles, and Compliance With the Code (ACM, 2018). This paper will discuss the seven General Ethical Principles and classify them into the three major areas of ethics, privacy, and social justice.</description>
+      <guid>http://localhost:4321/post/2019/01/20/data-science-and-a-code-of-ethics/</guid>
+      <description>&lt;p&gt;    The Association for Computing Machinery (ACM) created the ACM Code of Ethics and Professional Conduct to direct computing professionals to act and promote ethical behavior in the profession (ACM, 2018).  The ACM Code of Ethics and Professional Conduct is in four sections: General Ethical Principles, Professional Responsibilities, Professional Leadership Principles,  and Compliance With the Code (ACM, 2018). This paper will discuss the seven General Ethical Principles and classify them into the three major areas of ethics, privacy, and social justice.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Ethical Issues a Data Scientist Could Face</title>
-      <link>/post/2019/01/15/ethical-issues-a-data-scientist-could-face/</link>
+      <link>http://localhost:4321/post/2019/01/15/ethical-issues-a-data-scientist-could-face/</link>
       <pubDate>Tue, 15 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/15/ethical-issues-a-data-scientist-could-face/</guid>
-      <description>The Association for Computing Machinery (ACM) has a code of ethics and professional conduct guidelines (ACM, 2018). The &amp;ldquo;code&amp;rdquo; is for people that work in computing and a guide to consider when decision making. Section 2.9 outlines the need to design systems that are very secure and recognizing that breaches of computer systems can be malevolent to many people and organizations (ACM, 2018). The ACM states not to roll out systems without thorough testing of security exploits (2018).</description>
+      <guid>http://localhost:4321/post/2019/01/15/ethical-issues-a-data-scientist-could-face/</guid>
+      <description>&lt;p&gt;    The Association for Computing Machinery (ACM) has a code of ethics and professional conduct guidelines (ACM, 2018). The &amp;ldquo;code&amp;rdquo; is for people that work in computing and a guide to consider when decision making. Section 2.9 outlines the need to design systems that are very secure and recognizing that breaches of computer systems can be malevolent to many people and organizations (ACM, 2018). The ACM states not to roll out systems without thorough testing of security exploits (2018).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Image Classification - A Computer Vision Problem</title>
-      <link>/post/2018/12/16/image-classification-a-computer-vision-problem/</link>
+      <link>http://localhost:4321/post/2018/12/16/image-classification-a-computer-vision-problem/</link>
       <pubDate>Sun, 16 Dec 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/12/16/image-classification-a-computer-vision-problem/</guid>
-      <description>Seedling Image Classification - A Convolutional Neural Network Problem in RStudioTable of ContentsThe Project OriginsImage DataThe Data Science ProblemThe Software to Work the ProblemData ExplorationImage AugmentationBase ModelVGG16 Pretrained ModelTraining and Validation GraphsData Augment – Balance ClassesVGG16 Pretrained Model – Freeze/UnfreezeTraining and Validation GraphsPredictions and Evaluations –VGG16Multi-Class ROC/AUCImproving the model - Part 2Predictions and Evaluations –VGG16Multi-Class ROC/AUCSummaryReferencesFigure 1: Image of invasive weed species growing in a crop.</description>
+      <guid>http://localhost:4321/post/2018/12/16/image-classification-a-computer-vision-problem/</guid>
+      <description>&lt;div id=&#34;seedling-image-classification---a-convolutional-neural-network-problem-in-rstudio&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Seedling Image Classification - A Convolutional Neural Network Problem in RStudio&lt;/h4&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;table-of-contents&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Table of Contents&lt;/h4&gt;&#xD;&#xA;&lt;ol style=&#34;list-style-type: decimal&#34;&gt;&#xD;&#xA;&lt;li&gt;The Project Origins&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Image Data&lt;/li&gt;&#xD;&#xA;&lt;li&gt;The Data Science Problem&lt;/li&gt;&#xD;&#xA;&lt;li&gt;The Software to Work the Problem&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Data Exploration&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Image Augmentation&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Base Model&lt;/li&gt;&#xD;&#xA;&lt;li&gt;VGG16 Pretrained Model&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Training and Validation Graphs&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Data Augment – Balance Classes&lt;/li&gt;&#xD;&#xA;&lt;li&gt;VGG16 Pretrained Model – Freeze/Unfreeze&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Training and Validation Graphs&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Predictions and Evaluations –VGG16&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Multi-Class ROC/AUC&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Improving the model - Part 2&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Predictions and Evaluations –VGG16&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Multi-Class ROC/AUC&lt;/li&gt;&#xD;&#xA;&lt;li&gt;Summary&lt;/li&gt;&#xD;&#xA;&lt;li&gt;References&lt;/li&gt;&#xD;&#xA;&lt;/ol&gt;&#xD;&#xA;&lt;div class=&#34;figure&#34;&gt;&lt;span id=&#34;fig:unnamed-chunk-1&#34;&gt;&lt;/span&gt;&#xD;&#xA;&lt;img src=&#34;http://localhost:4321/img/SIC_1.jpg&#34; alt=&#34;Image of invasive weed species growing in a crop. Image Source: https://vision.eng.au.dk/roboweedmaps/&#34;  /&gt;&#xD;&#xA;&lt;p class=&#34;caption&#34;&gt;&#xD;&#xA;Figure 1: Image of invasive weed species growing in a crop. Image Source: &lt;a href=&#34;https://vision.eng.au.dk/roboweedmaps/&#34; class=&#34;uri&#34;&gt;https://vision.eng.au.dk/roboweedmaps/&lt;/a&gt;&#xD;&#xA;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Classification Problem using Machine Learning</title>
-      <link>/post/2018/10/21/classification-problem-using-machine-learning-forest-cover-type/</link>
+      <link>http://localhost:4321/post/2018/10/21/classification-problem-using-machine-learning-forest-cover-type/</link>
       <pubDate>Sun, 21 Oct 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/10/21/classification-problem-using-machine-learning-forest-cover-type/</guid>
-      <description>IntroductionThis article will present a machine learning problem and the concept behind solving the problem. The project will go into detail about the early exploratory steps and build a machine learning model that can be used in production to categorize data. This project is to categorize seven Rocky Mountain tree types found in the forests. In this project, we will use old legacy data from the 1990s and use modern machine learning methods to categorize the data.</description>
+      <guid>http://localhost:4321/post/2018/10/21/classification-problem-using-machine-learning-forest-cover-type/</guid>
+      <description>&lt;div id=&#34;introduction&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Introduction&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;This article will present a machine learning problem and the concept behind solving the problem. The project will go into detail about the early exploratory steps and build a machine learning model that can be used in production to categorize data. This project is to categorize seven Rocky Mountain tree types found in the forests. In this project, we will use old legacy data from the 1990s and use modern machine learning methods to categorize the data. The owner of the data can migrate the newly categorized data over to their modern cloud database. In the late 1990s, data was collected for mapping by survey methods and done manually in the field. Though in the modern era, we can use high-resolution aerial imagery, GPS, and techniques in GIS systems to categorize cartographic data using the tools of computer vision and machine learning. However, for practical purposes, there are clients and owners of legacy data on old systems. Owners would like to migrate data from legacy systems into modern databases such as the cloud. The utilization of the data through modern computing is of use to the owners. One of the issues is how to categorize the vast amount of legacy data. Automating the categorization process with machine learning is the method proposed in this article.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Case Study - Mobile Photo Analysis</title>
-      <link>/post/2018/08/26/case-study-mobile-photo-analysis/</link>
+      <link>http://localhost:4321/post/2018/08/26/case-study-mobile-photo-analysis/</link>
       <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/26/case-study-mobile-photo-analysis/</guid>
-      <description>Case StudyCan a mobile phone application identify a species of a plant by photo analysis?
-This analysis is hypothetical and analyzes the feasibility of developing a mobile application for mobile phones (that photograph and store pictures) and identify flower pictures stored in memory. This exercise is a small part of a project and will only focus on the exploratory elements of a sample dataset called iris.
-For a successful application, the algorithm shall correctly identify a flower species from a photo on the user’s phone using an image recognition model.</description>
+      <guid>http://localhost:4321/post/2018/08/26/case-study-mobile-photo-analysis/</guid>
+      <description>&lt;div id=&#34;case-study&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Case Study&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;Can a mobile phone application identify a species of a plant by photo analysis?&lt;/p&gt;&#xD;&#xA;&lt;p&gt;This analysis is hypothetical and analyzes the feasibility of developing a mobile application for mobile phones (that photograph and store pictures) and identify flower pictures stored in memory. This exercise is a small part of a project and will only focus on the exploratory elements of a sample dataset called &lt;code&gt;iris&lt;/code&gt;.&lt;/p&gt;&#xD;&#xA;&lt;p&gt;For a successful application, the algorithm shall correctly identify a flower species from a photo on the user’s phone using an image recognition model. Success depends on measuring two flower parts (petal and sepal). There shall be two measurements (length and width) of each flower part. This problem is a classification example, and I will use accuracy of 90% with a 10% error rate. To get these success metrics, we will need to run a larger number of data to compare and calculate the correctly identified ratio to incorrectly identified classified flower species.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Different Graphs for Plotting Data in R</title>
-      <link>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</link>
+      <link>http://localhost:4321/post/2018/08/19/different-graphs-for-plotting-data-in-r/</link>
       <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</guid>
-      <description>R Graph Plotting SystemThis brief analysis demonstrates the quick ways to look at data by plotting the data points using R and ggplot2. There are four small datasets used in displaying the individual data characteristics. The point is fast and simplistic plot to reveal the represented data.
-Load the Librarieslibrary(datasets)library(tidyverse)Air Quality Plotwith(airquality, {plot(Temp, Ozone, pch=19, col=&amp;quot;grey&amp;quot;, main = &amp;quot;Base R - Ozone and Temperature&amp;quot;)lines(loess.</description>
+      <guid>http://localhost:4321/post/2018/08/19/different-graphs-for-plotting-data-in-r/</guid>
+      <description>&lt;div id=&#34;r-graph-plotting-system&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;R Graph Plotting System&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This brief analysis demonstrates the quick ways to look at data by plotting the data points using R and &lt;code&gt;ggplot2&lt;/code&gt;. There are four small datasets used in displaying the individual data characteristics. The point is fast and simplistic plot to reveal the represented data.&lt;/p&gt;&#xD;&#xA;&lt;div id=&#34;load-the-libraries&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Load the Libraries&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(datasets)&#xD;&#xA;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;air-quality-plot&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Air Quality Plot&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;with(airquality, {&#xD;&#xA;        plot(Temp, Ozone, pch=19, col=&amp;quot;grey&amp;quot;, main = &amp;quot;Base R - Ozone and Temperature&amp;quot;)&#xD;&#xA;        lines(loess.smooth(Temp, Ozone), col=&amp;quot;blue&amp;quot;, lwd=2)&#xD;&#xA;})&lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:4321/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>K-Means Clustering Analysis</title>
-      <link>/post/2018/08/12/k-means-clustering-analysis/</link>
+      <link>http://localhost:4321/post/2018/08/12/k-means-clustering-analysis/</link>
       <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/12/k-means-clustering-analysis/</guid>
-      <description>K-Means ClusteringThe first section uses the iris data set and k-means clustering starting with 3 cluster centers and an nstart of 15. The results are displayed below in the fit object. There are 3 clusters sized 50, 62, and 38. The within sum of squares by cluster is 88.4% and the smaller number (15.15, 39.82, &amp;amp; 23.87) indicates how closely related objects are in the clusters. The first cluster has the most related objects and the second cluster has the lesser of related objects mostly taken from the third cluster.</description>
+      <guid>http://localhost:4321/post/2018/08/12/k-means-clustering-analysis/</guid>
+      <description>&lt;div id=&#34;k-means-clustering&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;K-Means Clustering&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The first section uses the iris data set and k-means clustering starting with 3 cluster centers and an &lt;code&gt;nstart&lt;/code&gt; of 15. The results are displayed below in the fit object. There are 3 clusters sized 50, 62, and 38. The within sum of squares by cluster is 88.4% and the smaller number (15.15, 39.82, &amp;amp; 23.87) indicates how closely related objects are in the clusters. The first cluster has the most related objects and the second cluster has the lesser of related objects mostly taken from the third cluster.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Application of K-Means - A Brief Case Study</title>
-      <link>/post/2018/08/06/application-of-k-means-a-brief-case-study/</link>
+      <link>http://localhost:4321/post/2018/08/06/application-of-k-means-a-brief-case-study/</link>
       <pubDate>Mon, 06 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/06/application-of-k-means-a-brief-case-study/</guid>
-      <description>K-Means Case StudyThis article is an example of practical use for k-means clustering from a case study conducted in a Chinese city. The project comes from the IoT smart city concept and looks at real-time traffic network data and uses the k-means algorithm to analyze real data. The emerging intelligent transportation techniques are helping the urban environment run smoother though very complex. The authors take a small segment and look at supply chain logistics such as for manufacturing (raw materials), utilities (coal), banking (banknotes), and the cost related to the processing and transportation between the center and the supplier points.</description>
+      <guid>http://localhost:4321/post/2018/08/06/application-of-k-means-a-brief-case-study/</guid>
+      <description>&lt;div id=&#34;k-means-case-study&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;K-Means Case Study&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This article is an example of practical use for k-means clustering from a case study conducted in a Chinese city. The project comes from the IoT smart city concept and looks at real-time traffic network data and uses the k-means algorithm to analyze real data. The emerging intelligent transportation techniques are helping the urban environment run smoother though very complex. The authors take a small segment and look at supply chain logistics such as for manufacturing (raw materials), utilities (coal), banking (banknotes), and the cost related to the processing and transportation between the center and the supplier points. The study is a hotel supply chain with 618 hotel locations and 5-30 service suppliers. The algorithm uses real-time data to find the optimum transportation network that also has the lowest real cost. It takes a business center’s location, the cost to transport and makes a weighted index that defines the processing centers’ quality and locations to transport goods using the k-means algorithm.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Hierarchical Clustering (HCA)</title>
-      <link>/post/2018/08/04/hierarchical-clustering-hca/</link>
+      <link>http://localhost:4321/post/2018/08/04/hierarchical-clustering-hca/</link>
       <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/04/hierarchical-clustering-hca/</guid>
-      <description>Hierarchical ClusteringThe hierarchical agglomerative clustering starts with each observation as a cluster and pairs two at a time until all clusters are merged into one single cluster. The number of clusters is not known or specified in advance. The distance between all pairs of points in the data is recorded. There is a dendrogram (upside down tree structure) that is the output of the grouping of clusters. It represents and shows how many clusters were found in the data.</description>
+      <guid>http://localhost:4321/post/2018/08/04/hierarchical-clustering-hca/</guid>
+      <description>&lt;div id=&#34;hierarchical-clustering&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Hierarchical Clustering&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The hierarchical agglomerative clustering starts with each observation as a cluster and pairs two at a time until all clusters are merged into one single cluster. The number of clusters is not known or specified in advance. The distance between all pairs of points in the data is recorded. There is a dendrogram (upside down tree structure) that is the output of the grouping of clusters. It represents and shows how many clusters were found in the data. The hierarchical method starts at the bottom of the dendrogram and starts creating clusters. Then paired clusters that are similar are merged together. It continues until there is only one cluster. Bottom up pairing. There are four merging methods: averaging, complete, single, centroidal, and Ward’s method. Hierarchical clustering finds the nested groups of clusters and uses a distance measurement like Hamming, Manhattan, or Euclidean that is defined in the parameters of the R function. The default popular distance is the Euclidean and measures the dissimilarity between each pair of observations. The single linkage merging method looks at the shortest point in one cluster to the point in another cluster. The complete method looks at the longest point between a point in one cluster and a point in another cluster. The average linkage takes the average mean distance between each point in one cluster and each point in another cluster. It combines some of the benefits from both single and complete methods.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>R Analysis - Plotting Graphics</title>
-      <link>/post/2018/07/29/r-analysis-plotting-graphics/</link>
+      <link>http://localhost:4321/post/2018/07/29/r-analysis-plotting-graphics/</link>
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/29/r-analysis-plotting-graphics/</guid>
-      <description>R Graphics for Exploring DataThe graphics device prints the graphics to screen or into a file type read by other apps. The screen device is on our computers. For windows its windows(), mac its quartz() and Linux its x11(). I am assuming this is built into the R functions plot(), xyplot(), and qplot() when we use them to plot. The other “devices” are the file types that are created by the device.</description>
+      <guid>http://localhost:4321/post/2018/07/29/r-analysis-plotting-graphics/</guid>
+      <description>&lt;div id=&#34;r-graphics-for-exploring-data&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;R Graphics for Exploring Data&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The graphics device prints the graphics to screen or into a file type read by other apps. The screen device is on our computers. For windows its &lt;code&gt;windows()&lt;/code&gt;, mac its &lt;code&gt;quartz()&lt;/code&gt; and Linux its &lt;code&gt;x11()&lt;/code&gt;. I am assuming this is built into the R functions &lt;code&gt;plot()&lt;/code&gt;, &lt;code&gt;xyplot()&lt;/code&gt;, and &lt;code&gt;qplot()&lt;/code&gt; when we use them to plot. The other “devices” are the file types that are created by the device. PDF, PNG, JPEG, SVG file types are ways to plot graphics and view and share the plot. It depends where the plot is sent. Searching in RStudio I type: &lt;code&gt;?Devices&lt;/code&gt;, and get a List of Graphical Devices found in the &lt;code&gt;{grDevices}&lt;/code&gt; package that came loaded with RStudio. The available devices are windows, pdf, postscript, xfig, bitmap, and pictex. The other devices that may produce a warning message are: cairo.pdf, svg, png, jpeg, bmp, tiff. Some of these I recognize when I export a graph and save as image. If you are on Mac I would guess the first one would be the &lt;code&gt;quartz()&lt;/code&gt; and you wouldn’t see “windows” nor “x11” I would also presumption that with the 10,000+ packages for R there are more graphic devices available. There are two formats for the file devices which are vector and bitmap graphics. Vectors are more for line type graphics with simple color palettes, while bit maps are more like a very dense scatter plots or pictures that can handle color gradients and mixed colors. The &lt;code&gt;par()&lt;/code&gt; function sets the graphics device parameter in R and allowed plots to show up side by side and one on top of the other. &lt;code&gt;par()&lt;/code&gt; format stays on and will continuously show successive plots together side by side. The &lt;code&gt;dev.off()&lt;/code&gt; function is key here to reset the screen device parameters.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Analysis - Exploratory Graphics</title>
-      <link>/post/2018/07/22/data-analysis-exploratory-graphics/</link>
+      <link>http://localhost:4321/post/2018/07/22/data-analysis-exploratory-graphics/</link>
       <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/22/data-analysis-exploratory-graphics/</guid>
-      <description>Exploratory Graphics in RThe focus of this analysis is on the ways to graph data set variables. The first section uses the EPA data set retrieved from: https://github.com/jtleek/modules/blob/master/04_ExploratoryAnalysis/exploratoryGraphs/data/avgpm25.csv the data was imported into a csv file and then used for this first section. Code notes for explaination.
-The first part uses the RStudio base functionality to plot graphics then we use maps, lattice, and ggplot2 to compare and contrast.</description>
+      <guid>http://localhost:4321/post/2018/07/22/data-analysis-exploratory-graphics/</guid>
+      <description>&lt;div id=&#34;exploratory-graphics-in-r&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Exploratory Graphics in R&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The focus of this analysis is on the ways to graph data set variables. The first section uses the EPA data set retrieved from: &lt;a href=&#34;https://github.com/jtleek/modules/blob/master/04_ExploratoryAnalysis/exploratoryGraphs/data/avgpm25.csv&#34; class=&#34;uri&#34;&gt;https://github.com/jtleek/modules/blob/master/04_ExploratoryAnalysis/exploratoryGraphs/data/avgpm25.csv&lt;/a&gt; the data was imported into a csv file and then used for this first section. Code notes for explaination.&lt;/p&gt;&#xD;&#xA;&lt;p&gt;The first part uses the RStudio base functionality to plot graphics then we use maps, lattice, and ggplot2 to compare and contrast. ggplot2 and lattice produce nice graphics quickly, while maps has state maps with county delineations among other options.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Exploratory Data Analysis - EPA Ozone Data</title>
-      <link>/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</link>
+      <link>http://localhost:4321/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</link>
       <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</guid>
-      <description>IntroductionThis exploratory data analysis will use the “hourly_44201_2014” data set obtained from the web site: https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw The data is “Criteria Gases” and labeled “Ozone (44201)” for this particular data set. The data is loaded into RStudio and shows 9,060,694 rows and 24 variables.
-There are 24 variables in this data set. Looking through the variables, we can see the first four are coded presumably by the EPA. The Latitude, Longitude, and Datum are geo-location data.</description>
+      <guid>http://localhost:4321/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</guid>
+      <description>&lt;div id=&#34;introduction&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Introduction&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;This exploratory data analysis will use the “hourly_44201_2014” data set obtained from the web site: &lt;a href=&#34;https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw&#34; class=&#34;uri&#34;&gt;https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw&lt;/a&gt; The data is “Criteria Gases” and labeled “Ozone (44201)” for this particular data set. The data is loaded into RStudio and shows 9,060,694 rows and 24 variables.&lt;/p&gt;&#xD;&#xA;&lt;p&gt;There are 24 variables in this data set. Looking through the variables, we can see the first four are coded presumably by the EPA. The Latitude, Longitude, and Datum are geo-location data. Datum NAD83 is the coordinate system for North American datum, while the WGS84 is a world coordinate system and tells that there are measurements taken presumably in another region or territory of the U.S. The “Date_Local” variable is clearly showing 365 unique dates, which cover the number of days in a year. The “Time_local” variable indicates 24 individual observations and covers each hour in a day. We see the variable measurements labeled as “Sample_Measurement” and then some more coded variables. The last variables are the “State_Name”, “County_Name”. The 53 individual names in the “State_Name” variable stand out, and this possibly coincides with the WGS84 coordinate system for U.S. States outside of the 48 States and are territories.&#xD;&#xA;In summary, we have essential geographic information, time/date information, and an Ozone measurement available in the data set. For this analysis, we can disregard the internal coding from the EPA.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Exploration - The Chicago Dataset</title>
-      <link>/post/2018/07/07/data-exploration-the-chicago-dataset/</link>
+      <link>http://localhost:4321/post/2018/07/07/data-exploration-the-chicago-dataset/</link>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/07/data-exploration-the-chicago-dataset/</guid>
-      <description>IntroductionThis article is about using the tidyverse package in R to explore data. The Chicago dataset is the basis for this analysis. The data is air quality measurements taken over 19 years. The focus is on using the dplyr package to do the analysis. The dplyr package is part of the tidyverse in R and a suite of tools to analyze, transform, plot, and manipulate data. The base version of R does all of this; however, dplyr will work faster and cost fewer computing resources when used on big data.</description>
+      <guid>http://localhost:4321/post/2018/07/07/data-exploration-the-chicago-dataset/</guid>
+      <description>&lt;div id=&#34;introduction&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Introduction&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;This article is about using the tidyverse package in R to explore data. The Chicago dataset is the basis for this analysis. The data is air quality measurements taken over 19 years. The focus is on using the dplyr package to do the analysis. The dplyr package is part of the tidyverse in R and a suite of tools to analyze, transform, plot, and manipulate data. The base version of R does all of this; however, dplyr will work faster and cost fewer computing resources when used on big data. The functions used to explore the data are as follows:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Using the dplyr Package in R for Simple Data Analysis</title>
-      <link>/post/2018/07/04/using-the-dplyr-package-in-r-for-simple-data-analysis/</link>
+      <link>http://localhost:4321/post/2018/07/04/using-the-dplyr-package-in-r-for-simple-data-analysis/</link>
       <pubDate>Wed, 04 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/04/using-the-dplyr-package-in-r-for-simple-data-analysis/</guid>
-      <description>This article will briefly describe the dplyr package in R and the simple functions to analyze data with R for data analytics. The dplyr package in R is used for data manipulation and transformation because, typically, the data is not in a usable form. The package is useful for exploratory data analysis and a method of statistical analysis using graphical techniques. Some of the benefits are:
-get insights from the data intuitivelyfind hidden trendsfind outliers and anomalous datatest assumptionshelp develop models that the data will fitThe dplyr package is used by many data scientists and analysts to manipulate data.</description>
+      <guid>http://localhost:4321/post/2018/07/04/using-the-dplyr-package-in-r-for-simple-data-analysis/</guid>
+      <description>&lt;p&gt;This article will briefly describe the dplyr package in R and the simple functions to analyze data with R for data analytics. The dplyr package in R is used for data manipulation and transformation because, typically, the data is not in a usable form. The package is useful for exploratory data analysis and a method of statistical analysis using graphical techniques. Some of the benefits are:&lt;/p&gt;&#xD;&#xA;&lt;ul&gt;&#xD;&#xA;&lt;li&gt;get insights from the data intuitively&lt;/li&gt;&#xD;&#xA;&lt;li&gt;find hidden trends&lt;/li&gt;&#xD;&#xA;&lt;li&gt;find outliers and anomalous data&lt;/li&gt;&#xD;&#xA;&lt;li&gt;test assumptions&lt;/li&gt;&#xD;&#xA;&lt;li&gt;help develop models that the data will fit&lt;/li&gt;&#xD;&#xA;&lt;/ul&gt;&#xD;&#xA;&lt;p&gt;The dplyr package is used by many data scientists and analysts to manipulate data. All the functions in dplyr have alternate methods in the base version of R and the other myriad of packages that do similar functions. However, R’s code base may be slower in processing time for the modern data problems. The dplyr documentation says dplyr is the grammar of data manipulation. The plyr package was the old version, and the “d” represented data frames and added functionality. I further learned that the “Tibble” package is also used in conjunction because it is a simplified data frame structure for subsetting and printing. The dplyr package provides fast performance with large data sets, easy to use function names, with different data frames, tables, database formats.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Simple data exploration with base R functions</title>
-      <link>/post/2018/07/02/simple-data-exploration-with-base-r-functions/</link>
+      <link>http://localhost:4321/post/2018/07/02/simple-data-exploration-with-base-r-functions/</link>
       <pubDate>Mon, 02 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/02/simple-data-exploration-with-base-r-functions/</guid>
-      <description>Exploring the data with base R functionsThe purpose of this post is to show the basic fucntions in R to start a data analysis project. I look at the iris dataset that comes with Rstudio shown below.This briefly covers head(), str(), attributes(), summary(), dim(), names(), indexing [], table(), and plot() functions that come with base R. Simple to use.
-Load the iris datasetdata(&amp;quot;iris&amp;quot;) head()Look at the iris dataset with the head() function and lists the first five rows.</description>
+      <guid>http://localhost:4321/post/2018/07/02/simple-data-exploration-with-base-r-functions/</guid>
+      <description>&lt;div id=&#34;exploring-the-data-with-base-r-functions&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Exploring the data with base R functions&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;The purpose of this post is to show the basic fucntions in R to start a data analysis project. I look at the iris dataset that comes with Rstudio shown below.&#xD;&#xA;This briefly covers &lt;code&gt;head()&lt;/code&gt;, &lt;code&gt;str()&lt;/code&gt;, &lt;code&gt;attributes()&lt;/code&gt;, &lt;code&gt;summary()&lt;/code&gt;, &lt;code&gt;dim()&lt;/code&gt;, &lt;code&gt;names()&lt;/code&gt;, indexing [], &lt;code&gt;table()&lt;/code&gt;, and &lt;code&gt;plot()&lt;/code&gt; functions that come with base R. Simple to use.&lt;/p&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;load-the-iris-dataset&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Load the iris dataset&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data(&amp;quot;iris&amp;quot;) &lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;head&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;head()&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;Look at the iris dataset with the &lt;code&gt;head()&lt;/code&gt; function and lists the first five rows.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reinforcement Learning Problem</title>
-      <link>/post/2018/07/01/reinforcement-learing-problem/</link>
+      <link>http://localhost:4321/post/2018/07/01/reinforcement-learing-problem/</link>
       <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/01/reinforcement-learing-problem/</guid>
-      <description>Reinforcement Learning - Grid World ProblemThe first section looks at the grid world concept/problem. The environment is a 3x4 grid and the goal is to move from the start xy (1,1) (called a “state”&#34;) location to the opposite corner (4,3) called the goal state. The actions are up, down, left, right. We have the rewards of +1 &amp;amp; -1. We want the agent to find the shortest sequence of actions to get from start to end (goal).</description>
+      <guid>http://localhost:4321/post/2018/07/01/reinforcement-learing-problem/</guid>
+      <description>&lt;div id=&#34;reinforcement-learning---grid-world-problem&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Reinforcement Learning - Grid World Problem&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;The first section looks at the grid world concept/problem. The environment is a 3x4 grid and the goal is to move from the start xy (1,1) (called a “state”&#34;) location to the opposite corner (4,3) called the goal state. The actions are up, down, left, right. We have the rewards of +1 &amp;amp; -1. We want the agent to find the shortest sequence of actions to get from start to end (goal). The additional rules are blocking the the state labeled by x=2/y=2 and avoiding the forfeiture state of x=4/y=2. Thus from the start state we can only go up or right. This is a delayed reward state concept because several moves need to be made before getting to the goal state.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>K-Means - Hierarchial Cluster Analysis</title>
-      <link>/post/2018/06/17/k-means-hierarchial-cluster-analysis/</link>
+      <link>http://localhost:4321/post/2018/06/17/k-means-hierarchial-cluster-analysis/</link>
       <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/06/17/k-means-hierarchial-cluster-analysis/</guid>
-      <description>K-Means AnalysisThis project will use the Wholesale customer Data Set from: https://archive.ics.uci.edu/ml/datasets/Wholesale+customers. The data has 440 orbs and 8 variables. The data has the Channel and Region as integers but they are categorical in nature with 2 channels and 3 regions. We think this may need to be taken out of the analysis but will leave them in for now. A general observation about the variables there are outliers in the 6 major variables: fresh, milk, grocery, frozen, detergents_paper, delicassen.</description>
+      <guid>http://localhost:4321/post/2018/06/17/k-means-hierarchial-cluster-analysis/</guid>
+      <description>&lt;div id=&#34;k-means-analysis&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;K-Means Analysis&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This project will use the Wholesale customer Data Set from: &lt;a href=&#34;https://archive.ics.uci.edu/ml/datasets/Wholesale+customers&#34; class=&#34;uri&#34;&gt;https://archive.ics.uci.edu/ml/datasets/Wholesale+customers&lt;/a&gt;. The data has 440 orbs and 8 variables. The data has the Channel and Region as integers but they are categorical in nature with 2 channels and 3 regions. We think this may need to be taken out of the analysis but will leave them in for now. A general observation about the variables there are outliers in the 6 major variables: fresh, milk, grocery, frozen, detergents_paper, delicassen. There are plot of each variable. In addition, to the outliers it is noted that the data is dense at the bottom of each of the variable graphs. “Fresh” seems to be less dense than the rest and “Delicassen” is the thickest density of points at the bottom. Initial thoughts are the clusters are going to be somewhere at the bottom of the graph.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Artificial Neural Network and Support Vector Machine Analysis</title>
-      <link>/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</link>
+      <link>http://localhost:4321/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</link>
       <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</guid>
-      <description>IntroductionThe data set is the mushroom set retrieved from: http://archive.ics.uci.edu/ml/datasets/Mushroom. It consists of 8124 orbs and 23 variables. The classification variable is the “type” either edible (e) or poisonous (p). The remaining 22 variables are the predictors and consist of multiple levels from 1 to 12 each. The data columns will need to be named and are coded in short for each. There are 2480 NA’s found and in one variable “sr” or stalk root.</description>
+      <guid>http://localhost:4321/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</guid>
+      <description>&lt;div id=&#34;introduction&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Introduction&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The data set is the mushroom set retrieved from: &lt;a href=&#34;http://archive.ics.uci.edu/ml/datasets/Mushroom&#34; class=&#34;uri&#34;&gt;http://archive.ics.uci.edu/ml/datasets/Mushroom&lt;/a&gt;. It consists of 8124 orbs and 23 variables. The classification variable is the “type” either edible (e) or poisonous (p). The remaining 22 variables are the predictors and consist of multiple levels from 1 to 12 each. The data columns will need to be named and are coded in short for each. There are 2480 NA’s found and in one variable “sr” or stalk root. It is decided to use kNN imputation (k=10) to fill these values in with one of the five levels found in this variable.The imputation works for categorical data and thus chosen for this task. It is decided to create dummy variables into numeric values (1,0), but first the veil-type “vt” only has one level and will be removed, also the imputation creates a sr_imp variable and this is also removed. There will be 117 variables, to reduce collinearity the 2 level variables are reduced to 1 variable (fullRank=T). The dependent variable “type” then added back to the revised set as a factor or 2 levels (e,p).&#xD;&#xA;The first section will analyze the ANN using the nnet() from the nnet package. The second section will analyze the SVM using the ksvm() from the kernlab package.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Random Forest and Decision Tree Analysis</title>
-      <link>/post/2018/06/01/random-forest-and-decision-tree-analysis/</link>
+      <link>http://localhost:4321/post/2018/06/01/random-forest-and-decision-tree-analysis/</link>
       <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/06/01/random-forest-and-decision-tree-analysis/</guid>
-      <description>Decision Tree and Random ForestThis analysis will utilize the data set from https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv and the purpose is to find the differences between the decision tree method and the random forest method for predicting wine quality from the 11 variables that indicate each wine’s chemical readings. The 12th variable is the quality rating given to these 1599 wines and is used as the predictor in the models. The quality has ratings from 3 to 8.</description>
+      <guid>http://localhost:4321/post/2018/06/01/random-forest-and-decision-tree-analysis/</guid>
+      <description>&lt;div id=&#34;decision-tree-and-random-forest&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Decision Tree and Random Forest&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This analysis will utilize the data set from &lt;a href=&#34;https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&#34; class=&#34;uri&#34;&gt;https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&lt;/a&gt; and the purpose is to find the differences between the decision tree method and the random forest method for predicting wine quality from the 11 variables that indicate each wine’s chemical readings. The 12th variable is the quality rating given to these 1599 wines and is used as the predictor in the models. The quality has ratings from 3 to 8. To make the ratings work in the models there will be three groups “Fair” = (3-4), “Satisfactory” = (5-6), and “Excellent” = (7-8).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Naive Bayes SMS Message Classifier</title>
-      <link>/post/2018/05/27/naive-bayes-sms-message-classifier/</link>
+      <link>http://localhost:4321/post/2018/05/27/naive-bayes-sms-message-classifier/</link>
       <pubDate>Sun, 27 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/05/27/naive-bayes-sms-message-classifier/</guid>
-      <description>Naive Bayes SMS Message ClassifierThis analysis demonstrates the naive bayes classifier in determining the spam or ham status of 4837 SMS messages. The data set is retrieved from: http://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection. The data needs explicit cleaning to prepare it to run through a naive bayes classifier. A training and test set is created to train and validate the predictive ability ofy the model. There are summary plots of the words found in abundance in the data.</description>
+      <guid>http://localhost:4321/post/2018/05/27/naive-bayes-sms-message-classifier/</guid>
+      <description>&lt;div id=&#34;naive-bayes-sms-message-classifier&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Naive Bayes SMS Message Classifier&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This analysis demonstrates the naive bayes classifier in determining the spam or ham status of 4837 SMS messages. The data set is retrieved from: &lt;a href=&#34;http://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection&#34; class=&#34;uri&#34;&gt;http://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection&lt;/a&gt;. The data needs explicit cleaning to prepare it to run through a naive bayes classifier. A training and test set is created to train and validate the predictive ability ofy the model. There are summary plots of the words found in abundance in the data. The summary will show the model’s predictive accuracy and the simplicity of running the data. Crossfold validation method is used and the Accuracy and Kappa are the metrics to judge performance.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>K-Nearest Neighbor (KNN) - Heart Disease Dataset</title>
-      <link>/post/2018/05/20/k-nearest-neighbor-knn-heart-disease-dataset/</link>
+      <link>http://localhost:4321/post/2018/05/20/k-nearest-neighbor-knn-heart-disease-dataset/</link>
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/05/20/k-nearest-neighbor-knn-heart-disease-dataset/</guid>
-      <description>Introduction to K-Nearest NeighborKNN is a supervised learning algorithm and uses a training sample from the dataset, which classifies groups into different classes. It is a classifier used to predict the level of an unknown point (observation) and does this by measuring the points nearest to the unknown point. It works well in measuring the differences between multiple classes that are complex and hard to detect. KNN is considered a simple classification and regression algorithm.</description>
+      <guid>http://localhost:4321/post/2018/05/20/k-nearest-neighbor-knn-heart-disease-dataset/</guid>
+      <description>&lt;div id=&#34;introduction-to-k-nearest-neighbor&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Introduction to K-Nearest Neighbor&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;KNN is a supervised learning algorithm and uses a training sample from the dataset, which classifies groups into different classes. It is a classifier used to predict the level of an unknown point (observation) and does this by measuring the points nearest to the unknown point. It works well in measuring the differences between multiple classes that are complex and hard to detect. KNN is considered a simple classification and regression algorithm. In classification, new data points are grouped into a given class, while in regression, a new data point is labeled based on the average value of k nearest neighbor. KNN is a “lazy learner” because it doesn’t learn more than the training data&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Preprocessing - Diamonds Dataset</title>
-      <link>/post/2018/05/13/data-preprocessing-diamonds-dataset/</link>
+      <link>http://localhost:4321/post/2018/05/13/data-preprocessing-diamonds-dataset/</link>
       <pubDate>Sun, 13 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/05/13/data-preprocessing-diamonds-dataset/</guid>
-      <description>Data PreprocessingThe following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with one-hot encoding or dummy variables, scaling data, normalizing data.</description>
+      <guid>http://localhost:4321/post/2018/05/13/data-preprocessing-diamonds-dataset/</guid>
+      <description>&lt;div id=&#34;data-preprocessing&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Data Preprocessing&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;The following analysis is of the diamonds dataset downloaded from the tidyverse/ggplot2 Github repository. The data is in a .csv file. The purpose of the analysis is to explore the data and perform data exploration, cleaning, and preprocessing needed for modeling. Data cleaning and preprocessing involves checking for missing records, removing missing data, imputing missing data, converting categorical variables with &lt;em&gt;one-hot encoding&lt;/em&gt; or dummy variables, scaling data, normalizing data. The majority of code is not the focus of this analysis but rest assured, and there are close to 700 lines written for the graphing presented in this article.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Real-Time Data and Smart Cities</title>
-      <link>/post/2018/03/20/real-time-data-and-smart-cities/</link>
+      <link>http://localhost:4321/post/2018/03/20/real-time-data-and-smart-cities/</link>
       <pubDate>Tue, 20 Mar 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/03/20/real-time-data-and-smart-cities/</guid>
-      <description>Real-Time Data and Smart Cities  The Internet of Things (IoT) is a concept suggesting the number of devices connected to the Internet will continue to grow. The Internet has computers and mobile devices connected to it. The expectation is IoT will become more significant with the increasing use of sensors, actuators, and embedded devices. Currently, the Internet connects devices through wired and wireless technologies. Devices also can communicate over a network and then transfer the data to the Internet.</description>
+      <guid>http://localhost:4321/post/2018/03/20/real-time-data-and-smart-cities/</guid>
+      <description>&lt;h4 id=&#34;real-time-data-and-smart-cities&#34;&gt;&lt;strong&gt;Real-Time Data and Smart Cities&lt;/strong&gt;&lt;/h4&gt;&#xA;&lt;p&gt;    The Internet of Things (IoT) is a concept suggesting the number of devices connected to the Internet will continue to grow. The Internet has computers and mobile devices connected to it. The expectation is IoT will become more significant with the increasing use of sensors, actuators, and embedded devices. Currently, the Internet connects devices through wired and wireless technologies. Devices also can communicate over a network and then transfer the data to the Internet. According to Mahdavinejad et al. (2017), this technology is to make our activities and experiences easy and elevating.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Experimental Design</title>
-      <link>/post/2017/10/01/experimental-design/</link>
+      <link>http://localhost:4321/post/2017/10/01/experimental-design/</link>
       <pubDate>Sun, 01 Oct 2017 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2017/10/01/experimental-design/</guid>
-      <description>In the book Encyclopedia of Behavioral Medicine, Turner describes experimental design from a clinical perspective “as an experiment with a series of observations made under conditions in which the research scientist controls the influences of interest”, Turner, 2013. The randomized trial is a classic example of experimental design. The data is randomized to one of two or more experimental groups. Then the significant differences between the sets are analyzed. (Turner, 2013) The Completely Randomized Design, Randomized Block Design, and Factorial design are three experimental designs, and analysis of variance (ANOVA) will tell us whether or not there is a difference between the means of one or more independent categorical groups.</description>
+      <guid>http://localhost:4321/post/2017/10/01/experimental-design/</guid>
+      <description>&lt;p&gt;    In the book Encyclopedia of Behavioral Medicine, Turner describes experimental design from a clinical perspective “as an experiment with a series of observations made under conditions in which the research scientist controls the influences of interest”, Turner, 2013. The randomized trial is a classic example of experimental design. The data is randomized to one of two or more experimental groups. Then the significant differences between the sets are analyzed. (Turner, 2013) The Completely Randomized Design, Randomized Block Design, and Factorial design are three experimental designs, and analysis of variance (ANOVA) will tell us whether or not there is a difference between the means of one or more independent categorical groups. The ANOVA is an easily calculated method we can use in R.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>About</title>
-      <link>/about/</link>
+      <link>http://localhost:4321/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>/about/</guid>
-      <description>Welcome to my portfolio This website is a place where I present to the world the work I have been doing since early 2017. I possess a Bachelor&amp;rsquo;s in Business and a Master&amp;rsquo;s Degree in Data Science. I discovered data science in 2015 when the local news reported on the HBR article titled Data Scientist: Sexiest Job of the Century and talked about the tremendous growth and demand for professionals in the field where there were more open jobs than trained people to fill data roles.</description>
+      <guid>http://localhost:4321/about/</guid>
+      <description>&lt;h3 id=&#34;welcome-to-my-old-portfolio&#34;&gt;Welcome to my (old) portfolio&lt;/h3&gt;&#xA;&lt;p&gt;A place for some past R projects in data science/data analytics.&#xA;This website is also created in R Studio.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

@@ -1,24 +1,19 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>reinforcement learning on Bryan Schafroth Portfolio</title>
-    <link>/tags/reinforcement-learning/</link>
-    <description>Recent content in reinforcement learning on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Reinforcement Learning on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/reinforcement-learning/</link>
+    <description>Recent content in Reinforcement Learning on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 01 Jul 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/reinforcement-learning/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/reinforcement-learning/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Reinforcement Learning Problem</title>
-      <link>/post/2018/07/01/reinforcement-learing-problem/</link>
+      <link>http://localhost:4321/post/2018/07/01/reinforcement-learing-problem/</link>
       <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/01/reinforcement-learing-problem/</guid>
-      <description>Reinforcement Learning - Grid World ProblemThe first section looks at the grid world concept/problem. The environment is a 3x4 grid and the goal is to move from the start xy (1,1) (called a “state”&#34;) location to the opposite corner (4,3) called the goal state. The actions are up, down, left, right. We have the rewards of +1 &amp;amp; -1. We want the agent to find the shortest sequence of actions to get from start to end (goal).</description>
+      <guid>http://localhost:4321/post/2018/07/01/reinforcement-learing-problem/</guid>
+      <description>&lt;div id=&#34;reinforcement-learning---grid-world-problem&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Reinforcement Learning - Grid World Problem&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;The first section looks at the grid world concept/problem. The environment is a 3x4 grid and the goal is to move from the start xy (1,1) (called a “state”&#34;) location to the opposite corner (4,3) called the goal state. The actions are up, down, left, right. We have the rewards of +1 &amp;amp; -1. We want the agent to find the shortest sequence of actions to get from start to end (goal). The additional rules are blocking the the state labeled by x=2/y=2 and avoiding the forfeiture state of x=4/y=2. Thus from the start state we can only go up or right. This is a delayed reward state concept because several moves need to be made before getting to the goal state.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

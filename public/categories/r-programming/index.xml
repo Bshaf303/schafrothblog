@@ -2,155 +2,116 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>R Programming on Bryan Schafroth Portfolio</title>
-    <link>/categories/r-programming/</link>
+    <link>http://localhost:4321/categories/r-programming/</link>
     <description>Recent content in R Programming on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 26 Aug 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/categories/r-programming/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/categories/r-programming/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Case Study - Mobile Photo Analysis</title>
-      <link>/post/2018/08/26/case-study-mobile-photo-analysis/</link>
+      <link>http://localhost:4321/post/2018/08/26/case-study-mobile-photo-analysis/</link>
       <pubDate>Sun, 26 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/26/case-study-mobile-photo-analysis/</guid>
-      <description>Case StudyCan a mobile phone application identify a species of a plant by photo analysis?
-This analysis is hypothetical and analyzes the feasibility of developing a mobile application for mobile phones (that photograph and store pictures) and identify flower pictures stored in memory. This exercise is a small part of a project and will only focus on the exploratory elements of a sample dataset called iris.
-For a successful application, the algorithm shall correctly identify a flower species from a photo on the user’s phone using an image recognition model.</description>
+      <guid>http://localhost:4321/post/2018/08/26/case-study-mobile-photo-analysis/</guid>
+      <description>&lt;div id=&#34;case-study&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Case Study&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;Can a mobile phone application identify a species of a plant by photo analysis?&lt;/p&gt;&#xD;&#xA;&lt;p&gt;This analysis is hypothetical and analyzes the feasibility of developing a mobile application for mobile phones (that photograph and store pictures) and identify flower pictures stored in memory. This exercise is a small part of a project and will only focus on the exploratory elements of a sample dataset called &lt;code&gt;iris&lt;/code&gt;.&lt;/p&gt;&#xD;&#xA;&lt;p&gt;For a successful application, the algorithm shall correctly identify a flower species from a photo on the user’s phone using an image recognition model. Success depends on measuring two flower parts (petal and sepal). There shall be two measurements (length and width) of each flower part. This problem is a classification example, and I will use accuracy of 90% with a 10% error rate. To get these success metrics, we will need to run a larger number of data to compare and calculate the correctly identified ratio to incorrectly identified classified flower species.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Different Graphs for Plotting Data in R</title>
-      <link>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</link>
+      <link>http://localhost:4321/post/2018/08/19/different-graphs-for-plotting-data-in-r/</link>
       <pubDate>Sun, 19 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/19/different-graphs-for-plotting-data-in-r/</guid>
-      <description>R Graph Plotting SystemThis brief analysis demonstrates the quick ways to look at data by plotting the data points using R and ggplot2. There are four small datasets used in displaying the individual data characteristics. The point is fast and simplistic plot to reveal the represented data.
-Load the Librarieslibrary(datasets)library(tidyverse)Air Quality Plotwith(airquality, {plot(Temp, Ozone, pch=19, col=&amp;quot;grey&amp;quot;, main = &amp;quot;Base R - Ozone and Temperature&amp;quot;)lines(loess.</description>
+      <guid>http://localhost:4321/post/2018/08/19/different-graphs-for-plotting-data-in-r/</guid>
+      <description>&lt;div id=&#34;r-graph-plotting-system&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;R Graph Plotting System&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This brief analysis demonstrates the quick ways to look at data by plotting the data points using R and &lt;code&gt;ggplot2&lt;/code&gt;. There are four small datasets used in displaying the individual data characteristics. The point is fast and simplistic plot to reveal the represented data.&lt;/p&gt;&#xD;&#xA;&lt;div id=&#34;load-the-libraries&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Load the Libraries&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(datasets)&#xD;&#xA;library(tidyverse)&lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;air-quality-plot&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Air Quality Plot&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;with(airquality, {&#xD;&#xA;        plot(Temp, Ozone, pch=19, col=&amp;quot;grey&amp;quot;, main = &amp;quot;Base R - Ozone and Temperature&amp;quot;)&#xD;&#xA;        lines(loess.smooth(Temp, Ozone), col=&amp;quot;blue&amp;quot;, lwd=2)&#xD;&#xA;})&lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;p&gt;&lt;img src=&#34;http://localhost:4321/post/2018-08-19-different-graphs-for-plotting-data-in-r_files/figure-html/unnamed-chunk-1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>K-Means Clustering Analysis</title>
-      <link>/post/2018/08/12/k-means-clustering-analysis/</link>
+      <link>http://localhost:4321/post/2018/08/12/k-means-clustering-analysis/</link>
       <pubDate>Sun, 12 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/12/k-means-clustering-analysis/</guid>
-      <description>K-Means ClusteringThe first section uses the iris data set and k-means clustering starting with 3 cluster centers and an nstart of 15. The results are displayed below in the fit object. There are 3 clusters sized 50, 62, and 38. The within sum of squares by cluster is 88.4% and the smaller number (15.15, 39.82, &amp;amp; 23.87) indicates how closely related objects are in the clusters. The first cluster has the most related objects and the second cluster has the lesser of related objects mostly taken from the third cluster.</description>
+      <guid>http://localhost:4321/post/2018/08/12/k-means-clustering-analysis/</guid>
+      <description>&lt;div id=&#34;k-means-clustering&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;K-Means Clustering&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The first section uses the iris data set and k-means clustering starting with 3 cluster centers and an &lt;code&gt;nstart&lt;/code&gt; of 15. The results are displayed below in the fit object. There are 3 clusters sized 50, 62, and 38. The within sum of squares by cluster is 88.4% and the smaller number (15.15, 39.82, &amp;amp; 23.87) indicates how closely related objects are in the clusters. The first cluster has the most related objects and the second cluster has the lesser of related objects mostly taken from the third cluster.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Hierarchical Clustering (HCA)</title>
-      <link>/post/2018/08/04/hierarchical-clustering-hca/</link>
+      <link>http://localhost:4321/post/2018/08/04/hierarchical-clustering-hca/</link>
       <pubDate>Sat, 04 Aug 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/08/04/hierarchical-clustering-hca/</guid>
-      <description>Hierarchical ClusteringThe hierarchical agglomerative clustering starts with each observation as a cluster and pairs two at a time until all clusters are merged into one single cluster. The number of clusters is not known or specified in advance. The distance between all pairs of points in the data is recorded. There is a dendrogram (upside down tree structure) that is the output of the grouping of clusters. It represents and shows how many clusters were found in the data.</description>
+      <guid>http://localhost:4321/post/2018/08/04/hierarchical-clustering-hca/</guid>
+      <description>&lt;div id=&#34;hierarchical-clustering&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Hierarchical Clustering&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The hierarchical agglomerative clustering starts with each observation as a cluster and pairs two at a time until all clusters are merged into one single cluster. The number of clusters is not known or specified in advance. The distance between all pairs of points in the data is recorded. There is a dendrogram (upside down tree structure) that is the output of the grouping of clusters. It represents and shows how many clusters were found in the data. The hierarchical method starts at the bottom of the dendrogram and starts creating clusters. Then paired clusters that are similar are merged together. It continues until there is only one cluster. Bottom up pairing. There are four merging methods: averaging, complete, single, centroidal, and Ward’s method. Hierarchical clustering finds the nested groups of clusters and uses a distance measurement like Hamming, Manhattan, or Euclidean that is defined in the parameters of the R function. The default popular distance is the Euclidean and measures the dissimilarity between each pair of observations. The single linkage merging method looks at the shortest point in one cluster to the point in another cluster. The complete method looks at the longest point between a point in one cluster and a point in another cluster. The average linkage takes the average mean distance between each point in one cluster and each point in another cluster. It combines some of the benefits from both single and complete methods.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>R Analysis - Plotting Graphics</title>
-      <link>/post/2018/07/29/r-analysis-plotting-graphics/</link>
+      <link>http://localhost:4321/post/2018/07/29/r-analysis-plotting-graphics/</link>
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/29/r-analysis-plotting-graphics/</guid>
-      <description>R Graphics for Exploring DataThe graphics device prints the graphics to screen or into a file type read by other apps. The screen device is on our computers. For windows its windows(), mac its quartz() and Linux its x11(). I am assuming this is built into the R functions plot(), xyplot(), and qplot() when we use them to plot. The other “devices” are the file types that are created by the device.</description>
+      <guid>http://localhost:4321/post/2018/07/29/r-analysis-plotting-graphics/</guid>
+      <description>&lt;div id=&#34;r-graphics-for-exploring-data&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;R Graphics for Exploring Data&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The graphics device prints the graphics to screen or into a file type read by other apps. The screen device is on our computers. For windows its &lt;code&gt;windows()&lt;/code&gt;, mac its &lt;code&gt;quartz()&lt;/code&gt; and Linux its &lt;code&gt;x11()&lt;/code&gt;. I am assuming this is built into the R functions &lt;code&gt;plot()&lt;/code&gt;, &lt;code&gt;xyplot()&lt;/code&gt;, and &lt;code&gt;qplot()&lt;/code&gt; when we use them to plot. The other “devices” are the file types that are created by the device. PDF, PNG, JPEG, SVG file types are ways to plot graphics and view and share the plot. It depends where the plot is sent. Searching in RStudio I type: &lt;code&gt;?Devices&lt;/code&gt;, and get a List of Graphical Devices found in the &lt;code&gt;{grDevices}&lt;/code&gt; package that came loaded with RStudio. The available devices are windows, pdf, postscript, xfig, bitmap, and pictex. The other devices that may produce a warning message are: cairo.pdf, svg, png, jpeg, bmp, tiff. Some of these I recognize when I export a graph and save as image. If you are on Mac I would guess the first one would be the &lt;code&gt;quartz()&lt;/code&gt; and you wouldn’t see “windows” nor “x11” I would also presumption that with the 10,000+ packages for R there are more graphic devices available. There are two formats for the file devices which are vector and bitmap graphics. Vectors are more for line type graphics with simple color palettes, while bit maps are more like a very dense scatter plots or pictures that can handle color gradients and mixed colors. The &lt;code&gt;par()&lt;/code&gt; function sets the graphics device parameter in R and allowed plots to show up side by side and one on top of the other. &lt;code&gt;par()&lt;/code&gt; format stays on and will continuously show successive plots together side by side. The &lt;code&gt;dev.off()&lt;/code&gt; function is key here to reset the screen device parameters.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Analysis - Exploratory Graphics</title>
-      <link>/post/2018/07/22/data-analysis-exploratory-graphics/</link>
+      <link>http://localhost:4321/post/2018/07/22/data-analysis-exploratory-graphics/</link>
       <pubDate>Sun, 22 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/22/data-analysis-exploratory-graphics/</guid>
-      <description>Exploratory Graphics in RThe focus of this analysis is on the ways to graph data set variables. The first section uses the EPA data set retrieved from: https://github.com/jtleek/modules/blob/master/04_ExploratoryAnalysis/exploratoryGraphs/data/avgpm25.csv the data was imported into a csv file and then used for this first section. Code notes for explaination.
-The first part uses the RStudio base functionality to plot graphics then we use maps, lattice, and ggplot2 to compare and contrast.</description>
+      <guid>http://localhost:4321/post/2018/07/22/data-analysis-exploratory-graphics/</guid>
+      <description>&lt;div id=&#34;exploratory-graphics-in-r&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Exploratory Graphics in R&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The focus of this analysis is on the ways to graph data set variables. The first section uses the EPA data set retrieved from: &lt;a href=&#34;https://github.com/jtleek/modules/blob/master/04_ExploratoryAnalysis/exploratoryGraphs/data/avgpm25.csv&#34; class=&#34;uri&#34;&gt;https://github.com/jtleek/modules/blob/master/04_ExploratoryAnalysis/exploratoryGraphs/data/avgpm25.csv&lt;/a&gt; the data was imported into a csv file and then used for this first section. Code notes for explaination.&lt;/p&gt;&#xD;&#xA;&lt;p&gt;The first part uses the RStudio base functionality to plot graphics then we use maps, lattice, and ggplot2 to compare and contrast. ggplot2 and lattice produce nice graphics quickly, while maps has state maps with county delineations among other options.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Exploratory Data Analysis - EPA Ozone Data</title>
-      <link>/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</link>
+      <link>http://localhost:4321/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</link>
       <pubDate>Sat, 14 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</guid>
-      <description>IntroductionThis exploratory data analysis will use the “hourly_44201_2014” data set obtained from the web site: https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw The data is “Criteria Gases” and labeled “Ozone (44201)” for this particular data set. The data is loaded into RStudio and shows 9,060,694 rows and 24 variables.
-There are 24 variables in this data set. Looking through the variables, we can see the first four are coded presumably by the EPA. The Latitude, Longitude, and Datum are geo-location data.</description>
+      <guid>http://localhost:4321/post/2018/07/14/exploratory-data-analysis-epa-ozone-data/</guid>
+      <description>&lt;div id=&#34;introduction&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Introduction&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;This exploratory data analysis will use the “hourly_44201_2014” data set obtained from the web site: &lt;a href=&#34;https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw&#34; class=&#34;uri&#34;&gt;https://aqs.epa.gov/aqsweb/airdata/download_files.html#Raw&lt;/a&gt; The data is “Criteria Gases” and labeled “Ozone (44201)” for this particular data set. The data is loaded into RStudio and shows 9,060,694 rows and 24 variables.&lt;/p&gt;&#xD;&#xA;&lt;p&gt;There are 24 variables in this data set. Looking through the variables, we can see the first four are coded presumably by the EPA. The Latitude, Longitude, and Datum are geo-location data. Datum NAD83 is the coordinate system for North American datum, while the WGS84 is a world coordinate system and tells that there are measurements taken presumably in another region or territory of the U.S. The “Date_Local” variable is clearly showing 365 unique dates, which cover the number of days in a year. The “Time_local” variable indicates 24 individual observations and covers each hour in a day. We see the variable measurements labeled as “Sample_Measurement” and then some more coded variables. The last variables are the “State_Name”, “County_Name”. The 53 individual names in the “State_Name” variable stand out, and this possibly coincides with the WGS84 coordinate system for U.S. States outside of the 48 States and are territories.&#xD;&#xA;In summary, we have essential geographic information, time/date information, and an Ozone measurement available in the data set. For this analysis, we can disregard the internal coding from the EPA.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Exploration - The Chicago Dataset</title>
-      <link>/post/2018/07/07/data-exploration-the-chicago-dataset/</link>
+      <link>http://localhost:4321/post/2018/07/07/data-exploration-the-chicago-dataset/</link>
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/07/data-exploration-the-chicago-dataset/</guid>
-      <description>IntroductionThis article is about using the tidyverse package in R to explore data. The Chicago dataset is the basis for this analysis. The data is air quality measurements taken over 19 years. The focus is on using the dplyr package to do the analysis. The dplyr package is part of the tidyverse in R and a suite of tools to analyze, transform, plot, and manipulate data. The base version of R does all of this; however, dplyr will work faster and cost fewer computing resources when used on big data.</description>
+      <guid>http://localhost:4321/post/2018/07/07/data-exploration-the-chicago-dataset/</guid>
+      <description>&lt;div id=&#34;introduction&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Introduction&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;This article is about using the tidyverse package in R to explore data. The Chicago dataset is the basis for this analysis. The data is air quality measurements taken over 19 years. The focus is on using the dplyr package to do the analysis. The dplyr package is part of the tidyverse in R and a suite of tools to analyze, transform, plot, and manipulate data. The base version of R does all of this; however, dplyr will work faster and cost fewer computing resources when used on big data. The functions used to explore the data are as follows:&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Simple data exploration with base R functions</title>
-      <link>/post/2018/07/02/simple-data-exploration-with-base-r-functions/</link>
+      <link>http://localhost:4321/post/2018/07/02/simple-data-exploration-with-base-r-functions/</link>
       <pubDate>Mon, 02 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/02/simple-data-exploration-with-base-r-functions/</guid>
-      <description>Exploring the data with base R functionsThe purpose of this post is to show the basic fucntions in R to start a data analysis project. I look at the iris dataset that comes with Rstudio shown below.This briefly covers head(), str(), attributes(), summary(), dim(), names(), indexing [], table(), and plot() functions that come with base R. Simple to use.
-Load the iris datasetdata(&amp;quot;iris&amp;quot;) head()Look at the iris dataset with the head() function and lists the first five rows.</description>
+      <guid>http://localhost:4321/post/2018/07/02/simple-data-exploration-with-base-r-functions/</guid>
+      <description>&lt;div id=&#34;exploring-the-data-with-base-r-functions&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Exploring the data with base R functions&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;The purpose of this post is to show the basic fucntions in R to start a data analysis project. I look at the iris dataset that comes with Rstudio shown below.&#xD;&#xA;This briefly covers &lt;code&gt;head()&lt;/code&gt;, &lt;code&gt;str()&lt;/code&gt;, &lt;code&gt;attributes()&lt;/code&gt;, &lt;code&gt;summary()&lt;/code&gt;, &lt;code&gt;dim()&lt;/code&gt;, &lt;code&gt;names()&lt;/code&gt;, indexing [], &lt;code&gt;table()&lt;/code&gt;, and &lt;code&gt;plot()&lt;/code&gt; functions that come with base R. Simple to use.&lt;/p&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;load-the-iris-dataset&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Load the iris dataset&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data(&amp;quot;iris&amp;quot;) &lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;head&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;head()&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;Look at the iris dataset with the &lt;code&gt;head()&lt;/code&gt; function and lists the first five rows.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Reinforcement Learning Problem</title>
-      <link>/post/2018/07/01/reinforcement-learing-problem/</link>
+      <link>http://localhost:4321/post/2018/07/01/reinforcement-learing-problem/</link>
       <pubDate>Sun, 01 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/01/reinforcement-learing-problem/</guid>
-      <description>Reinforcement Learning - Grid World ProblemThe first section looks at the grid world concept/problem. The environment is a 3x4 grid and the goal is to move from the start xy (1,1) (called a “state”&#34;) location to the opposite corner (4,3) called the goal state. The actions are up, down, left, right. We have the rewards of +1 &amp;amp; -1. We want the agent to find the shortest sequence of actions to get from start to end (goal).</description>
+      <guid>http://localhost:4321/post/2018/07/01/reinforcement-learing-problem/</guid>
+      <description>&lt;div id=&#34;reinforcement-learning---grid-world-problem&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Reinforcement Learning - Grid World Problem&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;The first section looks at the grid world concept/problem. The environment is a 3x4 grid and the goal is to move from the start xy (1,1) (called a “state”&#34;) location to the opposite corner (4,3) called the goal state. The actions are up, down, left, right. We have the rewards of +1 &amp;amp; -1. We want the agent to find the shortest sequence of actions to get from start to end (goal). The additional rules are blocking the the state labeled by x=2/y=2 and avoiding the forfeiture state of x=4/y=2. Thus from the start state we can only go up or right. This is a delayed reward state concept because several moves need to be made before getting to the goal state.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>K-Means - Hierarchial Cluster Analysis</title>
-      <link>/post/2018/06/17/k-means-hierarchial-cluster-analysis/</link>
+      <link>http://localhost:4321/post/2018/06/17/k-means-hierarchial-cluster-analysis/</link>
       <pubDate>Sun, 17 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/06/17/k-means-hierarchial-cluster-analysis/</guid>
-      <description>K-Means AnalysisThis project will use the Wholesale customer Data Set from: https://archive.ics.uci.edu/ml/datasets/Wholesale+customers. The data has 440 orbs and 8 variables. The data has the Channel and Region as integers but they are categorical in nature with 2 channels and 3 regions. We think this may need to be taken out of the analysis but will leave them in for now. A general observation about the variables there are outliers in the 6 major variables: fresh, milk, grocery, frozen, detergents_paper, delicassen.</description>
+      <guid>http://localhost:4321/post/2018/06/17/k-means-hierarchial-cluster-analysis/</guid>
+      <description>&lt;div id=&#34;k-means-analysis&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;K-Means Analysis&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This project will use the Wholesale customer Data Set from: &lt;a href=&#34;https://archive.ics.uci.edu/ml/datasets/Wholesale+customers&#34; class=&#34;uri&#34;&gt;https://archive.ics.uci.edu/ml/datasets/Wholesale+customers&lt;/a&gt;. The data has 440 orbs and 8 variables. The data has the Channel and Region as integers but they are categorical in nature with 2 channels and 3 regions. We think this may need to be taken out of the analysis but will leave them in for now. A general observation about the variables there are outliers in the 6 major variables: fresh, milk, grocery, frozen, detergents_paper, delicassen. There are plot of each variable. In addition, to the outliers it is noted that the data is dense at the bottom of each of the variable graphs. “Fresh” seems to be less dense than the rest and “Delicassen” is the thickest density of points at the bottom. Initial thoughts are the clusters are going to be somewhere at the bottom of the graph.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Artificial Neural Network and Support Vector Machine Analysis</title>
-      <link>/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</link>
+      <link>http://localhost:4321/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</link>
       <pubDate>Sun, 10 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</guid>
-      <description>IntroductionThe data set is the mushroom set retrieved from: http://archive.ics.uci.edu/ml/datasets/Mushroom. It consists of 8124 orbs and 23 variables. The classification variable is the “type” either edible (e) or poisonous (p). The remaining 22 variables are the predictors and consist of multiple levels from 1 to 12 each. The data columns will need to be named and are coded in short for each. There are 2480 NA’s found and in one variable “sr” or stalk root.</description>
+      <guid>http://localhost:4321/post/2018/06/10/artificial-neural-network-and-support-vector-machine-analysis/</guid>
+      <description>&lt;div id=&#34;introduction&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Introduction&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;The data set is the mushroom set retrieved from: &lt;a href=&#34;http://archive.ics.uci.edu/ml/datasets/Mushroom&#34; class=&#34;uri&#34;&gt;http://archive.ics.uci.edu/ml/datasets/Mushroom&lt;/a&gt;. It consists of 8124 orbs and 23 variables. The classification variable is the “type” either edible (e) or poisonous (p). The remaining 22 variables are the predictors and consist of multiple levels from 1 to 12 each. The data columns will need to be named and are coded in short for each. There are 2480 NA’s found and in one variable “sr” or stalk root. It is decided to use kNN imputation (k=10) to fill these values in with one of the five levels found in this variable.The imputation works for categorical data and thus chosen for this task. It is decided to create dummy variables into numeric values (1,0), but first the veil-type “vt” only has one level and will be removed, also the imputation creates a sr_imp variable and this is also removed. There will be 117 variables, to reduce collinearity the 2 level variables are reduced to 1 variable (fullRank=T). The dependent variable “type” then added back to the revised set as a factor or 2 levels (e,p).&#xD;&#xA;The first section will analyze the ANN using the nnet() from the nnet package. The second section will analyze the SVM using the ksvm() from the kernlab package.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Random Forest and Decision Tree Analysis</title>
-      <link>/post/2018/06/01/random-forest-and-decision-tree-analysis/</link>
+      <link>http://localhost:4321/post/2018/06/01/random-forest-and-decision-tree-analysis/</link>
       <pubDate>Fri, 01 Jun 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/06/01/random-forest-and-decision-tree-analysis/</guid>
-      <description>Decision Tree and Random ForestThis analysis will utilize the data set from https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv and the purpose is to find the differences between the decision tree method and the random forest method for predicting wine quality from the 11 variables that indicate each wine’s chemical readings. The 12th variable is the quality rating given to these 1599 wines and is used as the predictor in the models. The quality has ratings from 3 to 8.</description>
+      <guid>http://localhost:4321/post/2018/06/01/random-forest-and-decision-tree-analysis/</guid>
+      <description>&lt;div id=&#34;decision-tree-and-random-forest&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Decision Tree and Random Forest&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This analysis will utilize the data set from &lt;a href=&#34;https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&#34; class=&#34;uri&#34;&gt;https://archive.ics.uci.edu/ml/machine-learning-databases/wine-quality/winequality-red.csv&lt;/a&gt; and the purpose is to find the differences between the decision tree method and the random forest method for predicting wine quality from the 11 variables that indicate each wine’s chemical readings. The 12th variable is the quality rating given to these 1599 wines and is used as the predictor in the models. The quality has ratings from 3 to 8. To make the ratings work in the models there will be three groups “Fair” = (3-4), “Satisfactory” = (5-6), and “Excellent” = (7-8).&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Naive Bayes SMS Message Classifier</title>
-      <link>/post/2018/05/27/naive-bayes-sms-message-classifier/</link>
+      <link>http://localhost:4321/post/2018/05/27/naive-bayes-sms-message-classifier/</link>
       <pubDate>Sun, 27 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/05/27/naive-bayes-sms-message-classifier/</guid>
-      <description>Naive Bayes SMS Message ClassifierThis analysis demonstrates the naive bayes classifier in determining the spam or ham status of 4837 SMS messages. The data set is retrieved from: http://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection. The data needs explicit cleaning to prepare it to run through a naive bayes classifier. A training and test set is created to train and validate the predictive ability ofy the model. There are summary plots of the words found in abundance in the data.</description>
+      <guid>http://localhost:4321/post/2018/05/27/naive-bayes-sms-message-classifier/</guid>
+      <description>&lt;div id=&#34;naive-bayes-sms-message-classifier&#34; class=&#34;section level3&#34;&gt;&#xD;&#xA;&lt;h3&gt;Naive Bayes SMS Message Classifier&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;This analysis demonstrates the naive bayes classifier in determining the spam or ham status of 4837 SMS messages. The data set is retrieved from: &lt;a href=&#34;http://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection&#34; class=&#34;uri&#34;&gt;http://archive.ics.uci.edu/ml/datasets/SMS+Spam+Collection&lt;/a&gt;. The data needs explicit cleaning to prepare it to run through a naive bayes classifier. A training and test set is created to train and validate the predictive ability ofy the model. There are summary plots of the words found in abundance in the data. The summary will show the model’s predictive accuracy and the simplicity of running the data. Crossfold validation method is used and the Accuracy and Kappa are the metrics to judge performance.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>K-Nearest Neighbor (KNN) - Heart Disease Dataset</title>
-      <link>/post/2018/05/20/k-nearest-neighbor-knn-heart-disease-dataset/</link>
+      <link>http://localhost:4321/post/2018/05/20/k-nearest-neighbor-knn-heart-disease-dataset/</link>
       <pubDate>Sun, 20 May 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/05/20/k-nearest-neighbor-knn-heart-disease-dataset/</guid>
-      <description>Introduction to K-Nearest NeighborKNN is a supervised learning algorithm and uses a training sample from the dataset, which classifies groups into different classes. It is a classifier used to predict the level of an unknown point (observation) and does this by measuring the points nearest to the unknown point. It works well in measuring the differences between multiple classes that are complex and hard to detect. KNN is considered a simple classification and regression algorithm.</description>
+      <guid>http://localhost:4321/post/2018/05/20/k-nearest-neighbor-knn-heart-disease-dataset/</guid>
+      <description>&lt;div id=&#34;introduction-to-k-nearest-neighbor&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Introduction to K-Nearest Neighbor&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;KNN is a supervised learning algorithm and uses a training sample from the dataset, which classifies groups into different classes. It is a classifier used to predict the level of an unknown point (observation) and does this by measuring the points nearest to the unknown point. It works well in measuring the differences between multiple classes that are complex and hard to detect. KNN is considered a simple classification and regression algorithm. In classification, new data points are grouped into a given class, while in regression, a new data point is labeled based on the average value of k nearest neighbor. KNN is a “lazy learner” because it doesn’t learn more than the training data&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

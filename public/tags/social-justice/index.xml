@@ -1,51 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>social justice on Bryan Schafroth Portfolio</title>
-    <link>/tags/social-justice/</link>
-    <description>Recent content in social justice on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Social Justice on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/social-justice/</link>
+    <description>Recent content in Social Justice on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 09 Mar 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/social-justice/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/social-justice/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Open Data – Annual Crime Dataset 2015</title>
-      <link>/post/2019/03/09/open-data-annual-crime-dataset-2015/</link>
+      <link>http://localhost:4321/post/2019/03/09/open-data-annual-crime-dataset-2015/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/03/09/open-data-annual-crime-dataset-2015/</guid>
-      <description>Data.gov has a “Local Government” (data.gov, 2019b) section among fourteen available topics to obtain data. In the “All Local Government section, as of this writing, there are 17,209 datasets (data.gov, 2019a). Filtering found in the “Organizations” or “Publishers” tab will isolate all the data available for Austin, Texas. Not all U.S. States, cities, and counties are in this resource, which does not indicate the data are not available. A direct way to find local data is to go to the city, state, or county websites.</description>
+      <guid>http://localhost:4321/post/2019/03/09/open-data-annual-crime-dataset-2015/</guid>
+      <description>&lt;p&gt;    Data.gov has a “Local Government” (data.gov, 2019b) section among fourteen available topics to obtain data. In the “All Local Government section, as of this writing, there are 17,209 datasets (data.gov, 2019a). Filtering found in the “Organizations” or “Publishers” tab will isolate all the data available for Austin, Texas. Not all U.S. States, cities, and counties are in this resource, which does not indicate the data are not available. A direct way to find local data is to go to the city, state, or county websites. Data.gov is still a practical place to start to view what topics are available and can help with idea generation.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Data Science for Social Justice - Bolivia Case Study</title>
-      <link>/post/2019/03/02/data-science-for-social-justice-bolivia-case-study/</link>
+      <link>http://localhost:4321/post/2019/03/02/data-science-for-social-justice-bolivia-case-study/</link>
       <pubDate>Sat, 02 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/03/02/data-science-for-social-justice-bolivia-case-study/</guid>
-      <description>Data science for social justice is a present-day concept that is gaining more recognition and popularity in the world. Solving current social problems using available open-source data and data science skillsets will help many world populations and is an ongoing challenge. The article reviews an old case study about Cochabamba, Bolivia’s problem with water infrastructure privatization, and what happened in the year 2000. While the data science profession, open data sources, and current technologies were not around in 2000, this article is a speculative assessment on how a data scientist from two sides may retrospectively go about the work today given the skills and technologies available.</description>
+      <guid>http://localhost:4321/post/2019/03/02/data-science-for-social-justice-bolivia-case-study/</guid>
+      <description>&lt;p&gt;    Data science for social justice is a present-day concept that is gaining more recognition and popularity in the world. Solving current social problems using available open-source data and data science skillsets will help many world populations and is an ongoing challenge. The article reviews an old case study about Cochabamba, Bolivia’s problem with water infrastructure privatization, and what happened in the year 2000. While the data science profession, open data sources, and current technologies were not around in 2000, this article is a speculative assessment on how a data scientist from two sides may retrospectively go about the work today given the skills and technologies available.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Social Justice Aided with Data Science</title>
-      <link>/post/2019/02/25/social-justice-aided-with-data-science/</link>
+      <link>http://localhost:4321/post/2019/02/25/social-justice-aided-with-data-science/</link>
       <pubDate>Mon, 25 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/25/social-justice-aided-with-data-science/</guid>
-      <description>The social justice issue that data science can aid with is life expectancy throughout the world. The social justice issue is a project that was brought to the world&amp;rsquo;s attention by Hans Rosling, and you can see his presentation on Youtube in the references. He compared the life expectancy to the Gross Domestic Product per capita (GPD) of the countries, and plotting the data found a strong correlation between GDP and the life span of the Country&amp;rsquo;s citizens.</description>
+      <guid>http://localhost:4321/post/2019/02/25/social-justice-aided-with-data-science/</guid>
+      <description>&lt;p&gt;    The social justice issue that data science can aid with is life expectancy throughout the world. The social justice issue is a project that was brought to the world&amp;rsquo;s attention by Hans Rosling, and you can see his presentation on Youtube in the references. He compared the life expectancy to the Gross Domestic Product per capita (GPD) of the countries, and plotting the data found a strong correlation between GDP and the life span of the Country&amp;rsquo;s citizens. The first discovery was the life span increases with GDP; however, there is a cluster of Countries in the middle of that range that vary drastically in life expectancy even though each Country has similar GDP. The conclusion was how the money had been used in that particular Country determined the populations&amp;rsquo; life span. A data scientist can replicate this research in a non-profit today, and programs can be created from the data to aid select countries through education and services.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Social Media and Social Justice Fast Food Targeting</title>
-      <link>/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</link>
+      <link>http://localhost:4321/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</link>
       <pubDate>Fri, 22 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</guid>
-      <description>This article discusses a potential social justice project using social media data. Contained in the article is a description of the social justice issue and presented in a mind map. The paper discusses the purpose of the research and why the project is exploring a potential social justice problem in social media. The analysis then speculates the ethical and privacy issues relating to the project. A final summary and status of the social justice problem conclude this paper.</description>
+      <guid>http://localhost:4321/post/2019/02/22/social-media-and-social-justice-fast-food-targeting/</guid>
+      <description>&lt;p&gt;    This article discusses a potential social justice project using social media data. Contained in the article is a description of the social justice issue and presented in a mind map. The paper discusses the purpose of the research and why the project is exploring a potential social justice problem in social media. The analysis then speculates the ethical and privacy issues relating to the project. A final summary and status of the social justice problem conclude this paper.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>

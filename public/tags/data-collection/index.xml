@@ -1,54 +1,40 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>data collection on Bryan Schafroth Portfolio</title>
-    <link>/tags/data-collection/</link>
-    <description>Recent content in data collection on Bryan Schafroth Portfolio</description>
-    <generator>Hugo -- gohugo.io</generator>
+    <title>Data Collection on Bryan Schafroth Portfolio</title>
+    <link>http://localhost:4321/tags/data-collection/</link>
+    <description>Recent content in Data Collection on Bryan Schafroth Portfolio</description>
+    <generator>Hugo</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 09 Mar 2019 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/data-collection/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <atom:link href="http://localhost:4321/tags/data-collection/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Open Data – Annual Crime Dataset 2015</title>
-      <link>/post/2019/03/09/open-data-annual-crime-dataset-2015/</link>
+      <link>http://localhost:4321/post/2019/03/09/open-data-annual-crime-dataset-2015/</link>
       <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/03/09/open-data-annual-crime-dataset-2015/</guid>
-      <description>Data.gov has a “Local Government” (data.gov, 2019b) section among fourteen available topics to obtain data. In the “All Local Government section, as of this writing, there are 17,209 datasets (data.gov, 2019a). Filtering found in the “Organizations” or “Publishers” tab will isolate all the data available for Austin, Texas. Not all U.S. States, cities, and counties are in this resource, which does not indicate the data are not available. A direct way to find local data is to go to the city, state, or county websites.</description>
+      <guid>http://localhost:4321/post/2019/03/09/open-data-annual-crime-dataset-2015/</guid>
+      <description>&lt;p&gt;    Data.gov has a “Local Government” (data.gov, 2019b) section among fourteen available topics to obtain data. In the “All Local Government section, as of this writing, there are 17,209 datasets (data.gov, 2019a). Filtering found in the “Organizations” or “Publishers” tab will isolate all the data available for Austin, Texas. Not all U.S. States, cities, and counties are in this resource, which does not indicate the data are not available. A direct way to find local data is to go to the city, state, or county websites. Data.gov is still a practical place to start to view what topics are available and can help with idea generation.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Body-Worn Camera&#39;s &amp; Privacy in Law Enforcement</title>
-      <link>/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</link>
+      <link>http://localhost:4321/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</link>
       <pubDate>Wed, 13 Feb 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</guid>
-      <description>This presentation explores the Bureau of Justice Statistics and discusses privacy issues that are related to data obtained from Law Enforcement Agencies use of body-worn camera’s. Direct Link to slides:Body-Worn Cameras Slide Presentation
-Or hover mouse over slide and scroll through:
-</description>
+      <guid>http://localhost:4321/post/2019/02/13/body-worn-camera-s-privacy-in-law-enforcement/</guid>
+      <description>&lt;p&gt;This presentation explores the Bureau of Justice Statistics and discusses privacy issues that are related to data obtained from Law Enforcement Agencies use of body-worn camera’s. Direct Link to slides:&#xD;&#xA;&lt;a href=&#34;https://www.bryanschafroth.com/slides/govregdata.html#1&#34;&gt;Body-Worn Cameras Slide Presentation&lt;/a&gt;&lt;/p&gt;&#xD;&#xA;&lt;p&gt;Or hover mouse over slide and scroll through:&lt;/p&gt;&#xD;&#xA;&lt;iframe src=&#34;https://www.bryanschafroth.com/slides/bodycamlaw.html#1&#34; width=&#34;672&#34; height=&#34;400px&#34;&gt;&#xD;&#xA;&lt;/iframe&gt;</description>
     </item>
-    
     <item>
       <title>Case Study on Data Collection: Harvesting Personalities Online</title>
-      <link>/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</link>
+      <link>http://localhost:4321/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</link>
       <pubDate>Sun, 27 Jan 2019 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</guid>
-      <description>Raicu wrote a case study for the Santa Clara University discussing the data analytics firm Cambridge Analytica who provided marketing services for various political campaigns (2016). The case study reveals Cambridge Analytica assumed the personality type of nearly all of the registered voters in the U.S. (Raicu, 2016). The study attempts to answer how Cambridge Analytica determined the personality type of 190 million people who were registered to vote across the U.</description>
+      <guid>http://localhost:4321/post/2019/01/27/case-study-on-data-collection-harvesting-personalities-online/</guid>
+      <description>&lt;p&gt;    Raicu wrote a case study for the Santa Clara University discussing the data analytics firm Cambridge Analytica who provided marketing services for various political campaigns (2016). The case study reveals Cambridge Analytica assumed the personality type of nearly all of the registered voters in the U.S. (Raicu, 2016). The study attempts to answer how Cambridge Analytica determined the personality type of 190 million people who were registered to vote across the U.S. (Raicu, 2016). Raicu learned Cambridge Analytica assessed voter personalities through online questionnaires (ads) and obtained approximately 15%+/- participation in the surveys, the remaining voter personalities through statistical methods based on people that had other similar information taken from different sources are estimated (2016). The basis for &amp;ldquo;similar information&amp;rdquo; is assumed to be from data brokers and claimed to have a large number of data points on U.S. citizens (Raicu, 2016). The politicians used Cambridge Analytica&amp;rsquo;s services to market ad campaigns to the American people during the elections. The remainder of this paper will look into more of the details of this case and answer some ethical questions.&lt;/p&gt;</description>
     </item>
-    
     <item>
       <title>Simple data exploration with base R functions</title>
-      <link>/post/2018/07/02/simple-data-exploration-with-base-r-functions/</link>
+      <link>http://localhost:4321/post/2018/07/02/simple-data-exploration-with-base-r-functions/</link>
       <pubDate>Mon, 02 Jul 2018 00:00:00 +0000</pubDate>
-      
-      <guid>/post/2018/07/02/simple-data-exploration-with-base-r-functions/</guid>
-      <description>Exploring the data with base R functionsThe purpose of this post is to show the basic fucntions in R to start a data analysis project. I look at the iris dataset that comes with Rstudio shown below.This briefly covers head(), str(), attributes(), summary(), dim(), names(), indexing [], table(), and plot() functions that come with base R. Simple to use.
-Load the iris datasetdata(&amp;quot;iris&amp;quot;) head()Look at the iris dataset with the head() function and lists the first five rows.</description>
+      <guid>http://localhost:4321/post/2018/07/02/simple-data-exploration-with-base-r-functions/</guid>
+      <description>&lt;div id=&#34;exploring-the-data-with-base-r-functions&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Exploring the data with base R functions&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;The purpose of this post is to show the basic fucntions in R to start a data analysis project. I look at the iris dataset that comes with Rstudio shown below.&#xD;&#xA;This briefly covers &lt;code&gt;head()&lt;/code&gt;, &lt;code&gt;str()&lt;/code&gt;, &lt;code&gt;attributes()&lt;/code&gt;, &lt;code&gt;summary()&lt;/code&gt;, &lt;code&gt;dim()&lt;/code&gt;, &lt;code&gt;names()&lt;/code&gt;, indexing [], &lt;code&gt;table()&lt;/code&gt;, and &lt;code&gt;plot()&lt;/code&gt; functions that come with base R. Simple to use.&lt;/p&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;load-the-iris-dataset&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;Load the iris dataset&lt;/h4&gt;&#xD;&#xA;&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;data(&amp;quot;iris&amp;quot;) &lt;/code&gt;&lt;/pre&gt;&#xD;&#xA;&lt;/div&gt;&#xD;&#xA;&lt;div id=&#34;head&#34; class=&#34;section level4&#34;&gt;&#xD;&#xA;&lt;h4&gt;head()&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;Look at the iris dataset with the &lt;code&gt;head()&lt;/code&gt; function and lists the first five rows.&lt;/p&gt;</description>
     </item>
-    
   </channel>
 </rss>
